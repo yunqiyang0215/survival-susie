@@ -1,0 +1,89 @@
+---
+title: "sim_survival"
+author: "Yunqi Yang"
+date: "2/1/2023"
+output: html_document
+---
+
+## Description:
+Simulate time-to-event data based on exponential model. And fit proportional hazard model to data.
+
+```{r}
+library(mvtnorm)
+library(EnvStats)
+library(survival)
+```
+
+
+```{r}
+# Function to construct block like covariance matrix.
+# x1 and x2 are correlated; x3, x4 correlated and x5, x6 correlated
+block_cov <- function(r = c(0.98, 0.8, 0.5)){ 
+  cov = matrix(0, ncol = 6, nrow = 6)
+  diag(cov[2:6, 1:5]) = diag(cov[1:5, 2:6]) = c(r[1], 0, r[2], 0, r[3])
+  diag(cov) = rep(1, 6)
+  return(cov)
+}
+
+# Here I simulate 6 variables from Gaussian,
+# using block like covariance matrix.
+# @param n: sample size
+sim_X <- function(n, cov){
+  X <- rmvnorm(n, sigma = cov)
+  return(X)
+}
+
+# Here we use parametric model to simulate data with survival time,
+# assuming survival time is exponentially distributed.
+# T\sim 1/u*exp(-t/u), and the true model is:
+# log(T) = b0 + b1*x1 + b3*x3 + b5*x5 + e. 
+# e\sim extreme value distribution, f(e) = exp(e)*exp(-exp(e))
+# @param b: vector of length (p+1) for true effect size, include intercept.
+# @param X: variable matrix of size n by p. 
+sim_dat <- function(b, X){
+  n = nrow(X)
+  e = -revd(n, location = 0, scale = 1)
+  log_surT <- cbind(rep(1,n), X) %*% b + e
+  surT <- exp(log_surT)
+  dat <- data.frame(cbind(surT, X))
+  names(dat) = c("surT", "x1", "x2", "x3", "x4","x5", "x6")
+  return(dat)
+}
+```
+
+
+```{r}
+set.seed(1)
+n = 50
+cov <- block_cov()
+print(cov)
+X <- sim_X(n, cov)
+dat <- sim_dat(b = c(0.5, 3, 0, 2, 0, 2, 0), X)
+head(dat)
+dat$status <- rep(2, n)
+```
+
+```{r}
+hist(dat$surT, breaks = 20)
+```
+
+```{r}
+## Add survival object. status == 2 is death
+dat$SurvObj <- with(dat, Surv(surT, status == 2))
+## Check data
+head(dat)
+saveRDS(dat, "./data/sim1.rds")
+```
+
+## Cox regression using coxph
+```{r}
+## Fit Cox regression
+res.cox <- coxph(SurvObj ~ x1 + x2 + x3 + x4 + x5 + x6, data =  dat)
+res.cox
+
+res.cox2 <- coxph(SurvObj ~ x2, data =  dat)
+res.cox2
+
+res.cox3 <- coxph(SurvObj ~ x1, data =  dat)
+res.cox3
+```
