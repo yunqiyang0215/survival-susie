@@ -384,7 +384,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2023-02-05
+<strong>Last updated:</strong> 2023-02-06
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreeb93082627be2d80584f96c733f5ea9e512f4e91atargetblankb930826a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/b93082627be2d80584f96c733f5ea9e512f4e91a" target="_blank">b930826</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreebf1a95e5d7c96e29cd6e5d7994bd73822a540ac1targetblankbf1a95ea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/bf1a95e5d7c96e29cd6e5d7994bd73822a540ac1" target="_blank">bf1a95e</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreeb93082627be2d80584f96c733f5ea9e512f4e91atargetblankb930826a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreebf1a95e5d7c96e29cd6e5d7994bd73822a540ac1targetblankbf1a95ea" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/b93082627be2d80584f96c733f5ea9e512f4e91a" target="_blank">b930826</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/bf1a95e5d7c96e29cd6e5d7994bd73822a540ac1" target="_blank">bf1a95e</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -496,9 +496,9 @@ Ignored files:
     Ignored:    .Rproj.user/
     Ignored:    analysis/.RData
     Ignored:    analysis/.Rhistory
-    Ignored:    analysis/figure/
 
 Untracked files:
+    Untracked:  analysis/ser_survival.Rmd
     Untracked:  data/sim1.rds
 
 </code></pre>
@@ -543,6 +543,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/bf1a95e5d7c96e29cd6e5d7994bd73822a540ac1/analysis/sim_survival.Rmd" target="_blank">bf1a95e</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-06
+</td>
+<td>
+wflow_publish("analysis/sim_survival.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/d1c8e3780ef841cd50a2e44ecd1fd516821f9cb4/docs/sim_survival.html" target="_blank">d1c8e37</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-05
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/b93082627be2d80584f96c733f5ea9e512f4e91a/analysis/sim_survival.Rmd" target="_blank">b930826</a>
 </td>
 <td>
@@ -565,6 +599,26 @@ wflow_publish("analysis/sim_survival.Rmd")
 <div id="description" class="section level2">
 <h2>Description:</h2>
 <p>Simulate time-to-event data based on exponential model. And fit proportional hazard model to data.</p>
+<p>The exponential regression (AFT: accelerated failure time):</p>
+<p>It assumes survival time <span class="math inline">\(T\)</span> follows exponential distribution. Under this assumption, the hazard is constant over time. <span class="math display">\[
+\begin{split}
+T&amp;\sim \exp(\mu)\\
+f(t)&amp;=\frac{1}{\mu}\exp\{-t/\mu\}\\
+\lambda(t)&amp;=1/\mu
+\end{split}
+\]</span></p>
+<p>Remember in exponential distribution, <span class="math inline">\(E(T)=\mu\)</span>. So we model the <span class="math inline">\(\log\mu\)</span> part by linear combinations of variables. The error follows the following extreme value distribution: <span class="math display">\[
+\begin{split}
+\epsilon &amp;=\log T - \log \mu\\
+f(\epsilon)&amp;=\exp\{\epsilon-\exp\{\epsilon\}\}
+\end{split}
+\]</span> <span class="math display">\[
+\begin{split}
+\log(T_i) &amp;= \log(E(T_i)) + \epsilon_i\\
+&amp;=\beta_0 + X_i^T\beta+\epsilon_i
+\end{split}
+\]</span></p>
+<p>Here I simulate 6 variables, with following block covariance structure. The beta effects are like this: b = c(3, 0, 2, 0, 5, 0)</p>
 <pre class="r"><code>library(mvtnorm)
 library(EnvStats)</code></pre>
 <pre><code>
@@ -621,15 +675,15 @@ print(cov)</code></pre>
 [5,] 0.00 0.00  0.0  0.0  1.0  0.5
 [6,] 0.00 0.00  0.0  0.0  0.5  1.0</code></pre>
 <pre class="r"><code>X &lt;- sim_X(n, cov)
-dat &lt;- sim_dat(b = c(0.5, 3, 0, 2, 0, 2, 0), X)
+dat &lt;- sim_dat(b = c(0.5, 3, 0, 2, 0, 5, 0), X)
 head(dat)</code></pre>
-<pre><code>         surT         x1         x2          x3          x4         x5
-1  0.12938514 -0.3688273 -0.2542623 -0.03397769  1.05315805  0.1059272
-2 74.28497285  0.8446532  0.8801352  0.37842066 -0.01565043  1.5611673
-3  0.12629957 -1.8825864 -2.1079356  0.98607388  0.46289456  0.2286442
-4 42.42740818  1.0117009  0.9795530  1.17174034  1.11054315 -0.4428579
-5  0.01542759  0.4443932  0.3487988 -0.79708820 -1.38515479 -0.3536863
-6  0.08744163  0.9869396  0.7802569  0.32268168  0.12524732 -1.4375459
+<pre><code>          surT         x1         x2          x3          x4         x5
+1 1.777850e-01 -0.3688273 -0.2542623 -0.03397769  1.05315805  0.1059272
+2 8.033782e+03  0.8446532  0.8801352  0.37842066 -0.01565043  1.5611673
+3 2.507833e-01 -1.8825864 -2.1079356  0.98607388  0.46289456  0.2286442
+4 1.123710e+01  1.0117009  0.9795530  1.17174034  1.11054315 -0.4428579
+5 5.339321e-03  0.4443932  0.3487988 -0.79708820 -1.38515479 -0.3536863
+6 1.171557e-03  0.9869396  0.7802569  0.32268168  0.12524732 -1.4375459
           x6
 1 -0.7072287
 2  0.7678374
@@ -640,24 +694,61 @@ head(dat)</code></pre>
 <pre class="r"><code>dat$status &lt;- rep(2, n)</code></pre>
 <pre class="r"><code>hist(dat$surT, breaks = 20)</code></pre>
 <p><img src="figure/sim_survival.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
+Past versions of unnamed-chunk-4-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-4-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/d1c8e3780ef841cd50a2e44ecd1fd516821f9cb4/docs/figure/sim_survival.Rmd/unnamed-chunk-4-1.png" target="_blank">d1c8e37</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-05
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>## Add survival object. status == 2 is death
 dat$SurvObj &lt;- with(dat, Surv(surT, status == 2))
 ## Check data
 head(dat)</code></pre>
-<pre><code>         surT         x1         x2          x3          x4         x5
-1  0.12938514 -0.3688273 -0.2542623 -0.03397769  1.05315805  0.1059272
-2 74.28497285  0.8446532  0.8801352  0.37842066 -0.01565043  1.5611673
-3  0.12629957 -1.8825864 -2.1079356  0.98607388  0.46289456  0.2286442
-4 42.42740818  1.0117009  0.9795530  1.17174034  1.11054315 -0.4428579
-5  0.01542759  0.4443932  0.3487988 -0.79708820 -1.38515479 -0.3536863
-6  0.08744163  0.9869396  0.7802569  0.32268168  0.12524732 -1.4375459
-          x6 status     SurvObj
-1 -0.7072287      2  0.12938514
-2  0.7678374      2 74.28497285
-3  0.9074854      2  0.12629957
-4 -1.9022673      2 42.42740818
-5  0.2799462      2  0.01542759
-6 -0.7572632      2  0.08744163</code></pre>
+<pre><code>          surT         x1         x2          x3          x4         x5
+1 1.777850e-01 -0.3688273 -0.2542623 -0.03397769  1.05315805  0.1059272
+2 8.033782e+03  0.8446532  0.8801352  0.37842066 -0.01565043  1.5611673
+3 2.507833e-01 -1.8825864 -2.1079356  0.98607388  0.46289456  0.2286442
+4 1.123710e+01  1.0117009  0.9795530  1.17174034  1.11054315 -0.4428579
+5 5.339321e-03  0.4443932  0.3487988 -0.79708820 -1.38515479 -0.3536863
+6 1.171557e-03  0.9869396  0.7802569  0.32268168  0.12524732 -1.4375459
+          x6 status      SurvObj
+1 -0.7072287      2 1.777850e-01
+2  0.7678374      2 8.033782e+03
+3  0.9074854      2 2.507833e-01
+4 -1.9022673      2 1.123710e+01
+5  0.2799462      2 5.339321e-03
+6 -0.7572632      2 1.171557e-03</code></pre>
 <pre class="r"><code>saveRDS(dat, &quot;./data/sim1.rds&quot;)</code></pre>
 </div>
 <div id="cox-regression-using-coxph" class="section level2">
@@ -668,35 +759,35 @@ res.cox</code></pre>
 <pre><code>Call:
 coxph(formula = SurvObj ~ x1 + x2 + x3 + x4 + x5 + x6, data = dat)
 
-       coef exp(coef) se(coef)      z        p
-x1 -3.22922   0.03959  1.03367 -3.124  0.00178
-x2  0.34129   1.40675  0.96286  0.354  0.72300
-x3 -1.92631   0.14569  0.35632 -5.406 6.44e-08
-x4 -0.39133   0.67616  0.25498 -1.535  0.12484
-x5 -2.67193   0.06912  0.45889 -5.823 5.79e-09
-x6  0.02514   1.02546  0.25402  0.099  0.92115
+        coef exp(coef)  se(coef)      z        p
+x1 -2.076160  0.125411  1.002684 -2.071   0.0384
+x2 -0.480957  0.618192  0.960812 -0.501   0.6167
+x3 -1.275563  0.279274  0.292328 -4.363 1.28e-05
+x4 -0.364413  0.694604  0.248892 -1.464   0.1432
+x5 -5.026365  0.006563  0.754415 -6.663 2.69e-11
+x6 -0.190784  0.826311  0.237344 -0.804   0.4215
 
-Likelihood ratio test=116.8  on 6 df, p=&lt; 2.2e-16
+Likelihood ratio test=138.7  on 6 df, p=&lt; 2.2e-16
 n= 50, number of events= 50 </code></pre>
 <pre class="r"><code>res.cox2 &lt;- coxph(SurvObj ~ x2, data =  dat)
 res.cox2</code></pre>
 <pre><code>Call:
 coxph(formula = SurvObj ~ x2, data = dat)
 
-      coef exp(coef) se(coef)      z        p
-x2 -0.8959    0.4082   0.1985 -4.514 6.36e-06
+      coef exp(coef) se(coef)      z       p
+x2 -0.6498    0.5221   0.2014 -3.227 0.00125
 
-Likelihood ratio test=21.14  on 1 df, p=4.265e-06
+Likelihood ratio test=11  on 1 df, p=0.00091
 n= 50, number of events= 50 </code></pre>
 <pre class="r"><code>res.cox3 &lt;- coxph(SurvObj ~ x1, data =  dat)
 res.cox3</code></pre>
 <pre><code>Call:
 coxph(formula = SurvObj ~ x1, data = dat)
 
-      coef exp(coef) se(coef)      z        p
-x1 -0.8410    0.4313   0.2049 -4.104 4.06e-05
+      coef exp(coef) se(coef)      z       p
+x1 -0.5594    0.5715   0.2018 -2.772 0.00558
 
-Likelihood ratio test=18.67  on 1 df, p=1.553e-05
+Likelihood ratio test=8.36  on 1 df, p=0.003834
 n= 50, number of events= 50 </code></pre>
 <br>
 <p>
