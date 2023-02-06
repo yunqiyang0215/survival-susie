@@ -8,6 +8,34 @@ output: html_document
 ## Description:
 Simulate time-to-event data based on exponential model. And fit proportional hazard model to data.
 
+The exponential regression (AFT: accelerated failure time):
+
+It assumes survival time $T$ follows exponential distribution. Under this assumption, the hazard is constant over time. 
+$$
+\begin{split}
+T&\sim \exp(\mu)\\
+f(t)&=\frac{1}{\mu}\exp\{-t/\mu\}\\
+\lambda(t)&=1/\mu
+\end{split}
+$$
+
+Remember in exponential distribution, $E(T)=\mu$. So we model the $\log\mu$ part by linear combinations of variables. The error follows the following extreme value distribution:
+$$
+\begin{split}
+\epsilon &=\log T - \log \mu\\
+f(\epsilon)&=\exp\{\epsilon-\exp\{\epsilon\}\}
+\end{split}
+$$
+$$
+\begin{split}
+\log(T_i) &= \log(E(T_i)) + \epsilon_i\\
+&=\beta_0 + X_i^T\beta+\epsilon_i
+\end{split}
+$$
+
+Here I simulate 6 variables, with following block covariance structure. The beta effects are like this: b = c(3, 0, 2, 0, 5, 0)
+
+
 ```{r}
 library(mvtnorm)
 library(EnvStats)
@@ -58,7 +86,7 @@ n = 50
 cov <- block_cov()
 print(cov)
 X <- sim_X(n, cov)
-dat <- sim_dat(b = c(0.5, 3, 0, 2, 0, 2, 0), X)
+dat <- sim_dat(b = c(0.5, 3, 0, 2, 0, 5, 0), X)
 head(dat)
 dat$status <- rep(2, n)
 ```
