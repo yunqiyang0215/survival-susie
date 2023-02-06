@@ -1,0 +1,82 @@
+---
+title: "Apply SER module"
+author: "Yunqi Yang"
+date: "2/5/2023"
+output: html_document
+---
+
+```{r}
+devtools::load_all("/Users/nicholeyang/Desktop/logisticsusie")
+library(survival)
+dat = readRDS("./data/sim1.rds")
+
+```
+
+The Wakefield approximation:
+$$
+ABF(H_1/H_0)=\sqrt\frac{V}{V+W}\exp\{\frac{z^2}{2}\frac{W}{V+W}\},
+$$
+where $V$ is the variance of estimated regression coefficient, and $W$ is variance in the normal prior, $N(0,W)$. 
+
+```{r}
+# Function to calculate approximate BF based on Wakefield approximation
+# @param z: zscore of the regression coefficient
+# @param s: standard deviation of the estimated coefficient
+compute_abf <- function(z, s, prior_variance){
+  abf <- sqrt(s^2/(s^2+prior_variance))*exp(z^2/2*(prior_variance/(s^2+prior_variance)))
+  return(abf)
+}
+
+
+compute_approx_post_var <- function(z, s, prior_variance){
+  post_var <- 1/(1/s^2 + 1/prior_variance)
+  return(post_var)
+}
+
+# @param post_var: posterior variance
+# @param s: standard deviation of the estimated coefficient
+# @param bhat: estimated beta effect
+compute_approx_post_mean <- function(post_var, s, bhat){
+  mu <- post_var/(s^2)*bhat
+  return(mu)
+}
+
+```
+
+```{r}
+surv_uni_fun <- function(x, y, o, prior_variance, estimate_intercept = 0, ...){
+  fit <- coxph(y~ x + o)
+  bhat <- summary(fit)$coefficients[1, 1]
+  sd <- summary(fit)$coefficients[1, 3]
+  zscore <- summary(fit)$coefficients[1, 4]
+  
+  bf <- compute_abf(zscore, sd, prior_variance)
+  var <- compute_approx_post_var(zscore, sd, prior_variance)
+  mu <- compute_approx_post_mean(var, sd, bhat)
+  lbf <- log(bf)
+  return(list(mu = mu, var=var, lbf=lbf, intercept=0))
+}
+```
+
+
+```{r}
+X = as.matrix(dat[, c(2:7)])
+y = dat$SurvObj
+```
+
+
+```{r}
+fit_coxph <- ser_from_univariate(surv_uni_fun)
+fit <- ibss_from_ser(X, y, L = 3, prior_variance = 1., prior_weights = rep(1/6, 6), tol = 1e-3, maxit = 100, estimate_intercept = TRUE, ser_function = fit_coxph)
+```
+
+# The PIP for last l is problematic:
+```{r}
+fit$alpha
+```
+
+```{r}
+fit$mu
+```
+
+
