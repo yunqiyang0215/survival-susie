@@ -1,0 +1,125 @@
+---
+title: "Apply SER module"
+author: "Yunqi Yang"
+date: "2/5/2023"
+output: html_document
+---
+
+#### The Wakefield approximation:
+$$
+ABF(H_1/H_0)=\sqrt\frac{V}{V+W}\exp\{\frac{z^2}{2}\frac{W}{V+W}\},
+$$
+where $V$ is the variance of estimated regression coefficient, and $W$ is variance in the normal prior, $N(0,W)$. 
+
+```{r}
+# Function to calculate approximate BF based on Wakefield approximation
+# @param z: zscore of the regression coefficient
+# @param s: standard deviation of the estimated coefficient
+compute_abf <- function(z, s, prior_variance){
+  abf <- sqrt(s^2/(s^2+prior_variance))*exp(z^2/2*(prior_variance/(s^2+prior_variance)))
+  return(abf)
+}
+
+
+compute_approx_post_var <- function(z, s, prior_variance){
+  post_var <- 1/(1/s^2 + 1/prior_variance)
+  return(post_var)
+}
+
+# @param post_var: posterior variance
+# @param s: standard deviation of the estimated coefficient
+# @param bhat: estimated beta effect
+compute_approx_post_mean <- function(post_var, s, bhat){
+  mu <- post_var/(s^2)*bhat
+  return(mu)
+}
+
+```
+
+```{r}
+dat = readRDS("./data/sim_dat_simple.rds")
+
+library(survival)
+# Modified Karl's code for intercept part
+devtools::load_all("/Users/nicholeyang/Desktop/logisticsusie")
+```
+
+```{r}
+surv_uni_fun <- function(x, y, o, prior_variance, estimate_intercept = 0, ...){
+  fit <- coxph(y~ x + o)
+  bhat <- summary(fit)$coefficients[1, 1]
+  sd <- summary(fit)$coefficients[1, 3]
+  zscore <- summary(fit)$coefficients[1, 4]
+  
+  bf <- compute_abf(zscore, sd, prior_variance)
+  var <- compute_approx_post_var(zscore, sd, prior_variance)
+  mu <- compute_approx_post_mean(var, sd, bhat)
+  lbf <- log(bf)
+  return(list(mu = mu, var=var, lbf=lbf, intercept=0))
+}
+
+fit_coxph <- ser_from_univariate(surv_uni_fun)
+```
+
+
+
+
+
+#### Data 1: simulated from null model:
+$\log T_i =\beta_0+\epsilon_i$ and $\beta_0 = 1$.
+```{r}
+X = as.matrix(dat[[1]][, c(2:3)])
+## Create  survival object. status == 2 is death
+y <- with(dat[[1]], Surv(surT, status == 2))
+```
+
+
+```{r}
+fit1 <- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1/2, 2), tol = 1e-3, maxit = 100, estimate_intercept = TRUE, ser_function = fit_coxph)
+fit1$alpha
+```
+
+
+#### Data 2: simulated from $\log T_i=\beta_0 + \beta_1x_{i1}$. $x_1$ and $x_2$ no correlation.
+
+$\beta_0 = 1, \beta_1 = 3$
+```{r}
+X = as.matrix(dat[[2]][, c(2:3)])
+## Create  survival object. status == 2 is death
+y <- with(dat[[2]], Surv(surT, status == 2))
+```
+
+```{r}
+fit2 <- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1/2, 2), tol = 1e-3, maxit = 100, estimate_intercept = TRUE, ser_function = fit_coxph)
+fit2$alpha
+```
+
+
+#### Data 3: simulated from $\log T_i=\beta_0 + \beta_1x_{i1}$. $x_1$ and $x_2$ have high correlation.
+
+$\beta_0 = 1, \beta_1 = 3$ and $cor(x_1,x_2)=0.9$.
+```{r}
+X = as.matrix(dat[[3]][, c(2:3)])
+## Create  survival object. status == 2 is death
+y <- with(dat[[3]], Surv(surT, status == 2))
+```
+
+```{r}
+fit3 <- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1/2, 2), tol = 1e-3, maxit = 100, estimate_intercept = TRUE, ser_function = fit_coxph)
+fit3$alpha
+```
+
+#### Data 4: simulated from $\log T_i=\beta_0 + \beta_1x_{i1} + \beta_1x_{i2}$. $x_1$ and $x_2$ have high correlation
+
+$\beta_0 = 1, \beta_1 = 3, \beta_2 = 2$ and $cor(x_1,x_2)=0.9$.
+```{r}
+X = as.matrix(dat[[4]][, c(2:3)])
+## Create  survival object. status == 2 is death
+y <- with(dat[[4]], Surv(surT, status == 2))
+```
+
+```{r}
+fit4 <- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1/2, 2), tol = 1e-3, maxit = 100, estimate_intercept = TRUE, ser_function = fit_coxph)
+fit4$alpha
+```
+
