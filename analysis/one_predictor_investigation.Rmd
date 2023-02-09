@@ -1,7 +1,7 @@
 ---
-title: "sim_survival"
+title: "Run Susie on one predictor model"
 author: "Yunqi Yang"
-date: "2/1/2023"
+date: "2/9/2023"
 output: html_document
 ---
 
@@ -86,7 +86,7 @@ fit_coxph <- ser_from_univariate(surv_uni_fun)
 
 ```
 
-#### Sim1: r = 0.9. 
+### Sim1: r = 0.9. 
 ```{r}
 set.seed(2)
 r = 0.9
@@ -113,7 +113,7 @@ fit$alpha
 ```
 
 
-#### Sim2: r = 0.8 
+### Sim2: r = 0.8 
 ```{r}
 set.seed(2)
 r = 0.8
@@ -144,7 +144,7 @@ fit$alpha
 
 
 
-#### Sim3: r = 0.7
+### Sim3: r = 0.7
 ```{r}
 set.seed(2)
 r = 0.7
