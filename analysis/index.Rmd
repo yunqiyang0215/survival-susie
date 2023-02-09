@@ -12,4 +12,6 @@ editor_options:
 
 + [Simulate survival data using exponential distribution](sim_survival.html)
 
++ [Run IBSS on simple simulation data](run_ser_simple_dat.html)
+
 + [Run IBSS procedure on survival data](ser_survival.html)
