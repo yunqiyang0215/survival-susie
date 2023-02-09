@@ -6,7 +6,7 @@ output: html_document
 ---
 
 ## Description:
-Simulate time-to-event data based on exponential model. And fit proportional hazard model to data.
+Simulate time-to-event data based on exponential model. And fit proportional hazard model to data. Let's first simulate data without **censoring**. 
 
 The exponential regression (AFT: accelerated failure time):
 
@@ -19,13 +19,7 @@ f(t)&=\frac{1}{\mu}\exp\{-t/\mu\}\\
 \end{split}
 $$
 
-Remember in exponential distribution, $E(T)=\mu$. So we model the $\log\mu$ part by linear combinations of variables. The error follows the following extreme value distribution:
-$$
-\begin{split}
-\epsilon &=\log T - \log \mu\\
-f(\epsilon)&=\exp\{\epsilon-\exp\{\epsilon\}\}
-\end{split}
-$$
+Remember in exponential distribution, $E(T)=\mu$. So we model the $\log\mu$ part by linear combinations of variables. 
 $$
 \begin{split}
 \log(T_i) &= \log(E(T_i)) + \epsilon_i\\
@@ -33,85 +27,103 @@ $$
 \end{split}
 $$
 
-Here I simulate 6 variables, with following block covariance structure. The beta effects are like this: b = c(3, 0, 2, 0, 5, 0)
+
+### Simulate under 4 simple scenarios, two variables $x_1$ and $x_2$ available:
+
+1. The null model, time $T_i$ is simulated from the model that only has intercept. 
+
+2. Single effect model without correlation. Time $T_i$ depends on $x_1$ only, and no correlation between $x_1$ and $x_2$
+
+3. Single effect model with correlation. Time $T_i$ depends on $x_1$ only, and high correlation between $x_1$ and $x_2$. 
+
+4. $\log T_i = \beta_0+\beta_1x_{i1} + \beta_2x_{i2}+\epsilon_i$, and high correlation between $x_1$ and $x_2$. 
 
 
 ```{r}
 library(mvtnorm)
-library(EnvStats)
 library(survival)
 ```
 
 
+
 ```{r}
-# Function to construct block like covariance matrix.
-# x1 and x2 are correlated; x3, x4 correlated and x5, x6 correlated
-block_cov <- function(r = c(0.98, 0.8, 0.5)){ 
-  cov = matrix(0, ncol = 6, nrow = 6)
-  diag(cov[2:6, 1:5]) = diag(cov[1:5, 2:6]) = c(r[1], 0, r[2], 0, r[3])
-  diag(cov) = rep(1, 6)
-  return(cov)
-}
-
-# Here I simulate 6 variables from Gaussian,
-# using block like covariance matrix.
-# @param n: sample size
-sim_X <- function(n, cov){
-  X <- rmvnorm(n, sigma = cov)
-  return(X)
-}
-
 # Here we use parametric model to simulate data with survival time,
-# assuming survival time is exponentially distributed.
+# assuming survival time is exponentially distributed. 
+# We first simulate the mean of exponential from linear combinations
+# of variables, and then simulate survival time. 
 # T\sim 1/u*exp(-t/u), and the true model is:
-# log(T) = b0 + b1*x1 + b3*x3 + b5*x5 + e. 
-# e\sim extreme value distribution, f(e) = exp(e)*exp(-exp(e))
+# log(T) = \mu + e = b0 + Xb + e
 # @param b: vector of length (p+1) for true effect size, include intercept.
 # @param X: variable matrix of size n by p. 
+# @param status: censoring status. 1 = censored, 2 = event observed. 
 sim_dat <- function(b, X){
   n = nrow(X)
-  e = -revd(n, location = 0, scale = 1)
-  log_surT <- cbind(rep(1,n), X) %*% b + e
-  surT <- exp(log_surT)
+  mu <- exp(cbind(rep(1,n), X) %*% b)
+  surT <- rexp(n, rate = 1/mu)
   dat <- data.frame(cbind(surT, X))
-  names(dat) = c("surT", "x1", "x2", "x3", "x4","x5", "x6")
+  names(dat) = c("surT", "x1", "x2")
+  dat$status <- rep(2, n)
   return(dat)
 }
 ```
 
-
+#### Scenario 1: null model
 ```{r}
 set.seed(1)
-n = 50
-cov <- block_cov()
-print(cov)
-X <- sim_X(n, cov)
-dat <- sim_dat(b = c(0.5, 3, 0, 2, 0, 5, 0), X)
-head(dat)
-dat$status <- rep(2, n)
+n <- 50
+b <- c(1, 0, 0)
+X <- rmvnorm(n, sigma = matrix(c(1, 0.5, 0.5, 1), ncol = 2, nrow = 2))
+dat1 <- sim_dat(b, X)
 ```
 
 ```{r}
-hist(dat$surT, breaks = 20)
+hist(dat1$surT, breaks = 20)
+```
+
+
+#### Scenario 2: single effect model with independent predictors
+```{r}
+set.seed(1)
+n <- 50
+b <- c(1, 3, 0)
+X <- rmvnorm(n, sigma = matrix(c(1, 0, 0, 1), ncol = 2, nrow = 2))
+dat2 <- sim_dat(b, X)
 ```
 
 ```{r}
-## Add survival object. status == 2 is death
-dat$SurvObj <- with(dat, Surv(surT, status == 2))
-## Check data
-head(dat)
-saveRDS(dat, "./data/sim1.rds")
+hist(dat2$surT, breaks = 20)
 ```
 
-## Cox regression using coxph
+
+#### Scenario 3: single effect model with independent predictors
 ```{r}
-## Fit Cox regression
-res.cox <- coxph(SurvObj ~ x1 + x2 + x3 + x4 + x5 + x6, data =  dat)
-res.cox
-
-res.cox2 <- coxph(SurvObj ~ x2, data =  dat)
-res.cox2
-
-res.cox3 <- coxph(SurvObj ~ x1, data =  dat)
-res.cox3
+set.seed(1)
+n <- 50
+b <- c(1, 3, 0)
+X <- rmvnorm(n, sigma = matrix(c(1, 0.9, 0.9, 1), ncol = 2, nrow = 2))
+dat3 <- sim_dat(b, X)
 ```
+
+```{r}
+hist(dat3$surT, breaks = 20)
+```
+
+
+#### Scenario 4
+```{r}
+set.seed(1)
+n <- 50
+b <- c(1, 3, 2)
+X <- rmvnorm(n, sigma = matrix(c(1, 0.9, 0.9, 1), ncol = 2, nrow = 2))
+dat4 <- sim_dat(b, X)
+```
+
+```{r}
+hist(dat4$surT, breaks = 20)
+```
+
+```{r}
+sim_dat_simple <- list(dat1, dat2, dat3, dat4)
+saveRDS(sim_dat_simple, "./data/sim_dat_simple.rds")
+```
+
