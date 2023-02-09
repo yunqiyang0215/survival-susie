@@ -4,6 +4,12 @@ author: "Yunqi Yang"
 date: "2/5/2023"
 output: html_document
 ---
+### Description:
+
+I simulated data in 4 different scenarios, and apply both coxph model and susie procedure. The data simulation procedure is available at https://yunqiyang0215.github.io/survival-susie/sim_survival.html
+
+Susie works in 1,2,4 scenarios, but not scenario 3. 
+
 
 #### The Wakefield approximation:
 $$
@@ -157,5 +163,13 @@ y = dat[[4]]$y
 ```{r}
 fit4 <- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1/2, 2), tol = 1e-3, maxit = 100, estimate_intercept = TRUE, ser_function = fit_coxph)
 fit4$alpha
+```
+
+```{r}
+x = rnorm(50)
+e = rnorm(50)
+y = 1+ 3*x + e
+fit <- lm(y~x)
+summary(fit)
 ```
 
