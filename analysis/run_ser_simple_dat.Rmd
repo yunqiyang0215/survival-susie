@@ -67,14 +67,24 @@ fit_coxph <- ser_from_univariate(surv_uni_fun)
 
 ### Data 1: simulated from null model:
 $\log T_i =\beta_0+\epsilon_i$ and $\beta_0 = 1$.
+
 ```{r}
-X = as.matrix(dat[[1]][, c(2:3)])
+# Fit cox ph
 ## Create  survival object. status == 2 is death
-y <- with(dat[[1]], Surv(surT, status == 2))
+dat[[1]]$y <- with(dat[[1]], Surv(surT, status == 2))
+cox1 <- coxph(y ~ x1 + x2, data =  dat[[1]])
+summary(cox1)
 ```
 
 
 ```{r}
+X = as.matrix(dat[[1]][, c(2:3)])
+y = dat[[1]]$y
+```
+
+
+```{r}
+# IBSS of susie
 fit1 <- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1/2, 2), tol = 1e-3, maxit = 100, estimate_intercept = TRUE, ser_function = fit_coxph)
 fit1$alpha
 ```
@@ -84,10 +94,20 @@ fit1$alpha
 
 $\beta_0 = 1, \beta_1 = 3$
 ```{r}
-X = as.matrix(dat[[2]][, c(2:3)])
+# Fit cox ph
 ## Create  survival object. status == 2 is death
-y <- with(dat[[2]], Surv(surT, status == 2))
+dat[[2]]$y <- with(dat[[2]], Surv(surT, status == 2))
+cox2 <- coxph(y ~ x1 + x2, data =  dat[[2]])
+summary(cox2)
 ```
+
+
+```{r}
+X = as.matrix(dat[[2]][, c(2:3)])
+y = dat[[2]]$y
+```
+
+
 
 ```{r}
 fit2 <- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1/2, 2), tol = 1e-3, maxit = 100, estimate_intercept = TRUE, ser_function = fit_coxph)
@@ -99,9 +119,17 @@ fit2$alpha
 
 $\beta_0 = 1, \beta_1 = 3$ and $cor(x_1,x_2)=0.9$.
 ```{r}
-X = as.matrix(dat[[3]][, c(2:3)])
+# Fit cox ph
 ## Create  survival object. status == 2 is death
-y <- with(dat[[3]], Surv(surT, status == 2))
+dat[[3]]$y <- with(dat[[3]], Surv(surT, status == 2))
+cox3 <- coxph(y ~ x1 + x2, data =  dat[[3]])
+summary(cox3)
+```
+
+
+```{r}
+X = as.matrix(dat[[3]][, c(2:3)])
+y = dat[[3]]$y
 ```
 
 ```{r}
@@ -113,9 +141,17 @@ fit3$alpha
 
 $\beta_0 = 1, \beta_1 = 3, \beta_2 = 2$ and $cor(x_1,x_2)=0.9$.
 ```{r}
-X = as.matrix(dat[[4]][, c(2:3)])
+# Fit cox ph
 ## Create  survival object. status == 2 is death
-y <- with(dat[[4]], Surv(surT, status == 2))
+dat[[4]]$y <- with(dat[[4]], Surv(surT, status == 2))
+cox4 <- coxph(y ~ x1 + x2, data =  dat[[4]])
+summary(cox4)
+```
+
+
+```{r}
+X = as.matrix(dat[[4]][, c(2:3)])
+y = dat[[4]]$y
 ```
 
 ```{r}
