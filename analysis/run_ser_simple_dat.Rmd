@@ -65,7 +65,7 @@ fit_coxph <- ser_from_univariate(surv_uni_fun)
 
 
 
-#### Data 1: simulated from null model:
+### Data 1: simulated from null model:
 $\log T_i =\beta_0+\epsilon_i$ and $\beta_0 = 1$.
 ```{r}
 X = as.matrix(dat[[1]][, c(2:3)])
@@ -80,7 +80,7 @@ fit1$alpha
 ```
 
 
-#### Data 2: simulated from $\log T_i=\beta_0 + \beta_1x_{i1}$. $x_1$ and $x_2$ no correlation.
+### Data 2: simulated from $\log T_i=\beta_0 + \beta_1x_{i1}$. $x_1$ and $x_2$ no correlation.
 
 $\beta_0 = 1, \beta_1 = 3$
 ```{r}
@@ -95,7 +95,7 @@ fit2$alpha
 ```
 
 
-#### Data 3: simulated from $\log T_i=\beta_0 + \beta_1x_{i1}$. $x_1$ and $x_2$ have high correlation.
+### Data 3: simulated from $\log T_i=\beta_0 + \beta_1x_{i1}$. $x_1$ and $x_2$ have high correlation.
 
 $\beta_0 = 1, \beta_1 = 3$ and $cor(x_1,x_2)=0.9$.
 ```{r}
@@ -109,7 +109,7 @@ fit3 <- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1/2
 fit3$alpha
 ```
 
-#### Data 4: simulated from $\log T_i=\beta_0 + \beta_1x_{i1} + \beta_1x_{i2}$. $x_1$ and $x_2$ have high correlation
+### Data 4: simulated from $\log T_i=\beta_0 + \beta_1x_{i1} + \beta_1x_{i2}$. $x_1$ and $x_2$ have high correlation
 
 $\beta_0 = 1, \beta_1 = 3, \beta_2 = 2$ and $cor(x_1,x_2)=0.9$.
 ```{r}
