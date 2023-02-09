@@ -12,7 +12,7 @@
 <meta name="author" content="Yunqi Yang" />
 
 
-<title>sim_survival</title>
+<title>Run Susie on one predictor model</title>
 
 <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -357,9 +357,9 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">sim_survival</h1>
+<h1 class="title toc-ignore">Run Susie on one predictor model</h1>
 <h4 class="author">Yunqi Yang</h4>
-<h4 class="date">2/1/2023</h4>
+<h4 class="date">2/9/2023</h4>
 
 </div>
 
@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree1cfdc17f92b4b405c2c156de534ddcea84767304targetblank1cfdc17a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/1cfdc17f92b4b405c2c156de534ddcea84767304" target="_blank">1cfdc17</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree27cf8af453f6aa263e4fb15b9c6cbb7cd3399009targetblank27cf8afa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/27cf8af453f6aa263e4fb15b9c6cbb7cd3399009" target="_blank">27cf8af</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree1cfdc17f92b4b405c2c156de534ddcea84767304targetblank1cfdc17a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree27cf8af453f6aa263e4fb15b9c6cbb7cd3399009targetblank27cf8afa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/1cfdc17f92b4b405c2c156de534ddcea84767304" target="_blank">1cfdc17</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/27cf8af453f6aa263e4fb15b9c6cbb7cd3399009" target="_blank">27cf8af</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -535,6 +535,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/27cf8af453f6aa263e4fb15b9c6cbb7cd3399009/analysis/one_predictor_investigation.Rmd" target="_blank">27cf8af</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-09
+</td>
+<td>
+wflow_publish("analysis/one_predictor_investigation.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/cd1637efea006f4b6048295a774e47154cf3478c/docs/one_predictor_investigation.html" target="_blank">cd1637e</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-09
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -627,8 +661,9 @@ compute_approx_post_mean &lt;- function(post_var, s, bhat){
 }
 
 fit_coxph &lt;- ser_from_univariate(surv_uni_fun)</code></pre>
-<div id="sim1-r-0.9." class="section level4">
-<h4>Sim1: r = 0.9.</h4>
+</div>
+<div id="sim1-r-0.9." class="section level3">
+<h3>Sim1: r = 0.9.</h3>
 <pre class="r"><code>set.seed(2)
 r = 0.9
 n &lt;- 50
@@ -637,6 +672,43 @@ X &lt;- rmvnorm(n, sigma = matrix(c(1, r, r, 1), ncol = 2, nrow = 2))
 dat &lt;- sim_dat(b, X)
 hist(dat$surT, breaks = 20)</code></pre>
 <p><img src="figure/one_predictor_investigation.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
+Past versions of unnamed-chunk-5-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/cd1637efea006f4b6048295a774e47154cf3478c/docs/figure/one_predictor_investigation.Rmd/unnamed-chunk-5-1.png" target="_blank">cd1637e</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Fit cox ph
 ## Create  survival object. status == 2 is death
 dat$y &lt;- with(dat, Surv(surT, status == 2))
@@ -665,7 +737,7 @@ Score (logrank) test = 73.13  on 2 df,   p=&lt;2e-16</code></pre>
 y = dat$y
 
 fit &lt;- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1/2, 2), tol = 1e-3, maxit = 100, estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
-<pre><code>4.083 sec elapsed</code></pre>
+<pre><code>10.261 sec elapsed</code></pre>
 <pre class="r"><code>fit$alpha</code></pre>
 <pre><code>            [,1]      [,2]
  [1,] 0.06669668 0.9333033
@@ -679,8 +751,8 @@ fit &lt;- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1
  [9,] 0.65507624 0.3449238
 [10,] 0.65500422 0.3449958</code></pre>
 </div>
-<div id="sim2-r-0.8" class="section level4">
-<h4>Sim2: r = 0.8</h4>
+<div id="sim2-r-0.8" class="section level3">
+<h3>Sim2: r = 0.8</h3>
 <pre class="r"><code>set.seed(2)
 r = 0.8
 n &lt;- 50
@@ -689,6 +761,43 @@ X &lt;- rmvnorm(n, sigma = matrix(c(1, r, r, 1), ncol = 2, nrow = 2))
 dat &lt;- sim_dat(b, X)
 hist(dat$surT, breaks = 20)</code></pre>
 <p><img src="figure/one_predictor_investigation.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-1">
+Past versions of unnamed-chunk-8-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/cd1637efea006f4b6048295a774e47154cf3478c/docs/figure/one_predictor_investigation.Rmd/unnamed-chunk-8-1.png" target="_blank">cd1637e</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Fit cox ph
 ## Create  survival object. status == 2 is death
 dat$y &lt;- with(dat, Surv(surT, status == 2))
@@ -717,7 +826,7 @@ Score (logrank) test = 73.14  on 2 df,   p=&lt;2e-16</code></pre>
 y = dat$y
 
 fit &lt;- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1/2, 2), tol = 1e-3, maxit = 100, estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
-<pre><code>4.654 sec elapsed</code></pre>
+<pre><code>8.605 sec elapsed</code></pre>
 <pre class="r"><code>fit$alpha</code></pre>
 <pre><code>            [,1]      [,2]
  [1,] 0.05557329 0.9444267
@@ -731,8 +840,8 @@ fit &lt;- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1
  [9,] 0.73083015 0.2691698
 [10,] 0.73055282 0.2694472</code></pre>
 </div>
-<div id="sim3-r-0.7" class="section level4">
-<h4>Sim3: r = 0.7</h4>
+<div id="sim3-r-0.7" class="section level3">
+<h3>Sim3: r = 0.7</h3>
 <pre class="r"><code>set.seed(2)
 r = 0.7
 n &lt;- 50
@@ -741,6 +850,43 @@ X &lt;- rmvnorm(n, sigma = matrix(c(1, r, r, 1), ncol = 2, nrow = 2))
 dat &lt;- sim_dat(b, X)
 hist(dat$surT, breaks = 20)</code></pre>
 <p><img src="figure/one_predictor_investigation.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-1">
+Past versions of unnamed-chunk-11-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/cd1637efea006f4b6048295a774e47154cf3478c/docs/figure/one_predictor_investigation.Rmd/unnamed-chunk-11-1.png" target="_blank">cd1637e</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># Fit cox ph
 ## Create  survival object. status == 2 is death
 dat$y &lt;- with(dat, Surv(surT, status == 2))
@@ -769,7 +915,7 @@ Score (logrank) test = 73.46  on 2 df,   p=&lt;2e-16</code></pre>
 y = dat$y
 
 fit &lt;- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1/2, 2), tol = 1e-3, maxit = 100, estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
-<pre><code>0.198 sec elapsed</code></pre>
+<pre><code>0.233 sec elapsed</code></pre>
 <pre class="r"><code>fit$alpha</code></pre>
 <pre><code>      [,1]         [,2]
  [1,]    1 3.208481e-11
@@ -825,7 +971,6 @@ loaded via a namespace (and not attached):
 [53] tibble_3.1.5       crayon_1.4.1       whisker_0.4        pkgconfig_2.0.3   
 [57] ellipsis_0.3.2     Matrix_1.5-3       prettyunits_1.1.1  rmarkdown_2.11    
 [61] rstudioapi_0.13    R6_2.5.1           git2r_0.28.0       compiler_4.1.1    </code></pre>
-</div>
 </div>
 </div>
 </div>
