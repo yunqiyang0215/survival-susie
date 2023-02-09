@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree4e06f2772f9fe8436938eb54d460741524b56a2etargetblank4e06f27a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/4e06f2772f9fe8436938eb54d460741524b56a2e" target="_blank">4e06f27</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree4f1c5c379c16d0abda229162793ec670d5864c4ftargetblank4f1c5c3a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/4f1c5c379c16d0abda229162793ec670d5864c4f" target="_blank">4f1c5c3</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree4e06f2772f9fe8436938eb54d460741524b56a2etargetblank4e06f27a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree4f1c5c379c16d0abda229162793ec670d5864c4ftargetblank4f1c5c3a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/4e06f2772f9fe8436938eb54d460741524b56a2e" target="_blank">4e06f27</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/4f1c5c379c16d0abda229162793ec670d5864c4f" target="_blank">4f1c5c3</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -535,6 +535,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/4f1c5c379c16d0abda229162793ec670d5864c4f/analysis/run_ser_simple_dat.Rmd" target="_blank">4f1c5c3</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-09
+</td>
+<td>
+wflow_publish("analysis/run_ser_simple_dat.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/ba5113f92ef4a0ca322dcc909b105a8c598885ce/docs/run_ser_simple_dat.html" target="_blank">ba5113f</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-09
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -606,8 +640,8 @@ devtools::load_all(&quot;/Users/nicholeyang/Desktop/logisticsusie&quot;)</code><
 
 fit_coxph &lt;- ser_from_univariate(surv_uni_fun)</code></pre>
 </div>
-<div id="data-1-simulated-from-null-model" class="section level4">
-<h4>Data 1: simulated from null model:</h4>
+<div id="data-1-simulated-from-null-model" class="section level3">
+<h3>Data 1: simulated from null model:</h3>
 <p><span class="math inline">\(\log T_i =\beta_0+\epsilon_i\)</span> and <span class="math inline">\(\beta_0 = 1\)</span>.</p>
 <pre class="r"><code>X = as.matrix(dat[[1]][, c(2:3)])
 ## Create  survival object. status == 2 is death
@@ -615,7 +649,7 @@ y &lt;- with(dat[[1]], Surv(surT, status == 2))</code></pre>
 <pre class="r"><code>fit1 &lt;- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1/2, 2), tol = 1e-3, maxit = 100, estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
 <pre><code>Warning in ibss_from_ser(X, y, L = 10, prior_variance = 1, prior_weights =
 rep(1/2, : Maximum number of iterations reached</code></pre>
-<pre><code>6.724 sec elapsed</code></pre>
+<pre><code>7.056 sec elapsed</code></pre>
 <pre class="r"><code>fit1$alpha</code></pre>
 <pre><code>           [,1]      [,2]
  [1,] 0.7644728 0.2355272
@@ -629,14 +663,14 @@ rep(1/2, : Maximum number of iterations reached</code></pre>
  [9,] 0.8126784 0.1873216
 [10,] 0.8152894 0.1847106</code></pre>
 </div>
-<div id="data-2-simulated-from-log-t_ibeta_0-beta_1x_i1.-x_1-and-x_2-no-correlation." class="section level4">
-<h4>Data 2: simulated from <span class="math inline">\(\log T_i=\beta_0 + \beta_1x_{i1}\)</span>. <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> no correlation.</h4>
+<div id="data-2-simulated-from-log-t_ibeta_0-beta_1x_i1.-x_1-and-x_2-no-correlation." class="section level3">
+<h3>Data 2: simulated from <span class="math inline">\(\log T_i=\beta_0 + \beta_1x_{i1}\)</span>. <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> no correlation.</h3>
 <p><span class="math inline">\(\beta_0 = 1, \beta_1 = 3\)</span></p>
 <pre class="r"><code>X = as.matrix(dat[[2]][, c(2:3)])
 ## Create  survival object. status == 2 is death
 y &lt;- with(dat[[2]], Surv(surT, status == 2))</code></pre>
 <pre class="r"><code>fit2 &lt;- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1/2, 2), tol = 1e-3, maxit = 100, estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
-<pre><code>0.192 sec elapsed</code></pre>
+<pre><code>0.188 sec elapsed</code></pre>
 <pre class="r"><code>fit2$alpha</code></pre>
 <pre><code>      [,1]         [,2]
  [1,]    1 1.475791e-10
@@ -650,14 +684,14 @@ y &lt;- with(dat[[2]], Surv(surT, status == 2))</code></pre>
  [9,]    1 1.475791e-10
 [10,]    1 1.475791e-10</code></pre>
 </div>
-<div id="data-3-simulated-from-log-t_ibeta_0-beta_1x_i1.-x_1-and-x_2-have-high-correlation." class="section level4">
-<h4>Data 3: simulated from <span class="math inline">\(\log T_i=\beta_0 + \beta_1x_{i1}\)</span>. <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> have high correlation.</h4>
+<div id="data-3-simulated-from-log-t_ibeta_0-beta_1x_i1.-x_1-and-x_2-have-high-correlation." class="section level3">
+<h3>Data 3: simulated from <span class="math inline">\(\log T_i=\beta_0 + \beta_1x_{i1}\)</span>. <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> have high correlation.</h3>
 <p><span class="math inline">\(\beta_0 = 1, \beta_1 = 3\)</span> and <span class="math inline">\(cor(x_1,x_2)=0.9\)</span>.</p>
 <pre class="r"><code>X = as.matrix(dat[[3]][, c(2:3)])
 ## Create  survival object. status == 2 is death
 y &lt;- with(dat[[3]], Surv(surT, status == 2))</code></pre>
 <pre class="r"><code>fit3 &lt;- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1/2, 2), tol = 1e-3, maxit = 100, estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
-<pre><code>2.736 sec elapsed</code></pre>
+<pre><code>2.947 sec elapsed</code></pre>
 <pre class="r"><code>fit3$alpha</code></pre>
 <pre><code>           [,1]      [,2]
  [1,] 0.1553077 0.8446923
@@ -671,8 +705,8 @@ y &lt;- with(dat[[3]], Surv(surT, status == 2))</code></pre>
  [9,] 0.6336429 0.3663571
 [10,] 0.6339523 0.3660477</code></pre>
 </div>
-<div id="data-4-simulated-from-log-t_ibeta_0-beta_1x_i1-beta_1x_i2.-x_1-and-x_2-have-high-correlation" class="section level4">
-<h4>Data 4: simulated from <span class="math inline">\(\log T_i=\beta_0 + \beta_1x_{i1} + \beta_1x_{i2}\)</span>. <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> have high correlation</h4>
+<div id="data-4-simulated-from-log-t_ibeta_0-beta_1x_i1-beta_1x_i2.-x_1-and-x_2-have-high-correlation" class="section level3">
+<h3>Data 4: simulated from <span class="math inline">\(\log T_i=\beta_0 + \beta_1x_{i1} + \beta_1x_{i2}\)</span>. <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> have high correlation</h3>
 <p><span class="math inline">\(\beta_0 = 1, \beta_1 = 3, \beta_2 = 2\)</span> and <span class="math inline">\(cor(x_1,x_2)=0.9\)</span>.</p>
 <pre class="r"><code>X = as.matrix(dat[[4]][, c(2:3)])
 ## Create  survival object. status == 2 is death
@@ -680,7 +714,7 @@ y &lt;- with(dat[[4]], Surv(surT, status == 2))</code></pre>
 <pre class="r"><code>fit4 &lt;- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1/2, 2), tol = 1e-3, maxit = 100, estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
 <pre><code>Warning in ibss_from_ser(X, y, L = 10, prior_variance = 1, prior_weights =
 rep(1/2, : Maximum number of iterations reached</code></pre>
-<pre><code>6.217 sec elapsed</code></pre>
+<pre><code>6.832 sec elapsed</code></pre>
 <pre class="r"><code>fit4$alpha</code></pre>
 <pre><code>              [,1]       [,2]
  [1,] 0.9526665552 0.04733344
