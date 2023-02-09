@@ -1,0 +1,173 @@
+---
+title: "sim_survival"
+author: "Yunqi Yang"
+date: "2/1/2023"
+output: html_document
+---
+
+## Description:
+Simulate time-to-event data based on exponential model. And fit proportional hazard model to data. Let's first simulate data without **censoring**. The full explanation about simulation is at: https://yunqiyang0215.github.io/survival-susie/sim_survival.html
+
+
+Here I try different correlations between $x_1$ and $x_2$ where $x_1$ has an effect on survival time, and $x_2$ doesn't have. That is, the true model is: $\log T_i = \beta_0+\beta_1x_{i1} +\epsilon_i$. 
+
+Results: 
+(1) For r = 0.9, and r = 0.8. Susie seems work marginally. 
+(2) For r = 0.7, Susie gives rediculous results. Seems something wrong in the code. 
+```{r}
+library(mvtnorm)
+library(survival)
+# Modified Karl's code for intercept part
+devtools::load_all("/Users/nicholeyang/Desktop/logisticsusie")
+```
+
+### Simulation functions:
+```{r}
+# Here we use parametric model to simulate data with survival time,
+# assuming survival time is exponentially distributed. 
+# We first simulate the mean of exponential from linear combinations
+# of variables, and then simulate survival time. 
+# T\sim 1/u*exp(-t/u), and the true model is:
+# log(T) = \mu + e = b0 + Xb + e
+# @param b: vector of length (p+1) for true effect size, include intercept.
+# @param X: variable matrix of size n by p. 
+# @param status: censoring status. 1 = censored, 2 = event observed. 
+sim_dat <- function(b, X){
+  n = nrow(X)
+  mu <- exp(cbind(rep(1,n), X) %*% b)
+  surT <- rexp(n, rate = 1/mu)
+  dat <- data.frame(cbind(surT, X))
+  names(dat) = c("surT", "x1", "x2")
+  dat$status <- rep(2, n)
+  return(dat)
+}
+```
+
+### Functions for running IBSS
+```{r}
+# Function to calculate approximate BF based on Wakefield approximation
+# @param z: zscore of the regression coefficient
+# @param s: standard deviation of the estimated coefficient
+compute_abf <- function(z, s, prior_variance){
+  abf <- sqrt(s^2/(s^2+prior_variance))*exp(z^2/2*(prior_variance/(s^2+prior_variance)))
+  return(abf)
+}
+
+
+compute_approx_post_var <- function(z, s, prior_variance){
+  post_var <- 1/(1/s^2 + 1/prior_variance)
+  return(post_var)
+}
+
+# @param post_var: posterior variance
+# @param s: standard deviation of the estimated coefficient
+# @param bhat: estimated beta effect
+compute_approx_post_mean <- function(post_var, s, bhat){
+  mu <- post_var/(s^2)*bhat
+  return(mu)
+}
+```
+
+```{r}
+surv_uni_fun <- function(x, y, o, prior_variance, estimate_intercept = 0, ...){
+  fit <- coxph(y~ x + o)
+  bhat <- summary(fit)$coefficients[1, 1]
+  sd <- summary(fit)$coefficients[1, 3]
+  zscore <- summary(fit)$coefficients[1, 4]
+  
+  bf <- compute_abf(zscore, sd, prior_variance)
+  var <- compute_approx_post_var(zscore, sd, prior_variance)
+  mu <- compute_approx_post_mean(var, sd, bhat)
+  lbf <- log(bf)
+  return(list(mu = mu, var=var, lbf=lbf, intercept=0))
+}
+
+fit_coxph <- ser_from_univariate(surv_uni_fun)
+
+```
+
+#### Sim1: r = 0.9. 
+```{r}
+set.seed(2)
+r = 0.9
+n <- 50
+b <- c(1, 3, 0)
+X <- rmvnorm(n, sigma = matrix(c(1, r, r, 1), ncol = 2, nrow = 2))
+dat <- sim_dat(b, X)
+hist(dat$surT, breaks = 20)
+```
+```{r}
+# Fit cox ph
+## Create  survival object. status == 2 is death
+dat$y <- with(dat, Surv(surT, status == 2))
+cox <- coxph(y ~ x1 + x2, data =  dat)
+summary(cox)
+```
+
+```{r}
+X = as.matrix(dat[, c(2:3)])
+y = dat$y
+
+fit <- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1/2, 2), tol = 1e-3, maxit = 100, estimate_intercept = TRUE, ser_function = fit_coxph)
+fit$alpha
+```
+
+
+#### Sim2: r = 0.8 
+```{r}
+set.seed(2)
+r = 0.8
+n <- 50
+b <- c(1, 3, 0)
+X <- rmvnorm(n, sigma = matrix(c(1, r, r, 1), ncol = 2, nrow = 2))
+dat <- sim_dat(b, X)
+hist(dat$surT, breaks = 20)
+```
+
+```{r}
+# Fit cox ph
+## Create  survival object. status == 2 is death
+dat$y <- with(dat, Surv(surT, status == 2))
+cox <- coxph(y ~ x1 + x2, data =  dat)
+summary(cox)
+```
+
+```{r}
+X = as.matrix(dat[, c(2:3)])
+y = dat$y
+
+fit <- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1/2, 2), tol = 1e-3, maxit = 100, estimate_intercept = TRUE, ser_function = fit_coxph)
+fit$alpha
+```
+
+
+
+
+
+#### Sim3: r = 0.7
+```{r}
+set.seed(2)
+r = 0.7
+n <- 50
+b <- c(1, 3, 0)
+X <- rmvnorm(n, sigma = matrix(c(1, r, r, 1), ncol = 2, nrow = 2))
+dat <- sim_dat(b, X)
+hist(dat$surT, breaks = 20)
+```
+
+```{r}
+# Fit cox ph
+## Create  survival object. status == 2 is death
+dat$y <- with(dat, Surv(surT, status == 2))
+cox <- coxph(y ~ x1 + x2, data =  dat)
+summary(cox)
+```
+
+```{r}
+X = as.matrix(dat[, c(2:3)])
+y = dat$y
+
+fit <- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1/2, 2), tol = 1e-3, maxit = 100, estimate_intercept = TRUE, ser_function = fit_coxph)
+fit$alpha
+```
+
