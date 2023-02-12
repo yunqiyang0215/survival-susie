@@ -366,7 +366,7 @@ div.tocify {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -375,7 +375,7 @@ div.tocify {
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -387,7 +387,7 @@ div.tocify {
 <strong>Last updated:</strong> 2023-02-12
 </p>
 <p>
-<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>survival-susie/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
@@ -451,12 +451,27 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongdetected"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>Cache:</strong> detected </a>
 </p>
 </div>
-<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div id="strongCachestrongdetected" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+The following chunks had caches available:
+<ul>
+<li>
+unnamed-chunk-5
+</li>
+<li>
+unnamed-chunk-6
+</li>
+<li>
+unnamed-chunk-7
+</li>
+<li>
+unnamed-chunk-8
+</li>
+</ul>
+<p>To ensure reproducibility of the results, delete the cache directory <code>run_ser_simple_dat_cache</code> and re-run the analysis. To have workflowr automatically delete the cache directory prior to building the file, set <code>delete_cache = TRUE</code> when running <code>wflow_build()</code> or <code>wflow_publish()</code>.</p>
 </div>
 </div>
 </div>
@@ -475,16 +490,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree55b418b41dc5606554fbb08640c0d7d35dee9071targetblank55b418ba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/55b418b41dc5606554fbb08640c0d7d35dee9071" target="_blank">55b418b</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree4910cfccbe362f4a7e1b8db0b6cf3bcc40ef6d64targetblank4910cfca"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/4910cfccbe362f4a7e1b8db0b6cf3bcc40ef6d64" target="_blank">4910cfc</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree55b418b41dc5606554fbb08640c0d7d35dee9071targetblank55b418ba" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree4910cfccbe362f4a7e1b8db0b6cf3bcc40ef6d64targetblank4910cfca" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/55b418b41dc5606554fbb08640c0d7d35dee9071" target="_blank">55b418b</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/4910cfccbe362f4a7e1b8db0b6cf3bcc40ef6d64" target="_blank">4910cfc</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -497,6 +512,7 @@ Ignored files:
     Ignored:    analysis/.DS_Store
     Ignored:    analysis/.RData
     Ignored:    analysis/.Rhistory
+    Ignored:    analysis/run_ser_simple_dat_cache/
 
 </code></pre>
 <p>
@@ -535,6 +551,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/4910cfccbe362f4a7e1b8db0b6cf3bcc40ef6d64/analysis/run_ser_simple_dat.Rmd" target="_blank">4910cfc</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-12
+</td>
+<td>
+wflow_publish("analysis/run_ser_simple_dat.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/9d83f7247ebd094abe4f6e6bb15e4451718cc064/docs/run_ser_simple_dat.html" target="_blank">9d83f72</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-12
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1163,11 +1213,128 @@ y = dat[[4]]$y
 # IBSS of susie
 t1 &lt;- proc.time()
 fit4 &lt;- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
-<pre><code>30.982 sec elapsed</code></pre>
+<pre><code>34.861 sec elapsed</code></pre>
 <pre class="r"><code>t2 &lt;- proc.time()
 t2 - t1</code></pre>
 <pre><code>   user  system elapsed 
- 30.094   0.412  30.984 </code></pre>
+ 33.652   0.586  34.885 </code></pre>
+<div class="alert alert-warning">
+<p>
+<strong>Warning:</strong> The above code chunk cached its results, but it won’t be re-run if previous chunks it depends on are updated. If you need to use caching, it is highly recommended to also set <code>knitr::opts_chunk$set(autodep = TRUE)</code> at the top of the file (in a chunk that is not cached). Alternatively, you can customize the option <code>dependson</code> for each individual chunk that is cached. Using either <code>autodep</code> or <code>dependson</code> will remove this warning. See the <a href="https://yihui.name/knitr/options/#cache"
+>knitr cache options</a> for more details.
+</p>
+</div>
+<pre class="r"><code>fit4$alpha</code></pre>
+<pre><code>              [,1]         [,2]         [,3]         [,4]         [,5]
+ [1,] 1.000000e+00 5.462073e-15 5.878062e-15 7.908404e-13 3.127903e-13
+ [2,] 1.218094e-08 9.999294e-01 5.309247e-08 8.740058e-08 2.705689e-08
+ [3,] 3.570948e-02 2.492915e-02 1.878042e-02 1.531881e-02 2.510584e-02
+ [4,] 3.586999e-02 2.487214e-02 1.867543e-02 1.535015e-02 2.493102e-02
+ [5,] 3.601484e-02 2.481580e-02 1.857759e-02 1.537833e-02 2.476811e-02
+ [6,] 3.607353e-02 2.479168e-02 1.853702e-02 1.538973e-02 2.470057e-02
+ [7,] 3.602649e-02 2.481151e-02 1.856952e-02 1.538060e-02 2.475469e-02
+ [8,] 3.590179e-02 2.486105e-02 1.865406e-02 1.535633e-02 2.489548e-02
+ [9,] 3.575831e-02 2.491369e-02 1.874858e-02 1.532830e-02 2.505292e-02
+[10,] 3.566541e-02 2.494570e-02 1.880832e-02 1.531010e-02 2.515243e-02
+              [,6]         [,7]         [,8]         [,9]        [,10]
+ [1,] 4.813312e-13 2.964555e-13 1.268710e-13 3.736764e-15 3.248483e-14
+ [2,] 1.125053e-07 2.812564e-08 4.376611e-08 1.942261e-07 6.965236e-06
+ [3,] 1.551654e-02 3.150950e-02 3.160673e-02 1.636298e-02 1.748556e-02
+ [4,] 1.561327e-02 3.118398e-02 3.122083e-02 1.629688e-02 1.758284e-02
+ [5,] 1.570246e-02 3.088257e-02 3.086631e-02 1.623514e-02 1.767215e-02
+ [6,] 1.573916e-02 3.075812e-02 3.072073e-02 1.620951e-02 1.770879e-02
+ [7,] 1.570974e-02 3.085780e-02 3.083735e-02 1.623009e-02 1.767940e-02
+ [8,] 1.563274e-02 3.111811e-02 3.114319e-02 1.628349e-02 1.760231e-02
+ [9,] 1.554582e-02 3.141089e-02 3.148955e-02 1.634306e-02 1.751497e-02
+[10,] 1.549043e-02 3.159682e-02 3.171085e-02 1.638067e-02 1.745912e-02
+             [,11]        [,12]        [,13]        [,14]        [,15]
+ [1,] 5.386879e-11 1.589717e-14 5.108270e-13 1.322122e-13 4.482215e-15
+ [2,] 2.528000e-06 4.434115e-08 5.476186e-06 3.117614e-09 1.473406e-07
+ [3,] 4.067655e-02 3.983076e-02 1.962509e-02 2.862063e-02 1.928395e-02
+ [4,] 4.148250e-02 3.925963e-02 1.963784e-02 2.843965e-02 1.920721e-02
+ [5,] 4.224721e-02 3.873593e-02 1.964788e-02 2.826890e-02 1.913414e-02
+ [6,] 4.256798e-02 3.852110e-02 1.965154e-02 2.819753e-02 1.910345e-02
+ [7,] 4.231046e-02 3.869322e-02 1.964865e-02 2.825469e-02 1.912816e-02
+ [8,] 4.164821e-02 3.914513e-02 1.964017e-02 2.840231e-02 1.919152e-02
+ [9,] 4.091941e-02 3.965781e-02 1.962909e-02 2.856558e-02 1.926102e-02
+[10,] 4.046486e-02 3.998595e-02 1.962125e-02 2.866774e-02 1.930427e-02
+             [,16]        [,17]        [,18]        [,19]        [,20]
+ [1,] 8.461749e-13 2.437675e-15 3.151304e-11 2.500937e-13 2.406229e-13
+ [2,] 1.529384e-06 3.858431e-06 7.734469e-08 9.606877e-07 3.948449e-07
+ [3,] 2.046743e-02 1.566720e-02 1.570248e-02 2.196391e-02 1.659927e-02
+ [4,] 2.072471e-02 1.564193e-02 1.575828e-02 2.183533e-02 1.669588e-02
+ [5,] 2.096617e-02 1.561763e-02 1.580897e-02 2.171570e-02 1.678485e-02
+ [6,] 2.106674e-02 1.560734e-02 1.582962e-02 2.166619e-02 1.682143e-02
+ [7,] 2.098604e-02 1.561563e-02 1.581307e-02 2.170594e-02 1.679209e-02
+ [8,] 2.077709e-02 1.563676e-02 1.576938e-02 2.180932e-02 1.671528e-02
+ [9,] 2.054490e-02 1.565974e-02 1.571939e-02 2.192509e-02 1.662849e-02
+[10,] 2.039888e-02 1.567394e-02 1.568719e-02 2.199839e-02 1.657312e-02
+             [,21]        [,22]        [,23]        [,24]        [,25]
+ [1,] 1.361300e-14 3.295044e-13 5.074858e-12 2.486214e-14 2.842661e-14
+ [2,] 2.955632e-07 1.584879e-07 7.812304e-07 3.423552e-07 2.307278e-06
+ [3,] 1.454931e-02 1.783813e-02 1.614177e-02 1.431941e-02 1.764240e-02
+ [4,] 1.456969e-02 1.777431e-02 1.614754e-02 1.436978e-02 1.760731e-02
+ [5,] 1.458773e-02 1.771513e-02 1.615237e-02 1.441550e-02 1.757425e-02
+ [6,] 1.459495e-02 1.769068e-02 1.615422e-02 1.443410e-02 1.756046e-02
+ [7,] 1.458918e-02 1.771027e-02 1.615274e-02 1.441919e-02 1.757154e-02
+ [8,] 1.457366e-02 1.776136e-02 1.614861e-02 1.437980e-02 1.760016e-02
+ [9,] 1.455548e-02 1.781872e-02 1.614351e-02 1.433470e-02 1.763184e-02
+[10,] 1.454355e-02 1.785511e-02 1.614003e-02 1.430562e-02 1.765172e-02
+             [,26]        [,27]        [,28]        [,29]        [,30]
+ [1,] 5.100067e-14 2.228931e-13 2.222310e-11 1.464532e-13 2.765254e-13
+ [2,] 1.941303e-06 6.785370e-08 1.867813e-08 1.620806e-07 3.857104e-07
+ [3,] 1.683264e-02 1.473248e-02 1.646160e-02 2.477907e-02 1.665124e-02
+ [4,] 1.697244e-02 1.476730e-02 1.646880e-02 2.461047e-02 1.675940e-02
+ [5,] 1.710258e-02 1.479877e-02 1.647418e-02 2.445268e-02 1.685955e-02
+ [6,] 1.715649e-02 1.481155e-02 1.647603e-02 2.438713e-02 1.690089e-02
+ [7,] 1.711325e-02 1.480131e-02 1.647453e-02 2.443980e-02 1.686774e-02
+ [8,] 1.700072e-02 1.477419e-02 1.646999e-02 2.457630e-02 1.678122e-02
+ [9,] 1.687478e-02 1.474303e-02 1.646378e-02 2.472837e-02 1.668393e-02
+[10,] 1.679509e-02 1.472288e-02 1.645922e-02 2.482424e-02 1.662212e-02
+             [,31]        [,32]        [,33]        [,34]        [,35]
+ [1,] 2.772113e-12 2.315126e-15 4.059533e-16 1.010916e-12 4.558022e-13
+ [2,] 2.012678e-07 1.293445e-07 9.878602e-07 1.942955e-08 8.637753e-08
+ [3,] 1.618867e-02 2.285974e-02 1.271087e-02 1.417202e-02 1.745145e-02
+ [4,] 1.623872e-02 2.263979e-02 1.275616e-02 1.419213e-02 1.742784e-02
+ [5,] 1.628441e-02 2.243688e-02 1.279768e-02 1.421056e-02 1.740448e-02
+ [6,] 1.630309e-02 2.235331e-02 1.281471e-02 1.421812e-02 1.739442e-02
+ [7,] 1.628811e-02 2.242030e-02 1.280106e-02 1.421206e-02 1.740249e-02
+ [8,] 1.624870e-02 2.259552e-02 1.276522e-02 1.419612e-02 1.742280e-02
+ [9,] 1.620381e-02 2.279324e-02 1.272456e-02 1.417805e-02 1.744434e-02
+[10,] 1.617499e-02 2.291921e-02 1.269854e-02 1.416647e-02 1.745733e-02
+             [,36]        [,37]        [,38]        [,39]        [,40]
+ [1,] 1.550987e-14 1.415505e-12 1.098762e-14 1.352398e-14 3.933191e-13
+ [2,] 9.674681e-07 1.818342e-06 4.235214e-06 2.439048e-06 3.510392e-07
+ [3,] 1.659455e-02 2.159109e-02 1.547214e-02 1.788202e-02 1.914194e-02
+ [4,] 1.657493e-02 2.186007e-02 1.550905e-02 1.790105e-02 1.910316e-02
+ [5,] 1.655611e-02 2.211231e-02 1.554218e-02 1.791761e-02 1.906643e-02
+ [6,] 1.654817e-02 2.221730e-02 1.555556e-02 1.792415e-02 1.905106e-02
+ [7,] 1.655455e-02 2.213307e-02 1.554485e-02 1.791894e-02 1.906340e-02
+ [8,] 1.657086e-02 2.191488e-02 1.551637e-02 1.790477e-02 1.909518e-02
+ [9,] 1.658864e-02 2.167225e-02 1.548343e-02 1.788790e-02 1.913021e-02
+[10,] 1.659963e-02 2.151959e-02 1.546203e-02 1.787670e-02 1.915209e-02
+             [,41]        [,42]        [,43]        [,44]        [,45]
+ [1,] 4.460373e-12 8.177907e-13 1.436130e-14 2.099208e-14 1.549666e-15
+ [2,] 1.109067e-08 4.437556e-06 1.230095e-08 4.234839e-07 1.535883e-07
+ [3,] 1.548843e-02 1.716043e-02 3.043474e-02 1.607125e-02 2.082654e-02
+ [4,] 1.547435e-02 1.726136e-02 3.001777e-02 1.611487e-02 2.077749e-02
+ [5,] 1.546063e-02 1.735435e-02 2.963504e-02 1.615438e-02 2.072913e-02
+ [6,] 1.545477e-02 1.739260e-02 2.947799e-02 1.617044e-02 2.070839e-02
+ [7,] 1.545945e-02 1.736192e-02 2.960383e-02 1.615757e-02 2.072514e-02
+ [8,] 1.547132e-02 1.728163e-02 2.993394e-02 1.612353e-02 2.076726e-02
+ [9,] 1.548407e-02 1.719094e-02 3.030806e-02 1.608449e-02 2.081206e-02
+[10,] 1.549183e-02 1.713309e-02 3.054727e-02 1.605927e-02 2.083920e-02
+             [,46]        [,47]        [,48]        [,49]        [,50]
+ [1,] 2.020794e-13 2.586569e-12 1.047822e-14 4.149980e-10 5.331764e-14
+ [2,] 3.316499e-07 2.059592e-05 3.218721e-06 2.978091e-08 1.145830e-06
+ [3,] 1.697099e-02 1.995204e-02 1.532269e-02 1.761134e-02 1.538672e-02
+ [4,] 1.711780e-02 2.015371e-02 1.537503e-02 1.773518e-02 1.544302e-02
+ [5,] 1.725458e-02 2.034239e-02 1.542296e-02 1.784950e-02 1.549499e-02
+ [6,] 1.731127e-02 2.042079e-02 1.544259e-02 1.789659e-02 1.551639e-02
+ [7,] 1.726579e-02 2.035787e-02 1.542685e-02 1.785886e-02 1.549922e-02
+ [8,] 1.714752e-02 2.019467e-02 1.538548e-02 1.776019e-02 1.545432e-02
+ [9,] 1.701523e-02 2.001282e-02 1.533851e-02 1.764893e-02 1.540369e-02
+[10,] 1.693159e-02 1.989817e-02 1.530842e-02 1.757809e-02 1.537145e-02</code></pre>
 <pre class="r"><code>t(apply(fit4$alpha, 1, function(x) sort(x, decreasing = TRUE)))</code></pre>
 <pre><code>            [,1]         [,2]         [,3]         [,4]         [,5]
  [1,] 1.00000000 4.149980e-10 5.386879e-11 3.151304e-11 2.222310e-11
@@ -1279,12 +1446,6 @@ t2 - t1</code></pre>
  [8,] 1.477419e-02 1.457366e-02 1.437980e-02 1.419612e-02 1.276522e-02
  [9,] 1.474303e-02 1.455548e-02 1.433470e-02 1.417805e-02 1.272456e-02
 [10,] 1.472288e-02 1.454355e-02 1.430562e-02 1.416647e-02 1.269854e-02</code></pre>
-<div class="alert alert-warning">
-<p>
-<strong>Warning:</strong> The above code chunk cached its results, but it won’t be re-run if previous chunks it depends on are updated. If you need to use caching, it is highly recommended to also set <code>knitr::opts_chunk$set(autodep = TRUE)</code> at the top of the file (in a chunk that is not cached). Alternatively, you can customize the option <code>dependson</code> for each individual chunk that is cached. Using either <code>autodep</code> or <code>dependson</code> will remove this warning. See the <a href="https://yihui.name/knitr/options/#cache"
->knitr cache options</a> for more details.
-</p>
-</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
