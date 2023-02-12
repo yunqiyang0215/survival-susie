@@ -96,6 +96,9 @@ t2 - t1
 t(apply(fit1$alpha, 1, function(x) sort(x, decreasing = TRUE)))
 ```
 
+```{r}
+fit1$alpha
+```
 
 ### Data 2: simulated from $\log T_i=\beta_0 + \beta_1x_{i1}$. Predictors are independent. 
 
