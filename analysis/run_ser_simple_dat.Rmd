@@ -75,101 +75,75 @@ fit_coxph <- ser_from_univariate(surv_uni_fun)
 $\log T_i =\beta_0+\epsilon_i$ and $\beta_0 = 1$.
 
 ```{r}
-# Fit cox ph
 ## Create  survival object. status == 2 is death
 dat[[1]]$y <- with(dat[[1]], Surv(surT, status == 2))
-cox1 <- coxph(y ~ x1 + x2, data =  dat[[1]])
-summary(cox1)
+# Fit cox ph. Cox ph model with select multiple significant predictors..
+cox1 <- coxph(y ~ .-status, data =  dat[[1]])
+
 ```
 
 
-```{r}
-X = as.matrix(dat[[1]][, c(2:3)])
+```{r cache = TRUE}
+p = 50
+X = as.matrix(dat[[1]][, c(2:(p+1))])
 y = dat[[1]]$y
-```
 
-
-```{r}
 # IBSS of susie
-fit1 <- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1/2, 2), tol = 1e-3, maxit = 100, estimate_intercept = TRUE, ser_function = fit_coxph)
-fit1$alpha
+t1 <- proc.time()
+fit1 <- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)
+t2 <- proc.time()
+t2 - t1
+t(apply(fit1$alpha, 1, function(x) sort(x, decreasing = TRUE)))
 ```
 
 
-### Data 2: simulated from $\log T_i=\beta_0 + \beta_1x_{i1}$. $x_1$ and $x_2$ no correlation.
+### Data 2: simulated from $\log T_i=\beta_0 + \beta_1x_{i1}$. Predictors are independent. 
 
 $\beta_0 = 1, \beta_1 = 3$
-```{r}
-# Fit cox ph
-## Create  survival object. status == 2 is death
+```{r cache = TRUE}
 dat[[2]]$y <- with(dat[[2]], Surv(surT, status == 2))
-cox2 <- coxph(y ~ x1 + x2, data =  dat[[2]])
-summary(cox2)
-```
-
-
-```{r}
-X = as.matrix(dat[[2]][, c(2:3)])
+X = as.matrix(dat[[2]][, c(2:(p+1))])
 y = dat[[2]]$y
+
+# IBSS of susie
+t1 <- proc.time()
+fit2 <- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)
+t2 <- proc.time()
+t2 - t1
+t(apply(fit2$alpha, 1, function(x) sort(x, decreasing = TRUE)))
 ```
 
 
+### Data 3: simulated from $\log T_i=\beta_0 + \beta_1x_{i1}$. Predictors have high correlation. 
 
-```{r}
-fit2 <- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1/2, 2), tol = 1e-3, maxit = 100, estimate_intercept = TRUE, ser_function = fit_coxph)
-fit2$alpha
-```
-
-
-### Data 3: simulated from $\log T_i=\beta_0 + \beta_1x_{i1}$. $x_1$ and $x_2$ have high correlation.
-
-$\beta_0 = 1, \beta_1 = 3$ and $cor(x_1,x_2)=0.9$.
-```{r}
-# Fit cox ph
-## Create  survival object. status == 2 is death
+```{r cache = TRUE}
 dat[[3]]$y <- with(dat[[3]], Surv(surT, status == 2))
-cox3 <- coxph(y ~ x1 + x2, data =  dat[[3]])
-summary(cox3)
-```
-
-
-```{r}
-X = as.matrix(dat[[3]][, c(2:3)])
+X = as.matrix(dat[[3]][, c(2:(p+1))])
 y = dat[[3]]$y
+
+# IBSS of susie
+t1 <- proc.time()
+fit3 <- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)
+t2 <- proc.time()
+t2 - t1
+t(apply(fit3$alpha, 1, function(x) sort(x, decreasing = TRUE)))
 ```
 
-```{r}
-fit3 <- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1/2, 2), tol = 1e-3, maxit = 100, estimate_intercept = TRUE, ser_function = fit_coxph)
-fit3$alpha
-```
+### Data 4: simulated from $\log T_i=\beta_0 + \beta_1x_{i1} + \beta_1x_{i2}$. Predictors have high correlation
 
-### Data 4: simulated from $\log T_i=\beta_0 + \beta_1x_{i1} + \beta_1x_{i2}$. $x_1$ and $x_2$ have high correlation
-
-$\beta_0 = 1, \beta_1 = 3, \beta_2 = 2$ and $cor(x_1,x_2)=0.9$.
-```{r}
-# Fit cox ph
-## Create  survival object. status == 2 is death
+$\beta_0 = 1, \beta_1 = 3, \beta_2 = 1.5$ and $cor=0.9$.
+```{r cache = TRUE}
 dat[[4]]$y <- with(dat[[4]], Surv(surT, status == 2))
-cox4 <- coxph(y ~ x1 + x2, data =  dat[[4]])
-summary(cox4)
-```
-
-
-```{r}
-X = as.matrix(dat[[4]][, c(2:3)])
+X = as.matrix(dat[[4]][, c(2:(p+1))])
 y = dat[[4]]$y
+ 
+# IBSS of susie
+t1 <- proc.time()
+fit4 <- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)
+t2 <- proc.time()
+t2 - t1
+t(apply(fit4$alpha, 1, function(x) sort(x, decreasing = TRUE)))
 ```
 
-```{r}
-fit4 <- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1/2, 2), tol = 1e-3, maxit = 100, estimate_intercept = TRUE, ser_function = fit_coxph)
-fit4$alpha
-```
 
-```{r}
-x = rnorm(50)
-e = rnorm(50)
-y = 1+ 3*x + e
-fit <- lm(y~x)
-summary(fit)
-```
 
