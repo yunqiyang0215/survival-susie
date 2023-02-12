@@ -28,15 +28,16 @@ $$
 $$
 
 
-### Simulate under 4 simple scenarios, two variables $x_1$ and $x_2$ available:
+### Simulate under 4 simple scenarios, 50 variables are available. 
 
-1. The null model, time $T_i$ is simulated from the model that only has intercept. 
 
-2. Single effect model without correlation. Time $T_i$ depends on $x_1$ only, and no correlation between $x_1$ and $x_2$
+1. The null model, time $T_i$ is simulated from the model that only has intercept. High correlation among all predictors. 
 
-3. Single effect model with correlation. Time $T_i$ depends on $x_1$ only, and high correlation between $x_1$ and $x_2$. 
+2. Single effect model without correlation. Time $T_i$ depends on $x_1$ only, and no correlation between $x_1$ and other variables. 
 
-4. $\log T_i = \beta_0+\beta_1x_{i1} + \beta_2x_{i2}+\epsilon_i$, and high correlation between $x_1$ and $x_2$. 
+3. Single effect model with correlation. Time $T_i$ depends on $x_1$ only, and high correlation between $x_1$ and other variables. 
+
+4. $\log T_i = \beta_0+\beta_1x_{i1} + \beta_2x_{i2}+\epsilon_i$, and high correlation between $x_1$ and $x_2$, $x_1, x_2$ and other variables. 
 
 
 ```{r}
@@ -45,8 +46,19 @@ library(survival)
 ```
 
 
-
 ```{r}
+# Function to construct correlation matrix among predictors. 
+# Diagonal elements are all 1s, the off-diagonal elements = corr
+# @param p: number of predictors
+# @param corr: correlation
+cov_simple_het = function(p, corr){
+  for(i in 1:length(corr)){
+    cov = matrix(corr, nrow=p,ncol=p)
+    diag(cov) <- 1
+  }
+  return(cov)
+}
+
 # Here we use parametric model to simulate data with survival time,
 # assuming survival time is exponentially distributed. 
 # We first simulate the mean of exponential from linear combinations
@@ -58,10 +70,12 @@ library(survival)
 # @param status: censoring status. 1 = censored, 2 = event observed. 
 sim_dat <- function(b, X){
   n = nrow(X)
+  p = ncol(X)
   mu <- exp(cbind(rep(1,n), X) %*% b)
   surT <- rexp(n, rate = 1/mu)
   dat <- data.frame(cbind(surT, X))
-  names(dat) = c("surT", "x1", "x2")
+  x.name <- unlist(lapply(1:p, function(i) paste0("x", i)))
+  names(dat) = c("surT", x.name)
   dat$status <- rep(2, n)
   return(dat)
 }
@@ -70,9 +84,11 @@ sim_dat <- function(b, X){
 #### Scenario 1: null model
 ```{r}
 set.seed(1)
-n <- 50
-b <- c(1, 0, 0)
-X <- rmvnorm(n, sigma = matrix(c(1, 0.5, 0.5, 1), ncol = 2, nrow = 2))
+n <- 100
+p <- 50
+b <- c(1, rep(0, 50))
+sigma <- cov_simple_het(p, corr = 0.9)
+X<- rmvnorm(n, sigma = sigma)
 dat1 <- sim_dat(b, X)
 ```
 
@@ -84,9 +100,11 @@ hist(dat1$surT, breaks = 20)
 #### Scenario 2: single effect model with independent predictors
 ```{r}
 set.seed(1)
-n <- 50
-b <- c(1, 3, 0)
-X <- rmvnorm(n, sigma = matrix(c(1, 0, 0, 1), ncol = 2, nrow = 2))
+n <- 100
+p <- 50
+b <- c(1, 3, rep(0, p-1))
+sigma <- cov_simple_het(p, corr = 0)
+X<- rmvnorm(n, sigma = sigma)
 dat2 <- sim_dat(b, X)
 ```
 
@@ -95,12 +113,14 @@ hist(dat2$surT, breaks = 20)
 ```
 
 
-#### Scenario 3: single effect model with independent predictors
+#### Scenario 3: single effect model with highly correlated predictors
 ```{r}
 set.seed(1)
-n <- 50
-b <- c(1, 3, 0)
-X <- rmvnorm(n, sigma = matrix(c(1, 0.9, 0.9, 1), ncol = 2, nrow = 2))
+n <- 100
+p <- 50
+b <- c(1, 3, rep(0, p-1))
+sigma <- cov_simple_het(p, corr = 0.9)
+X<- rmvnorm(n, sigma = sigma)
 dat3 <- sim_dat(b, X)
 ```
 
@@ -109,12 +129,14 @@ hist(dat3$surT, breaks = 20)
 ```
 
 
-#### Scenario 4
+#### Scenario 4: two effects model with highly correlated variables 
 ```{r}
 set.seed(1)
-n <- 50
-b <- c(1, 3, 2)
-X <- rmvnorm(n, sigma = matrix(c(1, 0.9, 0.9, 1), ncol = 2, nrow = 2))
+n <- 100
+p <- 50
+b <- c(1, 3, 1.5, rep(0, p-2))
+sigma <- cov_simple_het(p, corr = 0.9)
+X<- rmvnorm(n, sigma = sigma)
 dat4 <- sim_dat(b, X)
 ```
 
