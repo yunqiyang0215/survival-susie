@@ -142,8 +142,12 @@ t1 <- proc.time()
 fit4 <- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)
 t2 <- proc.time()
 t2 - t1
-t(apply(fit4$alpha, 1, function(x) sort(x, decreasing = TRUE)))
+
 ```
 
+```{r}
+fit4$alpha
+t(apply(fit4$alpha, 1, function(x) sort(x, decreasing = TRUE)))
+```
 
 
