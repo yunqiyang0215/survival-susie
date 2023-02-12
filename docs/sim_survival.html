@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree8b98f20dd15ca81b6eca1950308a69ca79d1906atargetblank8b98f20a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/8b98f20dd15ca81b6eca1950308a69ca79d1906a" target="_blank">8b98f20</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree13721b56e1f4d6880839ce674aedc13a9604a6c0targetblank13721b5a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/13721b56e1f4d6880839ce674aedc13a9604a6c0" target="_blank">13721b5</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree8b98f20dd15ca81b6eca1950308a69ca79d1906atargetblank8b98f20a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree13721b56e1f4d6880839ce674aedc13a9604a6c0targetblank13721b5a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/8b98f20dd15ca81b6eca1950308a69ca79d1906a" target="_blank">8b98f20</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/13721b56e1f4d6880839ce674aedc13a9604a6c0" target="_blank">13721b5</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -497,6 +497,9 @@ Ignored files:
     Ignored:    analysis/.DS_Store
     Ignored:    analysis/.RData
     Ignored:    analysis/.Rhistory
+
+Unstaged changes:
+    Modified:   data/sim_dat_simple.rds
 
 </code></pre>
 <p>
@@ -535,6 +538,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/13721b56e1f4d6880839ce674aedc13a9604a6c0/analysis/sim_survival.Rmd" target="_blank">13721b5</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-12
+</td>
+<td>
+wflow_publish("analysis/sim_survival.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/1be4f46d336c641934187312f7cdb9708a0bf45a/docs/sim_survival.html" target="_blank">1be4f46</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-12
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -684,7 +721,7 @@ f(t)&amp;=\frac{1}{\mu}\exp\{-t/\mu\}\\
 <li><p>The null model, time <span class="math inline">\(T_i\)</span> is simulated from the model that only has intercept. High correlation among all predictors.</p></li>
 <li><p>Single effect model without correlation. Time <span class="math inline">\(T_i\)</span> depends on <span class="math inline">\(x_1\)</span> only, and no correlation between <span class="math inline">\(x_1\)</span> and other variables.</p></li>
 <li><p>Single effect model with correlation. Time <span class="math inline">\(T_i\)</span> depends on <span class="math inline">\(x_1\)</span> only, and high correlation between <span class="math inline">\(x_1\)</span> and other variables.</p></li>
-<li><p><span class="math inline">\(\log T_i = \beta_0+\beta_1x_{i1} + \beta_2x_{i2}+\epsilon_i\)</span>, and high correlation between <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>, <span class="math inline">\(x_1, x_2\)</span> and other variables.</p></li>
+<li><p><span class="math inline">\(\log T_i = \beta_0+\beta_1x_{i1} + \beta_2x_{i2}+\epsilon_i\)</span>, and high correlation among all variables.</p></li>
 </ol>
 <pre class="r"><code>library(mvtnorm)
 library(survival)</code></pre>
@@ -753,6 +790,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/1be4f46d336c641934187312f7cdb9708a0bf45a/docs/figure/sim_survival.Rmd/unnamed-chunk-4-1.png" target="_blank">1be4f46</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-12
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/09369048c696a8d05c83f48e108b259f8cb801a2/docs/figure/sim_survival.Rmd/unnamed-chunk-4-1.png" target="_blank">0936904</a>
@@ -826,6 +874,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/1be4f46d336c641934187312f7cdb9708a0bf45a/docs/figure/sim_survival.Rmd/unnamed-chunk-6-1.png" target="_blank">1be4f46</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-12
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/09369048c696a8d05c83f48e108b259f8cb801a2/docs/figure/sim_survival.Rmd/unnamed-chunk-6-1.png" target="_blank">0936904</a>
 </td>
 <td>
@@ -875,6 +934,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/1be4f46d336c641934187312f7cdb9708a0bf45a/docs/figure/sim_survival.Rmd/unnamed-chunk-8-1.png" target="_blank">1be4f46</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-12
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/09369048c696a8d05c83f48e108b259f8cb801a2/docs/figure/sim_survival.Rmd/unnamed-chunk-8-1.png" target="_blank">0936904</a>
 </td>
 <td>
@@ -922,6 +992,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/1be4f46d336c641934187312f7cdb9708a0bf45a/docs/figure/sim_survival.Rmd/unnamed-chunk-10-1.png" target="_blank">1be4f46</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-12
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/09369048c696a8d05c83f48e108b259f8cb801a2/docs/figure/sim_survival.Rmd/unnamed-chunk-10-1.png" target="_blank">0936904</a>
