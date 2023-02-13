@@ -10,6 +10,8 @@ editor_options:
 
 + [Example of survival analysis in R](survival_example.html)
 
++ [Check effect of standardization in coxph model](check_coxph_fit.html)
+
 + [Simulate survival data using exponential distribution](sim_survival.html)
 
 + [Run IBSS on simple simulation data](run_ser_simple_dat.html)
