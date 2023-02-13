@@ -1,0 +1,85 @@
+---
+title: "standardize_effect_coxph"
+author: "Yunqi Yang"
+date: "2/13/2023"
+output: html_document
+---
+
+### Description: 
+
+check if standardizing will change the coefficient of variables in coxph model. Let's still use the exponential model from https://yunqiyang0215.github.io/survival-susie/sim_survival.html
+
+The exponential model models the mean of exponential as:
+$$
+\begin{split}
+E(T_i) &= \mu_i\\
+\log\mu_i &= \beta_0 + X\beta
+\end{split}
+$$
+The hazard in exponential model is $\lambda_i = 1/\mu_i=\frac{1}{\exp\{\beta_0+X\beta\}}=\lambda_0\exp\{X\alpha\}$. Therefore, $\alpha$ is the output from coxph model and $\alpha=-\beta$. 
+
+
+```{r}
+library(mvtnorm)
+library(survival)
+```
+
+```{r}
+# Here we use parametric model to simulate data with survival time,
+# assuming survival time is exponentially distributed. 
+# We first simulate the mean of exponential from linear combinations
+# of variables, and then simulate survival time. 
+# T\sim 1/u*exp(-t/u), and the true model is:
+# log(T) = \mu + e = b0 + Xb + e
+# @param b: vector of length (p+1) for true effect size, include intercept.
+# @param X: variable matrix of size n by p. 
+# @param status: censoring status. 1 = censored, 2 = event observed. 
+sim_dat <- function(b, X){
+  n = nrow(X)
+  p = ncol(X)
+  mu <- exp(cbind(rep(1,n), X) %*% b)
+  surT <- rexp(n, rate = 1/mu)
+  dat <- data.frame(cbind(surT, X))
+  x.name <- unlist(lapply(1:p, function(i) paste0("x", i)))
+  names(dat) = c("surT", x.name)
+  dat$status <- rep(2, n)
+  return(dat)
+}
+
+```
+
+
+```{r}
+set.seed(1)
+n = 200
+b = c(1,0.1)
+X = as.matrix(rnorm(n, mean = 3, sd = 2))
+dat = sim_dat(b, X)
+
+Xc = X - mean(X)
+X.sd = (X - mean(X))/sd(X)
+sd = sd(X)
+print(sd)
+```
+
+```{r}
+hist(dat$surT, breaks = 20)
+```
+
+
+```{r}
+## Create  survival object. status == 2 is death
+dat$y <- with(dat, Surv(surT, status == 2))
+# Fit cox ph. Cox ph model with select multiple significant predictors..
+cox1 <- coxph(y ~ x1, data =  dat)
+cox2 <- coxph(dat$y ~ X.sd)
+cox3 <- coxph(dat$y ~ Xc)
+```
+
+
+```{r}
+coef(cox1)
+coef(cox2)
+coef(cox3)
+```
+
