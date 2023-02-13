@@ -18,6 +18,11 @@ E(T_i) &= \mu_i\\
 $$
 The hazard in exponential model is $\lambda_i = 1/\mu_i=\frac{1}{\exp\{\beta_0+X\beta\}}=\lambda_0\exp\{X\alpha\}$. Therefore, $\alpha$ is the output from coxph model and $\alpha=-\beta$. 
 
+*Conclusion*: 
+
+1. Mean center won't change the coefficient in coxph model.
+
+2. The coefficient will be multiplied by $s$ if the variable is divided by $s$.
 
 ```{r}
 library(mvtnorm)
