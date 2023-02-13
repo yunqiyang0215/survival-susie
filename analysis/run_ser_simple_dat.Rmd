@@ -78,7 +78,7 @@ $\log T_i =\beta_0+\epsilon_i$ and $\beta_0 = 1$.
 ## Create  survival object. status == 2 is death
 dat[[1]]$y <- with(dat[[1]], Surv(surT, status == 2))
 # Fit cox ph. Cox ph model with select multiple significant predictors..
-cox1 <- coxph(y ~ .-status, data =  dat[[1]])
+cox1 <- coxph(y ~ .-status - surT, data =  dat[[1]])
 
 ```
 
