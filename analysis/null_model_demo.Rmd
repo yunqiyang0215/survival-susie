@@ -1,0 +1,153 @@
+---
+title: "Check the distribution of zscores in coxph"
+author: "Yunqi Yang"
+date: "2/9/2023"
+output: html_document
+---
+
+## Description:
+
+Here I first simulate survival data from exponential distribution **without censoring**. I simulate one variable and the true model is the null model, that is, the variable is not associated with survival time $T$. From fitting the cox proportional hazard model on the data, we characterize the distribution of z-scores. 
+
+
+### More background on survival analysis:
+
+**1. To characterize the distribution of survival time $T$**, people often consider 4 functions, which are interrelated. Their relationships can be derived, here I just summarize the facts:
+
+(1) probability density function, f(t). $f(t)=\lambda(t)S(t)$
+
+(2) survival function, S(t). $S(t)=1-F(t)$
+
+(3) hazard function, $\lambda(t)$. $\lambda(t)=f(t)/S(t)=-\frac{\partial}{\partial t}\log S(t)$.
+
+(4) cumulative hazard function, $\Lambda(t)$. $\Lambda(t)=\int_0^t\lambda(s)d s$.
+
+
+**2. Parametric distribution for $T$**: exponential distribution
+
+In exponential distribution, the hazard (instantaneous rate at time $t$) is constant over time. 
+$$
+\begin{split}
+f(t)&=\frac{1}{\mu}\exp\{-t/\mu\}\\
+\lambda(t)&=\frac{1}{\mu}
+\end{split}
+$$
+
+**3. Model the mean of survival time**:
+
+Remember in exponential distribution, $E(T)=\mu$. So we can model $\log\mu$ by linear combinations of variables. $i$ indexes an individual. Let's call this *generative model*, because I simulate $T_i$ from $\exp(\mu_i)$.
+
+$$
+\begin{split}
+\log T_i &= \log E(T_i) + \epsilon_i=\log\mu_i+\epsilon_i\\
+\log\mu_i &=\beta_0+\beta ^Tx_i
+\end{split}
+$$
+
+**4. Cox proportional hazard model**:
+
+Cox proportional hazard (cox-ph) model is a model for the hazard $\lambda(t)$, not the survival time. It has a form of the following, where $\lambda_0$ is the baseline hazard and $x$ (length-p vector) denotes attributes of an individual that increase/decrease his hazard. For example, high BMI may increase the hazard of getting diabetes. 
+
+$$
+\lambda_i(t)=\lambda_0\exp\{\alpha_0+\alpha^Tx_i\}
+$$
+
+Cox-ph model is a semi-parametric model, where the baseline hazard function $\lambda_0$ can be left unspecified. The inference carries out only in $\alpha_0, \alpha$. 
+
+
+**5. Relationship between our generative model and cox-ph**:
+
+As mentioned above, when assuming $T$ follows exponential distribution, we have $\lambda=1/\mu$, again this means the hazard is constant over time. Here I mainly want to show the relationship between $\alpha$ in coxph and $\beta$ in our generative model.
+
+$$
+\begin{split}
+\lambda_i=1/\mu_i&=\frac{1}{\exp\{\beta_0+\beta^Tx_i\}}=\frac{1}{\mu_0\exp\{\beta^Tx_i\}}\\
+&=\lambda_0\exp\{-\beta^Tx_i\}=\lambda_0\exp\{-\alpha^Tx_i\}
+\end{split}
+$$
+
+Therefore, $\alpha = -\beta$. That is to say, if I generate a model with $\beta_1=1$ and fit the survival data to cox-ph model, the coefficient I get is $\alpha$, which is -1. 
+
+
+
+```{r}
+library(mvtnorm)
+library(survival)
+# Modified Karl's code for intercept part
+devtools::load_all("/Users/nicholeyang/Desktop/logisticsusie")
+```
+
+### Step 1: simulate data from the null model. 
+
+Let's do the simplest case, where we only have one variable and is not associated with survival time. 
+
+```{r}
+# Here we use parametric model to simulate data with survival time,
+# assuming survival time is exponentially distributed. 
+# We first simulate the mean of exponential from linear combinations
+# of variables, and then simulate survival time. 
+# T\sim 1/u*exp(-t/u), and the true model is:
+# log(T) = \mu + e = b0 + Xb + e
+# @param b: vector of length (p+1) for true effect size, include intercept.
+# @param X: variable matrix of size n by p. 
+# @param status: censoring status. 1 = censored, 2 = event observed. 
+sim_dat <- function(b, X){
+  n = nrow(X)
+  p = ncol(X)
+  mu <- exp(cbind(rep(1,n), X) %*% b)
+  surT <- rexp(n, rate = 1/mu)
+  dat <- data.frame(cbind(surT, X))
+  x.name <- unlist(lapply(1:p, function(i) paste0("x", i)))
+  names(dat) = c("surT", x.name)
+  dat$status <- rep(2, n)
+  return(dat)
+}
+
+```
+
+```{r}
+set.seed(1)
+n = 200
+b = c(1, 0) # True beta coefficients, first element is intercept. 
+X = as.matrix(rnorm(n, mean = 3, sd = 2))
+dat = sim_dat(b, X)
+hist(dat$surT, breaks = 20)
+```
+
+### Step 2: fit cox-ph model
+```{r}
+## Create  survival object. status == 2 is death
+dat$y <- with(dat, Surv(surT, status == 2))
+cox1 <- coxph(y ~ x1, data =  dat)
+summary(cox1)
+```
+### Step 3: simulate multiple data replicates and fit coxph, plot the distribution of z-scores
+```{r}
+seeds = c(1:5e3)
+n = 200
+b = c(1, 0)
+zscores <- rep(NA, 5e3)
+
+for (seed in seeds){
+  
+  set.seed(seed)
+  X = as.matrix(rnorm(n, mean = 3, sd = 2))
+  dat = sim_dat(b, X)
+  
+  ## Create  survival object. status == 2 is death
+  dat$y <- with(dat, Surv(surT, status == 2))
+  cox <- coxph(y ~ x1, data =  dat)
+  zscores[seed] = coef(summary(cox))[,"z"]
+  
+}
+
+```
+
+```{r}
+x = seq(-3, 3, length.out = 1e3)
+hist(zscores, probability = TRUE)
+# The red line is the density of N(0,1)
+curve(dnorm(x, mean = 0, sd = 1), add = TRUE, col = "red")
+
+```
+
