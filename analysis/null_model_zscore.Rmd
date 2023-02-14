@@ -137,7 +137,7 @@ for (seed in seeds){
   ## Create  survival object. status == 2 is death
   dat$y <- with(dat, Surv(surT, status == 2))
   cox <- coxph(y ~ x1, data =  dat)
-  zscores[seed] = coef(summary(cox))[,"z"]
+  zscores[seed] = -coef(summary(cox))[,"z"]
   
 }
 
