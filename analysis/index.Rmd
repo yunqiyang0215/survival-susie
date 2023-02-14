@@ -12,7 +12,7 @@ editor_options:
 
 + [Check effect of standardization in coxph model](check_coxph_fit.html)
 
-+ [Check distribution of zscores under the null in coxph](null_model.html)
++ [Check distribution of zscores under the null in coxph](null_model_zscore.html)
 
 + [Simulate survival data using exponential distribution](sim_survival.html)
 
