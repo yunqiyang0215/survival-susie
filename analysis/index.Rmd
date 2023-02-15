@@ -8,11 +8,16 @@ editor_options:
   chunk_output_type: console
 ---
 
+Background and analysis on coxph model
+
 + [Example of survival analysis in R](survival_example.html)
 
 + [Check effect of standardization in coxph model](check_coxph_fit.html)
 
 + [Check distribution of zscores under the null in coxph](null_model_zscore.html)
+
+
+Simulation for survival data and run IBSS
 
 + [Simulate survival data using exponential distribution](sim_survival.html)
 
@@ -20,4 +25,3 @@ editor_options:
 
 + [Run IBSS procedure on survival data](ser_survival.html)
 
-+ [Run IBSS on one predictor model](one_predictor_investigation.html)
