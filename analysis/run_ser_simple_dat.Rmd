@@ -127,6 +127,19 @@ fit2$alpha
 
 ### Data 3: simulated from $\log T_i=\beta_0 + \beta_1x_{i1}$. Predictors have high correlation. 
 
+```{r }
+dat[[3]]$y <- with(dat[[3]], Surv(surT, status == 2))
+X = as.matrix(dat[[3]][, c(2:(p+1))])
+y = dat[[3]]$y
+
+# IBSS of susie
+t1 <- proc.time()
+fit3 <- ibss_from_ser(X, y, L = 1, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)
+t2 <- proc.time()
+t2 - t1
+fit3$alpha
+```
+
 ```{r cache = TRUE}
 dat[[3]]$y <- with(dat[[3]], Surv(surT, status == 2))
 X = as.matrix(dat[[3]][, c(2:(p+1))])
@@ -139,6 +152,7 @@ t2 <- proc.time()
 t2 - t1
 t(apply(fit3$alpha, 1, function(x) sort(x, decreasing = TRUE)))
 ```
+
 
 ### Data 4: simulated from $\log T_i=\beta_0 + \beta_1x_{i1} + \beta_1x_{i2}$. Predictors have high correlation
 
