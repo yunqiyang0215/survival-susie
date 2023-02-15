@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree2aab4d2a9c69495318c355acb992bcb4d020c86ftargetblank2aab4d2a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/2aab4d2a9c69495318c355acb992bcb4d020c86f" target="_blank">2aab4d2</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree0b9d885dc079946d665999543cf1b50538655552targetblank0b9d885a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/0b9d885dc079946d665999543cf1b50538655552" target="_blank">0b9d885</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree2aab4d2a9c69495318c355acb992bcb4d020c86ftargetblank2aab4d2a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree0b9d885dc079946d665999543cf1b50538655552targetblank0b9d885a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/2aab4d2a9c69495318c355acb992bcb4d020c86f" target="_blank">2aab4d2</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/0b9d885dc079946d665999543cf1b50538655552" target="_blank">0b9d885</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -497,7 +497,6 @@ Ignored files:
     Ignored:    analysis/.DS_Store
     Ignored:    analysis/.RData
     Ignored:    analysis/.Rhistory
-    Ignored:    analysis/figure/
 
 Unstaged changes:
     Modified:   analysis/check_coxph_fit.Rmd
@@ -542,6 +541,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/0b9d885dc079946d665999543cf1b50538655552/analysis/run_ser_simple_dat.Rmd" target="_blank">0b9d885</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-15
+</td>
+<td>
+wflow_publish("analysis/run_ser_simple_dat.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/fa55cee739e18b78f4448c07cbbecf99f745fabb/docs/run_ser_simple_dat.html" target="_blank">fa55cee</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-15
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -937,13 +970,50 @@ X = as.matrix(dat[[1]][, c(2:(p+1))])
 y = dat[[1]]$y</code></pre>
 <pre class="r"><code># IBSS of susie
 fit1 &lt;- ibss_from_ser(X, y, L = 1, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
-<pre><code>0.894 sec elapsed</code></pre>
+<pre><code>0.974 sec elapsed</code></pre>
 <pre class="r"><code>hist(fit1$alpha, breaks = 20)</code></pre>
 <p><img src="figure/run_ser_simple_dat.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-1">
+Past versions of unnamed-chunk-7-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/fa55cee739e18b78f4448c07cbbecf99f745fabb/docs/figure/run_ser_simple_dat.Rmd/unnamed-chunk-7-1.png" target="_blank">fa55cee</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-15
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code># IBSS of susie
 t1 &lt;- proc.time()
 fit2 &lt;- ibss_from_ser(X, y, L = 5, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
-<pre><code>196.523 sec elapsed</code></pre>
+<pre><code>166.351 sec elapsed</code></pre>
 <pre class="r"><code>t2 &lt;- proc.time()
 t(apply(fit2$alpha, 1, function(x) sort(x, decreasing = TRUE)))</code></pre>
 <pre><code>          [,1]       [,2]        [,3]         [,4]         [,5]         [,6]
@@ -1024,11 +1094,11 @@ y = dat[[2]]$y
 # IBSS of susie
 t1 &lt;- proc.time()
 fit2 &lt;- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
-<pre><code>9.032 sec elapsed</code></pre>
+<pre><code>4.297 sec elapsed</code></pre>
 <pre class="r"><code>t2 &lt;- proc.time()
 t2 - t1</code></pre>
 <pre><code>   user  system elapsed 
-  5.715   0.140   9.034 </code></pre>
+  4.233   0.048   4.299 </code></pre>
 <div class="alert alert-warning">
 <p>
 <strong>Warning:</strong> The above code chunk cached its results, but it won’t be re-run if previous chunks it depends on are updated. If you need to use caching, it is highly recommended to also set <code>knitr::opts_chunk$set(autodep = TRUE)</code> at the top of the file (in a chunk that is not cached). Alternatively, you can customize the option <code>dependson</code> for each individual chunk that is cached. Using either <code>autodep</code> or <code>dependson</code> will remove this warning. See the <a href="https://yihui.name/knitr/options/#cache"
@@ -1155,12 +1225,45 @@ y = dat[[3]]$y
 
 # IBSS of susie
 t1 &lt;- proc.time()
-fit3 &lt;- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
-<pre><code>125.329 sec elapsed</code></pre>
+fit3 &lt;- ibss_from_ser(X, y, L = 1, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
+<pre><code>0.442 sec elapsed</code></pre>
 <pre class="r"><code>t2 &lt;- proc.time()
 t2 - t1</code></pre>
 <pre><code>   user  system elapsed 
-114.589   2.208 125.338 </code></pre>
+  0.435   0.005   0.444 </code></pre>
+<pre class="r"><code>fit3$alpha</code></pre>
+<pre><code>          [,1]         [,2]        [,3]        [,4]         [,5]         [,6]
+[1,] 0.9999907 1.567435e-08 1.93253e-10 8.04475e-08 6.905913e-08 1.069103e-08
+             [,7]         [,8]         [,9]        [,10]        [,11]
+[1,] 3.592092e-07 5.765639e-08 7.577177e-11 7.977227e-09 8.847508e-08
+            [,12]        [,13]        [,14]        [,15]        [,16]
+[1,] 2.502203e-09 6.281601e-08 1.392935e-09 8.914891e-10 2.544198e-08
+            [,17]        [,18]        [,19]        [,20]        [,21]
+[1,] 7.700038e-11 7.748153e-09 7.448784e-09 6.410945e-09 8.701265e-10
+            [,22]        [,23]        [,24]        [,25]       [,26]
+[1,] 2.211322e-08 7.167358e-08 3.865536e-09 5.272047e-09 1.46579e-09
+            [,27]        [,28]       [,29]        [,30]        [,31]
+[1,] 7.133814e-09 5.589628e-09 9.94712e-10 4.583663e-08 2.242277e-06
+            [,32]        [,33]        [,34]        [,35]        [,36]
+[1,] 1.572915e-09 1.420206e-10 6.514977e-09 7.028173e-08 7.609461e-10
+           [,37]        [,38]        [,39]        [,40]        [,41]
+[1,] 3.79113e-07 2.581716e-10 1.017795e-09 3.465629e-07 1.451801e-06
+            [,42]        [,43]        [,44]        [,45]       [,46]
+[1,] 9.232644e-07 4.859094e-10 1.976958e-09 9.466556e-10 2.90021e-08
+            [,47]        [,48]        [,49]        [,50]
+[1,] 2.517204e-06 4.200088e-08 2.622045e-07 1.775289e-08</code></pre>
+<pre class="r"><code>dat[[3]]$y &lt;- with(dat[[3]], Surv(surT, status == 2))
+X = as.matrix(dat[[3]][, c(2:(p+1))])
+y = dat[[3]]$y
+
+# IBSS of susie
+t1 &lt;- proc.time()
+fit3 &lt;- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
+<pre><code>104.966 sec elapsed</code></pre>
+<pre class="r"><code>t2 &lt;- proc.time()
+t2 - t1</code></pre>
+<pre><code>   user  system elapsed 
+102.707   1.373 104.972 </code></pre>
 <pre class="r"><code>t(apply(fit3$alpha, 1, function(x) sort(x, decreasing = TRUE)))</code></pre>
 <pre><code>            [,1]         [,2]         [,3]         [,4]         [,5]
  [1,] 0.99999698 1.052155e-06 4.521763e-07 3.791215e-07 3.688574e-07
@@ -1289,11 +1392,11 @@ y = dat[[4]]$y
 # IBSS of susie
 t1 &lt;- proc.time()
 fit4 &lt;- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
-<pre><code>32.068 sec elapsed</code></pre>
+<pre><code>48.476 sec elapsed</code></pre>
 <pre class="r"><code>t2 &lt;- proc.time()
 t2 - t1</code></pre>
 <pre><code>   user  system elapsed 
- 30.349   0.507  32.073 </code></pre>
+ 34.633   0.851  48.480 </code></pre>
 <div class="alert alert-warning">
 <p>
 <strong>Warning:</strong> The above code chunk cached its results, but it won’t be re-run if previous chunks it depends on are updated. If you need to use caching, it is highly recommended to also set <code>knitr::opts_chunk$set(autodep = TRUE)</code> at the top of the file (in a chunk that is not cached). Alternatively, you can customize the option <code>dependson</code> for each individual chunk that is cached. Using either <code>autodep</code> or <code>dependson</code> will remove this warning. See the <a href="https://yihui.name/knitr/options/#cache"
