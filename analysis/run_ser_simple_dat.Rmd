@@ -89,11 +89,15 @@ y = dat[[1]]$y
 
 ```{r }
 # IBSS of susie
+set.seed(1)
 fit1 <- ibss_from_ser(X, y, L = 1, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)
 ```
 
 ```{r}
 hist(fit1$alpha, breaks = 20)
+```
+```{r}
+hist(fit1$mu* fit1$alpha, breaks = 20)
 ```
 
 
