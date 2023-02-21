@@ -8,8 +8,6 @@ output: html_document
 
 I simulated data in 4 different scenarios, and apply both coxph model and susie procedure. The data simulation procedure is available at https://yunqiyang0215.github.io/survival-susie/sim_survival.html
 
-Susie works in 1,2,4 scenarios, but not scenario 3. 
-
 
 #### The Wakefield approximation:
 $$
@@ -149,6 +147,11 @@ t2 - t1
 t(apply(fit3$alpha, 1, function(x) sort(x, decreasing = TRUE)))
 ```
 
+```{r}
+beta <- colSums(fit3$alpha * fit3$mu)
+hist(beta, breaks = 20)
+```
+
 
 ### Data 4: simulated from $\log T_i=\beta_0 + \beta_1x_{i1} + \beta_1x_{i2}$. Predictors have high correlation
 
@@ -171,4 +174,8 @@ fit4$alpha
 t(apply(fit4$alpha, 1, function(x) sort(x, decreasing = TRUE)))
 ```
 
+```{r}
+beta <- colSums(fit4$alpha * fit4$mu)
+hist(beta, breaks = 20)
+```
 
