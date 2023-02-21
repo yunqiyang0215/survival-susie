@@ -459,10 +459,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 The following chunks had caches available:
 <ul>
 <li>
+unnamed-chunk-10
+</li>
+<li>
 unnamed-chunk-11
 </li>
 <li>
 unnamed-chunk-12
+</li>
+<li>
+unnamed-chunk-13
 </li>
 <li>
 unnamed-chunk-8
@@ -490,16 +496,16 @@ unnamed-chunk-9
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreeeecfb7f0d71611f537612f5ae523a591cd050491targetblankeecfb7fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/eecfb7f0d71611f537612f5ae523a591cd050491" target="_blank">eecfb7f</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree91d4fb738bb0144fdd146107b94f3a560ab55885targetblank91d4fb7a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/91d4fb738bb0144fdd146107b94f3a560ab55885" target="_blank">91d4fb7</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreeeecfb7f0d71611f537612f5ae523a591cd050491targetblankeecfb7fa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree91d4fb738bb0144fdd146107b94f3a560ab55885targetblank91d4fb7a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/eecfb7f0d71611f537612f5ae523a591cd050491" target="_blank">eecfb7f</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/91d4fb738bb0144fdd146107b94f3a560ab55885" target="_blank">91d4fb7</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -560,6 +566,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/91d4fb738bb0144fdd146107b94f3a560ab55885/analysis/run_ser_simple_dat.Rmd" target="_blank">91d4fb7</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-21
+</td>
+<td>
+wflow_publish("analysis/run_ser_simple_dat.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/babbca4f155c2a741cb62ce0decd8b9e28c40b5e/docs/run_ser_simple_dat.html" target="_blank">babbca4</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-21
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1029,7 +1069,6 @@ wflow_publish("analysis/run_ser_simple_dat.Rmd")
 <div id="description" class="section level3">
 <h3>Description:</h3>
 <p>I simulated data in 4 different scenarios, and apply both coxph model and susie procedure. The data simulation procedure is available at <a href="https://yunqiyang0215.github.io/survival-susie/sim_survival.html" class="uri">https://yunqiyang0215.github.io/survival-susie/sim_survival.html</a></p>
-<p>Susie works in 1,2,4 scenarios, but not scenario 3.</p>
 <div id="the-wakefield-approximation" class="section level4">
 <h4>The Wakefield approximation:</h4>
 <p><span class="math display">\[
@@ -1092,7 +1131,7 @@ y = dat[[1]]$y</code></pre>
 <pre class="r"><code># IBSS of susie
 set.seed(1)
 fit1 &lt;- ibss_from_ser(X, y, L = 1, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
-<pre><code>0.602 sec elapsed</code></pre>
+<pre><code>0.615 sec elapsed</code></pre>
 <pre class="r"><code>par(mfrow = c(1,2))
 hist(fit1$alpha, breaks = 20)
 hist(fit1$mu* fit1$alpha, breaks = 20)</code></pre>
@@ -1217,6 +1256,43 @@ t(apply(fit2$alpha, 1, function(x) sort(x, decreasing = TRUE)))</code></pre>
 <pre class="r"><code>beta &lt;- colSums(fit2$alpha * fit2$mu)
 hist(beta, breaks = 20)</code></pre>
 <p><img src="figure/run_ser_simple_dat.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-1">
+Past versions of unnamed-chunk-9-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-9-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/babbca4f155c2a741cb62ce0decd8b9e28c40b5e/docs/figure/run_ser_simple_dat.Rmd/unnamed-chunk-9-1.png" target="_blank">babbca4</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="data-2-simulated-from-log-t_ibeta_0-beta_1x_i1.-predictors-are-independent." class="section level3">
@@ -1304,6 +1380,43 @@ t2 - t1</code></pre>
 <pre class="r"><code>beta &lt;- colSums(fit2$alpha * fit2$mu)
 hist(beta, breaks = 20)</code></pre>
 <p><img src="figure/run_ser_simple_dat.Rmd/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-11-1">
+Past versions of unnamed-chunk-11-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-11-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/babbca4f155c2a741cb62ce0decd8b9e28c40b5e/docs/figure/run_ser_simple_dat.Rmd/unnamed-chunk-11-1.png" target="_blank">babbca4</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-21
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="data-3-simulated-from-log-t_ibeta_0-beta_1x_i1.-predictors-have-high-correlation." class="section level3">
 <h3>Data 3: simulated from <span class="math inline">\(\log T_i=\beta_0 + \beta_1x_{i1}\)</span>. Predictors have high correlation.</h3>
@@ -1386,6 +1499,9 @@ t2 - t1</code></pre>
 >knitr cache options</a> for more details.
 </p>
 </div>
+<pre class="r"><code>beta &lt;- colSums(fit3$alpha * fit3$mu)
+hist(beta, breaks = 20)</code></pre>
+<p><img src="figure/run_ser_simple_dat.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="data-4-simulated-from-log-t_ibeta_0-beta_1x_i1-beta_1x_i2.-predictors-have-high-correlation" class="section level3">
 <h3>Data 4: simulated from <span class="math inline">\(\log T_i=\beta_0 + \beta_1x_{i1} + \beta_1x_{i2}\)</span>. Predictors have high correlation</h3>
@@ -1397,11 +1513,11 @@ y = dat[[4]]$y
 # IBSS of susie
 t1 &lt;- proc.time()
 fit4 &lt;- ibss_from_ser(X, y, L = 5, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
-<pre><code>8.496 sec elapsed</code></pre>
+<pre><code>8.176 sec elapsed</code></pre>
 <pre class="r"><code>t2 &lt;- proc.time()
 t2 - t1</code></pre>
 <pre><code>   user  system elapsed 
-  7.849   0.145   8.499 </code></pre>
+  7.813   0.135   8.212 </code></pre>
 <div class="alert alert-warning">
 <p>
 <strong>Warning:</strong> The above code chunk cached its results, but it won’t be re-run if previous chunks it depends on are updated. If you need to use caching, it is highly recommended to also set <code>knitr::opts_chunk$set(autodep = TRUE)</code> at the top of the file (in a chunk that is not cached). Alternatively, you can customize the option <code>dependson</code> for each individual chunk that is cached. Using either <code>autodep</code> or <code>dependson</code> will remove this warning. See the <a href="https://yihui.name/knitr/options/#cache"
@@ -1530,6 +1646,9 @@ t2 - t1</code></pre>
 [3,] 1.588409e-02 1.583168e-02 1.579463e-02 1.577565e-02 1.503885e-02
 [4,] 1.586574e-02 1.580055e-02 1.575066e-02 1.574703e-02 1.504818e-02
 [5,] 1.589220e-02 1.587928e-02 1.586157e-02 1.581902e-02 1.502366e-02</code></pre>
+<pre class="r"><code>beta &lt;- colSums(fit4$alpha * fit4$mu)
+hist(beta, breaks = 20)</code></pre>
+<p><img src="figure/run_ser_simple_dat.Rmd/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
