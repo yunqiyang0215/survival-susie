@@ -384,7 +384,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2023-02-12
+<strong>Last updated:</strong> 2023-02-23
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree13721b56e1f4d6880839ce674aedc13a9604a6c0targetblank13721b5a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/13721b56e1f4d6880839ce674aedc13a9604a6c0" target="_blank">13721b5</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreea0a62a1e79f382471623772ee1591a3620bc76a1targetblanka0a62a1a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/a0a62a1e79f382471623772ee1591a3620bc76a1" target="_blank">a0a62a1</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree13721b56e1f4d6880839ce674aedc13a9604a6c0targetblank13721b5a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreea0a62a1e79f382471623772ee1591a3620bc76a1targetblanka0a62a1a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/13721b56e1f4d6880839ce674aedc13a9604a6c0" target="_blank">13721b5</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/a0a62a1e79f382471623772ee1591a3620bc76a1" target="_blank">a0a62a1</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -497,9 +497,16 @@ Ignored files:
     Ignored:    analysis/.DS_Store
     Ignored:    analysis/.RData
     Ignored:    analysis/.Rhistory
+    Ignored:    analysis/run_ser_simple_dat_cache/
+
+Untracked files:
+    Untracked:  analysis/ibss_null_model.Rmd
 
 Unstaged changes:
-    Modified:   data/sim_dat_simple.rds
+    Modified:   analysis/check_coxph_fit.Rmd
+    Deleted:    analysis/null_model_demo.Rmd
+    Modified:   analysis/null_model_zscore.Rmd
+    Deleted:    analysis/one_predictor_investigation.Rmd
 
 </code></pre>
 <p>
@@ -538,6 +545,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/a0a62a1e79f382471623772ee1591a3620bc76a1/analysis/sim_survival.Rmd" target="_blank">a0a62a1</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-23
+</td>
+<td>
+wflow_publish("analysis/sim_survival.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/864bb5287a5d8e115ee6ff7a10fedbc56b7121d6/docs/sim_survival.html" target="_blank">864bb52</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-12
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -757,13 +798,14 @@ sim_dat &lt;- function(b, X){
   dat$status &lt;- rep(2, n)
   return(dat)
 }</code></pre>
-<div id="scenario-1-null-model" class="section level4">
-<h4>Scenario 1: null model</h4>
+</div>
+<div id="scenario-1-null-model-x-no-correlation" class="section level3">
+<h3>Scenario 1: null model, X no correlation</h3>
 <pre class="r"><code>set.seed(1)
 n &lt;- 100
 p &lt;- 50
 b &lt;- c(1, rep(0, 50))
-sigma &lt;- cov_simple_het(p, corr = 0.9)
+sigma &lt;- cov_simple_het(p, corr = 0)
 X&lt;- rmvnorm(n, sigma = sigma)
 dat1 &lt;- sim_dat(b, X)</code></pre>
 <pre class="r"><code>hist(dat1$surT, breaks = 20)</code></pre>
@@ -839,13 +881,13 @@ yunqiyang0215
 </div>
 </div>
 </div>
-<div id="scenario-2-single-effect-model-with-independent-predictors" class="section level4">
-<h4>Scenario 2: single effect model with independent predictors</h4>
+<div id="scenario-2-null-model-x-correlation-0.9" class="section level3">
+<h3>Scenario 2: null model, X correlation = 0.9</h3>
 <pre class="r"><code>set.seed(1)
 n &lt;- 100
 p &lt;- 50
-b &lt;- c(1, 3, rep(0, p-1))
-sigma &lt;- cov_simple_het(p, corr = 0)
+b &lt;- c(1, rep(0, 50))
+sigma &lt;- cov_simple_het(p, corr = 0.9)
 X&lt;- rmvnorm(n, sigma = sigma)
 dat2 &lt;- sim_dat(b, X)</code></pre>
 <pre class="r"><code>hist(dat2$surT, breaks = 20)</code></pre>
@@ -899,16 +941,16 @@ yunqiyang0215
 </div>
 </div>
 </div>
-<div id="scenario-3-single-effect-model-with-highly-correlated-predictors" class="section level4">
-<h4>Scenario 3: single effect model with highly correlated predictors</h4>
+<div id="scenario-3-single-effect-model-with-independent-predictors" class="section level3">
+<h3>Scenario 3: single effect model with independent predictors</h3>
 <pre class="r"><code>set.seed(1)
 n &lt;- 100
 p &lt;- 50
 b &lt;- c(1, 3, rep(0, p-1))
-sigma &lt;- cov_simple_het(p, corr = 0.9)
+sigma &lt;- cov_simple_het(p, corr = 0)
 X&lt;- rmvnorm(n, sigma = sigma)
 dat3 &lt;- sim_dat(b, X)</code></pre>
-<pre class="r"><code>hist(dat3$surT, breaks = 20)</code></pre>
+<pre class="r"><code>hist(dat2$surT, breaks = 20)</code></pre>
 <p><img src="figure/sim_survival.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-1">
@@ -959,16 +1001,16 @@ yunqiyang0215
 </div>
 </div>
 </div>
-<div id="scenario-4-two-effects-model-with-highly-correlated-variables" class="section level4">
-<h4>Scenario 4: two effects model with highly correlated variables</h4>
+<div id="scenario-4-single-effect-model-with-highly-correlated-predictors" class="section level3">
+<h3>Scenario 4: single effect model with highly correlated predictors</h3>
 <pre class="r"><code>set.seed(1)
 n &lt;- 100
 p &lt;- 50
-b &lt;- c(1, 3, 1.5, rep(0, p-2))
+b &lt;- c(1, 3, rep(0, p-1))
 sigma &lt;- cov_simple_het(p, corr = 0.9)
 X&lt;- rmvnorm(n, sigma = sigma)
 dat4 &lt;- sim_dat(b, X)</code></pre>
-<pre class="r"><code>hist(dat4$surT, breaks = 20)</code></pre>
+<pre class="r"><code>hist(dat3$surT, breaks = 20)</code></pre>
 <p><img src="figure/sim_survival.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-1">
@@ -1018,7 +1060,19 @@ yunqiyang0215
 </table>
 </div>
 </div>
-<pre class="r"><code>sim_dat_simple &lt;- list(dat1, dat2, dat3, dat4)
+</div>
+<div id="scenario-5-two-effects-model-with-highly-correlated-variables" class="section level3">
+<h3>Scenario 5: two effects model with highly correlated variables</h3>
+<pre class="r"><code>set.seed(1)
+n &lt;- 100
+p &lt;- 50
+b &lt;- c(1, 3, 1.5, rep(0, p-2))
+sigma &lt;- cov_simple_het(p, corr = 0.9)
+X&lt;- rmvnorm(n, sigma = sigma)
+dat5 &lt;- sim_dat(b, X)</code></pre>
+<pre class="r"><code>hist(dat5$surT, breaks = 20)</code></pre>
+<p><img src="figure/sim_survival.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>sim_dat_simple &lt;- list(dat1, dat2, dat3, dat4, dat5)
 saveRDS(sim_dat_simple, &quot;./data/sim_dat_simple.rds&quot;)</code></pre>
 <br>
 <p>
@@ -1058,7 +1112,6 @@ loaded via a namespace (and not attached):
 [37] splines_4.1.1    promises_1.2.0.1 ellipsis_0.3.2   htmltools_0.5.2 
 [41] httpuv_1.6.3     utf8_1.2.2       stringi_1.7.5    cachem_1.0.6    
 [45] crayon_1.4.1    </code></pre>
-</div>
 </div>
 </div>
 </div>
