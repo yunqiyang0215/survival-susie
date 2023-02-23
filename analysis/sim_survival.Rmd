@@ -81,13 +81,13 @@ sim_dat <- function(b, X){
 }
 ```
 
-#### Scenario 1: null model
+### Scenario 1: null model, X no correlation
 ```{r}
 set.seed(1)
 n <- 100
 p <- 50
 b <- c(1, rep(0, 50))
-sigma <- cov_simple_het(p, corr = 0.9)
+sigma <- cov_simple_het(p, corr = 0)
 X<- rmvnorm(n, sigma = sigma)
 dat1 <- sim_dat(b, X)
 ```
@@ -97,13 +97,13 @@ hist(dat1$surT, breaks = 20)
 ```
 
 
-#### Scenario 2: single effect model with independent predictors
+### Scenario 2: null model, X correlation = 0.9
 ```{r}
 set.seed(1)
 n <- 100
 p <- 50
-b <- c(1, 3, rep(0, p-1))
-sigma <- cov_simple_het(p, corr = 0)
+b <- c(1, rep(0, 50))
+sigma <- cov_simple_het(p, corr = 0.9)
 X<- rmvnorm(n, sigma = sigma)
 dat2 <- sim_dat(b, X)
 ```
@@ -113,7 +113,23 @@ hist(dat2$surT, breaks = 20)
 ```
 
 
-#### Scenario 3: single effect model with highly correlated predictors
+### Scenario 3: single effect model with independent predictors
+```{r}
+set.seed(1)
+n <- 100
+p <- 50
+b <- c(1, 3, rep(0, p-1))
+sigma <- cov_simple_het(p, corr = 0)
+X<- rmvnorm(n, sigma = sigma)
+dat3 <- sim_dat(b, X)
+```
+
+```{r}
+hist(dat2$surT, breaks = 20)
+```
+
+
+### Scenario 4: single effect model with highly correlated predictors
 ```{r}
 set.seed(1)
 n <- 100
@@ -121,7 +137,7 @@ p <- 50
 b <- c(1, 3, rep(0, p-1))
 sigma <- cov_simple_het(p, corr = 0.9)
 X<- rmvnorm(n, sigma = sigma)
-dat3 <- sim_dat(b, X)
+dat4 <- sim_dat(b, X)
 ```
 
 ```{r}
@@ -129,7 +145,7 @@ hist(dat3$surT, breaks = 20)
 ```
 
 
-#### Scenario 4: two effects model with highly correlated variables 
+### Scenario 5: two effects model with highly correlated variables 
 ```{r}
 set.seed(1)
 n <- 100
@@ -137,15 +153,15 @@ p <- 50
 b <- c(1, 3, 1.5, rep(0, p-2))
 sigma <- cov_simple_het(p, corr = 0.9)
 X<- rmvnorm(n, sigma = sigma)
-dat4 <- sim_dat(b, X)
+dat5 <- sim_dat(b, X)
 ```
 
 ```{r}
-hist(dat4$surT, breaks = 20)
+hist(dat5$surT, breaks = 20)
 ```
 
 ```{r}
-sim_dat_simple <- list(dat1, dat2, dat3, dat4)
+sim_dat_simple <- list(dat1, dat2, dat3, dat4, dat5)
 saveRDS(sim_dat_simple, "./data/sim_dat_simple.rds")
 ```
 
