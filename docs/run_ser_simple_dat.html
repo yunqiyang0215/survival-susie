@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree26f177fd2807b2677e6db290d65b125b9c48c9b5targetblank26f177fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/26f177fd2807b2677e6db290d65b125b9c48c9b5" target="_blank">26f177f</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree8fceddde4ef427770fa8e10f0cc61eeb54cceff6targetblank8fceddda"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/8fceddde4ef427770fa8e10f0cc61eeb54cceff6" target="_blank">8fceddd</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree26f177fd2807b2677e6db290d65b125b9c48c9b5targetblank26f177fa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree8fceddde4ef427770fa8e10f0cc61eeb54cceff6targetblank8fceddda" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/26f177fd2807b2677e6db290d65b125b9c48c9b5" target="_blank">26f177f</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/8fceddde4ef427770fa8e10f0cc61eeb54cceff6" target="_blank">8fceddd</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -544,6 +544,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/8fceddde4ef427770fa8e10f0cc61eeb54cceff6/analysis/run_ser_simple_dat.Rmd" target="_blank">8fceddd</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-23
+</td>
+<td>
+wflow_publish("analysis/run_ser_simple_dat.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/7fc8ac9761e89f8e46bfa780a0c7987cea5ca126/docs/run_ser_simple_dat.html" target="_blank">7fc8ac9</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-23
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1160,7 +1194,7 @@ y = dat[[1]]$y</code></pre>
 <pre class="r"><code># IBSS of susie
 set.seed(1)
 fit1 &lt;- ibss_from_ser(X, y, L = 1, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
-<pre><code>0.687 sec elapsed</code></pre>
+<pre><code>0.737 sec elapsed</code></pre>
 <pre class="r"><code>par(mfrow = c(1,2))
 hist(fit1$alpha, breaks = 20)
 hist(fit1$mu* fit1$alpha, breaks = 20)</code></pre>
@@ -1187,6 +1221,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/7fc8ac9761e89f8e46bfa780a0c7987cea5ca126/docs/figure/run_ser_simple_dat.Rmd/unnamed-chunk-7-1.png" target="_blank">7fc8ac9</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-23
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/7a533c6d397f75b112c6599d0447812fcc767a01/docs/figure/run_ser_simple_dat.Rmd/unnamed-chunk-7-1.png" target="_blank">7a533c6</a>
@@ -1218,8 +1263,8 @@ yunqiyang0215
 <h4>Run IBSS on data from null model, L = 5.</h4>
 <pre class="r"><code># IBSS of susie
 t1 &lt;- proc.time()
-fit2 &lt;- ibss_from_ser(X, y, L = 5, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 50, estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
-<pre><code>6.143 sec elapsed</code></pre>
+fit2 &lt;- ibss_from_ser(X, y, L = 5, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
+<pre><code>6.08 sec elapsed</code></pre>
 <pre class="r"><code>t2 &lt;- proc.time()
 t(apply(fit2$alpha, 1, function(x) sort(x, decreasing = TRUE)))</code></pre>
 <pre><code>           [,1]       [,2]       [,3]       [,4]       [,5]       [,6]
@@ -1303,6 +1348,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/7fc8ac9761e89f8e46bfa780a0c7987cea5ca126/docs/figure/run_ser_simple_dat.Rmd/unnamed-chunk-9-1.png" target="_blank">7fc8ac9</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-23
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/babbca4f155c2a741cb62ce0decd8b9e28c40b5e/docs/figure/run_ser_simple_dat.Rmd/unnamed-chunk-9-1.png" target="_blank">babbca4</a>
 </td>
 <td>
@@ -1333,7 +1389,7 @@ y = dat[[2]]$y</code></pre>
 <pre class="r"><code># IBSS of susie
 set.seed(1)
 fit1 &lt;- ibss_from_ser(X, y, L = 1, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
-<pre><code>0.448 sec elapsed</code></pre>
+<pre><code>0.456 sec elapsed</code></pre>
 <pre class="r"><code>par(mfrow = c(1,2))
 hist(fit1$alpha, breaks = 20)
 hist(fit1$mu* fit1$alpha, breaks = 20)</code></pre>
@@ -1362,6 +1418,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/7fc8ac9761e89f8e46bfa780a0c7987cea5ca126/docs/figure/run_ser_simple_dat.Rmd/unnamed-chunk-13-1.png" target="_blank">7fc8ac9</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-23
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/2edb747738b9b98ccb13107503087d44f8e33b74/docs/figure/run_ser_simple_dat.Rmd/unnamed-chunk-13-1.png" target="_blank">2edb747</a>
 </td>
 <td>
@@ -1380,8 +1447,8 @@ yunqiyang0215
 <h4>Run IBSS on data from null model, L = 5.</h4>
 <pre class="r"><code># IBSS of susie
 t1 &lt;- proc.time()
-fit2 &lt;- ibss_from_ser(X, y, L = 5, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 50, estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
-<pre><code>5.793 sec elapsed</code></pre>
+fit2 &lt;- ibss_from_ser(X, y, L = 5, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
+<pre><code>5.654 sec elapsed</code></pre>
 <pre class="r"><code>t2 &lt;- proc.time()
 t(apply(fit2$alpha, 1, function(x) sort(x, decreasing = TRUE)))</code></pre>
 <pre><code>           [,1]       [,2]       [,3]       [,4]       [,5]       [,6]
@@ -1441,6 +1508,43 @@ t(apply(fit2$alpha, 1, function(x) sort(x, decreasing = TRUE)))</code></pre>
 <pre class="r"><code>beta &lt;- colSums(fit2$alpha * fit2$mu)
 hist(beta, breaks = 20)</code></pre>
 <p><img src="figure/run_ser_simple_dat.Rmd/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-15-1">
+Past versions of unnamed-chunk-15-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-15-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/7fc8ac9761e89f8e46bfa780a0c7987cea5ca126/docs/figure/run_ser_simple_dat.Rmd/unnamed-chunk-15-1.png" target="_blank">7fc8ac9</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-23
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 </div>
 <div id="data-3-simulated-from-log-t_ibeta_0-beta_1x_i1.-predictors-are-independent." class="section level3">
@@ -1453,11 +1557,11 @@ y = dat[[3]]$y
 # IBSS of susie
 t1 &lt;- proc.time()
 fit3 &lt;- ibss_from_ser(X, y, L = 5, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
-<pre><code>5.849 sec elapsed</code></pre>
+<pre><code>4.971 sec elapsed</code></pre>
 <pre class="r"><code>t2 &lt;- proc.time()
 t2 - t1</code></pre>
 <pre><code>   user  system elapsed 
-  5.414   0.113   5.852 </code></pre>
+  4.885   0.059   4.974 </code></pre>
 <pre class="r"><code>fit3$alpha</code></pre>
 <pre><code>           [,1]         [,2]         [,3]         [,4]         [,5]
 [1,] 1.00000000 2.307716e-25 7.411530e-25 1.364349e-25 1.378772e-25
@@ -1522,6 +1626,43 @@ t2 - t1</code></pre>
 <pre class="r"><code>beta &lt;- colSums(fit3$alpha * fit3$mu)
 hist(beta, breaks = 20)</code></pre>
 <p><img src="figure/run_ser_simple_dat.Rmd/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-17-1">
+Past versions of unnamed-chunk-17-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-17-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/7fc8ac9761e89f8e46bfa780a0c7987cea5ca126/docs/figure/run_ser_simple_dat.Rmd/unnamed-chunk-17-1.png" target="_blank">7fc8ac9</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-23
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="data-4-simulated-from-log-t_ibeta_0-beta_1x_i1.-predictors-have-high-correlation." class="section level3">
 <h3>Data 4: simulated from <span class="math inline">\(\log T_i=\beta_0 + \beta_1x_{i1}\)</span>. Predictors have high correlation.</h3>
@@ -1532,11 +1673,11 @@ y = dat[[4]]$y
 # IBSS of susie
 t1 &lt;- proc.time()
 fit4 &lt;- ibss_from_ser(X, y, L = 5, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
-<pre><code>10.502 sec elapsed</code></pre>
+<pre><code>12.243 sec elapsed</code></pre>
 <pre class="r"><code>t2 &lt;- proc.time()
 t2 - t1</code></pre>
 <pre><code>   user  system elapsed 
- 10.347   0.110  10.504 </code></pre>
+ 11.380   0.184  12.247 </code></pre>
 <pre class="r"><code>t(apply(fit4$alpha, 1, function(x) sort(x, decreasing = TRUE)))</code></pre>
 <pre><code>           [,1]         [,2]         [,3]         [,4]         [,5]
 [1,] 0.99986965 4.136298e-05 4.104706e-05 1.915872e-05 8.894234e-06
@@ -1601,6 +1742,43 @@ t2 - t1</code></pre>
 <pre class="r"><code>beta &lt;- colSums(fit4$alpha * fit4$mu)
 hist(beta, breaks = 20)</code></pre>
 <p><img src="figure/run_ser_simple_dat.Rmd/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-19-1">
+Past versions of unnamed-chunk-19-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-19-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/7fc8ac9761e89f8e46bfa780a0c7987cea5ca126/docs/figure/run_ser_simple_dat.Rmd/unnamed-chunk-19-1.png" target="_blank">7fc8ac9</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-23
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="data-5-simulated-from-log-t_ibeta_0-beta_1x_i1-beta_1x_i2.-predictors-have-high-correlation" class="section level3">
 <h3>Data 5: simulated from <span class="math inline">\(\log T_i=\beta_0 + \beta_1x_{i1} + \beta_1x_{i2}\)</span>. Predictors have high correlation</h3>
@@ -1612,11 +1790,11 @@ y = dat[[5]]$y
 # IBSS of susie
 t1 &lt;- proc.time()
 fit5 &lt;- ibss_from_ser(X, y, L = 5, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
-<pre><code>7.1 sec elapsed</code></pre>
+<pre><code>10.007 sec elapsed</code></pre>
 <pre class="r"><code>t2 &lt;- proc.time()
 t2 - t1</code></pre>
 <pre><code>   user  system elapsed 
-  6.981   0.080   7.102 </code></pre>
+  8.011   0.163  10.010 </code></pre>
 <pre class="r"><code>fit5$alpha</code></pre>
 <pre><code>             [,1]         [,2]         [,3]         [,4]         [,5]
 [1,] 1.000000e+00 2.933205e-12 4.087642e-12 2.366477e-10 6.257578e-11
@@ -1742,6 +1920,43 @@ t2 - t1</code></pre>
 <pre class="r"><code>beta &lt;- colSums(fit5$alpha * fit5$mu)
 hist(beta, breaks = 20)</code></pre>
 <p><img src="figure/run_ser_simple_dat.Rmd/unnamed-chunk-22-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-22-1">
+Past versions of unnamed-chunk-22-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-22-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/7fc8ac9761e89f8e46bfa780a0c7987cea5ca126/docs/figure/run_ser_simple_dat.Rmd/unnamed-chunk-22-1.png" target="_blank">7fc8ac9</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-23
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
