@@ -66,7 +66,8 @@ fit_coxph <- ser_from_univariate(surv_uni_fun)
 
 
 
-### Data 1: simulated from null model:
+### Data 1: simulated from null model with X independent
+
 $\log T_i =\beta_0+\epsilon_i$ and $\beta_0 = 1$.
 
 ```{r}
@@ -96,7 +97,7 @@ hist(fit1$mu* fit1$alpha, breaks = 20)
 ```
 
 #### Run IBSS on data from null model, L = 5.
-```{r cache = TRUE}
+```{r  }
 # IBSS of susie
 t1 <- proc.time()
 fit2 <- ibss_from_ser(X, y, L = 5, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 50, estimate_intercept = TRUE, ser_function = fit_coxph)
@@ -109,32 +110,57 @@ beta <- colSums(fit2$alpha * fit2$mu)
 hist(beta, breaks = 20)
 ```
 
-### Data 2: simulated from $\log T_i=\beta_0 + \beta_1x_{i1}$. Predictors are independent. 
 
-$\beta_0 = 1, \beta_1 = 3$
-```{r cache = TRUE}
+### Data 2: simulated from null model with highly correlated X.
+
+$\log T_i =\beta_0+\epsilon_i$ and $\beta_0 = 1$.
+
+```{r}
+## Create  survival object. status == 2 is death
 dat[[2]]$y <- with(dat[[2]], Surv(surT, status == 2))
+# Fit cox ph. Cox ph model with select multiple significant predictors..
+cox1 <- coxph(y ~ .-status - surT, data =  dat[[2]])
+```
+
+#### Run IBSS on data from null model with L=1.
+```{r  }
+p = 50
 X = as.matrix(dat[[2]][, c(2:(p+1))])
 y = dat[[2]]$y
+```
 
+```{r }
 # IBSS of susie
-t1 <- proc.time()
-fit2 <- ibss_from_ser(X, y, L = 5, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)
-t2 <- proc.time()
-t2 - t1
+set.seed(1)
+fit1 <- ibss_from_ser(X, y, L = 1, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)
 ```
 
 ```{r}
-fit2$alpha
+par(mfrow = c(1,2))
+hist(fit1$alpha, breaks = 20)
+hist(fit1$mu* fit1$alpha, breaks = 20)
+```
+
+#### Run IBSS on data from null model, L = 5.
+```{r  }
+# IBSS of susie
+t1 <- proc.time()
+fit2 <- ibss_from_ser(X, y, L = 5, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 50, estimate_intercept = TRUE, ser_function = fit_coxph)
+t2 <- proc.time()
+t(apply(fit2$alpha, 1, function(x) sort(x, decreasing = TRUE)))
+```
+
+```{r}
 beta <- colSums(fit2$alpha * fit2$mu)
 hist(beta, breaks = 20)
 ```
 
 
-### Data 3: simulated from $\log T_i=\beta_0 + \beta_1x_{i1}$. Predictors have high correlation. 
 
+### Data 3: simulated from $\log T_i=\beta_0 + \beta_1x_{i1}$. Predictors are independent. 
 
-```{r cache = TRUE}
+$\beta_0 = 1, \beta_1 = 3$
+```{r  }
 dat[[3]]$y <- with(dat[[3]], Surv(surT, status == 2))
 X = as.matrix(dat[[3]][, c(2:(p+1))])
 y = dat[[3]]$y
@@ -144,38 +170,58 @@ t1 <- proc.time()
 fit3 <- ibss_from_ser(X, y, L = 5, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)
 t2 <- proc.time()
 t2 - t1
-t(apply(fit3$alpha, 1, function(x) sort(x, decreasing = TRUE)))
 ```
 
 ```{r}
+fit3$alpha
 beta <- colSums(fit3$alpha * fit3$mu)
 hist(beta, breaks = 20)
 ```
 
 
-### Data 4: simulated from $\log T_i=\beta_0 + \beta_1x_{i1} + \beta_1x_{i2}$. Predictors have high correlation
-
-$\beta_0 = 1, \beta_1 = 3, \beta_2 = 1.5$ and $cor=0.9$.
-```{r cache = TRUE}
+### Data 4: simulated from $\log T_i=\beta_0 + \beta_1x_{i1}$. Predictors have high correlation. 
+```{r  }
 dat[[4]]$y <- with(dat[[4]], Surv(surT, status == 2))
 X = as.matrix(dat[[4]][, c(2:(p+1))])
 y = dat[[4]]$y
- 
+
 # IBSS of susie
 t1 <- proc.time()
 fit4 <- ibss_from_ser(X, y, L = 5, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)
+t2 <- proc.time()
+t2 - t1
+t(apply(fit4$alpha, 1, function(x) sort(x, decreasing = TRUE)))
+```
+
+```{r}
+beta <- colSums(fit4$alpha * fit4$mu)
+hist(beta, breaks = 20)
+```
+
+
+### Data 5: simulated from $\log T_i=\beta_0 + \beta_1x_{i1} + \beta_1x_{i2}$. Predictors have high correlation
+
+$\beta_0 = 1, \beta_1 = 3, \beta_2 = 1.5$ and $cor=0.9$.
+```{r  }
+dat[[5]]$y <- with(dat[[5]], Surv(surT, status == 2))
+X = as.matrix(dat[[5]][, c(2:(p+1))])
+y = dat[[5]]$y
+ 
+# IBSS of susie
+t1 <- proc.time()
+fit5 <- ibss_from_ser(X, y, L = 5, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)
 t2 <- proc.time()
 t2 - t1
 
 ```
 
 ```{r}
-fit4$alpha
-t(apply(fit4$alpha, 1, function(x) sort(x, decreasing = TRUE)))
+fit5$alpha
+t(apply(fit5$alpha, 1, function(x) sort(x, decreasing = TRUE)))
 ```
 
 ```{r}
-beta <- colSums(fit4$alpha * fit4$mu)
+beta <- colSums(fit5$alpha * fit5$mu)
 hist(beta, breaks = 20)
 ```
 
