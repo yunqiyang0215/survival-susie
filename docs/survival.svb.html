@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree37854d07ce5e10a7c970ac250f61267c7bce5d47targetblank37854d0a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/37854d07ce5e10a7c970ac250f61267c7bce5d47" target="_blank">37854d0</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreebcfcc2c40c7a954dd150dbbca97b641f7c6d8e6ftargetblankbcfcc2ca"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/bcfcc2c40c7a954dd150dbbca97b641f7c6d8e6f" target="_blank">bcfcc2c</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree37854d07ce5e10a7c970ac250f61267c7bce5d47targetblank37854d0a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreebcfcc2c40c7a954dd150dbbca97b641f7c6d8e6ftargetblankbcfcc2ca" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/37854d07ce5e10a7c970ac250f61267c7bce5d47" target="_blank">37854d0</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/bcfcc2c40c7a954dd150dbbca97b641f7c6d8e6f" target="_blank">bcfcc2c</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -549,6 +549,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/bcfcc2c40c7a954dd150dbbca97b641f7c6d8e6f/analysis/survival.svb.Rmd" target="_blank">bcfcc2c</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-03-03
+</td>
+<td>
+wflow_publish("analysis/survival.svb.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/962ae0030328b6335646196c846853c9ee5e5a03/docs/survival.svb.html" target="_blank">962ae00</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-03-03
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/37854d07ce5e10a7c970ac250f61267c7bce5d47/analysis/survival.svb.Rmd" target="_blank">37854d0</a>
 </td>
 <td>
@@ -573,15 +607,9 @@ wflow_publish("analysis/survival.svb.Rmd")
 <p>The candidate method is called <strong>survival.svb</strong>.</p>
 <p>Publication link: <a href="https://doi.org/10.1093/bioinformatics/btac416" class="uri">https://doi.org/10.1093/bioinformatics/btac416</a></p>
 <p>Software link:<a href="https://github.com/mkomod/survival.svb" class="uri">https://github.com/mkomod/survival.svb</a></p>
+<p><strong>Conclusion</strong>: Scenario 2 doesn’t work well. But all other scenarios work.</p>
 <pre class="r"><code>library(survival)
-library(survival.svb)
-library(BhGLM)
-library(BVSNLP)</code></pre>
-<pre><code>Bayesian Variable Selection using Non-Local priors for survival and logistic regression data.
-Loading Version 1.1.8</code></pre>
-<pre class="r"><code>library(glmnet)</code></pre>
-<pre><code>Loading required package: Matrix</code></pre>
-<pre><code>Loaded glmnet 4.1-4</code></pre>
+library(survival.svb)</code></pre>
 <div id="example-code-from-their-package" class="section level3">
 <h3>Example code from their package</h3>
 <pre class="r"><code># Question: Why re-scale censored data???
@@ -743,23 +771,22 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] glmnet_4.1-4       Matrix_1.5-3       BVSNLP_1.1.9       BhGLM_1.1.0       
-[5] survival.svb_0.0-2 survival_3.2-11    workflowr_1.6.2   
+[1] survival.svb_0.0-2 survival_3.2-11    workflowr_1.6.2   
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.8.3      pillar_1.6.4      compiler_4.1.1    bslib_0.4.1      
- [5] later_1.3.0       jquerylib_0.1.4   git2r_0.28.0      iterators_1.0.14 
- [9] tools_4.1.1       digest_0.6.28     lattice_0.20-44   jsonlite_1.7.2   
-[13] evaluate_0.14     lifecycle_1.0.1   tibble_3.1.5      pkgconfig_2.0.3  
-[17] rlang_1.0.6       foreach_1.5.2     cli_3.1.0         rstudioapi_0.13  
-[21] parallel_4.1.1    yaml_2.2.1        xfun_0.27         fastmap_1.1.0    
-[25] stringr_1.4.0     knitr_1.36        fs_1.5.0          vctrs_0.3.8      
-[29] sass_0.4.4        grid_4.1.1        rprojroot_2.0.2   glue_1.4.2       
-[33] R6_2.5.1          fansi_0.5.0       rmarkdown_2.11    magrittr_2.0.1   
-[37] whisker_0.4       codetools_0.2-18  splines_4.1.1     promises_1.2.0.1 
-[41] ellipsis_0.3.2    htmltools_0.5.2   shape_1.4.6       httpuv_1.6.3     
-[45] utf8_1.2.2        stringi_1.7.5     doParallel_1.0.17 cachem_1.0.6     
-[49] crayon_1.4.1     </code></pre>
+ [1] Rcpp_1.0.8.3     pillar_1.6.4     compiler_4.1.1   bslib_0.4.1     
+ [5] later_1.3.0      jquerylib_0.1.4  git2r_0.28.0     iterators_1.0.14
+ [9] tools_4.1.1      digest_0.6.28    lattice_0.20-44  jsonlite_1.7.2  
+[13] evaluate_0.14    lifecycle_1.0.1  tibble_3.1.5     pkgconfig_2.0.3 
+[17] rlang_1.0.6      foreach_1.5.2    Matrix_1.5-3     cli_3.1.0       
+[21] rstudioapi_0.13  yaml_2.2.1       xfun_0.27        fastmap_1.1.0   
+[25] stringr_1.4.0    knitr_1.36       fs_1.5.0         vctrs_0.3.8     
+[29] sass_0.4.4       glmnet_4.1-4     grid_4.1.1       rprojroot_2.0.2 
+[33] glue_1.4.2       R6_2.5.1         fansi_0.5.0      rmarkdown_2.11  
+[37] magrittr_2.0.1   whisker_0.4      codetools_0.2-18 splines_4.1.1   
+[41] promises_1.2.0.1 ellipsis_0.3.2   htmltools_0.5.2  shape_1.4.6     
+[45] httpuv_1.6.3     utf8_1.2.2       stringi_1.7.5    cachem_1.0.6    
+[49] crayon_1.4.1    </code></pre>
 </div>
 </div>
 </div>
