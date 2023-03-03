@@ -13,13 +13,10 @@ Publication link: https://doi.org/10.1093/bioinformatics/btac416
 
 Software link:https://github.com/mkomod/survival.svb
 
-
+**Conclusion**: Scenario 2 doesn't work well. But all other scenarios work. 
 ```{r}
 library(survival)
 library(survival.svb)
-library(BhGLM)
-library(BVSNLP)
-library(glmnet)
 ```
 
 ### Example code from their package
