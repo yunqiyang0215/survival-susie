@@ -1,0 +1,134 @@
+---
+title: "Run survival.svb on simple sim data"
+author: "Yunqi Yang"
+date: "3/3/2023"
+output: html_document
+---
+
+## Description:
+
+The candidate method is called **survival.svb**. 
+
+Publication link: https://doi.org/10.1093/bioinformatics/btac416
+
+Software link:https://github.com/mkomod/survival.svb
+
+
+```{r}
+library(survival)
+library(survival.svb)
+library(BhGLM)
+library(BVSNLP)
+library(glmnet)
+```
+
+### Example code from their package
+```{r eval = FALSE}
+
+# Question: Why re-scale censored data???
+n <- 200                        # number of sample
+p <- 1000                       # number of features
+s <- 10                         # number of non-zero coefficients
+censoring_lvl <- 0.4            # degree of censoring
+
+
+# generate some test data
+set.seed(1)
+b <- sample(c(runif(s, -2, 2), rep(0, p-s)))
+X <- matrix(rnorm(n * p), nrow=n)
+Y <- log(1 - runif(n)) / -exp(X %*% b)
+delta  <- runif(n) > censoring_lvl   		# 0: censored, 1: uncensored
+Y[!delta] <- Y[!delta] * runif(sum(!delta))	# rescale censored data
+
+
+# fit the model
+f <- survival.svb::svb.fit(Y, delta, X)
+
+# plot the results
+plot(b, xlab=expression(beta), main="Coefficient value", pch=8, ylim=c(-2,2))
+# effect size mu * gamma
+points(f$m * f$g, pch=20, col=2)
+legend("topleft", legend=c(expression(beta), expression(hat(beta))),
+       pch=c(8, 20), col=c(1, 2))
+
+```
+
+```{r}
+dat = readRDS("./data/sim_dat_simple.rds")
+```
+
+### Data 1: null model with X independent
+```{r}
+# In survival.svb, 0: censored & 1: uncensored
+p = 50
+X = as.matrix(dat[[1]][, c(2:(p+1))])
+y = dat[[1]]$surT
+delta = rep(1, length(dat[[1]]$status))
+```
+
+```{r}
+f <- survival.svb::svb.fit(y, delta, X)
+sort(f$inclusion_prob, decreasing = TRUE)
+```
+
+### Data 2: simulated from null model with highly correlated X. corr = 0.9
+```{r}
+# In survival.svb, 0: censored & 1: uncensored
+p = 50
+X = as.matrix(dat[[2]][, c(2:(p+1))])
+y = dat[[2]]$surT
+delta = rep(1, length(dat[[2]]$status))
+```
+
+```{r}
+f <- survival.svb::svb.fit(y, delta, X)
+sort(f$inclusion_prob, decreasing = TRUE)
+```
+
+
+### Data 3: simulated from one predictor model. Predictors are independent.
+```{r}
+# In survival.svb, 0: censored & 1: uncensored
+p = 50
+X = as.matrix(dat[[3]][, c(2:(p+1))])
+y = dat[[3]]$surT
+delta = rep(1, length(dat[[3]]$status))
+```
+
+```{r}
+f <- survival.svb::svb.fit(y, delta, X)
+sort(f$inclusion_prob, decreasing = TRUE)
+```
+
+
+### Data 4: simulated from one predictor model. Predictors are highly correlated, corr = 0.9
+```{r}
+# In survival.svb, 0: censored & 1: uncensored
+p = 50
+X = as.matrix(dat[[4]][, c(2:(p+1))])
+y = dat[[4]]$surT
+delta = rep(1, length(dat[[4]]$status))
+```
+
+```{r}
+f <- survival.svb::svb.fit(y, delta, X)
+sort(f$inclusion_prob, decreasing = TRUE)
+f$inclusion_prob
+```
+
+
+### Data 5: simulated from two predictor model. Predictors have high correlation, corr = 0.9
+
+```{r}
+# In survival.svb, 0: censored & 1: uncensored
+p = 50
+X = as.matrix(dat[[5]][, c(2:(p+1))])
+y = dat[[5]]$surT
+delta = rep(1, length(dat[[5]]$status))
+```
+
+```{r}
+f <- survival.svb::svb.fit(y, delta, X)
+sort(f$inclusion_prob, decreasing = TRUE)
+```
+
