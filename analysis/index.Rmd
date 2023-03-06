@@ -29,3 +29,5 @@ Simulation for survival data and run IBSS
 Try other candidate methods on simple simulated data:
 
 + [survival.svb](survival.svb.html)
+
++ [bvsnlp](bvsnlp.html)
