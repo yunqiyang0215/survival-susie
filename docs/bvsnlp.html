@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree8613489d8160b6eb52b846463e582370443640d1targetblank8613489a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/8613489d8160b6eb52b846463e582370443640d1" target="_blank">8613489</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree61cb71e35a5ac1bb4b2170c906faf259eedabffbtargetblank61cb71ea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/61cb71e35a5ac1bb4b2170c906faf259eedabffb" target="_blank">61cb71e</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree8613489d8160b6eb52b846463e582370443640d1targetblank8613489a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree61cb71e35a5ac1bb4b2170c906faf259eedabffbtargetblank61cb71ea" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/8613489d8160b6eb52b846463e582370443640d1" target="_blank">8613489</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/61cb71e35a5ac1bb4b2170c906faf259eedabffb" target="_blank">61cb71e</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -549,6 +549,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/61cb71e35a5ac1bb4b2170c906faf259eedabffb/analysis/bvsnlp.Rmd" target="_blank">61cb71e</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-03-06
+</td>
+<td>
+wflow_publish("analysis/bvsnlp.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/32044ec7adc6097797852812b3311917faaea813/docs/bvsnlp.html" target="_blank">32044ec</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-03-06
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/8613489d8160b6eb52b846463e582370443640d1/analysis/bvsnlp.Rmd" target="_blank">8613489</a>
 </td>
 <td>
@@ -572,7 +606,8 @@ wflow_publish("analysis/bvsnlp.Rmd")
 <h2>Description:</h2>
 <p>The candidate method is called bvsnlp.</p>
 <p>Publication link: <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7808442/" class="uri">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7808442/</a></p>
-<p>Software link:<a href="https://cran.r-project.org/web/packages/BVSNLP/index.html" class="uri">https://cran.r-project.org/web/packages/BVSNLP/index.html</a></p>
+<p>Software link: <a href="https://cran.r-project.org/web/packages/BVSNLP/index.html" class="uri">https://cran.r-project.org/web/packages/BVSNLP/index.html</a></p>
+<p><strong>Conclusion</strong>: This method doesn’t perform well under the null model, picked one or two variables under the null model. For other 3 scenarios, it performs well.</p>
 <pre class="r"><code>library(survival)
 library(BVSNLP)</code></pre>
 <pre><code>Bayesian Variable Selection using Non-Local priors for survival and logistic regression data.
@@ -616,6 +651,43 @@ y = dat[[1]]$y</code></pre>
 [1,]   43</code></pre>
 <pre class="r"><code>hist(fit1$inc_probs, breaks = 30)</code></pre>
 <p><img src="figure/bvsnlp.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
+Past versions of unnamed-chunk-6-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/32044ec7adc6097797852812b3311917faaea813/docs/figure/bvsnlp.Rmd/unnamed-chunk-6-1.png" target="_blank">32044ec</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-03-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>#fit1$des_mat[fit1$beta_hat, ]</code></pre>
 </div>
 <div id="data-2-simulated-from-null-model-with-highly-correlated-x.-corr-0.9" class="section level3">
@@ -635,6 +707,43 @@ y = dat[[2]]$y</code></pre>
 [2,]   43</code></pre>
 <pre class="r"><code>hist(fit2$inc_probs, breaks = 30)</code></pre>
 <p><img src="figure/bvsnlp.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-1">
+Past versions of unnamed-chunk-9-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-9-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/32044ec7adc6097797852812b3311917faaea813/docs/figure/bvsnlp.Rmd/unnamed-chunk-9-1.png" target="_blank">32044ec</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-03-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="data-3-simulated-from-one-predictor-model.-predictors-are-independent." class="section level3">
 <h3>Data 3: simulated from one predictor model. Predictors are independent.</h3>
@@ -652,6 +761,43 @@ y = dat[[3]]$y</code></pre>
 [1,]    1</code></pre>
 <pre class="r"><code>hist(fit3$inc_probs, breaks = 30)</code></pre>
 <p><img src="figure/bvsnlp.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-1">
+Past versions of unnamed-chunk-12-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-12-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/32044ec7adc6097797852812b3311917faaea813/docs/figure/bvsnlp.Rmd/unnamed-chunk-12-1.png" target="_blank">32044ec</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-03-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="data-4-simulated-from-one-predictor-model.-predictors-are-highly-correlated-corr-0.9" class="section level3">
 <h3>Data 4: simulated from one predictor model. Predictors are highly correlated, corr = 0.9</h3>
@@ -669,6 +815,43 @@ y = dat[[4]]$y</code></pre>
 [1,]    1</code></pre>
 <pre class="r"><code>hist(fit4$inc_probs, breaks = 30)</code></pre>
 <p><img src="figure/bvsnlp.Rmd/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-15-1">
+Past versions of unnamed-chunk-15-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-15-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/32044ec7adc6097797852812b3311917faaea813/docs/figure/bvsnlp.Rmd/unnamed-chunk-15-1.png" target="_blank">32044ec</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-03-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="data-5-simulated-from-two-predictor-model.-predictors-have-high-correlation-corr-0.9" class="section level3">
 <h3>Data 5: simulated from two predictor model. Predictors have high correlation, corr = 0.9</h3>
@@ -687,6 +870,43 @@ y = dat[[5]]$y</code></pre>
 [2,]    2</code></pre>
 <pre class="r"><code>hist(fit5$inc_probs, breaks = 30)</code></pre>
 <p><img src="figure/bvsnlp.Rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-18-1">
+Past versions of unnamed-chunk-18-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-18-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/32044ec7adc6097797852812b3311917faaea813/docs/figure/bvsnlp.Rmd/unnamed-chunk-18-1.png" target="_blank">32044ec</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-03-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
