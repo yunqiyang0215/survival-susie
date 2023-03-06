@@ -11,6 +11,11 @@ The candidate method here is lasso cox.
 A useful link for code: https://cran.r-project.org/web/packages/glmnet/vignettes/Coxnet.pdf
 
 I think we probably don't need to compare with lasso cox. Lasso cox doesn't have uncertainty quantification. 
+```{r knitr, echo=FALSE}
+knitr::opts_chunk$set(comment = "#",results = "hold",collapse = TRUE,
+                      fig.align = "center")
+```
+
 ```{r}
 library(glmnet)
 library(survival)
