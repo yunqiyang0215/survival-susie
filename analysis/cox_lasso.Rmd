@@ -39,7 +39,6 @@ y = dat[[1]]$y
 ```{r}
 set.seed(1)
 cvfit <- cv.glmnet(x, y, family = "cox", type.measure = "C")
-cvfit$lambda.min
 plot(cvfit)
 ```
 ```{r}
