@@ -1,0 +1,43 @@
+---
+title: "lasso cox"
+author: "Yunqi Yang"
+date: "3/3/2023"
+output: html_document
+---
+
+
+The candidate method here is lasso cox.
+
+A useful link for code: https://cran.r-project.org/web/packages/glmnet/vignettes/Coxnet.pdf
+
+I think we probably don't need to compare with lasso cox. Lasso cox doesn't have uncertainty quantification. 
+```{r}
+library(glmnet)
+library(survival)
+```
+
+
+```{r}
+dat = readRDS("./data/sim_dat_simple.rds")
+```
+
+
+### Data 1: null model with X independent
+```{r}
+# Create  survival object. status == 2 is death
+p = 50
+dat[[1]]$y <- with(dat[[1]], Surv(surT, status == 2))
+x = as.matrix(dat[[1]][, c(2:(p+1))])
+y = dat[[1]]$y
+```
+
+```{r}
+set.seed(1)
+cvfit <- cv.glmnet(x, y, family = "cox", type.measure = "C")
+cvfit$lambda.min
+plot(cvfit)
+```
+```{r}
+fit <- glmnet(x, y, family="cox", alpha = 1, lambda = cvfit$lambda.min, standardize = TRUE, maxit = 1000)
+fit$beta
+```
