@@ -31,3 +31,6 @@ Try other candidate methods on simple simulated data:
 + [survival.svb](survival.svb.html)
 
 + [bvsnlp](bvsnlp.html)
+
++ [lasso cox](cox_lasso.html)
+
