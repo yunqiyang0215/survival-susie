@@ -7,16 +7,19 @@ output: html_document
 
 ## Description:
 
-The candidate method is called bvsnlp.
+The candidate method is called bvsnlp. 
 
 Publication link: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7808442/
 
-Software link:https://cran.r-project.org/web/packages/BVSNLP/index.html
+Software link: https://cran.r-project.org/web/packages/BVSNLP/index.html
+
+**Conclusion**: This method doesn't perform well under the null model, picked one or two variables under the null model. For other 3 scenarios, it performs well.
 
 ```{r}
 library(survival)
 library(BVSNLP)
 ```
+
 ```{r}
 dat = readRDS("./data/sim_dat_simple.rds")
 ```
