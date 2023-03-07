@@ -13,6 +13,8 @@ Publication link: https://academic.oup.com/bioinformatics/article/33/18/2799/379
 
 Software link: https://github.com/nyiuab/BhGLM/blob/master/vignettes/Cox.pdf
 
+**Conclusion**: The performance on the null model is not good. But good for other scenarios. 
+
 ```{r knitr, echo=FALSE}
 knitr::opts_chunk$set(comment = "#",results = "hold",collapse = TRUE,
                       fig.align = "center")
