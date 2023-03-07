@@ -1,5 +1,5 @@
 ---
-title: "sim_survival"
+title: "Simulate survival data with censoring"
 author: "Yunqi Yang"
 date: "2/1/2023"
 output: html_document
