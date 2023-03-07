@@ -1,0 +1,186 @@
+---
+title: "sim_survival"
+author: "Yunqi Yang"
+date: "2/1/2023"
+output: html_document
+---
+
+## Description:
+Simulate time-to-event data based on exponential model. And fit proportional hazard model to data. Here we simulate data with **censoring**. The assumption is censoring mechanism is independent of survival time. 
+
+
+The exponential regression (AFT: accelerated failure time):
+
+It assumes survival time $T$ follows exponential distribution. Under this assumption, the hazard is constant over time. 
+$$
+\begin{split}
+T&\sim \exp(\mu)\\
+f(t)&=\frac{1}{\mu}\exp\{-t/\mu\}\\
+\lambda(t)&=1/\mu
+\end{split}
+$$
+
+Remember in exponential distribution, $E(T)=\mu$. So we model the $\log\mu$ part by linear combinations of variables. 
+$$
+\begin{split}
+\log(T_i) &= \log(E(T_i)) + \epsilon_i\\
+&=\beta_0 + X_i^T\beta+\epsilon_i
+\end{split}
+$$
+
+#### Simulation with censoring:
+
+1. Use a variable *censor_lvl* to determine the level of censoring in the dataset. For individual $i$, if runif(1) > consor_lvl, the event is observed. Otherwise, it's censored. 
+
+2. We first simulate the real survival time based on AFT model. 
+
+3. If individual $i$ is censored, we rescale the survival time to get the censoring time, $C_i = T_i\times\text{runif(1)}$.
+
+### Simulate under 4 simple scenarios, 50 variables are available. 
+
+
+1. The null model, time $T_i$ is simulated from the model that only has intercept. No correlation among all predictors.
+
+2. The null model, time $T_i$ is simulated from the model that only has intercept. High correlation among all predictors. 
+
+3. Single effect model without correlation. Time $T_i$ depends on $x_1$ only, and no correlation between $x_1$ and other variables. 
+
+4. Single effect model with correlation. Time $T_i$ depends on $x_1$ only, and high correlation between $x_1$ and other variables. 
+
+5. $\log T_i = \beta_0+\beta_1x_{i1} + \beta_2x_{i2}+\epsilon_i$, and high correlation among all variables. 
+
+
+```{r}
+library(mvtnorm)
+library(survival)
+```
+
+
+```{r}
+# Function to construct correlation matrix among predictors. 
+# Diagonal elements are all 1s, the off-diagonal elements = corr
+# @param p: number of predictors
+# @param corr: correlation
+cov_simple_het = function(p, corr){
+  for(i in 1:length(corr)){
+    cov = matrix(corr, nrow=p,ncol=p)
+    diag(cov) <- 1
+  }
+  return(cov)
+}
+
+# Here we use parametric model to simulate data with survival time,
+# assuming survival time is exponentially distributed. 
+# We first simulate the mean of exponential from linear combinations
+# of variables, and then simulate survival time. 
+# T\sim 1/u*exp(-t/u), and the true model is:
+# log(T) = \mu + e = b0 + Xb + e
+# @param b: vector of length (p+1) for true effect size, include intercept.
+# @param X: variable matrix of size n by p. 
+# @param censor_lvl: a constant from [0,1], indicating the censoring level in the data.
+# @return  status: censoring status. 0 = censored, 1 = event observed. See Surv() in library(survival)
+sim_dat <- function(b, X, censor_lvl){
+  n = nrow(X)
+  p = ncol(X)
+  status <- ifelse(runif(n) > censor_lvl, 1, 0)
+  mu <- exp(cbind(rep(1,n), X) %*% b)
+  surT <- rexp(n, rate = 1/mu)
+  surT[status == 0] = surT[status == 0] * runif(sum(status == 0))
+  
+  dat <- data.frame(cbind(surT, X))
+  x.name <- unlist(lapply(1:p, function(i) paste0("x", i)))
+  names(dat) = c("surT", x.name)
+  dat$status <- status
+  return(dat)
+}
+```
+
+### Scenario 1: null model, X no correlation
+```{r}
+set.seed(1)
+n <- 100
+p <- 50
+b <- c(1, rep(0, 50))
+censor_lvl <- 0.3
+sigma <- cov_simple_het(p, corr = 0)
+X<- rmvnorm(n, sigma = sigma)
+dat1 <- sim_dat(b, X, censor_lvl = censor_lvl)
+```
+
+```{r}
+hist(dat1$surT, breaks = 20)
+```
+
+
+### Scenario 2: null model, X correlation = 0.9
+```{r}
+set.seed(1)
+n <- 100
+p <- 50
+b <- c(1, rep(0, 50))
+censor_lvl <- 0.3
+sigma <- cov_simple_het(p, corr = 0.9)
+X<- rmvnorm(n, sigma = sigma)
+dat2 <- sim_dat(b, X, censor_lvl = censor_lvl)
+```
+
+```{r}
+hist(dat2$surT, breaks = 20)
+```
+
+
+### Scenario 3: single effect model with independent predictors
+```{r}
+set.seed(1)
+n <- 100
+p <- 50
+b <- c(1, 3, rep(0, p-1))
+censor_lvl <- 0.3
+sigma <- cov_simple_het(p, corr = 0)
+X<- rmvnorm(n, sigma = sigma)
+dat3 <- sim_dat(b, X, censor_lvl = censor_lvl)
+```
+
+```{r}
+hist(dat3$surT, breaks = 20)
+```
+
+
+### Scenario 4: single effect model with highly correlated predictors
+```{r}
+set.seed(1)
+n <- 100
+p <- 50
+b <- c(1, 3, rep(0, p-1))
+censor_lvl <- 0.3
+sigma <- cov_simple_het(p, corr = 0.9)
+X<- rmvnorm(n, sigma = sigma)
+dat4 <- sim_dat(b, X, censor_lvl = censor_lvl)
+```
+
+```{r}
+hist(dat4$surT, breaks = 20)
+```
+
+
+### Scenario 5: two effects model with highly correlated variables 
+```{r}
+set.seed(1)
+n <- 100
+p <- 50
+b <- c(1, 3, 1.5, rep(0, p-2))
+censor_lvl <- 0.3
+sigma <- cov_simple_het(p, corr = 0.9)
+X<- rmvnorm(n, sigma = sigma)
+dat5 <- sim_dat(b, X, censor_lvl = censor_lvl)
+```
+
+```{r}
+hist(dat5$surT, breaks = 20)
+```
+
+```{r}
+sim_dat_censoring <- list(dat1, dat2, dat3, dat4, dat5)
+saveRDS(sim_dat_censoring, "./data/sim_dat_censoring.rds")
+```
+
