@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreedb42e85a0db37b7967806eb949fc512399450e7ctargetblankdb42e85a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/db42e85a0db37b7967806eb949fc512399450e7c" target="_blank">db42e85</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreeb4cc13796b8dc93a214a791cbdd679b178c2e88ctargetblankb4cc137a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/b4cc13796b8dc93a214a791cbdd679b178c2e88c" target="_blank">b4cc137</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreedb42e85a0db37b7967806eb949fc512399450e7ctargetblankdb42e85a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreeb4cc13796b8dc93a214a791cbdd679b178c2e88ctargetblankb4cc137a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/db42e85a0db37b7967806eb949fc512399450e7c" target="_blank">db42e85</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/b4cc13796b8dc93a214a791cbdd679b178c2e88c" target="_blank">b4cc137</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -497,10 +497,10 @@ Ignored files:
     Ignored:    analysis/.DS_Store
     Ignored:    analysis/.RData
     Ignored:    analysis/.Rhistory
-    Ignored:    analysis/figure/
 
 Untracked files:
     Untracked:  analysis/ibss_null_model.Rmd
+    Untracked:  data/sim_dat_censoring.rds
 
 Unstaged changes:
     Modified:   analysis/check_coxph_fit.Rmd
@@ -551,6 +551,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/b4cc13796b8dc93a214a791cbdd679b178c2e88c/analysis/sim_survival_with_censoring.Rmd" target="_blank">b4cc137</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-03-07
+</td>
+<td>
+wflow_publish("analysis/sim_survival_with_censoring.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/4807fa3a833bb2c922cc7ff3d4a26896674ee998/docs/sim_survival_with_censoring.html" target="_blank">4807fa3</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-03-07
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/db42e85a0db37b7967806eb949fc512399450e7c/analysis/sim_survival_with_censoring.Rmd" target="_blank">db42e85</a>
 </td>
 <td>
@@ -595,8 +629,8 @@ f(t)&amp;=\frac{1}{\mu}\exp\{-t/\mu\}\\
 <li><p>If individual <span class="math inline">\(i\)</span> is censored, we rescale the survival time to get the censoring time, <span class="math inline">\(C_i = T_i\times\text{runif(1)}\)</span>.</p></li>
 </ol>
 </div>
-<div id="simulate-under-4-simple-scenarios-50-variables-are-available." class="section level3">
-<h3>Simulate under 4 simple scenarios, 50 variables are available.</h3>
+<div id="simulate-under-5-simple-scenarios-50-variables-are-available." class="section level3">
+<h3>Simulate under 5 simple scenarios, 50 variables are available.</h3>
 <ol style="list-style-type: decimal">
 <li><p>The null model, time <span class="math inline">\(T_i\)</span> is simulated from the model that only has intercept. No correlation among all predictors.</p></li>
 <li><p>The null model, time <span class="math inline">\(T_i\)</span> is simulated from the model that only has intercept. High correlation among all predictors.</p></li>
@@ -655,6 +689,43 @@ X&lt;- rmvnorm(n, sigma = sigma)
 dat1 &lt;- sim_dat(b, X, censor_lvl = censor_lvl)</code></pre>
 <pre class="r"><code>hist(dat1$surT, breaks = 20)</code></pre>
 <p><img src="figure/sim_survival_with_censoring.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
+Past versions of unnamed-chunk-4-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-4-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/4807fa3a833bb2c922cc7ff3d4a26896674ee998/docs/figure/sim_survival_with_censoring.Rmd/unnamed-chunk-4-1.png" target="_blank">4807fa3</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-03-07
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="scenario-2-null-model-x-correlation-0.9" class="section level3">
 <h3>Scenario 2: null model, X correlation = 0.9</h3>
@@ -668,6 +739,43 @@ X&lt;- rmvnorm(n, sigma = sigma)
 dat2 &lt;- sim_dat(b, X, censor_lvl = censor_lvl)</code></pre>
 <pre class="r"><code>hist(dat2$surT, breaks = 20)</code></pre>
 <p><img src="figure/sim_survival_with_censoring.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
+Past versions of unnamed-chunk-6-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/4807fa3a833bb2c922cc7ff3d4a26896674ee998/docs/figure/sim_survival_with_censoring.Rmd/unnamed-chunk-6-1.png" target="_blank">4807fa3</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-03-07
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="scenario-3-single-effect-model-with-independent-predictors" class="section level3">
 <h3>Scenario 3: single effect model with independent predictors</h3>
@@ -681,6 +789,43 @@ X&lt;- rmvnorm(n, sigma = sigma)
 dat3 &lt;- sim_dat(b, X, censor_lvl = censor_lvl)</code></pre>
 <pre class="r"><code>hist(dat3$surT, breaks = 20)</code></pre>
 <p><img src="figure/sim_survival_with_censoring.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-1">
+Past versions of unnamed-chunk-8-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/4807fa3a833bb2c922cc7ff3d4a26896674ee998/docs/figure/sim_survival_with_censoring.Rmd/unnamed-chunk-8-1.png" target="_blank">4807fa3</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-03-07
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="scenario-4-single-effect-model-with-highly-correlated-predictors" class="section level3">
 <h3>Scenario 4: single effect model with highly correlated predictors</h3>
@@ -694,6 +839,43 @@ X&lt;- rmvnorm(n, sigma = sigma)
 dat4 &lt;- sim_dat(b, X, censor_lvl = censor_lvl)</code></pre>
 <pre class="r"><code>hist(dat4$surT, breaks = 20)</code></pre>
 <p><img src="figure/sim_survival_with_censoring.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-1">
+Past versions of unnamed-chunk-10-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-10-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/4807fa3a833bb2c922cc7ff3d4a26896674ee998/docs/figure/sim_survival_with_censoring.Rmd/unnamed-chunk-10-1.png" target="_blank">4807fa3</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-03-07
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="scenario-5-two-effects-model-with-highly-correlated-variables" class="section level3">
 <h3>Scenario 5: two effects model with highly correlated variables</h3>
@@ -707,6 +889,43 @@ X&lt;- rmvnorm(n, sigma = sigma)
 dat5 &lt;- sim_dat(b, X, censor_lvl = censor_lvl)</code></pre>
 <pre class="r"><code>hist(dat5$surT, breaks = 20)</code></pre>
 <p><img src="figure/sim_survival_with_censoring.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-1">
+Past versions of unnamed-chunk-12-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-12-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/4807fa3a833bb2c922cc7ff3d4a26896674ee998/docs/figure/sim_survival_with_censoring.Rmd/unnamed-chunk-12-1.png" target="_blank">4807fa3</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-03-07
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>sim_dat_censoring &lt;- list(dat1, dat2, dat3, dat4, dat5)
 saveRDS(sim_dat_censoring, &quot;./data/sim_dat_censoring.rds&quot;)</code></pre>
 <br>
