@@ -31,13 +31,15 @@ $$
 ### Simulate under 4 simple scenarios, 50 variables are available. 
 
 
-1. The null model, time $T_i$ is simulated from the model that only has intercept. High correlation among all predictors. 
+1. The null model, time $T_i$ is simulated from the model that only has intercept. No correlation among all predictors.
 
-2. Single effect model without correlation. Time $T_i$ depends on $x_1$ only, and no correlation between $x_1$ and other variables. 
+2. The null model, time $T_i$ is simulated from the model that only has intercept. High correlation among all predictors. 
 
-3. Single effect model with correlation. Time $T_i$ depends on $x_1$ only, and high correlation between $x_1$ and other variables. 
+3. Single effect model without correlation. Time $T_i$ depends on $x_1$ only, and no correlation between $x_1$ and other variables. 
 
-4. $\log T_i = \beta_0+\beta_1x_{i1} + \beta_2x_{i2}+\epsilon_i$, and high correlation among all variables. 
+4. Single effect model with correlation. Time $T_i$ depends on $x_1$ only, and high correlation between $x_1$ and other variables. 
+
+5. $\log T_i = \beta_0+\beta_1x_{i1} + \beta_2x_{i2}+\epsilon_i$, and high correlation among all variables. 
 
 
 ```{r}
