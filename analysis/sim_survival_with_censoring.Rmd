@@ -36,7 +36,7 @@ $$
 
 3. If individual $i$ is censored, we rescale the survival time to get the censoring time, $C_i = T_i\times\text{runif(1)}$.
 
-### Simulate under 4 simple scenarios, 50 variables are available. 
+### Simulate under 5 simple scenarios, 50 variables are available. 
 
 
 1. The null model, time $T_i$ is simulated from the model that only has intercept. No correlation among all predictors.
