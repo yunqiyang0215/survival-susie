@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree9ae6dfa35517469301113b414974bcb3d9fc820ctargetblank9ae6dfaa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/9ae6dfa35517469301113b414974bcb3d9fc820c" target="_blank">9ae6dfa</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree1f9368201a75e2e11a760b0793c6a1668aa02b38targetblank1f93682a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/1f9368201a75e2e11a760b0793c6a1668aa02b38" target="_blank">1f93682</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree9ae6dfa35517469301113b414974bcb3d9fc820ctargetblank9ae6dfaa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree1f9368201a75e2e11a760b0793c6a1668aa02b38targetblank1f93682a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/9ae6dfa35517469301113b414974bcb3d9fc820c" target="_blank">9ae6dfa</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/1f9368201a75e2e11a760b0793c6a1668aa02b38" target="_blank">1f93682</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -500,13 +500,15 @@ Ignored files:
 
 Untracked files:
     Untracked:  analysis/ibss_null_model.Rmd
+    Untracked:  data/sim_dat_censoring.rds
 
 Unstaged changes:
     Modified:   analysis/check_coxph_fit.Rmd
-    Modified:   analysis/index.Rmd
     Deleted:    analysis/null_model_demo.Rmd
     Modified:   analysis/null_model_zscore.Rmd
     Deleted:    analysis/one_predictor_investigation.Rmd
+    Deleted:    analysis/ser_survival.Rmd
+    Modified:   analysis/sim_survival_with_censoring.Rmd
 
 </code></pre>
 <p>
@@ -545,6 +547,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/1f9368201a75e2e11a760b0793c6a1668aa02b38/analysis/sim_survival.Rmd" target="_blank">1f93682</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-03-07
+</td>
+<td>
+wflow_publish("analysis/sim_survival.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/d6a506d6c53c4682d1283e754a5eda9a14463d7d/docs/sim_survival.html" target="_blank">d6a506d</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-03-07
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -807,8 +843,8 @@ f(t)&amp;=\frac{1}{\mu}\exp\{-t/\mu\}\\
 &amp;=\beta_0 + X_i^T\beta+\epsilon_i
 \end{split}
 \]</span></p>
-<div id="simulate-under-4-simple-scenarios-50-variables-are-available." class="section level3">
-<h3>Simulate under 4 simple scenarios, 50 variables are available.</h3>
+<div id="simulate-under-5-simple-scenarios-50-variables-are-available." class="section level3">
+<h3>Simulate under 5 simple scenarios, 50 variables are available.</h3>
 <ol style="list-style-type: decimal">
 <li><p>The null model, time <span class="math inline">\(T_i\)</span> is simulated from the model that only has intercept. No correlation among all predictors.</p></li>
 <li><p>The null model, time <span class="math inline">\(T_i\)</span> is simulated from the model that only has intercept. High correlation among all predictors.</p></li>
@@ -1013,7 +1049,7 @@ b &lt;- c(1, 3, rep(0, p-1))
 sigma &lt;- cov_simple_het(p, corr = 0)
 X&lt;- rmvnorm(n, sigma = sigma)
 dat3 &lt;- sim_dat(b, X)</code></pre>
-<pre class="r"><code>hist(dat2$surT, breaks = 20)</code></pre>
+<pre class="r"><code>hist(dat3$surT, breaks = 20)</code></pre>
 <p><img src="figure/sim_survival.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-1">
@@ -1084,7 +1120,7 @@ b &lt;- c(1, 3, rep(0, p-1))
 sigma &lt;- cov_simple_het(p, corr = 0.9)
 X&lt;- rmvnorm(n, sigma = sigma)
 dat4 &lt;- sim_dat(b, X)</code></pre>
-<pre class="r"><code>hist(dat3$surT, breaks = 20)</code></pre>
+<pre class="r"><code>hist(dat4$surT, breaks = 20)</code></pre>
 <p><img src="figure/sim_survival.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-10-1">
