@@ -23,6 +23,8 @@ Simulation for survival data and run IBSS
 
 + [Run IBSS on simple simulation data](run_ser_simple_dat.html)
 
++ [Simulate survival data with censoring](sim_survival_with_censoring.html)
+
 
 Try other candidate methods on simple simulated data:
 
