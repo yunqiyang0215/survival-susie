@@ -28,7 +28,7 @@ $$
 $$
 
 
-### Simulate under 4 simple scenarios, 50 variables are available. 
+### Simulate under 5 simple scenarios, 50 variables are available. 
 
 
 1. The null model, time $T_i$ is simulated from the model that only has intercept. No correlation among all predictors.
@@ -127,7 +127,7 @@ dat3 <- sim_dat(b, X)
 ```
 
 ```{r}
-hist(dat2$surT, breaks = 20)
+hist(dat3$surT, breaks = 20)
 ```
 
 
@@ -143,7 +143,7 @@ dat4 <- sim_dat(b, X)
 ```
 
 ```{r}
-hist(dat3$surT, breaks = 20)
+hist(dat4$surT, breaks = 20)
 ```
 
 
