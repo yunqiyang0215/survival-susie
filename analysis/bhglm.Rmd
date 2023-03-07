@@ -1,0 +1,111 @@
+---
+title: "bhglm"
+author: "Yunqi Yang"
+date: "3/6/2023"
+output: html_document
+---
+
+## Description:
+
+The candidate method is called BhGLM. 
+
+Publication link: https://academic.oup.com/bioinformatics/article/33/18/2799/3796395?login=true 
+
+Software link: https://github.com/nyiuab/BhGLM/blob/master/vignettes/Cox.pdf
+
+```{r knitr, echo=FALSE}
+knitr::opts_chunk$set(comment = "#",results = "hold",collapse = TRUE,
+                      fig.align = "center")
+```
+
+```{r}
+library(survival)
+library(BhGLM)
+```
+
+```{r}
+dat = readRDS("./data/sim_dat_simple.rds")
+```
+
+### Data 1: null model with X independent
+```{r}
+# Create survival response
+dat[[1]]$y <- with(dat[[1]], Surv(surT, status == 2))
+
+p = 50
+X = as.matrix(dat[[1]][, c(2:(p+1))])
+y = dat[[1]]$y
+
+```
+
+```{r}
+fit <- bcoxph(y ~ X, prior = mde(0, s0 = 0.05, s1 = 0.5))
+out <- summary.bh(fit)
+out
+```
+
+
+### Data 2: simulated from null model with highly correlated X. corr = 0.9
+```{r}
+# Create survival response
+dat[[2]]$y <- with(dat[[2]], Surv(surT, status == 2))
+
+p = 50
+X = as.matrix(dat[[2]][, c(2:(p+1))])
+y = dat[[2]]$y
+```
+
+```{r}
+fit <- bcoxph(y ~ X, prior = mde(0, s0 = 0.05, s1 = 0.5))
+out <- summary.bh(fit)
+out
+```
+
+### Data 3: simulated from one predictor model. Predictors are independent.
+
+```{r}
+# Create survival response
+dat[[3]]$y <- with(dat[[3]], Surv(surT, status == 2))
+
+p = 50
+X = as.matrix(dat[[3]][, c(2:(p+1))])
+y = dat[[3]]$y
+```
+
+```{r}
+fit <- bcoxph(y ~ X, prior = mde(0, s0 = 0.05, s1 = 0.5))
+out <- summary.bh(fit)
+out
+```
+
+### Data 4: simulated from one predictor model. Predictors are highly correlated, corr = 0.9
+```{r}
+# Create survival response
+dat[[4]]$y <- with(dat[[4]], Surv(surT, status == 2))
+
+p = 50
+X = as.matrix(dat[[4]][, c(2:(p+1))])
+y = dat[[4]]$y
+```
+
+```{r}
+fit <- bcoxph(y ~ X, prior = mde(0, s0 = 0.05, s1 = 0.5))
+out <- summary.bh(fit)
+out
+```
+
+### Data 5: simulated from two predictor model. Predictors have high correlation, corr = 0.9
+```{r}
+# Create survival response
+dat[[5]]$y <- with(dat[[5]], Surv(surT, status == 2))
+
+p = 50
+X = as.matrix(dat[[5]][, c(2:(p+1))])
+y = dat[[5]]$y
+```
+
+```{r}
+fit <- bcoxph(y ~ X, prior = mde(0, s0 = 0.05, s1 = 0.5))
+out <- summary.bh(fit)
+out
+```
