@@ -34,5 +34,5 @@ Try other candidate methods on simple simulated data:
 
 + [lasso cox](cox_lasso.html)
 
-+ [bhglm](cox_lasso.html)
++ [bhglm](bhglm.html)
 
