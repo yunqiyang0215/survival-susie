@@ -1,0 +1,228 @@
+---
+title: "Run susie IBSS on censoring data"
+author: "Yunqi Yang"
+date: "3/15/2023"
+output: html_document
+---
+
+### Description:
+
+I simulated data in 5 different scenarios, and apply both coxph model and susie procedure. The data simulation procedure is available at https://yunqiyang0215.github.io/survival-susie/sim_survival_with_censoring.html
+
+
+#### The Wakefield approximation:
+$$
+ABF(H_1/H_0)=\sqrt\frac{V}{V+W}\exp\{\frac{z^2}{2}\frac{W}{V+W}\},
+$$
+where $V$ is the variance of estimated regression coefficient, and $W$ is variance in the normal prior, $N(0,W)$. 
+
+```{r}
+# Function to calculate approximate BF based on Wakefield approximation
+# @param z: zscore of the regression coefficient
+# @param s: standard deviation of the estimated coefficient
+compute_abf <- function(z, s, prior_variance){
+  abf <- sqrt(s^2/(s^2+prior_variance))*exp(z^2/2*(prior_variance/(s^2+prior_variance)))
+  return(abf)
+}
+
+
+compute_approx_post_var <- function(z, s, prior_variance){
+  post_var <- 1/(1/s^2 + 1/prior_variance)
+  return(post_var)
+}
+
+# @param post_var: posterior variance
+# @param s: standard deviation of the estimated coefficient
+# @param bhat: estimated beta effect
+compute_approx_post_mean <- function(post_var, s, bhat){
+  mu <- post_var/(s^2)*bhat
+  return(mu)
+}
+
+```
+
+```{r}
+dat = readRDS("./data/sim_dat_censoring.rds")
+
+library(survival)
+# Modified Karl's code for intercept part
+devtools::load_all("/Users/nicholeyang/Desktop/logisticsusie")
+```
+
+```{r}
+surv_uni_fun <- function(x, y, o, prior_variance, estimate_intercept = 0, ...){
+  fit <- coxph(y~ x + offset(o))
+  bhat <- summary(fit)$coefficients[1, 1] # bhat = -alphahat
+  sd <- summary(fit)$coefficients[1, 3]
+  zscore <- bhat/sd
+  bf <- compute_abf(zscore, sd, prior_variance)
+  var <- compute_approx_post_var(zscore, sd, prior_variance)
+  mu <- compute_approx_post_mean(var, sd, bhat)
+  lbf <- log(bf)
+  return(list(mu = mu, var=var, lbf=lbf, intercept=0))
+}
+
+fit_coxph <- ser_from_univariate(surv_uni_fun)
+```
+
+
+
+### Data 1: simulated from null model with X independent
+
+$\log T_i =\beta_0+\epsilon_i$ and $\beta_0 = 1$.
+
+```{r}
+## Create  survival object. status == 2 is death
+dat[[1]]$y <- with(dat[[1]], Surv(surT, status))
+# Fit cox ph. Cox ph model with select multiple significant predictors..
+cox1 <- coxph(y ~ .-status - surT, data =  dat[[1]])
+```
+
+#### Run IBSS on data from null model with L=1.
+```{r  }
+p = 50
+X = as.matrix(dat[[1]][, c(2:(p+1))])
+y = dat[[1]]$y
+```
+
+```{r }
+# IBSS of susie
+set.seed(1)
+fit1 <- ibss_from_ser(X, y, L = 1, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)
+```
+
+```{r}
+par(mfrow = c(1,2))
+hist(fit1$alpha, breaks = 20)
+hist(fit1$mu* fit1$alpha, breaks = 20)
+```
+
+#### Run IBSS on data from null model, L = 5.
+```{r  }
+# IBSS of susie
+t1 <- proc.time()
+fit2 <- ibss_from_ser(X, y, L = 5, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)
+t2 <- proc.time()
+t(apply(fit2$alpha, 1, function(x) sort(x, decreasing = TRUE)))
+```
+
+```{r}
+beta <- colSums(fit2$alpha * fit2$mu)
+hist(beta, breaks = 20)
+```
+
+
+### Data 2: simulated from null model with highly correlated X.
+
+$\log T_i =\beta_0+\epsilon_i$ and $\beta_0 = 1$.
+
+```{r}
+## Create  survival object. status == 2 is death
+dat[[2]]$y <- with(dat[[2]], Surv(surT, status))
+# Fit cox ph. Cox ph model with select multiple significant predictors..
+cox1 <- coxph(y ~ .-status - surT, data =  dat[[2]])
+```
+
+#### Run IBSS on data from null model with L=1.
+```{r  }
+p = 50
+X = as.matrix(dat[[2]][, c(2:(p+1))])
+y = dat[[2]]$y
+```
+
+```{r }
+# IBSS of susie
+set.seed(1)
+fit1 <- ibss_from_ser(X, y, L = 1, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)
+```
+
+```{r}
+par(mfrow = c(1,2))
+hist(fit1$alpha, breaks = 20)
+hist(fit1$mu* fit1$alpha, breaks = 20)
+```
+
+#### Run IBSS on data from null model, L = 5.
+```{r  }
+# IBSS of susie
+t1 <- proc.time()
+fit2 <- ibss_from_ser(X, y, L = 5, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)
+t2 <- proc.time()
+t(apply(fit2$alpha, 1, function(x) sort(x, decreasing = TRUE)))
+```
+
+```{r}
+beta <- colSums(fit2$alpha * fit2$mu)
+hist(beta, breaks = 20)
+```
+
+
+
+### Data 3: simulated from $\log T_i=\beta_0 + \beta_1x_{i1}$. Predictors are independent. 
+
+$\beta_0 = 1, \beta_1 = 3$
+```{r  }
+dat[[3]]$y <- with(dat[[3]], Surv(surT, status))
+X = as.matrix(dat[[3]][, c(2:(p+1))])
+y = dat[[3]]$y
+
+# IBSS of susie
+t1 <- proc.time()
+fit3 <- ibss_from_ser(X, y, L = 5, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)
+t2 <- proc.time()
+t2 - t1
+```
+
+```{r}
+fit3$alpha
+beta <- colSums(fit3$alpha * fit3$mu)
+hist(beta, breaks = 20)
+```
+
+
+### Data 4: simulated from $\log T_i=\beta_0 + \beta_1x_{i1}$. Predictors have high correlation. 
+```{r  }
+dat[[4]]$y <- with(dat[[4]], Surv(surT, status))
+X = as.matrix(dat[[4]][, c(2:(p+1))])
+y = dat[[4]]$y
+
+# IBSS of susie
+t1 <- proc.time()
+fit4 <- ibss_from_ser(X, y, L = 5, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)
+t2 <- proc.time()
+t2 - t1
+t(apply(fit4$alpha, 1, function(x) sort(x, decreasing = TRUE)))
+```
+
+```{r}
+beta <- colSums(fit4$alpha * fit4$mu)
+hist(beta, breaks = 20)
+```
+
+
+### Data 5: simulated from $\log T_i=\beta_0 + \beta_1x_{i1} + \beta_1x_{i2}$. Predictors have high correlation
+
+$\beta_0 = 1, \beta_1 = 3, \beta_2 = 1.5$ and $cor=0.9$.
+```{r  }
+dat[[5]]$y <- with(dat[[5]], Surv(surT, status))
+X = as.matrix(dat[[5]][, c(2:(p+1))])
+y = dat[[5]]$y
+ 
+# IBSS of susie
+t1 <- proc.time()
+fit5 <- ibss_from_ser(X, y, L = 5, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)
+t2 <- proc.time()
+t2 - t1
+
+```
+
+```{r}
+fit5$alpha
+t(apply(fit5$alpha, 1, function(x) sort(x, decreasing = TRUE)))
+```
+
+```{r}
+beta <- colSums(fit5$alpha * fit5$mu)
+hist(beta, breaks = 20)
+```
+
