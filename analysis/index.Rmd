@@ -21,12 +21,12 @@ Simulation for survival data and run IBSS
 
 + [Simulate survival data using exponential distribution](sim_survival.html)
 
-+ [Run IBSS on simple simulation data](run_ser_simple_dat.html)
-
 + [Simulate survival data with censoring](sim_survival_with_censoring.html)
 
 
-Try other candidate methods on simple simulated data:
+Try different methods on simple simulated data:
+
++ [Susie IBSS](run_ser_simple_dat.html)
 
 + [survival.svb](survival.svb.html)
 
@@ -36,3 +36,11 @@ Try other candidate methods on simple simulated data:
 
 + [bhglm](bhglm.html)
 
+
+Try different methods on simulated data with censoring:
+
++ [survival.svb](survival.svb_censoring.html)
+
++ [bvsnlp](bvsnlp_censoring.html)
+
++ [bhglm](bhglm_censoring.html)
