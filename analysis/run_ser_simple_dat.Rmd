@@ -6,7 +6,7 @@ output: html_document
 ---
 ### Description:
 
-I simulated data in 4 different scenarios, and apply both coxph model and susie procedure. The data simulation procedure is available at https://yunqiyang0215.github.io/survival-susie/sim_survival.html
+I simulated data in 5 different scenarios, and apply both coxph model and susie procedure. The data simulation procedure is available at https://yunqiyang0215.github.io/survival-susie/sim_survival.html
 
 
 #### The Wakefield approximation:
