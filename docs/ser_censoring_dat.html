@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Yunqi Yang" />
+
+
+<title>Run susie IBSS on censoring data</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">survival-susie</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/yunqiyang0215/survival-susie">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Run susie IBSS on censoring data</h1>
+<h4 class="author">Yunqi Yang</h4>
+<h4 class="date">3/15/2023</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2023-03-15
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>survival-susie/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20230201code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20230201)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20230201code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20230201)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreec084045c3f4015d5e6252c141f84c8ec801e3125targetblankc084045a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/c084045c3f4015d5e6252c141f84c8ec801e3125" target="_blank">c084045</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreec084045c3f4015d5e6252c141f84c8ec801e3125targetblankc084045a" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/c084045c3f4015d5e6252c141f84c8ec801e3125" target="_blank">c084045</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+    Ignored:    analysis/.DS_Store
+    Ignored:    analysis/.RData
+    Ignored:    analysis/.Rhistory
+
+Untracked files:
+    Untracked:  analysis/ibss_null_model.Rmd
+
+Unstaged changes:
+    Modified:   analysis/bhglm_censoring.Rmd
+    Modified:   analysis/check_coxph_fit.Rmd
+    Deleted:    analysis/null_model_demo.Rmd
+    Modified:   analysis/null_model_zscore.Rmd
+    Deleted:    analysis/one_predictor_investigation.Rmd
+    Deleted:    analysis/ser_survival.Rmd
+    Modified:   analysis/sim_survival_with_censoring.Rmd
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/ser_censoring_dat.Rmd</code>) and HTML (<code>docs/ser_censoring_dat.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/c084045c3f4015d5e6252c141f84c8ec801e3125/analysis/ser_censoring_dat.Rmd" target="_blank">c084045</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-03-15
+</td>
+<td>
+wflow_publish("analysis/ser_censoring_dat.Rmd")
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div id="description" class="section level3">
+<h3>Description:</h3>
+<p>I simulated data in 5 different scenarios, and apply both coxph model and susie procedure. The data simulation procedure is available at <a href="https://yunqiyang0215.github.io/survival-susie/sim_survival_with_censoring.html" class="uri">https://yunqiyang0215.github.io/survival-susie/sim_survival_with_censoring.html</a></p>
+<div id="the-wakefield-approximation" class="section level4">
+<h4>The Wakefield approximation:</h4>
+<p><span class="math display">\[
+ABF(H_1/H_0)=\sqrt\frac{V}{V+W}\exp\{\frac{z^2}{2}\frac{W}{V+W}\},
+\]</span> where <span class="math inline">\(V\)</span> is the variance of estimated regression coefficient, and <span class="math inline">\(W\)</span> is variance in the normal prior, <span class="math inline">\(N(0,W)\)</span>.</p>
+<pre class="r"><code># Function to calculate approximate BF based on Wakefield approximation
+# @param z: zscore of the regression coefficient
+# @param s: standard deviation of the estimated coefficient
+compute_abf &lt;- function(z, s, prior_variance){
+  abf &lt;- sqrt(s^2/(s^2+prior_variance))*exp(z^2/2*(prior_variance/(s^2+prior_variance)))
+  return(abf)
+}
+
+
+compute_approx_post_var &lt;- function(z, s, prior_variance){
+  post_var &lt;- 1/(1/s^2 + 1/prior_variance)
+  return(post_var)
+}
+
+# @param post_var: posterior variance
+# @param s: standard deviation of the estimated coefficient
+# @param bhat: estimated beta effect
+compute_approx_post_mean &lt;- function(post_var, s, bhat){
+  mu &lt;- post_var/(s^2)*bhat
+  return(mu)
+}</code></pre>
+<pre class="r"><code>dat = readRDS(&quot;./data/sim_dat_censoring.rds&quot;)
+
+library(survival)
+# Modified Karl&#39;s code for intercept part
+devtools::load_all(&quot;/Users/nicholeyang/Desktop/logisticsusie&quot;)</code></pre>
+<pre><code>ℹ Loading logisticsusie</code></pre>
+<pre class="r"><code>surv_uni_fun &lt;- function(x, y, o, prior_variance, estimate_intercept = 0, ...){
+  fit &lt;- coxph(y~ x + offset(o))
+  bhat &lt;- summary(fit)$coefficients[1, 1] # bhat = -alphahat
+  sd &lt;- summary(fit)$coefficients[1, 3]
+  zscore &lt;- bhat/sd
+  bf &lt;- compute_abf(zscore, sd, prior_variance)
+  var &lt;- compute_approx_post_var(zscore, sd, prior_variance)
+  mu &lt;- compute_approx_post_mean(var, sd, bhat)
+  lbf &lt;- log(bf)
+  return(list(mu = mu, var=var, lbf=lbf, intercept=0))
+}
+
+fit_coxph &lt;- ser_from_univariate(surv_uni_fun)</code></pre>
+</div>
+</div>
+<div id="data-1-simulated-from-null-model-with-x-independent" class="section level3">
+<h3>Data 1: simulated from null model with X independent</h3>
+<p><span class="math inline">\(\log T_i =\beta_0+\epsilon_i\)</span> and <span class="math inline">\(\beta_0 = 1\)</span>.</p>
+<pre class="r"><code>## Create  survival object. status == 2 is death
+dat[[1]]$y &lt;- with(dat[[1]], Surv(surT, status))
+# Fit cox ph. Cox ph model with select multiple significant predictors..
+cox1 &lt;- coxph(y ~ .-status - surT, data =  dat[[1]])</code></pre>
+<div id="run-ibss-on-data-from-null-model-with-l1." class="section level4">
+<h4>Run IBSS on data from null model with L=1.</h4>
+<pre class="r"><code>p = 50
+X = as.matrix(dat[[1]][, c(2:(p+1))])
+y = dat[[1]]$y</code></pre>
+<pre class="r"><code># IBSS of susie
+set.seed(1)
+fit1 &lt;- ibss_from_ser(X, y, L = 1, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
+<pre><code>1.265 sec elapsed</code></pre>
+<pre class="r"><code>par(mfrow = c(1,2))
+hist(fit1$alpha, breaks = 20)
+hist(fit1$mu* fit1$alpha, breaks = 20)</code></pre>
+<p><img src="figure/ser_censoring_dat.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="run-ibss-on-data-from-null-model-l-5." class="section level4">
+<h4>Run IBSS on data from null model, L = 5.</h4>
+<pre class="r"><code># IBSS of susie
+t1 &lt;- proc.time()
+fit2 &lt;- ibss_from_ser(X, y, L = 5, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
+<pre><code>14.827 sec elapsed</code></pre>
+<pre class="r"><code>t2 &lt;- proc.time()
+t(apply(fit2$alpha, 1, function(x) sort(x, decreasing = TRUE)))</code></pre>
+<pre><code>           [,1]       [,2]       [,3]       [,4]       [,5]       [,6]
+[1,] 0.08143903 0.04459949 0.03307453 0.03288476 0.03231248 0.03097552
+[2,] 0.08125140 0.04464858 0.03308086 0.03290245 0.03230952 0.03098557
+[3,] 0.08145853 0.04459454 0.03307387 0.03288292 0.03231277 0.03097445
+[4,] 0.08177828 0.04451166 0.03306307 0.03285291 0.03231769 0.03095730
+[5,] 0.08184774 0.04449362 0.03306071 0.03284640 0.03231877 0.03095359
+           [,7]       [,8]       [,9]      [,10]      [,11]      [,12]
+[1,] 0.03000089 0.02732608 0.02482835 0.02355495 0.02289869 0.02136300
+[2,] 0.02998739 0.02734163 0.02483963 0.02355213 0.02290642 0.02135388
+[3,] 0.03000229 0.02732446 0.02482718 0.02355525 0.02289790 0.02136394
+[4,] 0.03002516 0.02729805 0.02480801 0.02356000 0.02288478 0.02137941
+[5,] 0.03003011 0.02729233 0.02480386 0.02356102 0.02288193 0.02138275
+          [,13]      [,14]      [,15]      [,16]      [,17]      [,18]
+[1,] 0.02050405 0.02008745 0.01935175 0.01929643 0.01922760 0.01813640
+[2,] 0.02051133 0.02008575 0.01935756 0.01929480 0.01923238 0.01814018
+[3,] 0.02050331 0.02008762 0.01935114 0.01929659 0.01922711 0.01813633
+[4,] 0.02049095 0.02009044 0.01934123 0.01929928 0.01921897 0.01813524
+[5,] 0.02048826 0.02009106 0.01933908 0.01929987 0.01921720 0.01813501
+          [,19]      [,20]      [,21]      [,22]      [,23]      [,24]
+[1,] 0.01813434 0.01793803 0.01787401 0.01761446 0.01749518 0.01695308
+[2,] 0.01813701 0.01793816 0.01787682 0.01761664 0.01749850 0.01695871
+[3,] 0.01813373 0.01793801 0.01787372 0.01761423 0.01749482 0.01695250
+[4,] 0.01812377 0.01793774 0.01786892 0.01761047 0.01748912 0.01694291
+[5,] 0.01812161 0.01793768 0.01786787 0.01760966 0.01748789 0.01694083
+          [,25]      [,26]      [,27]      [,28]      [,29]      [,30]
+[1,] 0.01675546 0.01650316 0.01639385 0.01629904 0.01597818 0.01527255
+[2,] 0.01675719 0.01650486 0.01639719 0.01629913 0.01597990 0.01527618
+[3,] 0.01675527 0.01650298 0.01639349 0.01629902 0.01597800 0.01527218
+[4,] 0.01675226 0.01650003 0.01638779 0.01629882 0.01597505 0.01526600
+[5,] 0.01675161 0.01649939 0.01638655 0.01629878 0.01597441 0.01526465
+          [,31]      [,32]      [,33]      [,34]      [,35]      [,36]
+[1,] 0.01509248 0.01498543 0.01474355 0.01472444 0.01470023 0.01469815
+[2,] 0.01509770 0.01499086 0.01474772 0.01472828 0.01470564 0.01470085
+[3,] 0.01509194 0.01498487 0.01474312 0.01472404 0.01469967 0.01469787
+[4,] 0.01508307 0.01497564 0.01473601 0.01471750 0.01469325 0.01469048
+[5,] 0.01508114 0.01497364 0.01473446 0.01471608 0.01469225 0.01468849
+          [,37]      [,38]      [,39]      [,40]      [,41]      [,42]
+[1,] 0.01452888 0.01445394 0.01429492 0.01403043 0.01372873 0.01362489
+[2,] 0.01453138 0.01445497 0.01429713 0.01403276 0.01373176 0.01362723
+[3,] 0.01452862 0.01445383 0.01429469 0.01403018 0.01372842 0.01362465
+[4,] 0.01452434 0.01445205 0.01429090 0.01402620 0.01372325 0.01362064
+[5,] 0.01452342 0.01445166 0.01429008 0.01402533 0.01372213 0.01361977
+          [,43]      [,44]      [,45]      [,46]      [,47]      [,48]
+[1,] 0.01354143 0.01310261 0.01300362 0.01299495 0.01294824 0.01256044
+[2,] 0.01354304 0.01310091 0.01300500 0.01299669 0.01295004 0.01256262
+[3,] 0.01354126 0.01310278 0.01300347 0.01299477 0.01294806 0.01256021
+[4,] 0.01353850 0.01310564 0.01300110 0.01299179 0.01294499 0.01255649
+[5,] 0.01353790 0.01310626 0.01300058 0.01299114 0.01294432 0.01255568
+          [,49]      [,50]
+[1,] 0.01166208 0.01150776
+[2,] 0.01166479 0.01150891
+[3,] 0.01166179 0.01150764
+[4,] 0.01165718 0.01150566
+[5,] 0.01165618 0.01150523</code></pre>
+<pre class="r"><code>beta &lt;- colSums(fit2$alpha * fit2$mu)
+hist(beta, breaks = 20)</code></pre>
+<p><img src="figure/ser_censoring_dat.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="data-2-simulated-from-null-model-with-highly-correlated-x." class="section level3">
+<h3>Data 2: simulated from null model with highly correlated X.</h3>
+<p><span class="math inline">\(\log T_i =\beta_0+\epsilon_i\)</span> and <span class="math inline">\(\beta_0 = 1\)</span>.</p>
+<pre class="r"><code>## Create  survival object. status == 2 is death
+dat[[2]]$y &lt;- with(dat[[2]], Surv(surT, status))
+# Fit cox ph. Cox ph model with select multiple significant predictors..
+cox1 &lt;- coxph(y ~ .-status - surT, data =  dat[[2]])</code></pre>
+<div id="run-ibss-on-data-from-null-model-with-l1.-1" class="section level4">
+<h4>Run IBSS on data from null model with L=1.</h4>
+<pre class="r"><code>p = 50
+X = as.matrix(dat[[2]][, c(2:(p+1))])
+y = dat[[2]]$y</code></pre>
+<pre class="r"><code># IBSS of susie
+set.seed(1)
+fit1 &lt;- ibss_from_ser(X, y, L = 1, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
+<pre><code>1.432 sec elapsed</code></pre>
+<pre class="r"><code>par(mfrow = c(1,2))
+hist(fit1$alpha, breaks = 20)
+hist(fit1$mu* fit1$alpha, breaks = 20)</code></pre>
+<p><img src="figure/ser_censoring_dat.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="run-ibss-on-data-from-null-model-l-5.-1" class="section level4">
+<h4>Run IBSS on data from null model, L = 5.</h4>
+<pre class="r"><code># IBSS of susie
+t1 &lt;- proc.time()
+fit2 &lt;- ibss_from_ser(X, y, L = 5, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
+<pre><code>6.959 sec elapsed</code></pre>
+<pre class="r"><code>t2 &lt;- proc.time()
+t(apply(fit2$alpha, 1, function(x) sort(x, decreasing = TRUE)))</code></pre>
+<pre><code>           [,1]       [,2]       [,3]       [,4]       [,5]       [,6]
+[1,] 0.03175498 0.03135105 0.02937126 0.02706613 0.02678807 0.02560367
+[2,] 0.02739179 0.02423505 0.02412816 0.02301344 0.02191653 0.02170758
+[3,] 0.02984786 0.02320826 0.02293150 0.02290442 0.02189584 0.02128858
+[4,] 0.03009679 0.02335840 0.02280655 0.02278736 0.02178842 0.02136292
+[5,] 0.03011543 0.02336965 0.02279723 0.02277862 0.02178039 0.02136848
+           [,7]       [,8]       [,9]      [,10]      [,11]      [,12]
+[1,] 0.02513153 0.02413697 0.02349248 0.02324927 0.02282116 0.02268714
+[2,] 0.02168647 0.02144840 0.02132344 0.02115936 0.02097476 0.02097055
+[3,] 0.02120990 0.02106449 0.02100876 0.02079053 0.02076256 0.02075965
+[4,] 0.02129586 0.02112955 0.02092142 0.02079725 0.02070752 0.02070427
+[5,] 0.02130229 0.02113441 0.02091490 0.02080408 0.02070341 0.02069782
+          [,13]      [,14]      [,15]      [,16]      [,17]      [,18]
+[1,] 0.02245912 0.02176831 0.02158800 0.02147234 0.02144992 0.02122567
+[2,] 0.02083882 0.02069172 0.02059019 0.02053312 0.02042918 0.02039594
+[3,] 0.02070589 0.02051506 0.02047829 0.02046464 0.02045903 0.02035844
+[4,] 0.02069274 0.02047028 0.02045637 0.02042157 0.02041435 0.02028102
+[5,] 0.02068774 0.02046694 0.02045472 0.02041877 0.02041059 0.02027524
+          [,19]      [,20]      [,21]      [,22]      [,23]      [,24]
+[1,] 0.02073611 0.02053961 0.02013344 0.01963125 0.01932389 0.01903191
+[2,] 0.02033628 0.01983866 0.01979690 0.01977804 0.01967021 0.01963459
+[3,] 0.02018067 0.02009339 0.02008949 0.01993409 0.01977189 0.01975165
+[4,] 0.02015585 0.02015171 0.02004387 0.01997284 0.01976861 0.01976844
+[5,] 0.02015636 0.02015399 0.02004016 0.01997573 0.01976988 0.01976817
+          [,25]      [,26]      [,27]      [,28]      [,29]      [,30]
+[1,] 0.01877446 0.01864280 0.01846011 0.01826125 0.01811946 0.01758598
+[2,] 0.01956579 0.01952651 0.01949855 0.01945082 0.01944386 0.01926606
+[3,] 0.01967243 0.01951450 0.01933811 0.01930764 0.01923644 0.01921948
+[4,] 0.01967160 0.01948196 0.01938759 0.01931034 0.01926801 0.01919159
+[5,] 0.01967153 0.01947952 0.01939128 0.01931054 0.01927036 0.01918950
+          [,31]      [,32]      [,33]      [,34]      [,35]      [,36]
+[1,] 0.01750065 0.01748767 0.01717360 0.01712115 0.01710099 0.01706409
+[2,] 0.01915915 0.01914768 0.01898887 0.01890376 0.01888847 0.01885695
+[3,] 0.01913781 0.01910735 0.01910391 0.01908706 0.01897738 0.01893920
+[4,] 0.01913414 0.01911512 0.01909856 0.01905601 0.01896483 0.01895941
+[5,] 0.01913386 0.01911721 0.01909815 0.01905217 0.01896674 0.01896215
+          [,37]      [,38]      [,39]      [,40]      [,41]      [,42]
+[1,] 0.01701675 0.01692154 0.01687883 0.01675949 0.01637166 0.01610522
+[2,] 0.01882862 0.01879446 0.01873189 0.01868325 0.01867280 0.01864041
+[3,] 0.01892267 0.01892215 0.01886735 0.01878669 0.01873305 0.01857338
+[4,] 0.01893985 0.01893151 0.01888450 0.01879996 0.01879522 0.01854506
+[5,] 0.01894117 0.01892808 0.01888578 0.01880095 0.01879987 0.01854294
+          [,43]      [,44]      [,45]      [,46]      [,47]      [,48]
+[1,] 0.01609401 0.01598988 0.01569102 0.01567592 0.01543197 0.01518474
+[2,] 0.01854014 0.01844670 0.01818884 0.01809829 0.01803904 0.01790889
+[3,] 0.01854997 0.01851192 0.01841345 0.01832996 0.01832571 0.01816355
+[4,] 0.01851654 0.01846536 0.01840965 0.01836613 0.01834243 0.01820389
+[5,] 0.01851403 0.01846188 0.01840937 0.01836915 0.01834335 0.01820691
+          [,49]      [,50]
+[1,] 0.01491173 0.01486178
+[2,] 0.01774551 0.01749551
+[3,] 0.01797218 0.01781175
+[4,] 0.01796471 0.01784212
+[5,] 0.01796414 0.01784439</code></pre>
+<pre class="r"><code>beta &lt;- colSums(fit2$alpha * fit2$mu)
+hist(beta, breaks = 20)</code></pre>
+<p><img src="figure/ser_censoring_dat.Rmd/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="data-3-simulated-from-log-t_ibeta_0-beta_1x_i1.-predictors-are-independent." class="section level3">
+<h3>Data 3: simulated from <span class="math inline">\(\log T_i=\beta_0 + \beta_1x_{i1}\)</span>. Predictors are independent.</h3>
+<p><span class="math inline">\(\beta_0 = 1, \beta_1 = 3\)</span></p>
+<pre class="r"><code>dat[[3]]$y &lt;- with(dat[[3]], Surv(surT, status))
+X = as.matrix(dat[[3]][, c(2:(p+1))])
+y = dat[[3]]$y
+
+# IBSS of susie
+t1 &lt;- proc.time()
+fit3 &lt;- ibss_from_ser(X, y, L = 5, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
+<pre><code>24.262 sec elapsed</code></pre>
+<pre class="r"><code>t2 &lt;- proc.time()
+t2 - t1</code></pre>
+<pre><code>   user  system elapsed 
+ 12.555   0.192  24.266 </code></pre>
+<pre class="r"><code>fit3$alpha</code></pre>
+<pre><code>           [,1]         [,2]         [,3]         [,4]         [,5]
+[1,] 1.00000000 1.945309e-15 1.037966e-14 3.420646e-15 1.584199e-15
+[2,] 0.06119932 1.624290e-02 1.266428e-02 1.174145e-01 1.432957e-02
+[3,] 0.06109483 1.622042e-02 1.264841e-02 1.184278e-01 1.431333e-02
+[4,] 0.06098843 1.619754e-02 1.263223e-02 1.194601e-01 1.429676e-02
+[5,] 0.06105270 1.621251e-02 1.264273e-02 1.187885e-01 1.430754e-02
+             [,6]         [,7]         [,8]         [,9]        [,10]
+[1,] 1.280781e-15 1.573268e-15 1.966074e-15 2.337846e-15 1.457322e-15
+[2,] 1.351592e-02 2.752392e-02 2.028549e-02 1.168925e-02 1.451684e-02
+[3,] 1.350264e-02 2.747617e-02 2.027664e-02 1.167504e-02 1.451946e-02
+[4,] 1.348905e-02 2.742779e-02 2.026742e-02 1.166054e-02 1.452193e-02
+[5,] 1.349786e-02 2.745987e-02 2.027353e-02 1.166994e-02 1.452034e-02
+            [,11]        [,12]        [,13]        [,14]        [,15]
+[1,] 1.528543e-15 1.483987e-15 1.454037e-15 1.573859e-15 1.246281e-15
+[2,] 1.480047e-02 1.768463e-02 2.602703e-02 1.830046e-02 1.572868e-02
+[3,] 1.477775e-02 1.767836e-02 2.597387e-02 1.828325e-02 1.571061e-02
+[4,] 1.475466e-02 1.767181e-02 2.592006e-02 1.826564e-02 1.569221e-02
+[5,] 1.476980e-02 1.767622e-02 2.595588e-02 1.827714e-02 1.570443e-02
+            [,16]        [,17]        [,18]        [,19]        [,20]
+[1,] 1.647701e-15 1.686426e-15 2.575579e-15 2.836684e-15 1.397098e-15
+[2,] 2.516249e-02 1.203440e-02 1.300859e-02 1.531806e-02 2.621589e-02
+[3,] 2.514569e-02 1.202009e-02 1.299294e-02 1.529965e-02 2.624899e-02
+[4,] 2.512845e-02 1.200549e-02 1.297700e-02 1.528089e-02 2.628216e-02
+[5,] 2.514012e-02 1.201498e-02 1.298735e-02 1.529312e-02 2.626098e-02
+            [,21]        [,22]        [,23]        [,24]        [,25]
+[1,] 1.874612e-15 1.823134e-15 1.438606e-15 1.400395e-15 2.281874e-15
+[2,] 1.336619e-02 1.422307e-02 1.998931e-02 1.320484e-02 1.776728e-02
+[3,] 1.335023e-02 1.420212e-02 1.994945e-02 1.320125e-02 1.774371e-02
+[4,] 1.333396e-02 1.418083e-02 1.990910e-02 1.319746e-02 1.771970e-02
+[5,] 1.334453e-02 1.419464e-02 1.993569e-02 1.319994e-02 1.773531e-02
+            [,26]        [,27]        [,28]        [,29]        [,30]
+[1,] 5.101279e-15 1.604637e-15 1.772327e-15 1.488208e-15 1.365457e-15
+[2,] 1.579757e-02 1.255272e-02 1.497575e-02 1.293437e-02 3.014082e-02
+[3,] 1.578102e-02 1.253616e-02 1.496392e-02 1.292030e-02 3.015145e-02
+[4,] 1.576411e-02 1.251930e-02 1.495178e-02 1.290595e-02 3.016175e-02
+[5,] 1.577503e-02 1.253026e-02 1.495967e-02 1.291532e-02 3.015516e-02
+            [,31]        [,32]        [,33]        [,34]        [,35]
+[1,] 1.692315e-15 1.348246e-15 1.187088e-15 2.395663e-15 5.646317e-15
+[2,] 1.210610e-02 1.238187e-02 3.137243e-02 1.660180e-02 2.003215e-02
+[3,] 1.209010e-02 1.236326e-02 3.128756e-02 1.657879e-02 2.000625e-02
+[4,] 1.207381e-02 1.234434e-02 3.120198e-02 1.655536e-02 1.997990e-02
+[5,] 1.208441e-02 1.235665e-02 3.125854e-02 1.657054e-02 1.999694e-02
+            [,36]        [,37]        [,38]        [,39]        [,40]
+[1,] 1.278174e-14 1.204578e-15 1.591023e-15 1.439280e-15 1.944812e-15
+[2,] 3.894658e-02 2.562328e-02 1.644298e-02 1.270192e-02 1.637084e-02
+[3,] 3.893546e-02 2.556286e-02 1.640843e-02 1.269076e-02 1.635191e-02
+[4,] 3.892376e-02 2.550182e-02 1.637347e-02 1.267934e-02 1.633259e-02
+[5,] 3.893145e-02 2.554233e-02 1.639640e-02 1.268677e-02 1.634513e-02
+            [,41]        [,42]        [,43]        [,44]        [,45]
+[1,] 1.593842e-15 2.832258e-15 3.220562e-15 2.929024e-15 1.349872e-15
+[2,] 1.317969e-02 1.694926e-02 1.252905e-02 1.406807e-02 1.315624e-02
+[3,] 1.316901e-02 1.693971e-02 1.251180e-02 1.405151e-02 1.314174e-02
+[4,] 1.315808e-02 1.692984e-02 1.249423e-02 1.403462e-02 1.312695e-02
+[5,] 1.316517e-02 1.693620e-02 1.250561e-02 1.404560e-02 1.313657e-02
+            [,46]        [,47]        [,48]        [,49]        [,50]
+[1,] 1.989357e-15 1.430645e-15 2.373896e-15 4.910787e-15 1.510036e-15
+[2,] 1.124433e-02 1.676049e-02 1.387065e-02 1.186469e-02 1.518301e-02
+[3,] 1.123154e-02 1.673500e-02 1.383731e-02 1.185192e-02 1.516953e-02
+[4,] 1.121849e-02 1.670910e-02 1.380362e-02 1.183888e-02 1.515573e-02
+[5,] 1.122693e-02 1.672608e-02 1.382552e-02 1.184734e-02 1.516467e-02</code></pre>
+<pre class="r"><code>beta &lt;- colSums(fit3$alpha * fit3$mu)
+hist(beta, breaks = 20)</code></pre>
+<p><img src="figure/ser_censoring_dat.Rmd/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="data-4-simulated-from-log-t_ibeta_0-beta_1x_i1.-predictors-have-high-correlation." class="section level3">
+<h3>Data 4: simulated from <span class="math inline">\(\log T_i=\beta_0 + \beta_1x_{i1}\)</span>. Predictors have high correlation.</h3>
+<pre class="r"><code>dat[[4]]$y &lt;- with(dat[[4]], Surv(surT, status))
+X = as.matrix(dat[[4]][, c(2:(p+1))])
+y = dat[[4]]$y
+
+# IBSS of susie
+t1 &lt;- proc.time()
+fit4 &lt;- ibss_from_ser(X, y, L = 5, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
+<pre><code>37.665 sec elapsed</code></pre>
+<pre class="r"><code>t2 &lt;- proc.time()
+t2 - t1</code></pre>
+<pre><code>   user  system elapsed 
+ 23.443   0.326  37.675 </code></pre>
+<pre class="r"><code>t(apply(fit4$alpha, 1, function(x) sort(x, decreasing = TRUE)))</code></pre>
+<pre><code>           [,1]        [,2]         [,3]         [,4]         [,5]         [,6]
+[1,] 0.99593350 0.001746024 0.0003573373 0.0003111703 0.0001884094 0.0001275227
+[2,] 0.09067633 0.055789562 0.0378971935 0.0345777673 0.0301956149 0.0266962242
+[3,] 0.09144648 0.055932037 0.0381049105 0.0347018964 0.0302850962 0.0267750110
+[4,] 0.09434119 0.056432333 0.0388710615 0.0351549862 0.0306092184 0.0270614948
+[5,] 0.09409025 0.056393650 0.0388054664 0.0351169195 0.0305820235 0.0270373425
+             [,7]         [,8]         [,9]       [,10]        [,11]
+[1,] 0.0001269913 0.0001184401 0.0001110072 0.000108822 7.589513e-05
+[2,] 0.0239003073 0.0234044341 0.0223736210 0.021848347 2.026483e-02
+[3,] 0.0239560262 0.0234582379 0.0224202659 0.021887064 2.028217e-02
+[4,] 0.0241597101 0.0236537483 0.0225887578 0.022026046 2.034311e-02
+[5,] 0.0241424224 0.0236372954 0.0225746164 0.022014351 2.033811e-02
+            [,12]        [,13]        [,14]        [,15]        [,16]
+[1,] 7.550937e-05 7.009948e-05 6.790139e-05 5.301478e-05 5.136254e-05
+[2,] 1.979610e-02 1.902068e-02 1.890982e-02 1.851502e-02 1.789622e-02
+[3,] 1.979984e-02 1.903903e-02 1.891347e-02 1.850648e-02 1.789259e-02
+[4,] 1.980874e-02 1.910334e-02 1.892302e-02 1.847210e-02 1.787758e-02
+[5,] 1.980835e-02 1.909800e-02 1.892250e-02 1.847522e-02 1.787896e-02
+            [,17]        [,18]        [,19]        [,20]        [,21]
+[1,] 4.410203e-05 0.0000386038 3.599922e-05 3.225395e-05 2.983451e-05
+[2,] 1.783026e-02 0.0173362972 1.704661e-02 1.701408e-02 1.645728e-02
+[3,] 1.783631e-02 0.0173504363 1.701051e-02 1.700998e-02 1.644089e-02
+[4,] 1.785666e-02 0.0173998978 1.699480e-02 1.687324e-02 1.639956e-02
+[5,] 1.785506e-02 0.0173958213 1.699627e-02 1.688500e-02 1.640312e-02
+            [,22]        [,23]        [,24]        [,25]        [,26]
+[1,] 2.865682e-05 0.0000276614 0.0000222226 2.052095e-05 1.896575e-05
+[2,] 1.645171e-02 0.0164427687 0.0164136818 1.640025e-02 1.616874e-02
+[3,] 1.642811e-02 0.0164257336 0.0163842040 1.636509e-02 1.614824e-02
+[4,] 1.636079e-02 0.0163174754 0.0162736175 1.623438e-02 1.607172e-02
+[5,] 1.636643e-02 0.0163271029 0.0162831269 1.624555e-02 1.607826e-02
+            [,27]        [,28]        [,29]        [,30]        [,31]
+[1,] 1.826093e-05 1.725835e-05 1.441708e-05 1.212155e-05 1.184446e-05
+[2,] 1.610436e-02 1.610208e-02 1.576997e-02 1.544943e-02 1.502406e-02
+[3,] 1.609265e-02 1.597062e-02 1.574830e-02 1.541180e-02 1.497402e-02
+[4,] 1.605593e-02 1.566665e-02 1.548592e-02 1.527192e-02 1.478967e-02
+[5,] 1.605916e-02 1.567365e-02 1.552653e-02 1.528390e-02 1.480532e-02
+            [,32]        [,33]        [,34]        [,35]        [,36]
+[1,] 1.093679e-05 8.670495e-06 8.043892e-06 7.713121e-06 7.627377e-06
+[2,] 1.501195e-02 1.498541e-02 1.497392e-02 1.489252e-02 1.488433e-02
+[3,] 1.488545e-02 1.488499e-02 1.486355e-02 1.485155e-02 1.484182e-02
+[4,] 1.475476e-02 1.468426e-02 1.452252e-02 1.448641e-02 1.443260e-02
+[5,] 1.476412e-02 1.469769e-02 1.455302e-02 1.449788e-02 1.446447e-02
+            [,37]        [,38]        [,39]        [,40]        [,41]
+[1,] 7.332996e-06 7.237457e-06 6.752305e-06 6.176163e-06 6.150746e-06
+[2,] 1.467807e-02 1.465562e-02 1.463561e-02 1.456649e-02 1.447464e-02
+[3,] 1.461987e-02 1.461628e-02 1.456217e-02 1.453837e-02 1.441105e-02
+[4,] 1.442605e-02 1.440890e-02 1.438893e-02 1.429342e-02 1.417712e-02
+[5,] 1.444595e-02 1.444168e-02 1.440823e-02 1.431613e-02 1.419698e-02
+            [,42]        [,43]        [,44]        [,45]        [,46]
+[1,] 5.472320e-06 5.359691e-06 4.815199e-06 2.926219e-06 2.892118e-06
+[2,] 1.423094e-02 1.407268e-02 1.398643e-02 1.397698e-02 1.387861e-02
+[3,] 1.417846e-02 1.400775e-02 1.395483e-02 1.393223e-02 1.380807e-02
+[4,] 1.398538e-02 1.387198e-02 1.376807e-02 1.373240e-02 1.355039e-02
+[5,] 1.400177e-02 1.387907e-02 1.378847e-02 1.374939e-02 1.357215e-02
+            [,47]        [,48]        [,49]        [,50]
+[1,] 2.588139e-06 1.557484e-06 1.394369e-06 6.201839e-07
+[2,] 1.379942e-02 1.378886e-02 1.378621e-02 1.294765e-02
+[3,] 1.373379e-02 1.372977e-02 1.370178e-02 1.288071e-02
+[4,] 1.352313e-02 1.349383e-02 1.338487e-02 1.263632e-02
+[5,] 1.354060e-02 1.351410e-02 1.341156e-02 1.265695e-02</code></pre>
+<pre class="r"><code>beta &lt;- colSums(fit4$alpha * fit4$mu)
+hist(beta, breaks = 20)</code></pre>
+<p><img src="figure/ser_censoring_dat.Rmd/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="data-5-simulated-from-log-t_ibeta_0-beta_1x_i1-beta_1x_i2.-predictors-have-high-correlation" class="section level3">
+<h3>Data 5: simulated from <span class="math inline">\(\log T_i=\beta_0 + \beta_1x_{i1} + \beta_1x_{i2}\)</span>. Predictors have high correlation</h3>
+<p><span class="math inline">\(\beta_0 = 1, \beta_1 = 3, \beta_2 = 1.5\)</span> and <span class="math inline">\(cor=0.9\)</span>.</p>
+<pre class="r"><code>dat[[5]]$y &lt;- with(dat[[5]], Surv(surT, status))
+X = as.matrix(dat[[5]][, c(2:(p+1))])
+y = dat[[5]]$y
+ 
+# IBSS of susie
+t1 &lt;- proc.time()
+fit5 &lt;- ibss_from_ser(X, y, L = 5, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = 500, estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
+<pre><code>22.29 sec elapsed</code></pre>
+<pre class="r"><code>t2 &lt;- proc.time()
+t2 - t1</code></pre>
+<pre><code>   user  system elapsed 
+ 15.608   0.190  22.294 </code></pre>
+<pre class="r"><code>fit5$alpha</code></pre>
+<pre><code>             [,1]         [,2]         [,3]         [,4]         [,5]
+[1,] 4.109418e-02 2.342919e-02 1.611600e-02 0.1047439476 1.685648e-02
+[2,] 9.994369e-01 1.052992e-06 1.170118e-06 0.0002917087 7.288211e-06
+[3,] 5.354245e-05 9.806536e-01 2.697337e-04 0.0021378522 1.040166e-04
+[4,] 4.109648e-02 2.343055e-02 1.611377e-02 0.1052658491 1.684701e-02
+[5,] 4.110266e-02 2.343399e-02 1.611291e-02 0.1054503623 1.684347e-02
+             [,6]         [,7]         [,8]         [,9]        [,10]
+[1,] 2.551058e-02 1.423423e-02 1.762948e-02 1.709578e-02 1.347421e-02
+[2,] 7.482749e-06 1.395734e-06 1.142018e-05 1.171958e-06 1.143788e-06
+[3,] 4.173773e-04 3.157494e-05 9.654595e-05 3.690443e-04 4.177383e-05
+[4,] 2.553363e-02 1.419111e-02 1.761680e-02 1.708695e-02 1.344205e-02
+[5,] 2.554277e-02 1.417437e-02 1.761219e-02 1.708392e-02 1.342949e-02
+            [,11]        [,12]        [,13]        [,14]        [,15]
+[1,] 1.251906e-02 1.755829e-02 1.455633e-02 2.038377e-02 2.124691e-02
+[2,] 2.215010e-06 5.462646e-07 1.848065e-06 8.740251e-06 5.721350e-06
+[3,] 5.727383e-05 2.737840e-05 2.113659e-04 2.673427e-04 8.505945e-04
+[4,] 1.248648e-02 1.748325e-02 1.452783e-02 2.039416e-02 2.126020e-02
+[5,] 1.247387e-02 1.745327e-02 1.451692e-02 2.039833e-02 2.126584e-02
+            [,16]        [,17]        [,18]        [,19]        [,20]
+[1,] 1.397397e-02 1.435640e-02 2.322350e-02 1.561285e-02 1.377814e-02
+[2,] 2.947762e-06 2.327027e-06 3.200463e-05 1.783583e-06 9.608180e-07
+[3,] 2.220833e-05 1.047045e-04 2.232416e-04 3.768226e-04 1.140926e-04
+[4,] 1.393985e-02 1.433739e-02 2.322942e-02 1.560116e-02 1.374624e-02
+[5,] 1.392667e-02 1.433021e-02 2.323227e-02 1.559668e-02 1.373384e-02
+            [,21]        [,22]        [,23]        [,24]        [,25]
+[1,] 1.579284e-02 1.585890e-02 1.413761e-02 1.224713e-02 1.617971e-02
+[2,] 1.663264e-06 8.725551e-06 2.358453e-06 9.252694e-07 2.137854e-06
+[3,] 1.291651e-03 1.207768e-04 1.085563e-04 1.781653e-04 1.822807e-04
+[4,] 1.578046e-02 1.584958e-02 1.410031e-02 1.222380e-02 1.616383e-02
+[5,] 1.577617e-02 1.584622e-02 1.408579e-02 1.221483e-02 1.615790e-02
+            [,26]        [,27]        [,28]        [,29]        [,30]
+[1,] 1.420827e-02 1.358578e-02 1.611569e-02 1.550043e-02 2.412385e-02
+[2,] 5.437970e-07 8.259778e-07 1.217351e-05 3.805662e-06 1.022952e-05
+[3,] 5.759694e-04 8.126357e-05 1.096477e-04 2.705108e-04 3.509596e-04
+[4,] 1.418523e-02 1.355680e-02 1.610435e-02 1.548757e-02 2.415593e-02
+[5,] 1.417650e-02 1.354562e-02 1.610019e-02 1.548269e-02 2.416776e-02
+            [,31]        [,32]        [,33]        [,34]        [,35]
+[1,] 1.280616e-02 0.0259702262 3.403443e-02 1.643645e-02 1.465200e-02
+[2,] 3.271532e-06 0.0000140539 7.571014e-06 4.166839e-06 7.166997e-07
+[3,] 3.920806e-05 0.0004378459 1.718055e-03 1.816993e-04 9.124918e-05
+[4,] 1.277775e-02 0.0259916988 3.410919e-02 1.642406e-02 1.460965e-02
+[5,] 1.276677e-02 0.0260008960 3.413848e-02 1.641945e-02 1.459327e-02
+            [,36]        [,37]        [,38]        [,39]        [,40]
+[1,] 1.401149e-02 1.299665e-02 3.141972e-02 1.501858e-02 1.794825e-02
+[2,] 3.845528e-07 6.313182e-07 8.705226e-06 3.156451e-06 6.053799e-06
+[3,] 6.912561e-05 3.911581e-05 2.666603e-03 5.048864e-05 6.143480e-04
+[4,] 1.396687e-02 1.295656e-02 3.144399e-02 1.500172e-02 1.794193e-02
+[5,] 1.394946e-02 1.294101e-02 3.145527e-02 1.499525e-02 1.794001e-02
+            [,41]        [,42]        [,43]        [,44]        [,45]
+[1,] 1.723377e-02 3.756492e-02 1.749214e-02 1.610459e-02 2.597144e-02
+[2,] 1.432663e-05 3.326466e-05 4.385055e-06 1.349108e-06 5.037358e-06
+[3,] 9.189770e-05 1.851131e-03 1.779103e-04 2.144903e-04 1.616419e-03
+[4,] 1.723674e-02 3.761021e-02 1.748966e-02 1.608716e-02 2.599753e-02
+[5,] 1.723779e-02 3.763006e-02 1.748878e-02 1.608063e-02 2.600859e-02
+            [,46]        [,47]        [,48]        [,49]        [,50]
+[1,] 1.301992e-02 1.342574e-02 1.461770e-02 1.505321e-02 1.907915e-02
+[2,] 1.105621e-06 1.522711e-06 7.570050e-07 5.471051e-06 2.083112e-05
+[3,] 3.971696e-05 7.080237e-05 6.796350e-05 1.318939e-04 1.301271e-04
+[4,] 1.300459e-02 1.338643e-02 1.459356e-02 1.503466e-02 1.909799e-02
+[5,] 1.299858e-02 1.337115e-02 1.458418e-02 1.502778e-02 1.910489e-02</code></pre>
+<pre class="r"><code>t(apply(fit5$alpha, 1, function(x) sort(x, decreasing = TRUE)))</code></pre>
+<pre><code>          [,1]         [,2]         [,3]         [,4]         [,5]         [,6]
+[1,] 0.1047439 0.0410941770 3.756492e-02 3.403443e-02 3.141972e-02 2.597144e-02
+[2,] 0.9994369 0.0002917087 3.326466e-05 3.200463e-05 2.083112e-05 1.432663e-05
+[3,] 0.9806536 0.0026666030 2.137852e-03 1.851131e-03 1.718055e-03 1.616419e-03
+[4,] 0.1052658 0.0410964795 3.761021e-02 3.410919e-02 3.144399e-02 2.599753e-02
+[5,] 0.1054504 0.0411026573 3.763006e-02 3.413848e-02 3.145527e-02 2.600859e-02
+             [,7]         [,8]         [,9]        [,10]        [,11]
+[1,] 0.0259702262 2.551058e-02 2.412385e-02 2.342919e-02 2.322350e-02
+[2,] 0.0000140539 1.217351e-05 1.142018e-05 1.022952e-05 8.740251e-06
+[3,] 0.0012916514 8.505945e-04 6.143480e-04 5.759694e-04 4.378459e-04
+[4,] 0.0259916988 2.553363e-02 2.415593e-02 2.343055e-02 2.322942e-02
+[5,] 0.0260008960 2.554277e-02 2.416776e-02 2.343399e-02 2.323227e-02
+            [,12]        [,13]        [,14]        [,15]        [,16]
+[1,] 2.124691e-02 2.038377e-02 1.907915e-02 1.794825e-02 1.762948e-02
+[2,] 8.725551e-06 8.705226e-06 7.571014e-06 7.482749e-06 7.288211e-06
+[3,] 4.173773e-04 3.768226e-04 3.690443e-04 3.509596e-04 2.705108e-04
+[4,] 2.126020e-02 2.039416e-02 1.909799e-02 1.794193e-02 1.761680e-02
+[5,] 2.126584e-02 2.039833e-02 1.910489e-02 1.794001e-02 1.761219e-02
+            [,17]        [,18]        [,19]        [,20]        [,21]
+[1,] 1.755829e-02 1.749214e-02 1.723377e-02 1.709578e-02 1.685648e-02
+[2,] 6.053799e-06 5.721350e-06 5.471051e-06 5.037358e-06 4.385055e-06
+[3,] 2.697337e-04 2.673427e-04 2.232416e-04 2.144903e-04 2.113659e-04
+[4,] 1.748966e-02 1.748325e-02 1.723674e-02 1.708695e-02 1.684701e-02
+[5,] 1.748878e-02 1.745327e-02 1.723779e-02 1.708392e-02 1.684347e-02
+            [,22]        [,23]        [,24]        [,25]        [,26]
+[1,] 1.643645e-02 1.617971e-02 1.611600e-02 1.611569e-02 1.610459e-02
+[2,] 4.166839e-06 3.805662e-06 3.271532e-06 3.156451e-06 2.947762e-06
+[3,] 1.822807e-04 1.816993e-04 1.781653e-04 1.779103e-04 1.318939e-04
+[4,] 1.642406e-02 1.616383e-02 1.611377e-02 1.610435e-02 1.608716e-02
+[5,] 1.641945e-02 1.615790e-02 1.611291e-02 1.610019e-02 1.608063e-02
+            [,27]        [,28]        [,29]        [,30]        [,31]
+[1,] 1.585890e-02 1.579284e-02 1.561285e-02 1.550043e-02 1.505321e-02
+[2,] 2.358453e-06 2.327027e-06 2.215010e-06 2.137854e-06 1.848065e-06
+[3,] 1.301271e-04 1.207768e-04 1.140926e-04 1.096477e-04 1.085563e-04
+[4,] 1.584958e-02 1.578046e-02 1.560116e-02 1.548757e-02 1.503466e-02
+[5,] 1.584622e-02 1.577617e-02 1.559668e-02 1.548269e-02 1.502778e-02
+            [,32]        [,33]        [,34]        [,35]        [,36]
+[1,] 1.501858e-02 1.465200e-02 1.461770e-02 1.455633e-02 1.435640e-02
+[2,] 1.783583e-06 1.663264e-06 1.522711e-06 1.395734e-06 1.349108e-06
+[3,] 1.047045e-04 1.040166e-04 9.654595e-05 9.189770e-05 9.124918e-05
+[4,] 1.500172e-02 1.460965e-02 1.459356e-02 1.452783e-02 1.433739e-02
+[5,] 1.499525e-02 1.459327e-02 1.458418e-02 1.451692e-02 1.433021e-02
+            [,37]        [,38]        [,39]        [,40]        [,41]
+[1,] 1.423423e-02 1.420827e-02 1.413761e-02 1.401149e-02 1.397397e-02
+[2,] 1.171958e-06 1.170118e-06 1.143788e-06 1.105621e-06 1.052992e-06
+[3,] 8.126357e-05 7.080237e-05 6.912561e-05 6.796350e-05 5.727383e-05
+[4,] 1.419111e-02 1.418523e-02 1.410031e-02 1.396687e-02 1.393985e-02
+[5,] 1.417650e-02 1.417437e-02 1.408579e-02 1.394946e-02 1.392667e-02
+            [,42]        [,43]        [,44]        [,45]        [,46]
+[1,] 1.377814e-02 1.358578e-02 1.347421e-02 1.342574e-02 1.301992e-02
+[2,] 9.608180e-07 9.252694e-07 8.259778e-07 7.570050e-07 7.166997e-07
+[3,] 5.354245e-05 5.048864e-05 4.177383e-05 3.971696e-05 3.920806e-05
+[4,] 1.374624e-02 1.355680e-02 1.344205e-02 1.338643e-02 1.300459e-02
+[5,] 1.373384e-02 1.354562e-02 1.342949e-02 1.337115e-02 1.299858e-02
+            [,47]        [,48]        [,49]        [,50]
+[1,] 1.299665e-02 1.280616e-02 1.251906e-02 1.224713e-02
+[2,] 6.313182e-07 5.462646e-07 5.437970e-07 3.845528e-07
+[3,] 3.911581e-05 3.157494e-05 2.737840e-05 2.220833e-05
+[4,] 1.295656e-02 1.277775e-02 1.248648e-02 1.222380e-02
+[5,] 1.294101e-02 1.276677e-02 1.247387e-02 1.221483e-02</code></pre>
+<pre class="r"><code>beta &lt;- colSums(fit5$alpha * fit5$mu)
+hist(beta, breaks = 20)</code></pre>
+<p><img src="figure/ser_censoring_dat.Rmd/unnamed-chunk-22-1.png" width="672" style="display: block; margin: auto;" /></p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.1.1 (2021-08-10)
+Platform: x86_64-apple-darwin20.6.0 (64-bit)
+Running under: macOS Monterey 12.0.1
+
+Matrix products: default
+BLAS:   /usr/local/Cellar/openblas/0.3.18/lib/libopenblasp-r0.3.18.dylib
+LAPACK: /usr/local/Cellar/r/4.1.1_1/lib/R/lib/libRlapack.dylib
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+[1] logisticsusie_0.0.0.9004 testthat_3.1.0           survival_3.2-11         
+[4] workflowr_1.6.2         
+
+loaded via a namespace (and not attached):
+ [1] tidyselect_1.1.1   xfun_0.27          bslib_0.4.1        remotes_2.4.1     
+ [5] purrr_0.3.4        splines_4.1.1      lattice_0.20-44    generics_0.1.2    
+ [9] vctrs_0.3.8        usethis_2.1.3      htmltools_0.5.2    yaml_2.2.1        
+[13] utf8_1.2.2         rlang_1.0.6        pkgbuild_1.2.0     jquerylib_0.1.4   
+[17] later_1.3.0        pillar_1.6.4       glue_1.4.2         withr_2.5.0       
+[21] sessioninfo_1.1.1  matrixStats_0.63.0 lifecycle_1.0.1    stringr_1.4.0     
+[25] tictoc_1.1         devtools_2.4.2     evaluate_0.14      memoise_2.0.1     
+[29] knitr_1.36         callr_3.7.0        fastmap_1.1.0      httpuv_1.6.3      
+[33] ps_1.6.0           fansi_0.5.0        highr_0.9          Rcpp_1.0.8.3      
+[37] promises_1.2.0.1   cachem_1.0.6       desc_1.4.0         pkgload_1.2.3     
+[41] jsonlite_1.7.2     fs_1.5.0           digest_0.6.28      stringi_1.7.5     
+[45] dplyr_1.0.7        processx_3.5.2     rprojroot_2.0.2    grid_4.1.1        
+[49] cli_3.1.0          tools_4.1.1        magrittr_2.0.1     sass_0.4.4        
+[53] tibble_3.1.5       crayon_1.4.1       whisker_0.4        pkgconfig_2.0.3   
+[57] ellipsis_0.3.2     Matrix_1.5-3       prettyunits_1.1.1  rmarkdown_2.11    
+[61] rstudioapi_0.13    R6_2.5.1           git2r_0.28.0       compiler_4.1.1    </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
