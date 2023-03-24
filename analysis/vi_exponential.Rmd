@@ -1,0 +1,78 @@
+---
+title: "Variational inference on exponential survival model"
+author: "Yunqi Yang"
+date: "3/23/2023"
+output: html_document
+---
+
+## The model is:
+$$
+\begin{split}
+b&\sim N(0, \sigma^2)\\
+h(t)&=h_0(t)\exp\{bx\}\\
+\end{split}
+$$
+And we assume $h_0(t) =h_0$, constant baseline hazard and independent censoring. $y_i=\min(t_i,c_i)$, and $\delta_i$ indicates censoring status. $\delta_i=1$: the event time is observed and $\delta_i=0$ indicates censoring. 
+
+```{r}
+source("./code/VI_exponential.R")
+```
+
+
+### data simulation 
+```{r}
+
+set.seed(1)
+n = 5000
+s2 = 1 #prior variance of b
+h0 = 2
+b = rnorm(1, mean = 0, sd = s2)
+# Status variable delta. delta = 1, outcome observed. delta = 0, censored. 
+d = rbinom(n, size = 1, prob = 1)
+x = rnorm(n, 1)
+t = h0*exp(b*x)
+y = t
+# Rescale censored object to get Y. Y = min(C, T)
+y[d==0] = t[d == 0]*runif(sum(d == 0))
+```
+
+```{r}
+# change parameter init vals
+# the first param is m, the second is v2.
+lower = c(-10, 1e-3)
+upper = c(10, 10)
+res1 <- update_q(x, y, d, h0 = 2, m = 1, v2 = 1, s2 = 10, maxiter = 50, tol = 0.1, lower, upper)
+tail(res1)
+```
+
+```{r}
+# change parameter init vals
+lower = c(-50, 1e-3)
+upper = c(50, 50)
+res2 <- update_q(x, y, d, h0 = 2, m = 1, v2 = 1, s2 = 10, maxiter = 50, tol = 0.1, lower, upper)
+tail(res2)
+```
+
+```{r}
+# change parameter init vals
+lower = c(-50, 1)
+upper = c(50, 50)
+res3 <- update_q(x, y, d, h0 = 10, m = 1, v2 = 1, s2 = 50, maxiter = 50, tol = 0.1, lower, upper)
+tail(res3)
+```
+
+```{r}
+grid = seq(1e-4, 60, by = 0.01)
+res = rep(NA, length(grid))
+
+for (i in 1:length(grid)){
+  res[i] = partial_dv_v2(grid[i], x, y, s2 = 1, m = 0, h0 = 2)
+}
+```
+
+```{r}
+# all less than 0. 
+plot(grid, res, ylab = "value of partial derivative of v2")
+```
+
+
