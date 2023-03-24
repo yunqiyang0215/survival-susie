@@ -46,3 +46,7 @@ Try different methods on simulated data with censoring:
 + [bvsnlp](bvsnlp_censoring.html)
 
 + [bhglm](bhglm_censoring.html)
+
+Try variational approximation:
+
++ [Variational approximation on exponential survival model](vi_exponential.html)
