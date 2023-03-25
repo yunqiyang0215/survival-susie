@@ -15,25 +15,49 @@ $$
 And we assume $h_0(t) =h_0$, constant baseline hazard and independent censoring. $y_i=\min(t_i,c_i)$, and $\delta_i$ indicates censoring status. $\delta_i=1$: the event time is observed and $\delta_i=0$ indicates censoring. 
 
 ```{r}
+library(survival)
 source("./code/VI_exponential.R")
 ```
 
 
 ### data simulation 
+
+$$
+\begin{split}
+S(t)&=\exp\{-h(t)*t\}\\
+F(t)&=1-S(t)\sim U[0,1]\\
+\end{split}
+$$
+Using this relationship, we can simulate $t_i$ by:
+$$
+\begin{split}
+t_i=\log(1-u_i)/(-h_0\exp\{bx_i\})
+\end{split}
+$$
+
 ```{r}
 
 set.seed(1)
 n = 5000
+censoring_lvl = 0
 s2 = 1 #prior variance of b
 h0 = 2
 b = rnorm(1, mean = 0, sd = s2)
-# Status variable delta. delta = 1, outcome observed. delta = 0, censored. 
-d = rbinom(n, size = 1, prob = 1)
 x = rnorm(n, 1)
-t = h0*exp(b*x)
-y = t
-# Rescale censored object to get Y. Y = min(C, T)
-y[d==0] = t[d == 0]*runif(sum(d == 0))
+y <- log(1 - runif(n)) / (-h0*exp(x*b))
+# Status variable delta. delta = 1, outcome observed. delta = 0, censored. 
+d = rbinom(n, size = 1, prob = 1-censoring_lvl)
+y[!d] <- y[!d] * runif(sum(!d))	
+```
+
+```{r}
+print(b)
+```
+
+```{r}
+y.surv <- Surv(y, d)
+cox1 <- coxph(y.surv ~ x)
+summary(cox1)
 ```
 
 ```{r}
