@@ -20,7 +20,7 @@ source("./code/VI_exponential.R")
 ```
 
 
-### data simulation 
+## data simulation 
 
 $$
 \begin{split}
@@ -34,30 +34,36 @@ $$
 t_i=\log(1-u_i)/(-h_0\exp\{bx_i\})
 \end{split}
 $$
-
+1. Check if the data simulation makes sense
 ```{r}
-
 set.seed(1)
 n = 5000
 censoring_lvl = 0
 s2 = 1 #prior variance of b
 h0 = 2
 b = rnorm(1, mean = 0, sd = s2)
-x = rnorm(n, 1)
-y <- log(1 - runif(n)) / (-h0*exp(x*b))
-# Status variable delta. delta = 1, outcome observed. delta = 0, censored. 
-d = rbinom(n, size = 1, prob = 1-censoring_lvl)
-y[!d] <- y[!d] * runif(sum(!d))	
-```
-
-```{r}
 print(b)
 ```
+```{r}
+seeds  = c(1:100)
+bhat = rep(NA, 100)
+
+for (seed in seeds){
+  x = rnorm(n, 1)
+  y <- log(1 - runif(n)) / (-h0*exp(x*b))
+  # Status variable delta. delta = 1, outcome observed. delta = 0, censored. 
+  d = rbinom(n, size = 1, prob = 1-censoring_lvl)
+  y[!d] <- y[!d] * runif(sum(!d))	
+  y.surv <- Surv(y, d)
+  cox1 <- coxph(y.surv ~ x)
+  bhat[seed] = coef(cox1)[1]
+}
+
+```
 
 ```{r}
-y.surv <- Surv(y, d)
-cox1 <- coxph(y.surv ~ x)
-summary(cox1)
+hist(bhat)
+mean(bhat)
 ```
 
 ```{r}
