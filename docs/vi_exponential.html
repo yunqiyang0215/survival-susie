@@ -384,7 +384,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2023-03-25
+<strong>Last updated:</strong> 2023-03-27
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreea3b74ea1617cea307c81e614d795c32a8e5d3c69targetblanka3b74eaa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/a3b74ea1617cea307c81e614d795c32a8e5d3c69" target="_blank">a3b74ea</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreedaeebdbd09cf0b192bf663a90bd006a356575e78targetblankdaeebdba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/daeebdbd09cf0b192bf663a90bd006a356575e78" target="_blank">daeebdb</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreea3b74ea1617cea307c81e614d795c32a8e5d3c69targetblanka3b74eaa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreedaeebdbd09cf0b192bf663a90bd006a356575e78targetblankdaeebdba" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/a3b74ea1617cea307c81e614d795c32a8e5d3c69" target="_blank">a3b74ea</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/daeebdbd09cf0b192bf663a90bd006a356575e78" target="_blank">daeebdb</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -547,6 +547,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/daeebdbd09cf0b192bf663a90bd006a356575e78/analysis/vi_exponential.Rmd" target="_blank">daeebdb</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-03-27
+</td>
+<td>
+wflow_publish("analysis/vi_exponential.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/599ae7f589bde114ef4c1463aad1c6bed7218b4b/docs/vi_exponential.html" target="_blank">599ae7f</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-03-25
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -615,8 +649,9 @@ h(t)&amp;=h_0(t)\exp\{bx\}\\
 \]</span> And we assume <span class="math inline">\(h_0(t) =h_0\)</span>, constant baseline hazard and independent censoring. <span class="math inline">\(y_i=\min(t_i,c_i)\)</span>, and <span class="math inline">\(\delta_i\)</span> indicates censoring status. <span class="math inline">\(\delta_i=1\)</span>: the event time is observed and <span class="math inline">\(\delta_i=0\)</span> indicates censoring.</p>
 <pre class="r"><code>library(survival)
 source(&quot;./code/VI_exponential.R&quot;)</code></pre>
-<div id="data-simulation" class="section level3">
-<h3>data simulation</h3>
+</div>
+<div id="data-simulation" class="section level2">
+<h2>data simulation</h2>
 <p><span class="math display">\[
 \begin{split}
 S(t)&amp;=\exp\{-h(t)*t\}\\
@@ -626,77 +661,69 @@ F(t)&amp;=1-S(t)\sim U[0,1]\\
 \begin{split}
 t_i=\log(1-u_i)/(-h_0\exp\{bx_i\})
 \end{split}
-\]</span></p>
+\]</span> 1. Check if the data simulation makes sense</p>
 <pre class="r"><code>set.seed(1)
 n = 5000
 censoring_lvl = 0
 s2 = 1 #prior variance of b
 h0 = 2
 b = rnorm(1, mean = 0, sd = s2)
-x = rnorm(n, 1)
-y &lt;- log(1 - runif(n)) / (-h0*exp(x*b))
-# Status variable delta. delta = 1, outcome observed. delta = 0, censored. 
-d = rbinom(n, size = 1, prob = 1-censoring_lvl)
-y[!d] &lt;- y[!d] * runif(sum(!d)) </code></pre>
-<pre class="r"><code>print(b)</code></pre>
+print(b)</code></pre>
 <pre><code>[1] -0.6264538</code></pre>
-<pre class="r"><code>y.surv &lt;- Surv(y, d)
-cox1 &lt;- coxph(y.surv ~ x)
-summary(cox1)</code></pre>
-<pre><code>Call:
-coxph(formula = y.surv ~ x)
+<pre class="r"><code>seeds  = c(1:100)
+bhat = rep(NA, 100)
 
-  n= 5000, number of events= 5000 
-
-      coef exp(coef) se(coef)      z Pr(&gt;|z|)    
-x -0.61737   0.53936  0.01583 -38.99   &lt;2e-16 ***
----
-Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-
-  exp(coef) exp(-coef) lower .95 upper .95
-x    0.5394      1.854    0.5229    0.5564
-
-Concordance= 0.657  (se = 0.004 )
-Likelihood ratio test= 1537  on 1 df,   p=&lt;2e-16
-Wald test            = 1520  on 1 df,   p=&lt;2e-16
-Score (logrank) test = 1527  on 1 df,   p=&lt;2e-16</code></pre>
+for (seed in seeds){
+  x = rnorm(n, 1)
+  y &lt;- log(1 - runif(n)) / (-h0*exp(x*b))
+  # Status variable delta. delta = 1, outcome observed. delta = 0, censored. 
+  d = rbinom(n, size = 1, prob = 1-censoring_lvl)
+  y[!d] &lt;- y[!d] * runif(sum(!d))   
+  y.surv &lt;- Surv(y, d)
+  cox1 &lt;- coxph(y.surv ~ x)
+  bhat[seed] = coef(cox1)[1]
+}</code></pre>
+<pre class="r"><code>hist(bhat)</code></pre>
+<p><img src="figure/vi_exponential.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>mean(bhat)</code></pre>
+<pre><code>[1] -0.6271301</code></pre>
 <pre class="r"><code># change parameter init vals
 # the first param is m, the second is v2.
 lower = c(-10, 1e-3)
 upper = c(10, 10)
 res1 &lt;- update_q(x, y, d, h0 = 2, m = 1, v2 = 1, s2 = 10, maxiter = 50, tol = 0.1, lower, upper)
 tail(res1)</code></pre>
-<pre><code>          elbo       h0          m    v2        s2
-[45,] -4624.45 1.996201 -0.6175201 0.001 0.3823311
-[46,] -4624.45 1.996201 -0.6175201 0.001 0.3823311
-[47,] -4624.45 1.996201 -0.6175201 0.001 0.3823311
-[48,] -4624.45 1.996201 -0.6175201 0.001 0.3823311
-[49,] -4624.45 1.996201 -0.6175201 0.001 0.3823311
-[50,] -4624.45 1.996201 -0.6175201 0.001 0.3823311</code></pre>
+<pre><code>           elbo       h0          m    v2        s2
+[45,] -4559.926 2.034362 -0.6270516 0.001 0.3941936
+[46,] -4559.926 2.034362 -0.6270516 0.001 0.3941936
+[47,] -4559.926 2.034362 -0.6270516 0.001 0.3941936
+[48,] -4559.926 2.034362 -0.6270516 0.001 0.3941936
+[49,] -4559.926 2.034362 -0.6270516 0.001 0.3941936
+[50,] -4559.926 2.034362 -0.6270516 0.001 0.3941936</code></pre>
 <pre class="r"><code># change parameter init vals
 lower = c(-50, 1e-3)
 upper = c(50, 50)
 res2 &lt;- update_q(x, y, d, h0 = 2, m = 1, v2 = 1, s2 = 10, maxiter = 50, tol = 0.1, lower, upper)
 tail(res2)</code></pre>
-<pre><code>          elbo       h0          m    v2        s2
-[45,] -4624.45 1.996201 -0.6175201 0.001 0.3823311
-[46,] -4624.45 1.996201 -0.6175201 0.001 0.3823311
-[47,] -4624.45 1.996201 -0.6175201 0.001 0.3823311
-[48,] -4624.45 1.996201 -0.6175201 0.001 0.3823311
-[49,] -4624.45 1.996201 -0.6175201 0.001 0.3823311
-[50,] -4624.45 1.996201 -0.6175201 0.001 0.3823311</code></pre>
+<pre><code>           elbo       h0          m    v2        s2
+[45,] -4559.926 2.034362 -0.6270516 0.001 0.3941937
+[46,] -4559.926 2.034362 -0.6270516 0.001 0.3941937
+[47,] -4559.926 2.034362 -0.6270516 0.001 0.3941937
+[48,] -4559.926 2.034362 -0.6270516 0.001 0.3941937
+[49,] -4559.926 2.034362 -0.6270516 0.001 0.3941937
+[50,] -4559.926 2.034362 -0.6270516 0.001 0.3941937</code></pre>
 <pre class="r"><code># change parameter init vals
 lower = c(-50, 1)
 upper = c(50, 50)
 res3 &lt;- update_q(x, y, d, h0 = 10, m = 1, v2 = 1, s2 = 50, maxiter = 50, tol = 0.1, lower, upper)
 tail(res3)</code></pre>
-<pre><code>           elbo        h0         m v2       s2
-[45,] -12862.82 0.9974194 -1.575058  1 3.480809
-[46,] -12862.82 0.9974194 -1.575058  1 3.480809
-[47,] -12862.82 0.9974194 -1.575058  1 3.480809
-[48,] -12862.82 0.9974194 -1.575058  1 3.480809
-[49,] -12862.82 0.9974194 -1.575058  1 3.480809
-[50,] -12862.82 0.9974194 -1.575058  1 3.480809</code></pre>
+<pre><code>           elbo       h0         m v2       s2
+[45,] -12776.24 1.124916 -1.687747  1 3.848488
+[46,] -12776.24 1.124916 -1.687747  1 3.848488
+[47,] -12776.24 1.124916 -1.687747  1 3.848488
+[48,] -12776.24 1.124916 -1.687747  1 3.848488
+[49,] -12776.24 1.124916 -1.687747  1 3.848488
+[50,] -12776.24 1.124916 -1.687747  1 3.848488</code></pre>
 <pre class="r"><code>grid = seq(1e-4, 60, by = 0.01)
 res = rep(NA, length(grid))
 
@@ -706,6 +733,43 @@ for (i in 1:length(grid)){
 <pre class="r"><code># all less than 0. 
 plot(grid, res, ylab = &quot;value of partial derivative of v2&quot;)</code></pre>
 <p><img src="figure/vi_exponential.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-1">
+Past versions of unnamed-chunk-9-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-9-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/599ae7f589bde114ef4c1463aad1c6bed7218b4b/docs/figure/vi_exponential.Rmd/unnamed-chunk-9-1.png" target="_blank">599ae7f</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-03-25
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -744,7 +808,6 @@ loaded via a namespace (and not attached):
 [37] splines_4.1.1    promises_1.2.0.1 ellipsis_0.3.2   htmltools_0.5.2 
 [41] httpuv_1.6.3     utf8_1.2.2       stringi_1.7.5    cachem_1.0.6    
 [45] crayon_1.4.1    </code></pre>
-</div>
 </div>
 </div>
 
