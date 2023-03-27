@@ -5,7 +5,7 @@ date: "3/23/2023"
 output: html_document
 ---
 
-###  The model is:
+###  1. Model:
 $$
 \begin{split}
 b&\sim N(0, \sigma^2)\\
@@ -20,7 +20,7 @@ source("./code/VI_exponential.R")
 ```
 
 
-###  data simulation 
+###  2. data simulation 
 
 $$
 \begin{split}
@@ -34,7 +34,7 @@ $$
 t_i=\log(1-u_i)/(-h_0\exp\{bx_i\})
 \end{split}
 $$
-1. Check if the data simulation makes sense
+Check if the data simulation makes sense
 ```{r}
 set.seed(1)
 n = 5000
@@ -66,6 +66,7 @@ hist(bhat)
 mean(bhat)
 ```
 
+### 3. Run variational approximation
 ```{r}
 # change parameter init vals
 # the first param is m, the second is v2.
