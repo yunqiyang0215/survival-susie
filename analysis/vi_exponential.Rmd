@@ -5,7 +5,7 @@ date: "3/23/2023"
 output: html_document
 ---
 
-## The model is:
+###  The model is:
 $$
 \begin{split}
 b&\sim N(0, \sigma^2)\\
@@ -20,7 +20,7 @@ source("./code/VI_exponential.R")
 ```
 
 
-## data simulation 
+###  data simulation 
 
 $$
 \begin{split}
