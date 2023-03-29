@@ -71,10 +71,10 @@ abline(v = b, col = "blue")
 ```{r}
 # change parameter init vals
 # the first param is m, the second is v2.
-lower = c(-10, 1e-6)
-upper = c(10, 10)
-res1 <- update_q(x, y, d, h0 = 2, m = 1, v2 = 1, s2 = 10, maxiter = 50, tol = 0.1, lower, upper)
-tail(res1)
+lower = c(-100, 1e-10)
+upper = c(100, 30)
+res1 <- update_q(x, y, d, h0 = 2, m = 1, v2 = 1, s2 = 1, maxiter = 10, tol = 0.1, lower, upper)
+res1
 ```
 
 ```{r}
@@ -87,34 +87,12 @@ tail(res2)
 
 ```{r}
 # change parameter init vals
-lower = c(-50, 1)
+lower = c(-50, 1e-8)
 upper = c(50, 50)
-res3 <- update_q(x, y, d, h0 = 10, m = 1, v2 = 1, s2 = 50, maxiter = 50, tol = 0.1, lower, upper)
-tail(res3)
-```
-
-```{r}
-# change parameter init vals
-lower = c(-50, 1e-10)
-upper = c(50, 50)
-res4 <- update_q(x[1:50], y[1:50], d, h0 = 10, m = 1, v2 = 1, s2 = 50, maxiter = 50, tol = 0.1, lower, upper)
+res4 <- update_q(x[1:5], y[1:5], d[1:5], h0 = 10, m = 1, v2 = 1, s2 = 50, maxiter = 50, tol = 0.1, lower, upper)
+head(res4)
 tail(res4)
 ```
 
-```{r}
-grid = seq(1e-7, 5, by = 0.001)
-res = rep(NA, length(grid))
 
-for (i in 1:length(grid)){
-  res[i] = partial_dv_v2(grid[i], x[1:100], y[1:100], s2 = 1, m = 0, h0 = 1)
-}
-```
-
-```{r}
-plot(grid, res, ylab = "value of partial derivative of v2")
-```
-
-```{r}
-res[1:10]
-```
 
