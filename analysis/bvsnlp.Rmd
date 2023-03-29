@@ -40,7 +40,7 @@ bvs(
   r = 1,
   tau = 0.25,
   niter = 30,
-  mod_prior = c("unif", "beta"),
+  mod_prior = c("unif", "beta"), # For beta: a = 1, b = p − a
   inseed = NULL,
   cplng = FALSE, # This parameter is only used in logistic regression models
   ncpu = 4,
@@ -61,7 +61,7 @@ y = dat[[1]]$y
 ```
 
 ```{r}
-fit1 = bvs(X, resp = y, prep = FALSE, family = "survival", mod_prior = "unif", niter = 100)
+fit1 = bvs(X, resp = y, prep = FALSE, family = "survival", mod_prior = "beta", niter = 100)
 ```
 
 ```{r}
@@ -83,7 +83,7 @@ y = dat[[2]]$y
 ```
 
 ```{r}
-fit2 = bvs(X, resp = y, prep = FALSE, family = "survival", mod_prior = "unif", niter = 100)
+fit2 = bvs(X, resp = y, prep = FALSE, family = "survival", mod_prior = "beta", niter = 100)
 ```
 
 ```{r}
@@ -103,7 +103,7 @@ y = dat[[3]]$y
 ```
 
 ```{r}
-fit3 = bvs(X, resp = y, prep = FALSE, family = "survival", mod_prior = "unif", niter = 100)
+fit3 = bvs(X, resp = y, prep = FALSE, family = "survival", mod_prior = "beta", niter = 100)
 ```
 
 ```{r}
@@ -124,7 +124,7 @@ y = dat[[4]]$y
 ```
 
 ```{r}
-fit4 = bvs(X, resp = y, prep = FALSE, family = "survival", mod_prior = "unif", niter = 100)
+fit4 = bvs(X, resp = y, prep = FALSE, family = "survival", mod_prior = "beta", niter = 100)
 ```
 
 ```{r}
@@ -146,7 +146,7 @@ y = dat[[5]]$y
 ```
 
 ```{r}
-fit5 = bvs(X, resp = y, prep = FALSE, family = "survival", mod_prior = "unif", niter = 100)
+fit5 = bvs(X, resp = y, prep = FALSE, family = "survival", mod_prior = "beta", niter = 100)
 ```
 
 ```{r}
