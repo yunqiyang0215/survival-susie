@@ -65,10 +65,18 @@ delta = rep(1, length(dat[[1]]$status))
 
 ```{r}
 f <- survival.svb::svb.fit(y, delta, X)
+f$inclusion_prob
+# effect size
+f$beta_hat
+```
+```{r}
 sort(f$inclusion_prob, decreasing = TRUE)
 ```
 
+
 ### Data 2: simulated from null model with highly correlated X. corr = 0.9
+
+Wrongly selected two effects of different signs, cancelled out...
 ```{r}
 # In survival.svb, 0: censored & 1: uncensored
 p = 50
@@ -79,6 +87,11 @@ delta = rep(1, length(dat[[2]]$status))
 
 ```{r}
 f <- survival.svb::svb.fit(y, delta, X)
+f$inclusion_prob
+# effect size
+f$beta_hat
+```
+```{r}
 sort(f$inclusion_prob, decreasing = TRUE)
 ```
 
