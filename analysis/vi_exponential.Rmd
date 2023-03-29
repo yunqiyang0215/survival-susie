@@ -111,8 +111,10 @@ for (i in 1:length(grid)){
 ```
 
 ```{r}
-# all less than 0. 
 plot(grid, res, ylab = "value of partial derivative of v2")
 ```
 
+```{r}
+res[1:10]
+```
 
