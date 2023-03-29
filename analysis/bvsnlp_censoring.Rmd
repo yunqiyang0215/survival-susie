@@ -62,7 +62,7 @@ y = dat[[1]]$y
 
 ```{r}
 # prep: standardizing non-binary columns and adding intercept
-fit1 = bvs(X, resp = y, prep = TRUE, family = "survival", mod_prior = "unif", niter = 100)
+fit1 = bvs(X, resp = y, prep = TRUE, family = "survival", mod_prior = "beta", niter = 100)
 ```
 
 ```{r}
@@ -85,7 +85,7 @@ y = dat[[2]]$y
 ```
 
 ```{r}
-fit2 = bvs(X, resp = y, prep = TRUE, family = "survival", mod_prior = "unif", niter = 100)
+fit2 = bvs(X, resp = y, prep = TRUE, family = "survival", mod_prior = "beta", niter = 100)
 ```
 
 ```{r}
@@ -105,7 +105,7 @@ y = dat[[3]]$y
 ```
 
 ```{r}
-fit3 = bvs(X, resp = y, prep = TRUE, family = "survival", mod_prior = "unif", niter = 100)
+fit3 = bvs(X, resp = y, prep = TRUE, family = "survival", mod_prior = "beta", niter = 100)
 ```
 
 ```{r}
@@ -126,7 +126,7 @@ y = dat[[4]]$y
 ```
 
 ```{r}
-fit4 = bvs(X, resp = y, prep = TRUE, family = "survival", mod_prior = "unif", niter = 100)
+fit4 = bvs(X, resp = y, prep = TRUE, family = "survival", mod_prior = "beta", niter = 100)
 ```
 
 ```{r}
@@ -148,7 +148,7 @@ y = dat[[5]]$y
 ```
 
 ```{r}
-fit5 = bvs(X, resp = y, prep = TRUE, family = "survival", mod_prior = "unif", niter = 100)
+fit5 = bvs(X, resp = y, prep = TRUE, family = "survival", mod_prior = "beta", niter = 100)
 ```
 
 ```{r}
