@@ -384,7 +384,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2023-03-27
+<strong>Last updated:</strong> 2023-03-28
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree1f4f29fba736b31666debb3ea01d0fa787b20bfctargetblank1f4f29fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/1f4f29fba736b31666debb3ea01d0fa787b20bfc" target="_blank">1f4f29f</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreec48008fcfd7d2c90434f3ece06c7bbdfb456f10ftargetblankc48008fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/c48008fcfd7d2c90434f3ece06c7bbdfb456f10f" target="_blank">c48008f</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree1f4f29fba736b31666debb3ea01d0fa787b20bfctargetblank1f4f29fa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreec48008fcfd7d2c90434f3ece06c7bbdfb456f10ftargetblankc48008fa" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/1f4f29fba736b31666debb3ea01d0fa787b20bfc" target="_blank">1f4f29f</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/c48008fcfd7d2c90434f3ece06c7bbdfb456f10f" target="_blank">c48008f</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -547,6 +547,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/c48008fcfd7d2c90434f3ece06c7bbdfb456f10f/analysis/vi_exponential.Rmd" target="_blank">c48008f</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-03-28
+</td>
+<td>
+wflow_publish("analysis/vi_exponential.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/bd953f3689230de7294a00e901132eb22bbbb18b/docs/vi_exponential.html" target="_blank">bd953f3</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-03-27
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -785,7 +819,9 @@ for (seed in seeds){
   cox1 &lt;- coxph(y.surv ~ x)
   bhat[seed] = coef(cox1)[1]
 }</code></pre>
-<pre class="r"><code>hist(bhat)</code></pre>
+<pre class="r"><code>hist(bhat)
+abline(v = mean(bhat), col = &quot;red&quot;)
+abline(v = b, col = &quot;blue&quot;)</code></pre>
 <p><img src="figure/vi_exponential.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
@@ -824,8 +860,6 @@ yunqiyang0215
 </table>
 </div>
 </div>
-<pre class="r"><code>mean(bhat)</code></pre>
-<pre><code>[1] -0.6271301</code></pre>
 </div>
 <div id="run-variational-approximation" class="section level3">
 <h3>3. Run variational approximation</h3>
@@ -866,63 +900,27 @@ tail(res3)</code></pre>
 [48,] -12776.24 1.124916 -1.687747  1 3.848488
 [49,] -12776.24 1.124916 -1.687747  1 3.848488
 [50,] -12776.24 1.124916 -1.687747  1 3.848488</code></pre>
-<pre class="r"><code>grid = seq(1e-4, 60, by = 0.01)
+<pre class="r"><code># change parameter init vals
+lower = c(-50, 1e-10)
+upper = c(50, 50)
+res4 &lt;- update_q(x[1:50], y[1:50], d, h0 = 10, m = 1, v2 = 1, s2 = 50, maxiter = 50, tol = 0.1, lower, upper)
+tail(res4)</code></pre>
+<pre><code>           elbo       h0         m    v2       s2
+[45,] -478714.8 562.3696 -2.115074 1e-10 4.473538
+[46,] -478714.8 562.3696 -2.115074 1e-10 4.473538
+[47,] -478714.8 562.3696 -2.115074 1e-10 4.473538
+[48,] -478714.8 562.3696 -2.115074 1e-10 4.473538
+[49,] -478714.8 562.3696 -2.115074 1e-10 4.473538
+[50,] -478714.8 562.3696 -2.115074 1e-10 4.473538</code></pre>
+<pre class="r"><code>grid = seq(1e-7, 5, by = 0.001)
 res = rep(NA, length(grid))
 
 for (i in 1:length(grid)){
-  res[i] = partial_dv_v2(grid[i], x, y, s2 = 1, m = 0, h0 = 2)
+  res[i] = partial_dv_v2(grid[i], x[1:100], y[1:100], s2 = 1, m = 0, h0 = 1)
 }</code></pre>
 <pre class="r"><code># all less than 0. 
 plot(grid, res, ylab = &quot;value of partial derivative of v2&quot;)</code></pre>
-<p><img src="figure/vi_exponential.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-1">
-Past versions of unnamed-chunk-9-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-9-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/yunqiyang0215/survival-susie/blob/bcdf196bc0f949b1805640293dd70f1b75a45616/docs/figure/vi_exponential.Rmd/unnamed-chunk-9-1.png" target="_blank">bcdf196</a>
-</td>
-<td>
-yunqiyang0215
-</td>
-<td>
-2023-03-27
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/yunqiyang0215/survival-susie/blob/599ae7f589bde114ef4c1463aad1c6bed7218b4b/docs/figure/vi_exponential.Rmd/unnamed-chunk-9-1.png" target="_blank">599ae7f</a>
-</td>
-<td>
-yunqiyang0215
-</td>
-<td>
-2023-03-25
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/vi_exponential.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
