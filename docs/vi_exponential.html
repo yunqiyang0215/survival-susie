@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree6c36c1ed98df97156cee413ac31bd1e58e9e9ef3targetblank6c36c1ea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/6c36c1ed98df97156cee413ac31bd1e58e9e9ef3" target="_blank">6c36c1e</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree5fdca5398e5caa455be0d4ef6ff8e0c9054d0005targetblank5fdca53a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/5fdca5398e5caa455be0d4ef6ff8e0c9054d0005" target="_blank">5fdca53</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree6c36c1ed98df97156cee413ac31bd1e58e9e9ef3targetblank6c36c1ea" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree5fdca5398e5caa455be0d4ef6ff8e0c9054d0005targetblank5fdca53a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/6c36c1ed98df97156cee413ac31bd1e58e9e9ef3" target="_blank">6c36c1e</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/5fdca5398e5caa455be0d4ef6ff8e0c9054d0005" target="_blank">5fdca53</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -548,6 +548,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/5fdca5398e5caa455be0d4ef6ff8e0c9054d0005/analysis/vi_exponential.Rmd" target="_blank">5fdca53</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-03-28
+</td>
+<td>
+wflow_publish("analysis/vi_exponential.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/eb4daeb56ecd30ddbb23fa7f8cbdf2638d4e225c/docs/vi_exponential.html" target="_blank">eb4daeb</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-03-28
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1014,7 +1048,7 @@ yunqiyang0215
 <pre class="r"><code># change parameter init vals
 # the first param is m, the second is v2.
 lower = c(-100, 1e-10)
-upper = c(100, 30)
+upper = c(100, 100)
 res1 &lt;- update_q(x, y, d, h0 = 2, m = 1, v2 = 1, s2 = 1, maxiter = 100, tol = 0.1, lower, upper)
 head(res1)</code></pre>
 <pre><code>          elbo       h0          m           v2        s2
@@ -1033,25 +1067,25 @@ head(res1)</code></pre>
  [99,] -4558.54 2.03438 -0.6267426 0.0006810812 0.3934873
 [100,] -4558.54 2.03438 -0.6267426 0.0006810812 0.3934873</code></pre>
 <pre class="r"><code># change parameter init vals
-lower = c(-50, 1e-8)
-upper = c(50, 50)
+lower = c(-100, 1e-8)
+upper = c(100, 100)
 res2 &lt;- update_q(x[1:5], y[1:5], d[1:5], h0 = 10, m = 1, v2 = 1, s2 = 50, maxiter = 50, tol = 0.1, lower, upper)
 head(res2)</code></pre>
 <pre><code>          elbo        h0         m        v2       s2
-[1,] -2.909458 10.196319 -1.940608 0.2009400 3.966898
-[2,] -2.881298  9.653295 -1.855897 0.1736970 3.618050
-[3,] -2.869543  9.268710 -1.805537 0.1713412 3.431307
-[4,] -2.863381  8.997788 -1.769622 0.1699348 3.301496
-[5,] -2.860052  8.802892 -1.743429 0.1688901 3.208436
-[6,] -2.858216  8.660436 -1.724083 0.1681051 3.140567</code></pre>
+[1,] -2.909458 10.196335 -1.940609 0.2009392 3.966904
+[2,] -2.881298  9.653309 -1.855898 0.1736959 3.618053
+[3,] -2.869544  9.268721 -1.805539 0.1713413 3.431312
+[4,] -2.863381  8.997809 -1.769624 0.1699347 3.301505
+[5,] -2.860053  8.802913 -1.743433 0.1688906 3.208448
+[6,] -2.858216  8.660452 -1.724085 0.1681052 3.140574</code></pre>
 <pre class="r"><code>tail(res2)</code></pre>
 <pre><code>           elbo       h0         m       v2       s2
-[45,] -2.855817 8.231776 -1.664757 0.165626 2.937041
-[46,] -2.855817 8.231773 -1.664756 0.165626 2.937040
-[47,] -2.855817 8.231771 -1.664756 0.165626 2.937039
-[48,] -2.855817 8.231769 -1.664756 0.165626 2.937038
-[49,] -2.855817 8.231768 -1.664756 0.165626 2.937038
-[50,] -2.855817 8.231767 -1.664756 0.165626 2.937037</code></pre>
+[45,] -2.855817 8.231792 -1.664758 0.165625 2.937046
+[46,] -2.855817 8.231789 -1.664758 0.165625 2.937044
+[47,] -2.855817 8.231787 -1.664758 0.165625 2.937043
+[48,] -2.855817 8.231786 -1.664758 0.165625 2.937043
+[49,] -2.855817 8.231784 -1.664757 0.165625 2.937042
+[50,] -2.855817 8.231783 -1.664757 0.165625 2.937042</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
