@@ -37,7 +37,7 @@ $$
 Check if the data simulation makes sense
 ```{r}
 set.seed(1)
-n = 5000
+n = 1e4
 censoring_lvl = 0
 s2 = 1 #prior variance of b
 h0 = 2
@@ -71,7 +71,7 @@ abline(v = b, col = "blue")
 ```{r}
 # change parameter init vals
 # the first param is m, the second is v2.
-lower = c(-100, 1e-10)
+lower = c(-100, 1e-12)
 upper = c(100, 100)
 res1 <- update_q(x, y, d, h0 = 2, m = 1, v2 = 1, s2 = 1, maxiter = 100, tol = 0.1, lower, upper)
 head(res1)
@@ -82,7 +82,7 @@ tail(res1)
 # change parameter init vals
 lower = c(-100, 1e-8)
 upper = c(100, 100)
-res2 <- update_q(x[1:5], y[1:5], d[1:5], h0 = 10, m = 1, v2 = 1, s2 = 50, maxiter = 50, tol = 0.1, lower, upper)
+res2 <- update_q(x[1:20], y[1:20], d[1:20], h0 = 10, m = 1, v2 = 1, s2 = 50, maxiter = 50, tol = 0.1, lower, upper)
 head(res2)
 tail(res2)
 ```
