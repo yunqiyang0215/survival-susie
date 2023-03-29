@@ -73,8 +73,9 @@ abline(v = b, col = "blue")
 # the first param is m, the second is v2.
 lower = c(-100, 1e-10)
 upper = c(100, 30)
-res1 <- update_q(x, y, d, h0 = 2, m = 1, v2 = 1, s2 = 1, maxiter = 10, tol = 0.1, lower, upper)
-res1
+res1 <- update_q(x, y, d, h0 = 2, m = 1, v2 = 1, s2 = 1, maxiter = 100, tol = 0.1, lower, upper)
+head(res1)
+tail(res1)
 ```
 
 ```{r}
