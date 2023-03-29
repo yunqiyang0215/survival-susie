@@ -80,19 +80,11 @@ tail(res1)
 
 ```{r}
 # change parameter init vals
-lower = c(-50, 1e-3)
-upper = c(50, 50)
-res2 <- update_q(x, y, d, h0 = 2, m = 1, v2 = 1, s2 = 10, maxiter = 50, tol = 0.1, lower, upper)
-tail(res2)
-```
-
-```{r}
-# change parameter init vals
 lower = c(-50, 1e-8)
 upper = c(50, 50)
-res4 <- update_q(x[1:5], y[1:5], d[1:5], h0 = 10, m = 1, v2 = 1, s2 = 50, maxiter = 50, tol = 0.1, lower, upper)
-head(res4)
-tail(res4)
+res2 <- update_q(x[1:5], y[1:5], d[1:5], h0 = 10, m = 1, v2 = 1, s2 = 50, maxiter = 50, tol = 0.1, lower, upper)
+head(res2)
+tail(res2)
 ```
 
 
