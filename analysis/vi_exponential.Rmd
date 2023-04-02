@@ -80,7 +80,7 @@ tail(res1)
 
 ```{r}
 # change parameter init vals
-lower = c(-100, 1e-8)
+lower = c(-100, 1e-12)
 upper = c(100, 100)
 res2 <- update_q(x[1:20], y[1:20], d[1:20], h0 = 10, m = 1, v2 = 1, s2 = 50, maxiter = 50, tol = 0.1, lower, upper)
 head(res2)
