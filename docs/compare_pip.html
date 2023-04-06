@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree9c2e674475142d1325c7f4e228f2bd834d008f99targetblank9c2e674a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/9c2e674475142d1325c7f4e228f2bd834d008f99" target="_blank">9c2e674</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree236fff42eea581466359fcb8650e6728aacf8c06targetblank236fff4a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/236fff42eea581466359fcb8650e6728aacf8c06" target="_blank">236fff4</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree9c2e674475142d1325c7f4e228f2bd834d008f99targetblank9c2e674a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree236fff42eea581466359fcb8650e6728aacf8c06targetblank236fff4a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/9c2e674475142d1325c7f4e228f2bd834d008f99" target="_blank">9c2e674</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/236fff42eea581466359fcb8650e6728aacf8c06" target="_blank">236fff4</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -552,6 +552,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/236fff42eea581466359fcb8650e6728aacf8c06/analysis/compare_pip.Rmd" target="_blank">236fff4</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-04-06
+</td>
+<td>
+wflow_publish("analysis/compare_pip.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/60fa9df64c40c4d0f8f63a4725de6551cd50ef35/docs/compare_pip.html" target="_blank">60fa9df</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-04-06
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/9c2e674475142d1325c7f4e228f2bd834d008f99/analysis/compare_pip.Rmd" target="_blank">9c2e674</a>
 </td>
 <td>
@@ -590,6 +624,13 @@ wflow_publish("analysis/compare_pip.Rmd")
 <li><p>Set L = true number of effects.</p></li>
 <li><p>Set prior variance to the true prior variance.</p></li>
 </ol>
+</div>
+<div id="conclusion" class="section level4">
+<h4><strong>Conclusion</strong>:</h4>
+<ol style="list-style-type: decimal">
+<li><p>When using the real correlation matrix, susie result is very different from survival.svb. And survival.svb seems to have better results, as capturing more effects.</p></li>
+<li><p>In other scenarios, results are more consistent across methods.</p></li>
+</ol>
 <pre class="r"><code>compare_pip &lt;- function(pip1, pip2, effect_indx, dat_indx, p){
   is_effect = c()
   for (i in dat_indx){
@@ -603,26 +644,17 @@ wflow_publish("analysis/compare_pip.Rmd")
 <pre class="r"><code>plot_pip &lt;- function(res.pip, labs, main){
   pch = ifelse(res.pip$is_effect == 1, 16, 1)
   cex = ifelse(res.pip$is_effect == 1, 1, 0.5)
-  col = ifelse(res.pip$is_effect == 1, 2, 1)
+  col = ifelse(res.pip$is_effect == 1, &quot;red&quot;, &quot;grey&quot;)
   plot(res.pip$pip1, res.pip$pip2, col = col, pch = pch, cex = cex, 
        xlab = labs[1], ylab = labs[2], main = main)
 }</code></pre>
 <pre class="r"><code>susie = readRDS(&quot;./data/susie.rds&quot;)
 survsvb = readRDS(&quot;./data/survsvb.rds&quot;)
 bvsnlp = readRDS(&quot;./data/bvsnlp.rds&quot;)</code></pre>
-<pre class="r"><code>names(susie)</code></pre>
-<pre><code>[1] &quot;DSC&quot;                   &quot;simulate.cor_type&quot;     &quot;simulate.num_effect&quot;  
-[4] &quot;simulate.effect_indx&quot;  &quot;simulate.effect_size&quot;  &quot;susie.effect_estimate&quot;
-[7] &quot;susie.pip&quot;            </code></pre>
-<pre class="r"><code>names(survsvb)</code></pre>
-<pre><code>[1] &quot;DSC&quot;                         &quot;simulate.cor_type&quot;          
-[3] &quot;simulate.num_effect&quot;         &quot;simulate.effect_indx&quot;       
-[5] &quot;simulate.effect_size&quot;        &quot;survivalsvb.effect_estimate&quot;
-[7] &quot;survivalsvb.pip&quot;            </code></pre>
-<pre class="r"><code>names(bvsnlp)</code></pre>
-<pre><code>[1] &quot;DSC&quot;                    &quot;simulate.cor_type&quot;      &quot;simulate.num_effect&quot;   
-[4] &quot;simulate.effect_indx&quot;   &quot;simulate.effect_size&quot;   &quot;bvsnlp.effect_estimate&quot;
-[7] &quot;bvsnlp.pip&quot;            </code></pre>
+</div>
+</div>
+<div id="use-the-real-correlation-of-snps" class="section level3">
+<h3>1. Use the real correlation of SNPs</h3>
 <pre class="r"><code>par(mfrow = c(1,3))
 for (num in 1:3){
   indx = which(susie$simulate.cor_type == &quot;real&quot; &amp; susie$simulate.num_effect == num)[1:50]
@@ -632,7 +664,7 @@ for (num in 1:3){
   res.pip = compare_pip(pip.susie, pip.survsvb, susie$simulate.effect_indx, dat_indx = indx, p =1e3)
   plot_pip(res.pip, labs = c(&quot;susie&quot;, &quot;survival.svb&quot;), main = paste0(num, &quot; effect, max corr=0.9-0.99&quot;))
 }</code></pre>
-<p><img src="figure/compare_pip.Rmd/unnamed-chunk-5-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/compare_pip.Rmd/unnamed-chunk-4-1.png" width="864" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>par(mfrow = c(1,3))
 for (num in 1:3){
   indx = which(susie$simulate.cor_type == &quot;real&quot; &amp; susie$simulate.num_effect == num)[1:50]
@@ -643,7 +675,47 @@ for (num in 1:3){
   plot_pip(res.pip, labs = c(&quot;susie&quot;, &quot;bvsnlp&quot;), main = paste0(num, &quot; effect, max corr=0.9-0.99&quot;))
   abline(a = 0, b = 1, lty = 2, col = &quot;blue&quot;)
 }</code></pre>
-<p><img src="figure/compare_pip.Rmd/unnamed-chunk-6-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/compare_pip.Rmd/unnamed-chunk-5-1.png" width="864" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
+Past versions of unnamed-chunk-5-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/60fa9df64c40c4d0f8f63a4725de6551cd50ef35/docs/figure/compare_pip.Rmd/unnamed-chunk-5-1.png" target="_blank">60fa9df</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-04-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="near-independent-snps" class="section level3">
+<h3>2. Near independent SNPs</h3>
 <pre class="r"><code>par(mfrow = c(1,3))
 for (num in 1:3){
   indx = which(susie$simulate.cor_type == &quot;independent&quot; &amp; susie$simulate.num_effect == num)[1:50]
@@ -654,7 +726,44 @@ for (num in 1:3){
   plot_pip(res.pip, labs = c(&quot;susie&quot;, &quot;survival.svb&quot;), main = paste0(num, &quot; effect, X close to independent&quot;))
   abline(a = 0, b = 1, lty = 2, col = &quot;blue&quot;)
 }</code></pre>
-<p><img src="figure/compare_pip.Rmd/unnamed-chunk-7-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/compare_pip.Rmd/unnamed-chunk-6-1.png" width="864" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
+Past versions of unnamed-chunk-6-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/60fa9df64c40c4d0f8f63a4725de6551cd50ef35/docs/figure/compare_pip.Rmd/unnamed-chunk-6-1.png" target="_blank">60fa9df</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-04-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>par(mfrow = c(1,3))
 for (num in 1:3){
   indx = which(susie$simulate.cor_type == &quot;independent&quot; &amp; susie$simulate.num_effect == num)[1:50]
@@ -665,7 +774,44 @@ for (num in 1:3){
   plot_pip(res.pip, labs = c(&quot;susie&quot;, &quot;bvsnlp&quot;), main = paste0(num, &quot; effect, X close to independent&quot;))
   abline(a = 0, b = 1, lty = 2, col = &quot;blue&quot;)
 }</code></pre>
-<p><img src="figure/compare_pip.Rmd/unnamed-chunk-8-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p><img src="figure/compare_pip.Rmd/unnamed-chunk-7-1.png" width="864" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-1">
+Past versions of unnamed-chunk-7-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/60fa9df64c40c4d0f8f63a4725de6551cd50ef35/docs/figure/compare_pip.Rmd/unnamed-chunk-7-1.png" target="_blank">60fa9df</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-04-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -703,7 +849,6 @@ loaded via a namespace (and not attached):
 [33] whisker_0.4      promises_1.2.0.1 ellipsis_0.3.2   htmltools_0.5.2 
 [37] httpuv_1.6.3     utf8_1.2.2       stringi_1.7.5    cachem_1.0.6    
 [41] crayon_1.4.1    </code></pre>
-</div>
 </div>
 </div>
 
