@@ -50,3 +50,9 @@ Try different methods on simulated data with censoring:
 Try variational approximation:
 
 + [Variational approximation on exponential survival model](vi_exponential.html)
+
+Real data simulation:
+
++ [Plot PIPs](compare_pip.html)
+
++ [Power vs. FDR](compare_power_fdr.html)
