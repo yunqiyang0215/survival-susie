@@ -11,7 +11,11 @@ Compare the power vs. FDR across 3 methods. I vary the threshold for claiming ef
 
 **Conclustion**:
 
-1. 
+1. When X are highly correlated, susie performs best. And survival svb has very high FDR.
+
+2. When X are close to independent, susie is slightly worse than the other two methods. 
+
+
 ```{r}
 calculate_tpr_vs_fdr <- function(pip, is_effect, ts){
   res <- matrix(NA, nrow = length(ts), ncol = 2)
