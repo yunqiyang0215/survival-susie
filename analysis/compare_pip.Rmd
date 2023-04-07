@@ -29,6 +29,13 @@ Simulation results based on real genotype data from GTEx. I took the SNPs for a 
 2. Set prior variance to the true prior variance. 
 
 
+#### Method comparison:
+
+1. survival.svb:https://doi.org/10.1093/bioinformatics/btac416
+
+2. bvsnlp: https://yunqiyang0215.github.io/survival-susie/bvsnlp.html
+
+
 #### **Conclusion**:
 
 1. When using the real correlation matrix, susie result is very different from survival.svb. And survival.svb seems to have better results, as capturing more effects. 
