@@ -5,6 +5,10 @@ date: "4/10/2023"
 output: html_document
 ---
 
+### Description:
+
+An example data where susie doesn't perform well. The true number of effect here is 1. When L=1, the result looks good. When setting L=5, the result looks weird. 
+
 
 ```{r knitr, echo=FALSE}
 knitr::opts_chunk$set(comment = "#",results = "hold",collapse = TRUE,
@@ -14,9 +18,6 @@ knitr::opts_chunk$set(comment = "#",results = "hold",collapse = TRUE,
 
 ```{r}
 res = readRDS("./data/simulate_380.rds")
-```
-
-```{r}
 res$effect_size
 res$effect_indx
 ```
@@ -35,19 +36,31 @@ source("./code/surv_susie_helper.R")
 devtools::load_all("/Users/nicholeyang/Desktop/logisticsusie/R")
 ```
 
-### Run susie
-```{r}
-#### parameter settings
-L = 1
-p = ncol(res$dat$X)
-maxiter = 1e3
-```
-
 ```{r}
 ## Create  survival object
 y <- Surv(res$dat$y[,1], res$dat$y[,2])
 X = as.matrix(res$dat$X)
+```
 
+### Check if any coefficient tends to infinite
+```{r}
+p = 1e3
+res.cox = matrix(NA, nrow = p, ncol = 2)
+colnames(res.cox) = c("coef", "se")
+res.cox = data.frame(res.cox)
+
+for (i in 1:p){
+  fit <- coxph(y~ X[,i])
+  res.cox[i, ] = summary(fit)$coef[, c(1,3)]
+}
+range(res.cox$coef)
+```
+
+
+### Run susie with L=1
+```{r}
+
+maxiter = 1e3
 fit_coxph <- ser_from_univariate(surv_uni_fun)
 fit <- ibss_from_ser(X, y, L = 1, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = maxiter, estimate_intercept = TRUE, ser_function = fit_coxph)
 
@@ -57,18 +70,8 @@ sort(pip, decreasing = TRUE)[1:5]
 pip[1:5]
 ```
 
-### Check if any coefficient tends to infinite
-```{r}
-res.cox = matrix(NA, nrow = p, ncol = 2)
-colnames(res.cox) = c("coef", "se")
-res.cox = data.frame(res.cox)
-for (i in 1:p){
-  fit <- coxph(y~ X[,i])
-  res.cox[i, ] = summary(fit)$coef[, c(1,3)]
-}
-range(res.cox$coef)
-```
 
+### Run susie with L=5
 ```{r}
 fit_coxph <- ser_from_univariate(surv_uni_fun)
 fit <- ibss_from_ser(X, y, L = 5, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = maxiter, estimate_intercept = TRUE, ser_function = fit_coxph)
