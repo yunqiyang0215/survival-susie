@@ -56,3 +56,5 @@ Real data simulation:
 + [Plot PIPs](compare_pip.html)
 
 + [Power vs. FDR](compare_power_fdr.html)
+
++ [Data example: susie with poor performance](susie_poor_performance_example.html)
