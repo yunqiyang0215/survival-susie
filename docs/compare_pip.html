@@ -384,7 +384,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2023-04-07
+<strong>Last updated:</strong> 2023-04-10
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreed7669c3a0070fa665938da47e1900c5023a8c192targetblankd7669c3a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/d7669c3a0070fa665938da47e1900c5023a8c192" target="_blank">d7669c3</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree29216821a868889d4a9f27fca352bab6f1646679targetblank2921682a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/29216821a868889d4a9f27fca352bab6f1646679" target="_blank">2921682</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreed7669c3a0070fa665938da47e1900c5023a8c192targetblankd7669c3a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree29216821a868889d4a9f27fca352bab6f1646679targetblank2921682a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/d7669c3a0070fa665938da47e1900c5023a8c192" target="_blank">d7669c3</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/29216821a868889d4a9f27fca352bab6f1646679" target="_blank">2921682</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -547,6 +547,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/29216821a868889d4a9f27fca352bab6f1646679/analysis/compare_pip.Rmd" target="_blank">2921682</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-04-10
+</td>
+<td>
+wflow_publish("analysis/compare_pip.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/8bd4a22c7ba7390261a46630a1055732467b6b5b/docs/compare_pip.html" target="_blank">8bd4a22</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-04-07
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -728,6 +762,17 @@ survsvb = readRDS(&quot;./data/survsvb.rds&quot;)
 bvsnlp = readRDS(&quot;./data/bvsnlp.rds&quot;)</code></pre>
 </div>
 </div>
+<div id="check-if-each-row-stores-the-same-simulated-data" class="section level3">
+<h3>1. Check if each row stores the same simulated data</h3>
+<pre class="r"><code>sum(bvsnlp$simulate.cor_type != susie$simulate.cor_type)</code></pre>
+<pre><code>[1] 0</code></pre>
+<pre class="r"><code>sum(bvsnlp$simulate.num_effect != susie$simulate.num_effect)</code></pre>
+<pre><code>[1] 0</code></pre>
+<pre class="r"><code>sum(unlist(bvsnlp$simulate.effect_indx) != unlist(susie$simulate.effect_indx))</code></pre>
+<pre><code>[1] 0</code></pre>
+<pre class="r"><code>sum(unlist(bvsnlp$simulate.effect_size) != unlist(susie$simulate.effect_size))</code></pre>
+<pre><code>[1] 0</code></pre>
+</div>
 <div id="use-the-real-correlation-of-snps" class="section level3">
 <h3>1. Use the real correlation of SNPs</h3>
 <pre class="r"><code>par(mfrow = c(1,3))
@@ -738,65 +783,6 @@ for (num in 1:3){
 
   res.pip = compare_pip(pip.susie, pip.survsvb, susie$simulate.effect_indx, dat_indx = indx, p =1e3)
   plot_pip(res.pip, labs = c(&quot;susie&quot;, &quot;survival.svb&quot;), main = paste0(num, &quot; effect, max corr=0.9-0.99&quot;))
-}</code></pre>
-<p><img src="figure/compare_pip.Rmd/unnamed-chunk-4-1.png" width="960" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
-Past versions of unnamed-chunk-4-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-4-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/yunqiyang0215/survival-susie/blob/e14c11fa15b923ed24b2e386ff2d1c5065584003/docs/figure/compare_pip.Rmd/unnamed-chunk-4-1.png" target="_blank">e14c11f</a>
-</td>
-<td>
-yunqiyang0215
-</td>
-<td>
-2023-04-06
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/yunqiyang0215/survival-susie/blob/ab9bcbaea0ac8ddfbfd04781c6e2a61a2b5b401d/docs/figure/compare_pip.Rmd/unnamed-chunk-4-1.png" target="_blank">ab9bcba</a>
-</td>
-<td>
-yunqiyang0215
-</td>
-<td>
-2023-04-06
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>par(mfrow = c(1,3))
-for (num in 1:3){
-  indx = which(susie$simulate.cor_type == &quot;real&quot; &amp; susie$simulate.num_effect == num)[1:50]
-  pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
-  pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
-
-  res.pip = compare_pip(pip.susie, pip.bvsnlp, susie$simulate.effect_indx, dat_indx = indx, p =1e3)
-  plot_pip(res.pip, labs = c(&quot;susie&quot;, &quot;bvsnlp&quot;), main = paste0(num, &quot; effect, max corr=0.9-0.99&quot;))
-  abline(a = 0, b = 1, lty = 2, col = &quot;blue&quot;)
 }</code></pre>
 <p><img src="figure/compare_pip.Rmd/unnamed-chunk-5-1.png" width="960" style="display: block; margin: auto;" /></p>
 <p>
@@ -858,17 +844,14 @@ yunqiyang0215
 </table>
 </div>
 </div>
-</div>
-<div id="near-independent-snps" class="section level3">
-<h3>2. Near independent SNPs</h3>
 <pre class="r"><code>par(mfrow = c(1,3))
 for (num in 1:3){
-  indx = which(susie$simulate.cor_type == &quot;independent&quot; &amp; susie$simulate.num_effect == num)[1:50]
+  indx = which(susie$simulate.cor_type == &quot;real&quot; &amp; susie$simulate.num_effect == num)[1:50]
   pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
-  pip.survsvb = unlist(lapply(indx, function(x) survsvb$survivalsvb.pip[[x]]))
+  pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
 
-  res.pip = compare_pip(pip.susie, pip.survsvb, susie$simulate.effect_indx, dat_indx = indx, p =1e3)
-  plot_pip(res.pip, labs = c(&quot;susie&quot;, &quot;survival.svb&quot;), main = paste0(num, &quot; effect, X close to independent&quot;))
+  res.pip = compare_pip(pip.susie, pip.bvsnlp, susie$simulate.effect_indx, dat_indx = indx, p =1e3)
+  plot_pip(res.pip, labs = c(&quot;susie&quot;, &quot;bvsnlp&quot;), main = paste0(num, &quot; effect, max corr=0.9-0.99&quot;))
   abline(a = 0, b = 1, lty = 2, col = &quot;blue&quot;)
 }</code></pre>
 <p><img src="figure/compare_pip.Rmd/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto;" /></p>
@@ -931,14 +914,17 @@ yunqiyang0215
 </table>
 </div>
 </div>
+</div>
+<div id="near-independent-snps" class="section level3">
+<h3>2. Near independent SNPs</h3>
 <pre class="r"><code>par(mfrow = c(1,3))
 for (num in 1:3){
   indx = which(susie$simulate.cor_type == &quot;independent&quot; &amp; susie$simulate.num_effect == num)[1:50]
   pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
-  pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+  pip.survsvb = unlist(lapply(indx, function(x) survsvb$survivalsvb.pip[[x]]))
 
-  res.pip = compare_pip(pip.susie, pip.bvsnlp, susie$simulate.effect_indx, dat_indx = indx, p =1e3)
-  plot_pip(res.pip, labs = c(&quot;susie&quot;, &quot;bvsnlp&quot;), main = paste0(num, &quot; effect, X close to independent&quot;))
+  res.pip = compare_pip(pip.susie, pip.survsvb, susie$simulate.effect_indx, dat_indx = indx, p =1e3)
+  plot_pip(res.pip, labs = c(&quot;susie&quot;, &quot;survival.svb&quot;), main = paste0(num, &quot; effect, X close to independent&quot;))
   abline(a = 0, b = 1, lty = 2, col = &quot;blue&quot;)
 }</code></pre>
 <p><img src="figure/compare_pip.Rmd/unnamed-chunk-7-1.png" width="960" style="display: block; margin: auto;" /></p>
@@ -1001,6 +987,92 @@ yunqiyang0215
 </table>
 </div>
 </div>
+<pre class="r"><code>par(mfrow = c(1,3))
+for (num in 1:3){
+  indx = which(susie$simulate.cor_type == &quot;independent&quot; &amp; susie$simulate.num_effect == num)[1:50]
+  pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+  pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+
+  res.pip = compare_pip(pip.susie, pip.bvsnlp, susie$simulate.effect_indx, dat_indx = indx, p =1e3)
+  plot_pip(res.pip, labs = c(&quot;susie&quot;, &quot;bvsnlp&quot;), main = paste0(num, &quot; effect, X close to independent&quot;))
+  abline(a = 0, b = 1, lty = 2, col = &quot;blue&quot;)
+}</code></pre>
+<p><img src="figure/compare_pip.Rmd/unnamed-chunk-8-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-1">
+Past versions of unnamed-chunk-8-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/ab9bcbaea0ac8ddfbfd04781c6e2a61a2b5b401d/docs/figure/compare_pip.Rmd/unnamed-chunk-8-1.png" target="_blank">ab9bcba</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-04-06
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/60fa9df64c40c4d0f8f63a4725de6551cd50ef35/docs/figure/compare_pip.Rmd/unnamed-chunk-8-1.png" target="_blank">60fa9df</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-04-06
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="compare-susie-pip-and-bvsnlp-pip" class="section level3">
+<h3>Compare susie pip and bvsnlp pip:</h3>
+<pre class="r"><code>indx = which(susie$simulate.cor_type == &quot;independent&quot; &amp; susie$simulate.num_effect == 1)
+pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+res.pip = compare_pip(pip.susie, pip.bvsnlp, susie$simulate.effect_indx, dat_indx = indx, p =1e3)</code></pre>
+<pre class="r"><code>res.pip[res.pip$pip1 &gt; 0.8 &amp; res.pip$is_effect == 0, ]</code></pre>
+<pre><code>           pip1      pip2 is_effect
+8830  0.8769450 0.3363246         0
+21842 0.9987931 0.9580655         0
+25726 0.9931661 0.3442545         0
+32775 0.8363970 0.5644040         0
+47031 0.9937841 0.8677102         0
+63350 0.9661254 0.1560220         0
+64673 0.9032093 0.2763169         0
+73892 0.8904926 0.6485665         0</code></pre>
+<p>Susie with false positive, high PIPs and bvsnlp with low PIPs:</p>
+<pre class="r"><code>example_indx = indx[64]
+example_indx</code></pre>
+<pre><code>[1] 380</code></pre>
+<pre class="r"><code>pip.susie = unlist(lapply(example_indx, function(x) susie$susie.pip[[x]]))
+pip.bvsnlp = unlist(lapply(example_indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+res.pip = compare_pip(pip.susie, pip.bvsnlp, susie$simulate.effect_indx, dat_indx = example_indx, p =1e3)
+res.pip[res.pip$pip1 &gt; 0.8 &amp; res.pip$is_effect == 0, ]</code></pre>
+<pre><code>         pip1     pip2 is_effect
+350 0.9661254 0.156022         0</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
