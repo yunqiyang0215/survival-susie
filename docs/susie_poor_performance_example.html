@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree65ae05ebba9a0e7bb90ea66beb9d85cabbb0ad03targetblank65ae05ea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/65ae05ebba9a0e7bb90ea66beb9d85cabbb0ad03" target="_blank">65ae05e</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree512b4e9345c76b3f491fca15cfda50de4b606970targetblank512b4e9a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/512b4e9345c76b3f491fca15cfda50de4b606970" target="_blank">512b4e9</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree65ae05ebba9a0e7bb90ea66beb9d85cabbb0ad03targetblank65ae05ea" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree512b4e9345c76b3f491fca15cfda50de4b606970targetblank512b4e9a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/65ae05ebba9a0e7bb90ea66beb9d85cabbb0ad03" target="_blank">65ae05e</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/512b4e9345c76b3f491fca15cfda50de4b606970" target="_blank">512b4e9</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -552,6 +552,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/512b4e9345c76b3f491fca15cfda50de4b606970/analysis/susie_poor_performance_example.Rmd" target="_blank">512b4e9</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-04-10
+</td>
+<td>
+wflow_publish("analysis/susie_poor_performance_example.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/c63185ad127f45aa7940464fef55df00d6a69abd/docs/susie_poor_performance_example.html" target="_blank">c63185a</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-04-10
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/65ae05ebba9a0e7bb90ea66beb9d85cabbb0ad03/analysis/susie_poor_performance_example.Rmd" target="_blank">65ae05e</a>
 </td>
 <td>
@@ -571,8 +605,11 @@ wflow_publish("analysis/susie_poor_performance_example.Rmd")
 </div>
 </div>
 </div>
-<pre class="r"><code>res = readRDS(&quot;./data/simulate_380.rds&quot;)</code></pre>
-<pre class="r"><code>res$effect_size
+<div id="description" class="section level3">
+<h3>Description:</h3>
+<p>An example data where susie doesn’t perform well. The true number of effect here is 1. When L=1, the result looks good. When setting L=5, the result looks weird.</p>
+<pre class="r"><code>res = readRDS(&quot;./data/simulate_380.rds&quot;)
+res$effect_size
 res$effect_indx
 # [1] -0.5318875
 # [1] 1</code></pre>
@@ -587,16 +624,28 @@ range(rs, na.rm = TRUE)
 source(&quot;./code/surv_susie_helper.R&quot;)
 devtools::load_all(&quot;/Users/nicholeyang/Desktop/logisticsusie/R&quot;)
 # ℹ Loading logisticsusie</code></pre>
-<div id="run-susie" class="section level3">
-<h3>Run susie</h3>
-<pre class="r"><code>#### parameter settings
-L = 1
-p = ncol(res$dat$X)
-maxiter = 1e3</code></pre>
 <pre class="r"><code>## Create  survival object
 y &lt;- Surv(res$dat$y[,1], res$dat$y[,2])
-X = as.matrix(res$dat$X)
+X = as.matrix(res$dat$X)</code></pre>
+</div>
+<div id="check-if-any-coefficient-tends-to-infinite" class="section level3">
+<h3>Check if any coefficient tends to infinite</h3>
+<pre class="r"><code>p = 1e3
+res.cox = matrix(NA, nrow = p, ncol = 2)
+colnames(res.cox) = c(&quot;coef&quot;, &quot;se&quot;)
+res.cox = data.frame(res.cox)
 
+for (i in 1:p){
+  fit &lt;- coxph(y~ X[,i])
+  res.cox[i, ] = summary(fit)$coef[, c(1,3)]
+}
+range(res.cox$coef)
+# [1] -0.9421428  1.5538041</code></pre>
+</div>
+<div id="run-susie-with-l1" class="section level3">
+<h3>Run susie with L=1</h3>
+<pre class="r"><code>
+maxiter = 1e3
 fit_coxph &lt;- ser_from_univariate(surv_uni_fun)
 fit &lt;- ibss_from_ser(X, y, L = 1, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = maxiter, estimate_intercept = TRUE, ser_function = fit_coxph)
 
@@ -604,27 +653,18 @@ pip &lt;- logisticsusie:::get_pip(fit$alpha)
 effect_estimate &lt;- colSums(fit$alpha * fit$mu)
 sort(pip, decreasing = TRUE)[1:5]
 pip[1:5]
-# 12.934 sec elapsed
+# 12.38 sec elapsed
 # [1] 9.945515e-01 5.120386e-03 5.692610e-05 4.574745e-05 2.646572e-05
 # [1] 9.945515e-01 4.476417e-08 1.238833e-07 3.967854e-08 1.233310e-07</code></pre>
 </div>
-<div id="check-if-any-coefficient-tends-to-infinite" class="section level3">
-<h3>Check if any coefficient tends to infinite</h3>
-<pre class="r"><code>res.cox = matrix(NA, nrow = p, ncol = 2)
-colnames(res.cox) = c(&quot;coef&quot;, &quot;se&quot;)
-res.cox = data.frame(res.cox)
-for (i in 1:p){
-  fit &lt;- coxph(y~ X[,i])
-  res.cox[i, ] = summary(fit)$coef[, c(1,3)]
-}
-range(res.cox$coef)
-# [1] -0.9421428  1.5538041</code></pre>
+<div id="run-susie-with-l5" class="section level3">
+<h3>Run susie with L=5</h3>
 <pre class="r"><code>fit_coxph &lt;- ser_from_univariate(surv_uni_fun)
 fit &lt;- ibss_from_ser(X, y, L = 5, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = maxiter, estimate_intercept = TRUE, ser_function = fit_coxph)
 
 pip &lt;- logisticsusie:::get_pip(fit$alpha)
 sort(pip, decreasing = TRUE)[1:5]
-# 167.567 sec elapsed
+# 155.396 sec elapsed
 # [1] 0.9998206 0.9661254 0.1561482 0.1253916 0.1109885</code></pre>
 <br>
 <p>
