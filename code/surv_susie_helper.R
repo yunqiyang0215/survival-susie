@@ -35,4 +35,3 @@ surv_uni_fun <- function(x, y, o, prior_variance, estimate_intercept = 0, ...){
   return(list(mu = mu, var=var, lbf=lbf, intercept=0))
 }
 
-fit_coxph <- ser_from_univariate(surv_uni_fun)
