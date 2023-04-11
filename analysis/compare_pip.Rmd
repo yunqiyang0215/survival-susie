@@ -88,7 +88,7 @@ sum(unlist(bvsnlp$simulate.effect_size) != unlist(susie$simulate.effect_size))
 ```{r fig.width= 10, fig.height=5}
 par(mfrow = c(1,3))
 for (num in 1:3){
-  indx = which(susie$simulate.cor_type == "real" & susie$simulate.num_effect == num)[1:50]
+  indx = which(susie$simulate.cor_type == "real" & susie$simulate.num_effect == num)
   pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
   pip.survsvb = unlist(lapply(indx, function(x) survsvb$survivalsvb.pip[[x]]))
 
@@ -100,7 +100,7 @@ for (num in 1:3){
 ```{r fig.width= 10, fig.height=5}
 par(mfrow = c(1,3))
 for (num in 1:3){
-  indx = which(susie$simulate.cor_type == "real" & susie$simulate.num_effect == num)[1:50]
+  indx = which(susie$simulate.cor_type == "real" & susie$simulate.num_effect == num)
   pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
   pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
 
@@ -114,7 +114,7 @@ for (num in 1:3){
 ```{r fig.width= 10, fig.height=5}
 par(mfrow = c(1,3))
 for (num in 1:3){
-  indx = which(susie$simulate.cor_type == "independent" & susie$simulate.num_effect == num)[1:50]
+  indx = which(susie$simulate.cor_type == "independent" & susie$simulate.num_effect == num)
   pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
   pip.survsvb = unlist(lapply(indx, function(x) survsvb$survivalsvb.pip[[x]]))
 
@@ -127,7 +127,7 @@ for (num in 1:3){
 ```{r fig.width= 10, fig.height=5}
 par(mfrow = c(1,3))
 for (num in 1:3){
-  indx = which(susie$simulate.cor_type == "independent" & susie$simulate.num_effect == num)[1:50]
+  indx = which(susie$simulate.cor_type == "independent" & susie$simulate.num_effect == num)
   pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
   pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
 
