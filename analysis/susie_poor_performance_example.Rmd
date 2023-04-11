@@ -143,11 +143,11 @@ sort(pip, decreasing = TRUE)[1:5]
 pip[1]
 ```
 
-### Remove X with maf < 0.1 and run Susie with L=1
+### Remove X with maf < 0.3 and run Susie with L=1
 ```{r}
 
 maxiter = 1e3
-X1 = X[, maf > 0.1]
+X1 = X[, maf > 0.3]
 X1 = cbind(X[,1], X1)
 
 fit_coxph <- ser_from_univariate(surv_uni_fun)
