@@ -151,6 +151,10 @@ res.pip = compare_pip(pip.susie, pip.bvsnlp, susie$simulate.effect_indx, dat_ind
 res.pip[res.pip$pip1 > 0.8 & res.pip$is_effect == 0, ]
 ```
 
+```{r}
+res.pip[res.pip$pip1 < 0.5 & res.pip$is_effect == 1, ]
+```
+
 Susie with false positive, high PIPs and bvsnlp with low PIPs: 
 ```{r}
 example_indx = indx[64]
@@ -164,4 +168,15 @@ res.pip = compare_pip(pip.susie, pip.bvsnlp, susie$simulate.effect_indx, dat_ind
 res.pip[res.pip$pip1 > 0.8 & res.pip$is_effect == 0, ]
 ```
 
+Susie missed the signal, while bvsnlp didn't miss. 
+```{r}
+example_indx = indx[7]
+example_indx
+```
 
+```{r}
+pip.susie = unlist(lapply(example_indx, function(x) susie$susie.pip[[x]]))
+pip.bvsnlp = unlist(lapply(example_indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+res.pip = compare_pip(pip.susie, pip.bvsnlp, susie$simulate.effect_indx, dat_indx = example_indx, p =1e3)
+head(res.pip)
+```
