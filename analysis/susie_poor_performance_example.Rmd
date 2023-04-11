@@ -71,6 +71,16 @@ pip[1:5]
 ```
 
 
+### Run susie with L=3
+```{r}
+fit_coxph <- ser_from_univariate(surv_uni_fun)
+fit <- ibss_from_ser(X, y, L = 3, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = maxiter, estimate_intercept = TRUE, ser_function = fit_coxph)
+
+pip <- logisticsusie:::get_pip(fit$alpha)
+sort(pip, decreasing = TRUE)[1:5]
+```
+
+
 ### Run susie with L=5
 ```{r}
 fit_coxph <- ser_from_univariate(surv_uni_fun)
@@ -80,3 +90,11 @@ pip <- logisticsusie:::get_pip(fit$alpha)
 sort(pip, decreasing = TRUE)[1:5]
 ```
 
+### Run susie with L=10
+```{r}
+fit_coxph <- ser_from_univariate(surv_uni_fun)
+fit <- ibss_from_ser(X, y, L = 10, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = maxiter, estimate_intercept = TRUE, ser_function = fit_coxph)
+
+pip <- logisticsusie:::get_pip(fit$alpha)
+sort(pip, decreasing = TRUE)[1:5]
+```
