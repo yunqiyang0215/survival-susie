@@ -142,3 +142,20 @@ effect_estimate <- colSums(fit$alpha * fit$mu)
 sort(pip, decreasing = TRUE)[1:5]
 pip[1]
 ```
+
+### Remove X with maf < 0.1 and run Susie with L=1
+```{r}
+
+maxiter = 1e3
+X1 = X[, maf > 0.1]
+X1 = cbind(X[,1], X1)
+
+fit_coxph <- ser_from_univariate(surv_uni_fun)
+fit <- ibss_from_ser(X, y, L = 1, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = maxiter, estimate_intercept = TRUE, ser_function = fit_coxph)
+
+pip <- logisticsusie:::get_pip(fit$alpha)
+effect_estimate <- colSums(fit$alpha * fit$mu)
+sort(pip, decreasing = TRUE)[1:5]
+pip[1]
+```
+
