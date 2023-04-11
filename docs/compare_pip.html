@@ -384,7 +384,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2023-04-10
+<strong>Last updated:</strong> 2023-04-11
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree29216821a868889d4a9f27fca352bab6f1646679targetblank2921682a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/29216821a868889d4a9f27fca352bab6f1646679" target="_blank">2921682</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreea6e76cd5475f0ce2b738ccd1ec47d0e70376e139targetblanka6e76cda"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/a6e76cd5475f0ce2b738ccd1ec47d0e70376e139" target="_blank">a6e76cd</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree29216821a868889d4a9f27fca352bab6f1646679targetblank2921682a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreea6e76cd5475f0ce2b738ccd1ec47d0e70376e139targetblanka6e76cda" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/29216821a868889d4a9f27fca352bab6f1646679" target="_blank">2921682</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/a6e76cd5475f0ce2b738ccd1ec47d0e70376e139" target="_blank">a6e76cd</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -497,6 +497,7 @@ Ignored files:
     Ignored:    analysis/.DS_Store
     Ignored:    analysis/.RData
     Ignored:    analysis/.Rhistory
+    Ignored:    data/.DS_Store
 
 Untracked files:
     Untracked:  analysis/ibss_null_model.Rmd
@@ -547,6 +548,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/a6e76cd5475f0ce2b738ccd1ec47d0e70376e139/analysis/compare_pip.Rmd" target="_blank">a6e76cd</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-04-11
+</td>
+<td>
+wflow_publish("analysis/compare_pip.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/73a00908328c727b4d42f7079c3144473f7e087b/docs/compare_pip.html" target="_blank">73a0090</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-04-10
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -764,14 +799,14 @@ bvsnlp = readRDS(&quot;./data/bvsnlp.rds&quot;)</code></pre>
 </div>
 <div id="check-if-each-row-stores-the-same-simulated-data" class="section level3">
 <h3>1. Check if each row stores the same simulated data</h3>
-<pre class="r"><code>sum(bvsnlp$simulate.cor_type != susie$simulate.cor_type)</code></pre>
-<pre><code>[1] 0</code></pre>
-<pre class="r"><code>sum(bvsnlp$simulate.num_effect != susie$simulate.num_effect)</code></pre>
-<pre><code>[1] 0</code></pre>
-<pre class="r"><code>sum(unlist(bvsnlp$simulate.effect_indx) != unlist(susie$simulate.effect_indx))</code></pre>
-<pre><code>[1] 0</code></pre>
-<pre class="r"><code>sum(unlist(bvsnlp$simulate.effect_size) != unlist(susie$simulate.effect_size))</code></pre>
-<pre><code>[1] 0</code></pre>
+<pre class="r"><code>sum(bvsnlp$simulate.cor_type != susie$simulate.cor_type)
+sum(bvsnlp$simulate.num_effect != susie$simulate.num_effect)
+sum(unlist(bvsnlp$simulate.effect_indx) != unlist(susie$simulate.effect_indx))
+sum(unlist(bvsnlp$simulate.effect_size) != unlist(susie$simulate.effect_size))
+# [1] 0
+# [1] 0
+# [1] 0
+# [1] 0</code></pre>
 </div>
 <div id="use-the-real-correlation-of-snps" class="section level3">
 <h3>1. Use the real correlation of SNPs</h3>
@@ -807,6 +842,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/73a00908328c727b4d42f7079c3144473f7e087b/docs/figure/compare_pip.Rmd/unnamed-chunk-5-1.png" target="_blank">73a0090</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-04-10
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/e14c11fa15b923ed24b2e386ff2d1c5065584003/docs/figure/compare_pip.Rmd/unnamed-chunk-5-1.png" target="_blank">e14c11f</a>
@@ -877,6 +923,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/73a00908328c727b4d42f7079c3144473f7e087b/docs/figure/compare_pip.Rmd/unnamed-chunk-6-1.png" target="_blank">73a0090</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-04-10
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/e14c11fa15b923ed24b2e386ff2d1c5065584003/docs/figure/compare_pip.Rmd/unnamed-chunk-6-1.png" target="_blank">e14c11f</a>
@@ -952,6 +1009,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/73a00908328c727b4d42f7079c3144473f7e087b/docs/figure/compare_pip.Rmd/unnamed-chunk-7-1.png" target="_blank">73a0090</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-04-10
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/e14c11fa15b923ed24b2e386ff2d1c5065584003/docs/figure/compare_pip.Rmd/unnamed-chunk-7-1.png" target="_blank">e14c11f</a>
 </td>
 <td>
@@ -1022,6 +1090,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/73a00908328c727b4d42f7079c3144473f7e087b/docs/figure/compare_pip.Rmd/unnamed-chunk-8-1.png" target="_blank">73a0090</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-04-10
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/ab9bcbaea0ac8ddfbfd04781c6e2a61a2b5b401d/docs/figure/compare_pip.Rmd/unnamed-chunk-8-1.png" target="_blank">ab9bcba</a>
 </td>
 <td>
@@ -1053,26 +1132,21 @@ yunqiyang0215
 pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
 pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
 res.pip = compare_pip(pip.susie, pip.bvsnlp, susie$simulate.effect_indx, dat_indx = indx, p =1e3)</code></pre>
-<pre class="r"><code>res.pip[res.pip$pip1 &gt; 0.8 &amp; res.pip$is_effect == 0, ]</code></pre>
-<pre><code>           pip1      pip2 is_effect
-8830  0.8769450 0.3363246         0
-21842 0.9987931 0.9580655         0
-25726 0.9931661 0.3442545         0
-32775 0.8363970 0.5644040         0
-47031 0.9937841 0.8677102         0
-63350 0.9661254 0.1560220         0
-64673 0.9032093 0.2763169         0
-73892 0.8904926 0.6485665         0</code></pre>
+<pre class="r"><code>res.pip[res.pip$pip1 &gt; 0.8 &amp; res.pip$is_effect == 0, ]
+#            pip1      pip2 is_effect
+# 21842 0.9975252 0.9580655         0
+# 47031 0.9861262 0.8677102         0
+# 73892 0.8037455 0.6485665         0</code></pre>
 <p>Susie with false positive, high PIPs and bvsnlp with low PIPs:</p>
 <pre class="r"><code>example_indx = indx[64]
-example_indx</code></pre>
-<pre><code>[1] 380</code></pre>
+example_indx
+# [1] 380</code></pre>
 <pre class="r"><code>pip.susie = unlist(lapply(example_indx, function(x) susie$susie.pip[[x]]))
 pip.bvsnlp = unlist(lapply(example_indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
 res.pip = compare_pip(pip.susie, pip.bvsnlp, susie$simulate.effect_indx, dat_indx = example_indx, p =1e3)
-res.pip[res.pip$pip1 &gt; 0.8 &amp; res.pip$is_effect == 0, ]</code></pre>
-<pre><code>         pip1     pip2 is_effect
-350 0.9661254 0.156022         0</code></pre>
+res.pip[res.pip$pip1 &gt; 0.8 &amp; res.pip$is_effect == 0, ]
+# [1] pip1      pip2      is_effect
+# &lt;0 rows&gt; (or 0-length row.names)</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1080,36 +1154,36 @@ res.pip[res.pip$pip1 &gt; 0.8 &amp; res.pip$is_effect == 0, ]</code></pre>
 </button>
 </p>
 <div id="workflowr-sessioninfo" class="collapse">
-<pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 4.1.1 (2021-08-10)
-Platform: x86_64-apple-darwin20.6.0 (64-bit)
-Running under: macOS Monterey 12.0.1
-
-Matrix products: default
-BLAS:   /usr/local/Cellar/openblas/0.3.18/lib/libopenblasp-r0.3.18.dylib
-LAPACK: /usr/local/Cellar/r/4.1.1_1/lib/R/lib/libRlapack.dylib
-
-locale:
-[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
-
-attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods   base     
-
-other attached packages:
-[1] workflowr_1.6.2
-
-loaded via a namespace (and not attached):
- [1] Rcpp_1.0.8.3     highr_0.9        pillar_1.6.4     compiler_4.1.1  
- [5] bslib_0.4.1      later_1.3.0      jquerylib_0.1.4  git2r_0.28.0    
- [9] tools_4.1.1      digest_0.6.28    jsonlite_1.7.2   evaluate_0.14   
-[13] lifecycle_1.0.1  tibble_3.1.5     pkgconfig_2.0.3  rlang_1.0.6     
-[17] cli_3.1.0        rstudioapi_0.13  yaml_2.2.1       xfun_0.27       
-[21] fastmap_1.1.0    stringr_1.4.0    knitr_1.36       fs_1.5.0        
-[25] vctrs_0.3.8      sass_0.4.4       rprojroot_2.0.2  glue_1.4.2      
-[29] R6_2.5.1         fansi_0.5.0      rmarkdown_2.11   magrittr_2.0.1  
-[33] whisker_0.4      promises_1.2.0.1 ellipsis_0.3.2   htmltools_0.5.2 
-[37] httpuv_1.6.3     utf8_1.2.2       stringi_1.7.5    cachem_1.0.6    
-[41] crayon_1.4.1    </code></pre>
+<pre class="r"><code>sessionInfo()
+# R version 4.1.1 (2021-08-10)
+# Platform: x86_64-apple-darwin20.6.0 (64-bit)
+# Running under: macOS Monterey 12.0.1
+# 
+# Matrix products: default
+# BLAS:   /usr/local/Cellar/openblas/0.3.18/lib/libopenblasp-r0.3.18.dylib
+# LAPACK: /usr/local/Cellar/r/4.1.1_1/lib/R/lib/libRlapack.dylib
+# 
+# locale:
+# [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+# 
+# attached base packages:
+# [1] stats     graphics  grDevices utils     datasets  methods   base     
+# 
+# other attached packages:
+# [1] workflowr_1.6.2
+# 
+# loaded via a namespace (and not attached):
+#  [1] Rcpp_1.0.8.3     highr_0.9        pillar_1.6.4     compiler_4.1.1  
+#  [5] bslib_0.4.1      later_1.3.0      jquerylib_0.1.4  git2r_0.28.0    
+#  [9] tools_4.1.1      digest_0.6.28    jsonlite_1.7.2   evaluate_0.14   
+# [13] lifecycle_1.0.1  tibble_3.1.5     pkgconfig_2.0.3  rlang_1.0.6     
+# [17] cli_3.1.0        rstudioapi_0.13  yaml_2.2.1       xfun_0.27       
+# [21] fastmap_1.1.0    stringr_1.4.0    knitr_1.36       fs_1.5.0        
+# [25] vctrs_0.3.8      sass_0.4.4       rprojroot_2.0.2  glue_1.4.2      
+# [29] R6_2.5.1         fansi_0.5.0      rmarkdown_2.11   magrittr_2.0.1  
+# [33] whisker_0.4      promises_1.2.0.1 ellipsis_0.3.2   htmltools_0.5.2 
+# [37] httpuv_1.6.3     utf8_1.2.2       stringi_1.7.5    cachem_1.0.6    
+# [41] crayon_1.4.1</code></pre>
 </div>
 </div>
 
