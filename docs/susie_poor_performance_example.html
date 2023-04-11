@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree38267739c4b0c2c06af3e8c809fb0380dc8fb369targetblank3826773a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/38267739c4b0c2c06af3e8c809fb0380dc8fb369" target="_blank">3826773</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree64a1a5bdcfeafb5b3574864ca60863b2df9faf6etargetblank64a1a5ba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/64a1a5bdcfeafb5b3574864ca60863b2df9faf6e" target="_blank">64a1a5b</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree38267739c4b0c2c06af3e8c809fb0380dc8fb369targetblank3826773a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree64a1a5bdcfeafb5b3574864ca60863b2df9faf6etargetblank64a1a5ba" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/38267739c4b0c2c06af3e8c809fb0380dc8fb369" target="_blank">3826773</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/64a1a5bdcfeafb5b3574864ca60863b2df9faf6e" target="_blank">64a1a5b</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -548,6 +548,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/64a1a5bdcfeafb5b3574864ca60863b2df9faf6e/analysis/susie_poor_performance_example.Rmd" target="_blank">64a1a5b</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-04-11
+</td>
+<td>
+wflow_publish("analysis/susie_poor_performance_example.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/530a3e81453f98e5c3f17a5bdca656ea6a20264e/docs/susie_poor_performance_example.html" target="_blank">530a3e8</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-04-11
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -759,7 +793,7 @@ pip &lt;- logisticsusie:::get_pip(fit$alpha)
 effect_estimate &lt;- colSums(fit$alpha * fit$mu)
 sort(pip, decreasing = TRUE)[1:5]
 pip[1:5]
-# 11.778 sec elapsed
+# 16.131 sec elapsed
 # [1] 9.945515e-01 5.120386e-03 5.692610e-05 4.574745e-05 2.646572e-05
 # [1] 9.945515e-01 4.476417e-08 1.238833e-07 3.967854e-08 1.233310e-07</code></pre>
 </div>
@@ -770,7 +804,7 @@ fit &lt;- ibss_from_ser(X, y, L = 2, prior_variance = 1., prior_weights = rep(1/
 
 pip &lt;- logisticsusie:::get_pip(fit$alpha)
 sort(pip, decreasing = TRUE)[1:5]
-# 34.857 sec elapsed
+# 42.526 sec elapsed
 # [1] 0.999681939 0.954927683 0.005078653 0.004195424 0.002573596</code></pre>
 </div>
 <div id="run-susie-with-l5" class="section level3">
@@ -780,7 +814,7 @@ fit &lt;- ibss_from_ser(X, y, L = 5, prior_variance = 1., prior_weights = rep(1/
 
 pip &lt;- logisticsusie:::get_pip(fit$alpha)
 sort(pip, decreasing = TRUE)[1:5]
-# 132.414 sec elapsed
+# 145.19 sec elapsed
 # [1] 0.9998206 0.9661254 0.1561482 0.1253916 0.1109885</code></pre>
 </div>
 </div>
@@ -828,7 +862,25 @@ pip &lt;- logisticsusie:::get_pip(fit$alpha)
 effect_estimate &lt;- colSums(fit$alpha * fit$mu)
 sort(pip, decreasing = TRUE)[1:5]
 pip[1]
-# 11.586 sec elapsed
+# 12.282 sec elapsed
+# [1] 0.10594171 0.10264788 0.02522573 0.01764054 0.01607244
+# [1] 0.1059417</code></pre>
+</div>
+<div id="remove-x-with-maf-0.1-and-run-susie-with-l1" class="section level3">
+<h3>Remove X with maf &lt; 0.1 and run Susie with L=1</h3>
+<pre class="r"><code>
+maxiter = 1e3
+X1 = X[, maf &gt; 0.1]
+X1 = cbind(X[,1], X1)
+
+fit_coxph &lt;- ser_from_univariate(surv_uni_fun)
+fit &lt;- ibss_from_ser(X, y, L = 1, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = maxiter, estimate_intercept = TRUE, ser_function = fit_coxph)
+
+pip &lt;- logisticsusie:::get_pip(fit$alpha)
+effect_estimate &lt;- colSums(fit$alpha * fit$mu)
+sort(pip, decreasing = TRUE)[1:5]
+pip[1]
+# 11.996 sec elapsed
 # [1] 0.10594171 0.10264788 0.02522573 0.01764054 0.01607244
 # [1] 0.1059417</code></pre>
 <br>
