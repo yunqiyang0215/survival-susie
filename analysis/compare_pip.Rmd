@@ -42,6 +42,11 @@ Simulation results based on real genotype data from GTEx. I took the SNPs for a 
 
 2. In other scenarios, results are more consistent across methods. 
 
+```{r knitr, echo=FALSE}
+knitr::opts_chunk$set(comment = "#",results = "hold",collapse = TRUE,
+                      fig.align = "center", warning = FALSE)
+```
+
 ```{r}
 compare_pip <- function(pip1, pip2, effect_indx, dat_indx, p){
   is_effect = c()
