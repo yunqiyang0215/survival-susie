@@ -107,6 +107,8 @@ t(apply(fit2$alpha, 1, function(x) sort(x, decreasing = TRUE)))
 
 ```{r}
 beta <- colSums(fit2$alpha * fit2$mu)
+pip <- logisticsusie:::get_pip(fit2$alpha)
+pip
 hist(beta, breaks = 20)
 ```
 
@@ -152,6 +154,8 @@ t(apply(fit2$alpha, 1, function(x) sort(x, decreasing = TRUE)))
 
 ```{r}
 beta <- colSums(fit2$alpha * fit2$mu)
+pip <- logisticsusie:::get_pip(fit2$alpha)
+pip
 hist(beta, breaks = 20)
 ```
 
@@ -175,6 +179,8 @@ t2 - t1
 ```{r}
 fit3$alpha
 beta <- colSums(fit3$alpha * fit3$mu)
+pip <- logisticsusie:::get_pip(fit3$alpha)
+pip
 hist(beta, breaks = 20)
 ```
 
@@ -195,6 +201,8 @@ t(apply(fit4$alpha, 1, function(x) sort(x, decreasing = TRUE)))
 
 ```{r}
 beta <- colSums(fit4$alpha * fit4$mu)
+pip <- logisticsusie:::get_pip(fit4$alpha)
+pip
 hist(beta, breaks = 20)
 ```
 
@@ -222,6 +230,8 @@ t(apply(fit5$alpha, 1, function(x) sort(x, decreasing = TRUE)))
 
 ```{r}
 beta <- colSums(fit5$alpha * fit5$mu)
+pip <- logisticsusie:::get_pip(fit5$alpha)
+pip
 hist(beta, breaks = 20)
 ```
 
