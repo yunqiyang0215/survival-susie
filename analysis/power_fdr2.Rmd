@@ -24,11 +24,16 @@ New simulation results, comparing power vs. FDR across 3 methods. I vary the thr
 Other simulation settings, see here: https://yunqiyang0215.github.io/survival-susie/compare_pip.html
 
 
-**Conclustion**:
+**Conclusion**:
 
-1. When X are highly correlated, susie performs best. And survival svb has very high FDR.
+1. When X are highly correlated, susie performs best. 
 
-2. When X are close to independent, susie is slightly worse than the other two methods. 
+2. When X are independent, and without null model data, all methods are similar. 
+
+3. survival.svb and bvsnlp doesn't perform well after adding data from null model.
+
+4. When censoring level = 0.4, susie performance starts to get worse. 
+
 
 
 ```{r}
@@ -127,20 +132,6 @@ The dots indicate PIP threshold = 0.9.
 
 
 
-
-
-```{r}
-plot(res.susie[,2], res.susie[,1], type = "l", xlim = c(0, 0.1), ylim = c(0, 1), xlab = "FDR", ylab = "Power",
-     main = "Effect number 0-3 & X independent")
-lines(res.svb[,2], res.svb[,1], type = "l", col = 2)
-lines(res.bvsnlp[,2], res.bvsnlp[,1], type = "l", col = 3)
-
-points(res.susie[which(ts == 0.9),2], res.susie[which(ts == 0.9), 1])
-points(res.svb[which(ts == 0.9),2], res.svb[which(ts == 0.9), 1])
-points(res.bvsnlp[which(ts == 0.9),2], res.bvsnlp[which(ts == 0.9), 1])
-
-legend("bottomright", legend = c("susie", "survival.svb", "bvsnlp"), col = c(1,2,3), lty = 1)
-```
 
 
 
