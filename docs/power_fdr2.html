@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreef06a97984cc70ca13cdb9e751f9dc41662191f09targetblankf06a979a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/f06a97984cc70ca13cdb9e751f9dc41662191f09" target="_blank">f06a979</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree8c59901251f0de760145f9872f89ae74f5cd4f0etargetblank8c59901a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/8c59901251f0de760145f9872f89ae74f5cd4f0e" target="_blank">8c59901</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreef06a97984cc70ca13cdb9e751f9dc41662191f09targetblankf06a979a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree8c59901251f0de760145f9872f89ae74f5cd4f0etargetblank8c59901a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/f06a97984cc70ca13cdb9e751f9dc41662191f09" target="_blank">f06a979</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/8c59901251f0de760145f9872f89ae74f5cd4f0e" target="_blank">8c59901</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -556,6 +556,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/8c59901251f0de760145f9872f89ae74f5cd4f0e/analysis/power_fdr2.Rmd" target="_blank">8c59901</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-04-17
+</td>
+<td>
+wflow_publish("analysis/power_fdr2.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/ba4a07c2a8d25b3d0099f834739c2dfb10f18c40/docs/power_fdr2.html" target="_blank">ba4a07c</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-04-17
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/f06a97984cc70ca13cdb9e751f9dc41662191f09/analysis/power_fdr2.Rmd" target="_blank">f06a979</a>
 </td>
 <td>
@@ -587,10 +621,12 @@ wflow_publish("analysis/power_fdr2.Rmd")
 <li><p>Added the procedure for estimating prior variance.</p></li>
 </ol>
 <p>Other simulation settings, see here: <a href="https://yunqiyang0215.github.io/survival-susie/compare_pip.html" class="uri">https://yunqiyang0215.github.io/survival-susie/compare_pip.html</a></p>
-<p><strong>Conclustion</strong>:</p>
+<p><strong>Conclusion</strong>:</p>
 <ol style="list-style-type: decimal">
-<li><p>When X are highly correlated, susie performs best. And survival svb has very high FDR.</p></li>
-<li><p>When X are close to independent, susie is slightly worse than the other two methods.</p></li>
+<li><p>When X are highly correlated, susie performs best.</p></li>
+<li><p>When X are independent, and without null model data, all methods are similar.</p></li>
+<li><p>survival.svb and bvsnlp doesn’t perform well after adding data from null model.</p></li>
+<li><p>When censoring level = 0.4, susie performance starts to get worse.</p></li>
 </ol>
 <pre class="r"><code>calculate_tpr_vs_fdr &lt;- function(pip, is_effect, ts){
   res &lt;- matrix(NA, nrow = length(ts), ncol = 2)
@@ -640,7 +676,45 @@ for (i in 1:3){
   
   legend(&quot;topleft&quot;, legend = c(&quot;susie&quot;, &quot;survival.svb&quot;, &quot;bvsnlp&quot;), col = c(1,2,3), lty = 1)
 }</code></pre>
-<p><img src="figure/power_fdr2.Rmd/unnamed-chunk-4-1.png" width="1152" style="display: block; margin: auto;" /> The dots indicate PIP threshold = 0.9</p>
+<p><img src="figure/power_fdr2.Rmd/unnamed-chunk-4-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
+Past versions of unnamed-chunk-4-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-4-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/ba4a07c2a8d25b3d0099f834739c2dfb10f18c40/docs/figure/power_fdr2.Rmd/unnamed-chunk-4-1.png" target="_blank">ba4a07c</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-04-17
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The dots indicate PIP threshold = 0.9</p>
 </div>
 <div id="results-using-independent-x-without-data-from-null-model." class="section level3">
 <h3>2. Results using independent X, without data from null model.</h3>
@@ -671,18 +745,44 @@ for (i in 1:3){
   legend(&quot;bottomright&quot;, legend = c(&quot;susie&quot;, &quot;survival.svb&quot;, &quot;bvsnlp&quot;), col = c(1,2,3), lty = 1)
 }</code></pre>
 <p><img src="figure/power_fdr2.Rmd/unnamed-chunk-5-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
+Past versions of unnamed-chunk-5-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/ba4a07c2a8d25b3d0099f834739c2dfb10f18c40/docs/figure/power_fdr2.Rmd/unnamed-chunk-5-1.png" target="_blank">ba4a07c</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-04-17
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>The dots indicate PIP threshold = 0.9.</p>
-<pre class="r"><code>plot(res.susie[,2], res.susie[,1], type = &quot;l&quot;, xlim = c(0, 0.1), ylim = c(0, 1), xlab = &quot;FDR&quot;, ylab = &quot;Power&quot;,
-     main = &quot;Effect number 0-3 &amp; X independent&quot;)
-lines(res.svb[,2], res.svb[,1], type = &quot;l&quot;, col = 2)
-lines(res.bvsnlp[,2], res.bvsnlp[,1], type = &quot;l&quot;, col = 3)
-
-points(res.susie[which(ts == 0.9),2], res.susie[which(ts == 0.9), 1])
-points(res.svb[which(ts == 0.9),2], res.svb[which(ts == 0.9), 1])
-points(res.bvsnlp[which(ts == 0.9),2], res.bvsnlp[which(ts == 0.9), 1])
-
-legend(&quot;bottomright&quot;, legend = c(&quot;susie&quot;, &quot;survival.svb&quot;, &quot;bvsnlp&quot;), col = c(1,2,3), lty = 1)</code></pre>
-<p><img src="figure/power_fdr2.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="results-using-independent-x-with-data-from-null-model." class="section level3">
 <h3>3. Results using independent X, with data from null model.</h3>
@@ -712,7 +812,44 @@ for (i in 1:3){
   points(res.bvsnlp[which(ts == 0.9),2], res.bvsnlp[which(ts == 0.9), 1])
   legend(&quot;bottomright&quot;, legend = c(&quot;susie&quot;, &quot;survival.svb&quot;, &quot;bvsnlp&quot;), col = c(1,2,3), lty = 1)
 }</code></pre>
-<p><img src="figure/power_fdr2.Rmd/unnamed-chunk-7-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/power_fdr2.Rmd/unnamed-chunk-6-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
+Past versions of unnamed-chunk-6-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/ba4a07c2a8d25b3d0099f834739c2dfb10f18c40/docs/figure/power_fdr2.Rmd/unnamed-chunk-6-1.png" target="_blank">ba4a07c</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-04-17
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>The dots indicate PIP threshold = 0.9.</p>
 <pre class="r"><code>par(mfrow = c(1,3))
 censor_lvl = c(0, 0.2, 0.4)
@@ -740,7 +877,44 @@ for (i in 1:3){
   points(res.bvsnlp[which(ts == 0.9),2], res.bvsnlp[which(ts == 0.9), 1])
   legend(&quot;bottomright&quot;, legend = c(&quot;susie&quot;, &quot;survival.svb&quot;, &quot;bvsnlp&quot;), col = c(1,2,3), lty = 1)
 }</code></pre>
-<p><img src="figure/power_fdr2.Rmd/unnamed-chunk-8-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/power_fdr2.Rmd/unnamed-chunk-7-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-1">
+Past versions of unnamed-chunk-7-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/ba4a07c2a8d25b3d0099f834739c2dfb10f18c40/docs/figure/power_fdr2.Rmd/unnamed-chunk-7-1.png" target="_blank">ba4a07c</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-04-17
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
