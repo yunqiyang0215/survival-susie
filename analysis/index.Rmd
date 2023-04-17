@@ -58,3 +58,5 @@ Real data simulation:
 + [Power vs. FDR](compare_power_fdr.html)
 
 + [Data example: susie with poor performance](susie_poor_performance_example.html)
+
++ [Updated simulation: power vs. FDR](power_fdr2.html)
