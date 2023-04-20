@@ -214,12 +214,12 @@ On average, the non-null data contains 2 effects per data.
 ```{r}
 indx1 = which(survsvb$simulate.cor_type == "real" & survsvb$simulate.num_effect == 0)
 pip1 = unlist(lapply(indx1, function(x) survsvb$survivalsvb.pip[[x]]))
-sum(pip1 > 0.9)
+sum(pip1 > 0.95)
 length(indx1)
 
 indx2 = which(survsvb$simulate.cor_type == "real" & survsvb$simulate.num_effect != 0)
 pip2 = unlist(lapply(indx2, function(x) survsvb$survivalsvb.pip[[x]]))
-sum(pip2 > 0.9)
+sum(pip2 > 0.95)
 length(indx2)
 ```
 
@@ -237,12 +237,12 @@ On average, the non-null data contains 2 effects per data.
 ```{r}
 indx1 = which(survsvb$simulate.cor_type == "independent" & survsvb$simulate.num_effect == 0)
 pip1 = unlist(lapply(indx1, function(x) survsvb$survivalsvb.pip[[x]]))
-sum(pip1 > 0.9)
+sum(pip1 > 0.95)
 length(indx1)
 
 indx2 = which(survsvb$simulate.cor_type == "independent" & survsvb$simulate.num_effect != 0)
 pip2 = unlist(lapply(indx2, function(x) survsvb$survivalsvb.pip[[x]]))
-sum(pip2 > 0.9)
+sum(pip2 > 0.95)
 length(indx2)
 ```
 
