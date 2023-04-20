@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree036402bad8c11b6930cb5935a03d03e473c290ddtargetblank036402ba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/036402bad8c11b6930cb5935a03d03e473c290dd" target="_blank">036402b</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree4335c39811ee743ec83c6274215f894ee898cbf5targetblank4335c39a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/4335c39811ee743ec83c6274215f894ee898cbf5" target="_blank">4335c39</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree036402bad8c11b6930cb5935a03d03e473c290ddtargetblank036402ba" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree4335c39811ee743ec83c6274215f894ee898cbf5targetblank4335c39a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/036402bad8c11b6930cb5935a03d03e473c290dd" target="_blank">036402b</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/4335c39811ee743ec83c6274215f894ee898cbf5" target="_blank">4335c39</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -550,6 +550,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/4335c39811ee743ec83c6274215f894ee898cbf5/analysis/power_fdr2.Rmd" target="_blank">4335c39</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-04-20
+</td>
+<td>
+wflow_publish("analysis/power_fdr2.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/e7b734d4111603306a5ba664b99a26cdb6802091/docs/power_fdr2.html" target="_blank">e7b734d</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-04-20
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1010,16 +1044,16 @@ yunqiyang0215
 <p><strong>4.1</strong> Under real correlation The null data contains 300 replicates, the non-null data has 900 replicates. On average, the non-null data contains 2 effects per data.</p>
 <pre class="r"><code>indx1 = which(survsvb$simulate.cor_type == &quot;real&quot; &amp; survsvb$simulate.num_effect == 0)
 pip1 = unlist(lapply(indx1, function(x) survsvb$survivalsvb.pip[[x]]))
-sum(pip1 &gt; 0.9)
+sum(pip1 &gt; 0.95)
 length(indx1)
 
 indx2 = which(survsvb$simulate.cor_type == &quot;real&quot; &amp; survsvb$simulate.num_effect != 0)
 pip2 = unlist(lapply(indx2, function(x) survsvb$survivalsvb.pip[[x]]))
-sum(pip2 &gt; 0.9)
+sum(pip2 &gt; 0.95)
 length(indx2)
 # [1] 2164
 # [1] 300
-# [1] 4337
+# [1] 4323
 # [1] 900</code></pre>
 <pre class="r"><code>par(mfrow = c(1,2))
 hist(pip1, xlab = &quot;pip&quot;, main = &quot;Null data: X high correlation&quot;)
@@ -1065,16 +1099,16 @@ yunqiyang0215
 <p><strong>4.2</strong> Under real correlation The null data contains 300 replicates, the non-null data has 900 replicates. On average, the non-null data contains 2 effects per data.</p>
 <pre class="r"><code>indx1 = which(survsvb$simulate.cor_type == &quot;independent&quot; &amp; survsvb$simulate.num_effect == 0)
 pip1 = unlist(lapply(indx1, function(x) survsvb$survivalsvb.pip[[x]]))
-sum(pip1 &gt; 0.9)
+sum(pip1 &gt; 0.95)
 length(indx1)
 
 indx2 = which(survsvb$simulate.cor_type == &quot;independent&quot; &amp; survsvb$simulate.num_effect != 0)
 pip2 = unlist(lapply(indx2, function(x) survsvb$survivalsvb.pip[[x]]))
-sum(pip2 &gt; 0.9)
+sum(pip2 &gt; 0.95)
 length(indx2)
 # [1] 1868
 # [1] 300
-# [1] 1208
+# [1] 1183
 # [1] 900</code></pre>
 <pre class="r"><code>par(mfrow = c(1,2))
 hist(pip1, xlab = &quot;pip&quot;, main = &quot;Null data: X independent&quot;)
