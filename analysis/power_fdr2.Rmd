@@ -34,7 +34,10 @@ Other simulation settings, see here: https://yunqiyang0215.github.io/survival-su
 
 4. When censoring level = 0.4, susie performance starts to get worse. 
 
-
+```{r knitr-opts, include=FALSE}
+knitr::opts_chunk$set(comment = "#",collapse = TRUE,results = "hold",
+                      fig.align = "center")
+```
 
 ```{r}
 calculate_tpr_vs_fdr <- function(pip, is_effect, ts){
