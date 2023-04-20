@@ -201,3 +201,50 @@ for (i in 1:3){
 
 ```
 
+
+### 4. Check results for survival svb
+
+**4.1** Under real correlation
+The null data contains 300 replicates, the non-null data has 900 replicates. 
+On average, the non-null data contains 2 effects per data.
+
+```{r}
+indx1 = which(survsvb$simulate.cor_type == "real" & survsvb$simulate.num_effect == 0)
+pip1 = unlist(lapply(indx1, function(x) survsvb$survivalsvb.pip[[x]]))
+sum(pip1 > 0.9)
+length(indx1)
+
+indx2 = which(survsvb$simulate.cor_type == "real" & survsvb$simulate.num_effect != 0)
+pip2 = unlist(lapply(indx2, function(x) survsvb$survivalsvb.pip[[x]]))
+sum(pip2 > 0.9)
+length(indx2)
+```
+
+
+```{r}
+par(mfrow = c(1,2))
+hist(pip1, xlab = "pip", main = "Null data: X high correlation")
+hist(pip2, xlab = "pip", main = "Non-null data:  X high correlation")
+```
+
+**4.2** Under real correlation
+The null data contains 300 replicates, the non-null data has 900 replicates. 
+On average, the non-null data contains 2 effects per data.
+
+```{r}
+indx1 = which(survsvb$simulate.cor_type == "independent" & survsvb$simulate.num_effect == 0)
+pip1 = unlist(lapply(indx1, function(x) survsvb$survivalsvb.pip[[x]]))
+sum(pip1 > 0.9)
+length(indx1)
+
+indx2 = which(survsvb$simulate.cor_type == "independent" & survsvb$simulate.num_effect != 0)
+pip2 = unlist(lapply(indx2, function(x) survsvb$survivalsvb.pip[[x]]))
+sum(pip2 > 0.9)
+length(indx2)
+```
+
+```{r}
+par(mfrow = c(1,2))
+hist(pip1, xlab = "pip", main = "Null data: X independent")
+hist(pip2, xlab = "pip", main = "Non-null data: X independent")
+```
