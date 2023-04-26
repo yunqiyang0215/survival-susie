@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree31ee43a8a75f0fb07ed869d1327b561755da1a99targetblank31ee43aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/31ee43a8a75f0fb07ed869d1327b561755da1a99" target="_blank">31ee43a</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreec684ba0ca98dbe3bc5a888d20dfd699db5bbdf8etargetblankc684ba0a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/c684ba0ca98dbe3bc5a888d20dfd699db5bbdf8e" target="_blank">c684ba0</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree31ee43a8a75f0fb07ed869d1327b561755da1a99targetblank31ee43aa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreec684ba0ca98dbe3bc5a888d20dfd699db5bbdf8etargetblankc684ba0a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/31ee43a8a75f0fb07ed869d1327b561755da1a99" target="_blank">31ee43a</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/c684ba0ca98dbe3bc5a888d20dfd699db5bbdf8e" target="_blank">c684ba0</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -551,6 +551,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/c684ba0ca98dbe3bc5a888d20dfd699db5bbdf8e/analysis/dsc_sim3.Rmd" target="_blank">c684ba0</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-04-26
+</td>
+<td>
+wflow_publish("analysis/dsc_sim3.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/dfa65fa94bb681f5987e675c85fcfff924467117/docs/dsc_sim3.html" target="_blank">dfa65fa</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-04-26
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -989,10 +1023,28 @@ yunqiyang0215
 </div>
 <p>The dots indicate PIP threshold = 0.95.</p>
 </div>
-<div id="independent-x-censoring-0.8." class="section level3">
-<h3>4. independent X, censoring = 0.8.</h3>
-<p>Susie has ~1-1.5% less power than bvsnlp when fdr is around 0.1.</p>
-<pre class="r"><code>censor_lvl = 0.8
+<div id="realindependent-x-censoring-0.8." class="section level3">
+<h3>4. Real/independent X, censoring = 0.8.</h3>
+<p>For independent X, susie has ~1-1.5% less power than bvsnlp when fdr is around 0.1.</p>
+<pre class="r"><code>par(mfrow = c(1,2))
+censor_lvl = 0.8
+indx = which(susie$simulate.cor_type == &quot;real&quot; &amp; susie$simulate.censor_lvl == censor_lvl)
+pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
+  
+ts = seq(from = 0, to = 1, by = 0.01)
+res.susie = calculate_tpr_vs_fdr(pip.susie, is_effect, ts)
+res.bvsnlp = calculate_tpr_vs_fdr(pip.bvsnlp, is_effect, ts)
+  
+  
+plot(res.susie[,2], res.susie[,1], type = &quot;l&quot;, xlim = c(0, 0.4), ylim = c(0,0.2), xlab = &quot;FDR&quot;, ylab = &quot;Power&quot;, main = paste0(&quot;Real X, effect 0-3&quot;, &quot;,censor=&quot;, censor_lvl))
+lines(res.bvsnlp[,2], res.bvsnlp[,1], type = &quot;l&quot;, col = 3)
+points(res.susie[96,2], res.susie[96, 1])
+points(res.bvsnlp[96,2], res.bvsnlp[96, 1])
+legend(&quot;topleft&quot;, legend = c(&quot;susie&quot;, &quot;bvsnlp&quot;), col = c(1,3), lty = 1)
+
+#####
 indx = which(susie$simulate.cor_type == &quot;independent&quot; &amp; susie$simulate.censor_lvl == censor_lvl)
 pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
 pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
@@ -1008,7 +1060,44 @@ lines(res.bvsnlp[,2], res.bvsnlp[,1], type = &quot;l&quot;, col = 3)
 points(res.susie[96,2], res.susie[96, 1])
 points(res.bvsnlp[96,2], res.bvsnlp[96, 1])
 legend(&quot;bottomright&quot;, legend = c(&quot;susie&quot;, &quot;bvsnlp&quot;), col = c(1,3), lty = 1)</code></pre>
-<p><img src="figure/dsc_sim3.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/dsc_sim3.Rmd/unnamed-chunk-6-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
+Past versions of unnamed-chunk-6-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/dfa65fa94bb681f5987e675c85fcfff924467117/docs/figure/dsc_sim3.Rmd/unnamed-chunk-6-1.png" target="_blank">dfa65fa</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-04-26
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
