@@ -1,0 +1,164 @@
+---
+title: "Power vs. fdr v3"
+author: "Yunqi Yang"
+date: "4/26/2023"
+output: html_document
+---
+
+### Description:
+
+Version 3 simulation results, comparing power vs. FDR across 3 methods. I vary the threshold for claiming effect variables based on marginal PIP value. 
+
+**Difference between v3 and v2 simulation**:
+
+1. Instead of selecting effect SNP to have high correlation with other SNPs, this version is randomly select a SNP to be effect variable. But not the first variable. 
+
+2. Set L = 5 in Susie, and we assume overstating L won't affect the result a lot, because we added the procedure for estimating prior variance. 
+
+
+**Conclusion**:
+
+1. When X are highly correlated, susie performs best. 
+
+2. When X are independent, and without null model data, all methods are similar. 
+
+3. survival.svb and bvsnlp doesn't perform well after adding data from null model.
+
+4. When censoring level = 0.4, susie performance starts to get worse. 
+
+```{r knitr-opts, include=FALSE}
+knitr::opts_chunk$set(comment = "#",collapse = TRUE,results = "hold",
+                      fig.align = "center")
+```
+
+```{r}
+calculate_tpr_vs_fdr <- function(pip, is_effect, ts){
+  res <- matrix(NA, nrow = length(ts), ncol = 2)
+  colnames(res) = c("tpr", "fdr")
+  for (i in 1:length(ts)){
+    pred_pos = pip >= ts[i]
+    tp = pip >= ts[i] & is_effect == 1
+    fp = pip >= ts[i] & is_effect == 0
+    tpr = sum(tp)/sum(is_effect)
+    fdr = sum(fp)/sum(pred_pos)
+    res[i, ] = c(tpr, fdr)
+  }
+  return(res)
+}
+
+```
+
+```{r}
+susie = readRDS("./data/dsc3/susie.rds")
+survsvb = readRDS("./data/dsc3/survsvb.rds")
+bvsnlp = readRDS("./data/dsc3/bvsnlp.rds")
+```
+
+### 1. Results using real correlation structure from data
+
+```{r, fig.width=12, fig.height=8}
+par(mfrow = c(2,3))
+censor_lvl = c(0, 0.2, 0.4, 0.6, 0.8)
+for (i in 1:5){
+  indx = which(susie$simulate.cor_type == "real" & susie$simulate.censor_lvl == censor_lvl[i])
+  pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+  pip.survsvb = unlist(lapply(indx, function(x) survsvb$survivalsvb.pip[[x]]))
+  pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+  is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
+  
+  ts = seq(from = 0, to = 1, by = 0.01)
+  res.susie = calculate_tpr_vs_fdr(pip.susie, is_effect, ts)
+  res.svb = calculate_tpr_vs_fdr(pip.survsvb, is_effect, ts)
+  res.bvsnlp = calculate_tpr_vs_fdr(pip.bvsnlp, is_effect, ts)
+  
+  plot(res.susie[,2], res.susie[,1], type = "l", xlim = c(0,1), ylim = c(0, 1), xlab = "FDR", ylab = "Power",
+       main = paste0("Effect 0-3", ",censor=", censor_lvl[i]))
+  lines(res.svb[,2], res.svb[,1], type = "l", col = 2)
+  lines(res.bvsnlp[,2], res.bvsnlp[,1], type = "l", col = 3)
+  
+  points(res.susie[96,2], res.susie[96, 1])
+  points(res.svb[96,2], res.svb[96, 1])
+  points(res.bvsnlp[96,2], res.bvsnlp[96, 1])
+  
+  legend("topleft", legend = c("susie", "survival.svb", "bvsnlp"), col = c(1,2,3), lty = 1)
+}
+
+```
+The dots indicate PIP threshold = 0.95
+
+
+### 2. Results using independent X, without data from null model. 
+
+```{r, fig.width=12, fig.height=8}
+par(mfrow = c(2,3),cex.axis = 1.5)
+censor_lvl = c(0, 0.2, 0.4, 0.6, 0.8)
+
+for (i in 1:5){
+  indx = which(susie$simulate.cor_type == "independent" & susie$simulate.censor_lvl == censor_lvl[i] & susie$simulate.num_effect != 0)
+  pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+  pip.survsvb = unlist(lapply(indx, function(x) survsvb$survivalsvb.pip[[x]]))
+  pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+  is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
+  
+  
+  ts = seq(from = 0, to = 1, by = 0.01)
+  res.susie = calculate_tpr_vs_fdr(pip.susie, is_effect, ts)
+  res.svb = calculate_tpr_vs_fdr(pip.survsvb, is_effect, ts)
+  res.bvsnlp = calculate_tpr_vs_fdr(pip.bvsnlp, is_effect, ts)
+  
+  
+  plot(res.susie[,2], res.susie[,1], type = "l", xlim = c(0, 0.1), ylim = c(0, 1), xlab = "FDR", ylab = "Power",
+       main = paste0("Effect 1-3 & X independent", ",censor=", censor_lvl[i]), cex.main = 2)
+  lines(res.svb[,2], res.svb[,1], type = "l", col = 2)
+  lines(res.bvsnlp[,2], res.bvsnlp[,1], type = "l", col = 3)
+  points(res.susie[96,2], res.susie[96, 1])
+  points(res.svb[96,2], res.svb[96, 1])
+  points(res.bvsnlp[96,2], res.bvsnlp[96, 1])
+  legend("bottomright", legend = c("susie", "survival.svb", "bvsnlp"), col = c(1,2,3), lty = 1)
+}
+
+```
+
+The dots indicate PIP threshold = 0.95.
+
+
+### 3. Results using independent X, with data from null model. 
+
+```{r, fig.width=10, fig.height=8}
+par(mfrow = c(2,3),cex.axis = 1.5)
+censor_lvl = c(0, 0.2, 0.4, 0.6, 0.8)
+
+
+for (i in 1:5){
+  indx = which(susie$simulate.cor_type == "independent" & susie$simulate.censor_lvl == censor_lvl[i])
+  pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+  pip.survsvb = unlist(lapply(indx, function(x) survsvb$survivalsvb.pip[[x]]))
+  pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+  is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
+  
+  
+  ts = seq(from = 0, to = 1, by = 0.01)
+  res.susie = calculate_tpr_vs_fdr(pip.susie, is_effect, ts)
+  res.svb = calculate_tpr_vs_fdr(pip.survsvb, is_effect, ts)
+  res.bvsnlp = calculate_tpr_vs_fdr(pip.bvsnlp, is_effect, ts)
+  
+  
+  plot(res.susie[,2], res.susie[,1], type = "l", xlim = c(0, 1), ylim = c(0, 1), xlab = "FDR", ylab = "Power",
+       main = paste0("Effect 0-3 & X independent", ",censor=", censor_lvl[i]), cex.main = 2)
+  lines(res.svb[,2], res.svb[,1], type = "l", col = 2)
+  lines(res.bvsnlp[,2], res.bvsnlp[,1], type = "l", col = 3)
+  points(res.susie[96,2], res.susie[96, 1])
+  points(res.svb[96,2], res.svb[96, 1])
+  points(res.bvsnlp[96,2], res.bvsnlp[96, 1])
+  legend("bottomright", legend = c("susie", "survival.svb", "bvsnlp"), col = c(1,2,3), lty = 1)
+}
+
+```
+
+The dots indicate PIP threshold = 0.95.
+
+
+
+
+
+
