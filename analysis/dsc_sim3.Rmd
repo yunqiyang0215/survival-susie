@@ -153,12 +153,30 @@ for (i in 1:5){
 
 The dots indicate PIP threshold = 0.95.
 
-### 4. independent X, censoring = 0.8.
+### 4. Real/independent X, censoring = 0.8.
 
-Susie has ~1-1.5% less power than bvsnlp when fdr is around 0.1. 
+For independent X, susie has ~1-1.5% less power than bvsnlp when fdr is around 0.1. 
 
-```{r }
+```{r fig.width=8, fig.height=4}
+par(mfrow = c(1,2))
 censor_lvl = 0.8
+indx = which(susie$simulate.cor_type == "real" & susie$simulate.censor_lvl == censor_lvl)
+pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
+  
+ts = seq(from = 0, to = 1, by = 0.01)
+res.susie = calculate_tpr_vs_fdr(pip.susie, is_effect, ts)
+res.bvsnlp = calculate_tpr_vs_fdr(pip.bvsnlp, is_effect, ts)
+  
+  
+plot(res.susie[,2], res.susie[,1], type = "l", xlim = c(0, 0.4), ylim = c(0,0.2), xlab = "FDR", ylab = "Power", main = paste0("Real X, effect 0-3", ",censor=", censor_lvl))
+lines(res.bvsnlp[,2], res.bvsnlp[,1], type = "l", col = 3)
+points(res.susie[96,2], res.susie[96, 1])
+points(res.bvsnlp[96,2], res.bvsnlp[96, 1])
+legend("topleft", legend = c("susie", "bvsnlp"), col = c(1,3), lty = 1)
+
+#####
 indx = which(susie$simulate.cor_type == "independent" & susie$simulate.censor_lvl == censor_lvl)
 pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
 pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
