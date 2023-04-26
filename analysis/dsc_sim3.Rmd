@@ -57,7 +57,7 @@ bvsnlp = readRDS("./data/dsc3/bvsnlp.rds")
 ### 1. Results using real correlation structure from data
 
 ```{r, fig.width=12, fig.height=8}
-par(mfrow = c(2,3))
+par(mfrow = c(2,3), cex.axis = 1.5)
 censor_lvl = c(0, 0.2, 0.4, 0.6, 0.8)
 for (i in 1:5){
   indx = which(susie$simulate.cor_type == "real" & susie$simulate.censor_lvl == censor_lvl[i])
