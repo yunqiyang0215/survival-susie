@@ -18,13 +18,9 @@ Version 3 simulation results, comparing power vs. FDR across 3 methods. I vary t
 
 **Conclusion**:
 
-1. When X are highly correlated, susie performs best. 
+1. Overstating L with estimating prior variance doesn't seem to inflate the marginal PIP.
 
-2. When X are independent, and without null model data, all methods are similar. 
-
-3. survival.svb and bvsnlp doesn't perform well after adding data from null model.
-
-4. When censoring level = 0.4, susie performance starts to get worse. 
+2. Susie performs worse than bvsnlp when censoring = 0.8, despite X is independent or highly correlated. 
 
 ```{r knitr-opts, include=FALSE}
 knitr::opts_chunk$set(comment = "#",collapse = TRUE,results = "hold",
