@@ -9,6 +9,12 @@ output: html_document
 
 Test for implementation of Poisson SER.  
 
+```{r knitr, echo=FALSE}
+knitr::opts_chunk$set(comment = "#",results = "hold",collapse = TRUE,
+                      fig.align = "center")
+```
+
+
 ```{r}
 source("/Users/nicholeyang/Downloads/survival-susie/code/vi_poisson.R")
 ```
@@ -50,9 +56,15 @@ lower = c(-1e2, 1e-12)
 upper = c(1e2, 1e4)
 
 result <- update_q(X, dat$y, ss, m.vec, v2.vec, sigma2 = 1, pi, alpha, maxiter = 20, tol, lower, upper)
-tail(result$alpha)
-tail(result$m.vec)
-tail(result$v2.vec)
+head(result$alpha)
+head(result$m.vec)
+head(result$v2.vec)
+
+
+tail(result$alpha)[1, ]
+tail(result$m.vec)[1, ]
+tail(result$v2.vec)[1, ]
+
 ```
 
 ```{r}
@@ -86,9 +98,14 @@ lower = c(-1e2, 1e-12)
 upper = c(1e2, 1e4)
 
 result <- update_q(X, dat$y, ss, m.vec, v2.vec, sigma2 = 1, pi, alpha, maxiter = 20, tol, lower, upper)
-tail(result$alpha)
-tail(result$m.vec)
-tail(result$v2.vec)
+head(result$alpha)
+head(result$m.vec)
+head(result$v2.vec)
+
+
+tail(result$alpha)[1, ]
+tail(result$m.vec)[1, ]
+tail(result$v2.vec)[1, ]
 ```
 
 ```{r}
@@ -122,9 +139,14 @@ lower = c(-1e2, 1e-12)
 upper = c(1e2, 1e4)
 
 result <- update_q(X, dat$y, ss, m.vec, v2.vec, sigma2 = 1, pi, alpha, maxiter = 20, tol, lower, upper)
-tail(result$alpha)
-tail(result$m.vec)
-tail(result$v2.vec)
+head(result$alpha)
+head(result$m.vec)
+head(result$v2.vec)
+
+
+tail(result$alpha)[1, ]
+tail(result$m.vec)[1, ]
+tail(result$v2.vec)[1, ]
 ```
 
 ```{r}
