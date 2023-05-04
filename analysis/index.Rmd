@@ -51,6 +51,8 @@ Try variational approximation:
 
 + [Variational approximation on exponential survival model](vi_exponential.html)
 
++ [Poisson SER](vi_poisson.html)
+
 Real data simulation:
 
 + [Plot PIPs](compare_pip.html)
