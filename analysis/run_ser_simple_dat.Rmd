@@ -6,7 +6,9 @@ output: html_document
 ---
 ### Description:
 
-I simulated data in 5 different scenarios, and apply both coxph model and susie procedure. The data simulation procedure is available at https://yunqiyang0215.github.io/survival-susie/sim_survival.html
+I simulated data in 5 different scenarios, and apply both coxph model and susie procedure. The data simulation procedure is available at https://yunqiyang0215.github.io/survival-susie/sim_survival.html.
+
+Here I use corrected ABF instead of original Wakefeld ABF.
 
 
 #### The Wakefield approximation:
@@ -16,14 +18,14 @@ $$
 where $V$ is the variance of estimated regression coefficient, and $W$ is variance in the normal prior, $N(0,W)$. 
 
 ```{r}
-# Function to calculate approximate BF based on Wakefield approximation
+# Function to calculate log of approximate BF based on Wakefield approximation
 # @param z: zscore of the regression coefficient
 # @param s: standard deviation of the estimated coefficient
-compute_abf <- function(z, s, prior_variance){
-  abf <- sqrt(s^2/(s^2+prior_variance))*exp(z^2/2*(prior_variance/(s^2+prior_variance)))
-  return(abf)
+compute_lbf <- function(z, s, prior_variance){
+  abf <- sqrt(s^2/(s^2+prior_variance))
+  lbf <- log(sqrt(s^2/(s^2+prior_variance))) + z^2/2*(prior_variance/(s^2+prior_variance))
+  return(lbf)
 }
-
 
 compute_approx_post_var <- function(z, s, prior_variance){
   post_var <- 1/(1/s^2 + 1/prior_variance)
@@ -54,15 +56,17 @@ surv_uni_fun <- function(x, y, o, prior_variance, estimate_intercept = 0, ...){
   bhat <- summary(fit)$coefficients[1, 1] # bhat = -alphahat
   sd <- summary(fit)$coefficients[1, 3]
   zscore <- bhat/sd
-  bf <- compute_abf(zscore, sd, prior_variance)
+  lbf <- compute_lbf(zscore, sd, prior_variance)
+  lbf.corr <- lbf - bhat^2/sd^2/2+ summary(fit)$logtest[1]/2
   var <- compute_approx_post_var(zscore, sd, prior_variance)
   mu <- compute_approx_post_mean(var, sd, bhat)
-  lbf <- log(bf)
-  return(list(mu = mu, var=var, lbf=lbf, intercept=0))
+  return(list(mu = mu, var=var, lbf=lbf.corr, intercept=0))
 }
 
 fit_coxph <- ser_from_univariate(surv_uni_fun)
 ```
+
+
 
 
 
