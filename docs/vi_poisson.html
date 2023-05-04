@@ -499,16 +499,16 @@ code/vi_poisson.R
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree8d48e503d117528f8f7d793222077f46e207e8b5targetblank8d48e50a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/8d48e503d117528f8f7d793222077f46e207e8b5" target="_blank">8d48e50</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree56599b61dcb1cda928ef9aa3d8627d62fcaa1c2dtargetblank56599b6a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/56599b61dcb1cda928ef9aa3d8627d62fcaa1c2d" target="_blank">56599b6</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree8d48e503d117528f8f7d793222077f46e207e8b5targetblank8d48e50a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree56599b61dcb1cda928ef9aa3d8627d62fcaa1c2dtargetblank56599b6a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/8d48e503d117528f8f7d793222077f46e207e8b5" target="_blank">8d48e50</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/56599b61dcb1cda928ef9aa3d8627d62fcaa1c2d" target="_blank">56599b6</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -521,6 +521,7 @@ Ignored files:
     Ignored:    analysis/.DS_Store
     Ignored:    analysis/.RData
     Ignored:    analysis/.Rhistory
+    Ignored:    analysis/figure/
     Ignored:    data/.DS_Store
 
 Untracked files:
@@ -576,6 +577,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/56599b61dcb1cda928ef9aa3d8627d62fcaa1c2d/analysis/vi_poisson.Rmd" target="_blank">56599b6</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-05-04
+</td>
+<td>
+wflow_publish("analysis/vi_poisson.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/fc5ae541b55460ef84aa478649d7e2ec9816dbd9/docs/vi_poisson.html" target="_blank">fc5ae54</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-05-04
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -813,12 +848,49 @@ tail(result$v2.vec, n = 1)
 # [20,] 0.03474685 0.05694683 0.06156505 0.03536832 0.03734782</code></pre>
 <pre class="r"><code>plot(result$elbo, xlab = &quot;iter&quot;, ylab = &quot;elbo&quot;)</code></pre>
 <p><img src="figure/vi_poisson.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
+Past versions of unnamed-chunk-5-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/fc5ae541b55460ef84aa478649d7e2ec9816dbd9/docs/figure/vi_poisson.Rmd/unnamed-chunk-5-1.png" target="_blank">fc5ae54</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-05-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="simulation-2" class="section level1">
 <h1>Simulation 2</h1>
 <pre class="r"><code>set.seed(3)
-n = 50
-p = 10
+n = 200
+p = 5
 ss = rep(1, n)
 X = matrix(NA, nrow = n, ncol = p)
 for (i in 1:p){
@@ -828,16 +900,11 @@ for (i in 1:p){
 dat = sim.data(n, X, ss, sigma2 = 1, prior.prob = rep(1/p, p))
 dat$b.vec
 #            [,1]
-#  [1,] 0.0000000
-#  [2,] 0.0000000
-#  [3,] 0.0000000
-#  [4,] 0.0000000
-#  [5,] 0.0000000
-#  [6,] 0.0000000
-#  [7,] 0.0000000
-#  [8,] 0.0000000
-#  [9,] 0.9386706
-# [10,] 0.0000000</code></pre>
+# [1,]  0.0000000
+# [2,]  0.0000000
+# [3,]  0.0000000
+# [4,] -0.9728448
+# [5,]  0.0000000</code></pre>
 <pre class="r"><code># initializations 
 m.vec = rep(1, p)
 v2.vec = rep(1, p)
@@ -851,71 +918,81 @@ result &lt;- update_q(X, dat$y, ss, m.vec, v2.vec, sigma2 = 1, pi, alpha, maxite
 head(result$alpha)
 head(result$m.vec)
 head(result$v2.vec)
-#              [,1]         [,2]         [,3]         [,4]         [,5]
-# [1,] 1.000000e-01 1.000000e-01 1.000000e-01 1.000000e-01 1.000000e-01
-# [2,] 8.160190e-23 1.837385e-20 2.926887e-22 2.149848e-22 7.300604e-23
-# [3,] 8.966088e-23 1.950555e-20 3.200469e-22 2.353801e-22 8.026087e-23
-# [4,] 8.976002e-23 1.951927e-20 3.203827e-22 2.356306e-22 8.035014e-23
-# [5,] 8.976002e-23 1.951927e-20 3.203827e-22 2.356306e-22 8.035014e-23
-# [6,] 8.976002e-23 1.951927e-20 3.203827e-22 2.356306e-22 8.035014e-23
-#              [,6]         [,7]         [,8] [,9]        [,10]
-# [1,] 1.000000e-01 1.000000e-01 1.000000e-01  0.1 1.000000e-01
-# [2,] 6.423000e-22 1.954893e-22 4.706510e-22  1.0 7.597508e-23
-# [3,] 6.991325e-22 2.139658e-22 5.136975e-22  1.0 8.352319e-23
-# [4,] 6.998287e-22 2.141927e-22 5.142254e-22  1.0 8.361608e-23
-# [5,] 6.998287e-22 2.141927e-22 5.142254e-22  1.0 8.361608e-23
-# [6,] 6.998287e-22 2.141927e-22 5.142254e-22  1.0 8.361608e-23
-#             [,1]       [,2]       [,3]       [,4]        [,5]       [,6]
-# [1,] 1.000000000  1.0000000  1.0000000  1.0000000  1.00000000  1.0000000
-# [2,] 0.008465717 -0.5351202 -0.2202389 -0.1956396 -0.05026163 -0.2900640
-# [3,] 0.008451398 -0.5319638 -0.2194054 -0.1949107 -0.05006866 -0.2887800
-# [4,] 0.008442165 -0.5319602 -0.2194050 -0.1949104 -0.05006866 -0.2887792
-# [5,] 0.008442165 -0.5319602 -0.2194050 -0.1949104 -0.05006866 -0.2887792
-# [6,] 0.008442165 -0.5319602 -0.2194050 -0.1949104 -0.05006866 -0.2887792
-#            [,7]       [,8]      [,9]       [,10]
-# [1,]  1.0000000  1.0000000 1.0000000  1.00000000
-# [2,] -0.1959326 -0.2532504 0.8946622 -0.07940032
-# [3,] -0.1950457 -0.2523087 0.8936485 -0.07913235
-# [4,] -0.1950453 -0.2523082 0.8936485 -0.07913229
-# [5,] -0.1950453 -0.2523082 0.8936485 -0.07913178
-# [6,] -0.1950453 -0.2523082 0.8936485 -0.07913178
-#            [,1]       [,2]       [,3]       [,4]       [,5]       [,6]
-# [1,] 1.00000000 1.00000000 1.00000000 1.00000000 1.00000000 1.00000000
-# [2,] 0.02451328 0.02480646 0.01616001 0.01577584 0.01742374 0.01858618
-# [3,] 0.02437216 0.02470806 0.01611206 0.01572655 0.01734317 0.01852476
-# [4,] 0.02436691 0.02470465 0.01611123 0.01572574 0.01734317 0.01852359
-# [5,] 0.02436691 0.02470465 0.01611123 0.01572574 0.01734317 0.01852359
-# [6,] 0.02436691 0.02470465 0.01611123 0.01572574 0.01734317 0.01852359
-#            [,7]       [,8]        [,9]      [,10]
-# [1,] 1.00000000 1.00000000 1.000000000 1.00000000
-# [2,] 0.01839795 0.01581810 0.005019069 0.01381755
-# [3,] 0.01831743 0.01577332 0.004995734 0.01377364
-# [4,] 0.01831634 0.01577252 0.004995734 0.01377216
-# [5,] 0.01831634 0.01577252 0.004995734 0.01377199
-# [6,] 0.01831634 0.01577252 0.004995734 0.01377199</code></pre>
+#               [,1]          [,2]          [,3] [,4]          [,5]
+# [1,]  2.000000e-01  2.000000e-01  2.000000e-01  0.2  2.000000e-01
+# [2,] 2.573553e-100 4.966843e-100 3.413141e-100  1.0 8.244662e-100
+# [3,] 2.558142e-100 4.937279e-100 3.392754e-100  1.0 8.195830e-100
+# [4,] 2.558142e-100 4.937279e-100 3.392754e-100  1.0 8.195830e-100
+# [5,] 2.558142e-100 4.937279e-100 3.392754e-100  1.0 8.195830e-100
+# [6,] 2.558142e-100 4.937279e-100 3.392754e-100  1.0 8.195830e-100
+#             [,1]        [,2]        [,3]      [,4]      [,5]
+# [1,]  1.00000000  1.00000000  1.00000000  1.000000 1.0000000
+# [2,] -0.05615829 -0.09768592 -0.07725215 -1.005268 0.1202053
+# [3,] -0.05615829 -0.09768592 -0.07725215 -1.005268 0.1202053
+# [4,] -0.05615829 -0.09768592 -0.07725215 -1.005268 0.1202053
+# [5,] -0.05615829 -0.09768592 -0.07725215 -1.005268 0.1202053
+# [6,] -0.05615829 -0.09768592 -0.07725215 -1.005268 0.1202053
+#             [,1]        [,2]        [,3]        [,4]        [,5]
+# [1,] 1.000000000 1.000000000 1.000000000 1.000000000 1.000000000
+# [2,] 0.005221934 0.004810562 0.004911976 0.001547982 0.004865276
+# [3,] 0.005221934 0.004810562 0.004911976 0.001547982 0.004865276
+# [4,] 0.005221934 0.004810562 0.004911976 0.001547982 0.004865276
+# [5,] 0.005221934 0.004810562 0.004911976 0.001547982 0.004865276
+# [6,] 0.005221934 0.004810562 0.004911976 0.001547982 0.004865276</code></pre>
 <pre class="r"><code>tail(result$alpha, n = 1)
 tail(result$m.vec, n = 1)
 tail(result$v2.vec, n = 1)
-#               [,1]         [,2]         [,3]         [,4]         [,5]
-# [20,] 8.976002e-23 1.951927e-20 3.203827e-22 2.356306e-22 8.035014e-23
-#               [,6]         [,7]         [,8] [,9]        [,10]
-# [20,] 6.998287e-22 2.141927e-22 5.142254e-22    1 8.361608e-23
-#              [,1]       [,2]      [,3]       [,4]        [,5]       [,6]
-# [20,] 0.008442165 -0.5319602 -0.219405 -0.1949104 -0.05006866 -0.2887792
-#             [,7]       [,8]      [,9]       [,10]
-# [20,] -0.1950453 -0.2523082 0.8936485 -0.07913178
-#             [,1]       [,2]       [,3]       [,4]       [,5]       [,6]
-# [20,] 0.02436691 0.02470465 0.01611123 0.01572574 0.01734317 0.01852359
-#             [,7]       [,8]        [,9]      [,10]
-# [20,] 0.01831634 0.01577252 0.004995734 0.01377199</code></pre>
+#                [,1]          [,2]          [,3] [,4]         [,5]
+# [20,] 2.558142e-100 4.937279e-100 3.392754e-100    1 8.19583e-100
+#              [,1]        [,2]        [,3]      [,4]      [,5]
+# [20,] -0.05615829 -0.09768592 -0.07725215 -1.005268 0.1202053
+#              [,1]        [,2]        [,3]        [,4]        [,5]
+# [20,] 0.005221934 0.004810562 0.004911976 0.001547982 0.004865276</code></pre>
 <pre class="r"><code>plot(result$elbo, xlab = &quot;iter&quot;, ylab = &quot;elbo&quot;)</code></pre>
 <p><img src="figure/vi_poisson.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-9-1">
+Past versions of unnamed-chunk-9-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-9-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/fc5ae541b55460ef84aa478649d7e2ec9816dbd9/docs/figure/vi_poisson.Rmd/unnamed-chunk-9-1.png" target="_blank">fc5ae54</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-05-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="simulation-3" class="section level1">
 <h1>Simulation 3</h1>
 <pre class="r"><code>set.seed(5)
-n = 20
-p = 10
+n = 2e3
+p = 5
 ss = rep(1, n)
 X = matrix(NA, nrow = n, ncol = p)
 for (i in 1:p){
@@ -924,89 +1001,31 @@ for (i in 1:p){
 
 dat = sim.data(n, X, ss, sigma2 = 1, prior.prob = rep(1/p, p))
 dat$b.vec
-#             [,1]
-#  [1,]  0.0000000
-#  [2,]  0.0000000
-#  [3,]  0.0000000
-#  [4,]  0.0000000
-#  [5,] -0.9895031
-#  [6,]  0.0000000
-#  [7,]  0.0000000
-#  [8,]  0.0000000
-#  [9,]  0.0000000
-# [10,]  0.0000000</code></pre>
+#           [,1]
+# [1,] 0.0000000
+# [2,] 0.0000000
+# [3,] 0.0000000
+# [4,] 0.1007886
+# [5,] 0.0000000</code></pre>
 <pre class="r"><code># initializations 
 m.vec = rep(1, p)
 v2.vec = rep(1, p)
 alpha &lt;- rep(1/p, p)
 pi &lt;- rep(1/p, p)
 
-lower = c(-1e2, 1e-12)
-upper = c(1e2, 1e4)
+lower = c(-0.1, 0)
+upper = c(10, 1e4)
 
-result &lt;- update_q(X, dat$y, ss, m.vec, v2.vec, sigma2 = 1, pi, alpha, maxiter = 20, tol, lower, upper)
+result &lt;- update_q(X, dat$y, ss, m.vec, v2.vec, sigma2 = 1, pi, alpha, maxiter = 1, tol, lower, upper)
 head(result$alpha)
 head(result$m.vec)
 head(result$v2.vec)
-#              [,1]         [,2]         [,3]         [,4]      [,5]         [,6]
-# [1,] 1.000000e-01 1.000000e-01 1.000000e-01 0.1000000000 0.1000000 0.1000000000
-# [2,] 3.014911e-05 2.425715e-05 4.801244e-05 0.0002011773 0.9992522 0.0001497867
-# [3,] 2.940088e-05 2.363262e-05 4.693750e-05 0.0001984491 0.9992674 0.0001463048
-# [4,] 2.935296e-05 2.359265e-05 4.686860e-05 0.0001982740 0.9992684 0.0001460816
-# [5,] 2.935271e-05 2.359244e-05 4.686825e-05 0.0001982730 0.9992684 0.0001460804
-# [6,] 2.934982e-05 2.359003e-05 4.686409e-05 0.0001982625 0.9992685 0.0001460670
-#              [,7]         [,8]         [,9]        [,10]
-# [1,] 1.000000e-01 1.000000e-01 0.1000000000 1.000000e-01
-# [2,] 1.898145e-05 2.394215e-05 0.0001600789 9.143436e-05
-# [3,] 1.848750e-05 2.333132e-05 0.0001564570 8.955497e-05
-# [4,] 1.845588e-05 2.329221e-05 0.0001562247 8.943439e-05
-# [5,] 1.845572e-05 2.329201e-05 0.0001562235 8.943377e-05
-# [6,] 1.845381e-05 2.328966e-05 0.0001562095 8.942650e-05
-#           [,1]      [,2]       [,3]      [,4]      [,5]      [,6]        [,7]
-# [1,] 1.0000000 1.0000000  1.0000000 1.0000000  1.000000 1.0000000  1.00000000
-# [2,] 0.1889144 0.1475168 -0.3219587 0.6453213 -1.009862 0.3521073 -0.01408316
-# [3,] 0.1894175 0.1477215 -0.3233743 0.6491299 -1.011720 0.3525601 -0.01408750
-# [4,] 0.1894184 0.1477215 -0.3233922 0.6493791 -1.011727 0.3525601 -0.01408750
-# [5,] 0.1894192 0.1477215 -0.3234209 0.6493791 -1.011841 0.3525601 -0.01408750
-# [6,] 0.1894201 0.1477215 -0.3234303 0.6493853 -1.011841 0.3525601 -0.01408750
-#            [,8]      [,9]      [,10]
-# [1,] 1.00000000 1.0000000  1.0000000
-# [2,] 0.05887939 0.3791065 -0.4304632
-# [3,] 0.05890361 0.3796767 -0.4320297
-# [4,] 0.05891712 0.3796767 -0.4320505
-# [5,] 0.05893159 0.3796767 -0.4320738
-# [6,] 0.05893947 0.3796767 -0.4320863
-#            [,1]       [,2]       [,3]      [,4]       [,5]       [,6]
-# [1,] 1.00000000 1.00000000 1.00000000 1.0000000 1.00000000 1.00000000
-# [2,] 0.05147828 0.02878359 0.07897625 0.1107179 0.03546592 0.02529398
-# [3,] 0.05160729 0.02881910 0.07933641 0.1114068 0.03544978 0.02531387
-# [4,] 0.05160999 0.02881910 0.07936433 0.1114528 0.03545435 0.02531387
-# [5,] 0.05161159 0.02881910 0.07934725 0.1114528 0.03545032 0.02531387
-# [6,] 0.05161292 0.02881910 0.07936358 0.1114576 0.03545032 0.02531387
-#            [,7]       [,8]       [,9]      [,10]
-# [1,] 1.00000000 1.00000000 1.00000000 1.00000000
-# [2,] 0.03937708 0.05629907 0.02995713 0.06946548
-# [3,] 0.03945907 0.05641958 0.02998278 0.06971016
-# [4,] 0.03945907 0.05643381 0.02998278 0.06973495
-# [5,] 0.03945907 0.05642084 0.02998278 0.06971643
-# [6,] 0.03945907 0.05643071 0.02998278 0.06973245</code></pre>
-<pre class="r"><code>tail(result$alpha, n = 1)
+
+tail(result$alpha, n = 1)
 tail(result$m.vec, n = 1)
 tail(result$v2.vec, n = 1)
-#               [,1]         [,2]         [,3]         [,4]      [,5]        [,6]
-# [20,] 2.934982e-05 2.359003e-05 4.686409e-05 0.0001982625 0.9992685 0.000146067
-#               [,7]         [,8]         [,9]       [,10]
-# [20,] 1.845381e-05 2.328966e-05 0.0001562095 8.94265e-05
-#            [,1]      [,2]       [,3]      [,4]      [,5]      [,6]       [,7]
-# [20,] 0.1894472 0.1477215 -0.3234645 0.6493891 -1.011841 0.3525601 -0.0140875
-#             [,8]      [,9]      [,10]
-# [20,] 0.05897757 0.3796767 -0.4321214
-#             [,1]      [,2]       [,3]      [,4]       [,5]       [,6]
-# [20,] 0.05161323 0.0288191 0.07935792 0.1114539 0.03545032 0.02531387
-#             [,7]       [,8]       [,9]      [,10]
-# [20,] 0.03945907 0.05642541 0.02998278 0.06972517</code></pre>
-<pre class="r"><code>plot(result$elbo, xlab = &quot;iter&quot;, ylab = &quot;elbo&quot;)</code></pre>
-<p><img src="figure/vi_poisson.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
+
+plot(result$elbo, xlab = &quot;iter&quot;, ylab = &quot;elbo&quot;)</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
