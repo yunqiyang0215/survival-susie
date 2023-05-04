@@ -1,11 +1,12 @@
 
 #### Helper functions ######
-# Function to calculate approximate BF based on Wakefield approximation
+# Function to calculate log of approximate BF based on Wakefield approximation
 # @param z: zscore of the regression coefficient
 # @param s: standard deviation of the estimated coefficient
-compute_abf <- function(z, s, prior_variance){
-  abf <- sqrt(s^2/(s^2+prior_variance))*exp(z^2/2*(prior_variance/(s^2+prior_variance)))
-  return(abf)
+compute_lbf <- function(z, s, prior_variance){
+  abf <- sqrt(s^2/(s^2+prior_variance))
+  lbf <- log(sqrt(s^2/(s^2+prior_variance))) + z^2/2*(prior_variance/(s^2+prior_variance))
+  return(lbf)
 }
 
 
@@ -28,10 +29,9 @@ surv_uni_fun <- function(x, y, o, prior_variance, estimate_intercept = 0, ...){
   bhat <- summary(fit)$coefficients[1, 1] # bhat = -alphahat
   sd <- summary(fit)$coefficients[1, 3]
   zscore <- bhat/sd
-  bf <- compute_abf(zscore, sd, prior_variance)
+  lbf <- compute_lbf(zscore, sd, prior_variance)
   var <- compute_approx_post_var(zscore, sd, prior_variance)
   mu <- compute_approx_post_mean(var, sd, bhat)
-  lbf <- log(bf)
   return(list(mu = mu, var=var, lbf=lbf, intercept=0))
 }
 
