@@ -7,7 +7,7 @@ output: html_document
 
 ## Description:
 
-Test for implementation of Poisson SER.  
+Test for implementation of Poisson SER. The derivation can be found here: https://www.overleaf.com/read/rnftbwbsqrrg
 
 ```{r knitr, echo=FALSE}
 knitr::opts_chunk$set(comment = "#",results = "hold",collapse = TRUE,
