@@ -76,8 +76,8 @@ plot(result$elbo, xlab = "iter", ylab = "elbo")
 # Simulation 2
 ```{r  }
 set.seed(3)
-n = 50
-p = 10
+n = 200
+p = 5
 ss = rep(1, n)
 X = matrix(NA, nrow = n, ncol = p)
 for (i in 1:p){
@@ -120,8 +120,8 @@ plot(result$elbo, xlab = "iter", ylab = "elbo")
 # Simulation 3
 ```{r  }
 set.seed(5)
-n = 20
-p = 10
+n = 2e3
+p = 5
 ss = rep(1, n)
 X = matrix(NA, nrow = n, ncol = p)
 for (i in 1:p){
@@ -132,30 +132,25 @@ dat = sim.data(n, X, ss, sigma2 = 1, prior.prob = rep(1/p, p))
 dat$b.vec
 ```
 
-```{r}
+```{r eval = FALSE}
 # initializations 
 m.vec = rep(1, p)
 v2.vec = rep(1, p)
 alpha <- rep(1/p, p)
 pi <- rep(1/p, p)
 
-lower = c(-1e2, 1e-12)
-upper = c(1e2, 1e4)
+lower = c(-0.1, 0)
+upper = c(10, 1e4)
 
-result <- update_q(X, dat$y, ss, m.vec, v2.vec, sigma2 = 1, pi, alpha, maxiter = 20, tol, lower, upper)
+result <- update_q(X, dat$y, ss, m.vec, v2.vec, sigma2 = 1, pi, alpha, maxiter = 1, tol, lower, upper)
 head(result$alpha)
 head(result$m.vec)
 head(result$v2.vec)
-```
 
-
-```{r}
 tail(result$alpha, n = 1)
 tail(result$m.vec, n = 1)
 tail(result$v2.vec, n = 1)
-```
 
-```{r}
 plot(result$elbo, xlab = "iter", ylab = "elbo")
 ```
 
