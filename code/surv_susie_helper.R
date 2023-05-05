@@ -10,6 +10,7 @@ compute_lbf <- function(z, s, prior_variance){
 }
 
 
+
 compute_approx_post_var <- function(z, s, prior_variance){
   post_var <- 1/(1/s^2 + 1/prior_variance)
   return(post_var)
@@ -30,8 +31,9 @@ surv_uni_fun <- function(x, y, o, prior_variance, estimate_intercept = 0, ...){
   sd <- summary(fit)$coefficients[1, 3]
   zscore <- bhat/sd
   lbf <- compute_lbf(zscore, sd, prior_variance)
+  lbf.corr <- lbf - bhat^2/sd^2/2+ summary(fit)$logtest[1]/2
   var <- compute_approx_post_var(zscore, sd, prior_variance)
   mu <- compute_approx_post_mean(var, sd, bhat)
-  return(list(mu = mu, var=var, lbf=lbf, intercept=0))
+  return(list(mu = mu, var=var, lbf=lbf.corr, intercept=0))
 }
 
