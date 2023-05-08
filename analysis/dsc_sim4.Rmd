@@ -229,7 +229,7 @@ legend("bottomright", legend = c("susie", "bvsnlp"), col = c(1,3), lty = 1)
 ```
 ### 5. Assess Susie CS
 
-# Among the 1000 null data, susie only wrongly output 1 credible set as below:
+Among the 1000 null data, susie only wrongly output 1 credible set as below:
 ```{r}
 indx = which(susie$simulate.num_effect == 0)
 res = lapply(indx, function(x) is.null(susie$susie.cs[[x]]$cs))
