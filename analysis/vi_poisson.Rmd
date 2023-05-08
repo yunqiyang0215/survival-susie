@@ -48,14 +48,14 @@ dat$b.vec
 ```{r}
 # initializations 
 m.vec = rep(1, p)
-v2.vec = rep(1, p)
+logv2.vec = rep(1, p)
 alpha <- rep(1/p, p)
 pi <- rep(1/p, p)
 
 lower = c(-1e2, 1e-12)
 upper = c(1e2, 1e4)
 
-result <- update_q(X, dat$y, ss, m.vec, v2.vec, sigma2 = 1, pi, alpha, maxiter = 20, tol, lower, upper)
+result <- update_q(X, dat$y, ss, m.vec, logv2.vec, sigma2 = 1, pi, alpha, maxiter = 20, tol, lower, upper)
 head(result$alpha)
 head(result$m.vec)
 head(result$v2.vec)
@@ -64,7 +64,7 @@ head(result$v2.vec)
 ```{r}
 tail(result$alpha, n = 1)
 tail(result$m.vec, n = 1)
-tail(result$v2.vec, n = 1)
+tail(result$logv2.vec, n = 1)
 ```
 
 
@@ -101,7 +101,7 @@ upper = c(1e2, 1e4)
 result <- update_q(X, dat$y, ss, m.vec, v2.vec, sigma2 = 1, pi, alpha, maxiter = 20, tol, lower, upper)
 head(result$alpha)
 head(result$m.vec)
-head(result$v2.vec)
+head(result$logv2.vec)
 ```
 
 
@@ -109,7 +109,7 @@ head(result$v2.vec)
 ```{r}
 tail(result$alpha, n = 1)
 tail(result$m.vec, n = 1)
-tail(result$v2.vec, n = 1)
+tail(result$logv2.vec, n = 1)
 ```
 
 ```{r}
@@ -132,25 +132,26 @@ dat = sim.data(n, X, ss, sigma2 = 1, prior.prob = rep(1/p, p))
 dat$b.vec
 ```
 
-```{r eval = FALSE}
+```{r  }
 # initializations 
 m.vec = rep(1, p)
 v2.vec = rep(1, p)
 alpha <- rep(1/p, p)
 pi <- rep(1/p, p)
 
-lower = c(-0.1, 0)
-upper = c(10, 1e4)
-
-result <- update_q(X, dat$y, ss, m.vec, v2.vec, sigma2 = 1, pi, alpha, maxiter = 1, tol, lower, upper)
+result <- update_q(X, dat$y, ss, m.vec, v2.vec, sigma2 = 1, pi, alpha, maxiter = 50, tol, lower, upper)
 head(result$alpha)
 head(result$m.vec)
-head(result$v2.vec)
+head(result$logv2.vec)
+```
 
+```{r}
 tail(result$alpha, n = 1)
 tail(result$m.vec, n = 1)
-tail(result$v2.vec, n = 1)
+tail(result$logv2.vec, n = 1)
+```
 
+```{r}
 plot(result$elbo, xlab = "iter", ylab = "elbo")
 ```
 
