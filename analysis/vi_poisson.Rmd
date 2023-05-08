@@ -55,7 +55,7 @@ pi <- rep(1/p, p)
 lower = c(-1e2, 1e-12)
 upper = c(1e2, 1e4)
 
-result <- update_q(X, dat$y, ss, m.vec, logv2.vec, sigma2 = 1, pi, alpha, maxiter = 20, tol, lower, upper)
+result <- update_q(X, dat$y, ss, m.vec, logv2.vec, sigma2 = 1, pi, alpha, maxiter = 20, tol)
 head(result$alpha)
 head(result$m.vec)
 head(result$v2.vec)
@@ -64,7 +64,7 @@ head(result$v2.vec)
 ```{r}
 tail(result$alpha, n = 1)
 tail(result$m.vec, n = 1)
-tail(result$logv2.vec, n = 1)
+tail(result$v2.vec, n = 1)
 ```
 
 
@@ -98,10 +98,10 @@ pi <- rep(1/p, p)
 lower = c(-1e2, 1e-12)
 upper = c(1e2, 1e4)
 
-result <- update_q(X, dat$y, ss, m.vec, v2.vec, sigma2 = 1, pi, alpha, maxiter = 20, tol, lower, upper)
+result <- update_q(X, dat$y, ss, m.vec, v2.vec, sigma2 = 1, pi, alpha, maxiter = 20, tol)
 head(result$alpha)
 head(result$m.vec)
-head(result$logv2.vec)
+head(result$v2.vec)
 ```
 
 
@@ -109,7 +109,7 @@ head(result$logv2.vec)
 ```{r}
 tail(result$alpha, n = 1)
 tail(result$m.vec, n = 1)
-tail(result$logv2.vec, n = 1)
+tail(result$v2.vec, n = 1)
 ```
 
 ```{r}
@@ -139,16 +139,16 @@ v2.vec = rep(1, p)
 alpha <- rep(1/p, p)
 pi <- rep(1/p, p)
 
-result <- update_q(X, dat$y, ss, m.vec, v2.vec, sigma2 = 1, pi, alpha, maxiter = 50, tol, lower, upper)
+result <- update_q(X, dat$y, ss, m.vec, v2.vec, sigma2 = 1, pi, alpha, maxiter = 50, tol)
 head(result$alpha)
 head(result$m.vec)
-head(result$logv2.vec)
+head(result$v2.vec)
 ```
 
 ```{r}
 tail(result$alpha, n = 1)
 tail(result$m.vec, n = 1)
-tail(result$logv2.vec, n = 1)
+tail(result$v2.vec, n = 1)
 ```
 
 ```{r}
