@@ -499,16 +499,16 @@ code/vi_poisson.R
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree0cc052fef47bf54a70eb5949b3fda7e4d762e66ftargetblank0cc052fa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/0cc052fef47bf54a70eb5949b3fda7e4d762e66f" target="_blank">0cc052f</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree783d0e0739d497c6d775c6f72261175e2a11683ctargetblank783d0e0a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/783d0e0739d497c6d775c6f72261175e2a11683c" target="_blank">783d0e0</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree0cc052fef47bf54a70eb5949b3fda7e4d762e66ftargetblank0cc052fa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree783d0e0739d497c6d775c6f72261175e2a11683ctargetblank783d0e0a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/0cc052fef47bf54a70eb5949b3fda7e4d762e66f" target="_blank">0cc052f</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/783d0e0739d497c6d775c6f72261175e2a11683c" target="_blank">783d0e0</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -576,6 +576,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/783d0e0739d497c6d775c6f72261175e2a11683c/analysis/vi_poisson.Rmd" target="_blank">783d0e0</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-05-08
+</td>
+<td>
+wflow_publish("analysis/vi_poisson.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/0d942f777d8210cd4204aa0cfa0141477d87d116/docs/vi_poisson.html" target="_blank">0d942f7</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-05-08
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -879,7 +913,7 @@ pi &lt;- rep(1/p, p)
 lower = c(-1e2, 1e-12)
 upper = c(1e2, 1e4)
 
-result &lt;- update_q(X, dat$y, ss, m.vec, logv2.vec, sigma2 = 1, pi, alpha, maxiter = 20, tol, lower, upper)
+result &lt;- update_q(X, dat$y, ss, m.vec, logv2.vec, sigma2 = 1, pi, alpha, maxiter = 20, tol)
 head(result$alpha)
 head(result$m.vec)
 head(result$v2.vec)
@@ -897,16 +931,22 @@ head(result$v2.vec)
 # [4,] 0.7587173 -0.09988619 0.1220006 0.1653168 -0.9245491
 # [5,] 0.7586865 -0.09986875 0.1219760 0.1653349 -0.9245118
 # [6,] 0.7586884 -0.09984191 0.1219318 0.1653183 -0.9245082
-# NULL</code></pre>
+#            [,1]       [,2]       [,3]       [,4]       [,5]
+# [1,] 2.71828183 2.71828183 2.71828183 2.71828183 2.71828183
+# [2,] 0.03477527 0.05737539 0.06205195 0.03550702 0.03737092
+# [3,] 0.03474886 0.05698233 0.06160492 0.03537752 0.03734958
+# [4,] 0.03474452 0.05698159 0.06160405 0.03537723 0.03734636
+# [5,] 0.03474442 0.05698083 0.06160317 0.03537603 0.03734628
+# [6,] 0.03474434 0.05697715 0.06159899 0.03537580 0.03734598</code></pre>
 <pre class="r"><code>tail(result$alpha, n = 1)
 tail(result$m.vec, n = 1)
-tail(result$logv2.vec, n = 1)
+tail(result$v2.vec, n = 1)
 #             [,1]        [,2]         [,3]         [,4]      [,5]
 # [20,] 0.07436014 0.000108422 0.0001179054 0.0001184417 0.9252951
 #          [,1]        [,2]     [,3]      [,4]       [,5]
 # [20,] 0.75869 -0.09987165 0.121979 0.1653244 -0.9245125
-#            [,1]      [,2]      [,3]      [,4]      [,5]
-# [20,] -3.359838 -2.865434 -2.787454 -3.342008 -3.287595</code></pre>
+#            [,1]       [,2]       [,3]       [,4]       [,5]
+# [20,] 0.0347409 0.05695839 0.06157782 0.03536586 0.03734354</code></pre>
 <pre class="r"><code>plot(result$elbo, xlab = &quot;iter&quot;, ylab = &quot;elbo&quot;)</code></pre>
 <p><img src="figure/vi_poisson.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
@@ -931,6 +971,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/0d942f777d8210cd4204aa0cfa0141477d87d116/docs/figure/vi_poisson.Rmd/unnamed-chunk-5-1.png" target="_blank">0d942f7</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-05-08
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/fc5ae541b55460ef84aa478649d7e2ec9816dbd9/docs/figure/vi_poisson.Rmd/unnamed-chunk-5-1.png" target="_blank">fc5ae54</a>
@@ -975,10 +1026,10 @@ pi &lt;- rep(1/p, p)
 lower = c(-1e2, 1e-12)
 upper = c(1e2, 1e4)
 
-result &lt;- update_q(X, dat$y, ss, m.vec, v2.vec, sigma2 = 1, pi, alpha, maxiter = 20, tol, lower, upper)
+result &lt;- update_q(X, dat$y, ss, m.vec, v2.vec, sigma2 = 1, pi, alpha, maxiter = 20, tol)
 head(result$alpha)
 head(result$m.vec)
-head(result$logv2.vec)
+head(result$v2.vec)
 #               [,1]          [,2]          [,3] [,4]          [,5]
 # [1,]  2.000000e-01  2.000000e-01  2.000000e-01  0.2  2.000000e-01
 # [2,] 2.553238e-100 4.927759e-100 3.386268e-100  1.0 8.179769e-100
@@ -993,22 +1044,22 @@ head(result$logv2.vec)
 # [4,] -0.05591947 -0.09768510 -0.07726589 -1.005525 0.1202238
 # [5,] -0.05588152 -0.09769217 -0.07726916 -1.005526 0.1202286
 # [6,] -0.05590226 -0.09768731 -0.07726704 -1.005526 0.1202254
-#           [,1]      [,2]      [,3]      [,4]      [,5]
-# [1,]  1.000000  1.000000  1.000000  1.000000  1.000000
-# [2,] -5.265493 -5.351446 -5.330016 -6.643955 -5.340257
-# [3,] -5.265488 -5.351446 -5.330016 -6.643955 -5.340255
-# [4,] -5.265483 -5.351446 -5.330015 -6.643955 -5.340254
-# [5,] -5.265478 -5.351445 -5.330015 -6.643955 -5.340252
-# [6,] -5.265474 -5.351445 -5.330015 -6.643955 -5.340250</code></pre>
+#             [,1]        [,2]        [,3]        [,4]        [,5]
+# [1,] 2.718281828 2.718281828 2.718281828 2.718281828 2.718281828
+# [2,] 0.005166847 0.004741290 0.004843992 0.001301868 0.004794637
+# [3,] 0.005166872 0.004741291 0.004843993 0.001301869 0.004794646
+# [4,] 0.005166897 0.004741292 0.004843995 0.001301868 0.004794654
+# [5,] 0.005166921 0.004741293 0.004843997 0.001301868 0.004794663
+# [6,] 0.005166946 0.004741295 0.004843998 0.001301868 0.004794671</code></pre>
 <pre class="r"><code>tail(result$alpha, n = 1)
 tail(result$m.vec, n = 1)
-tail(result$logv2.vec, n = 1)
+tail(result$v2.vec, n = 1)
 #                [,1]          [,2]          [,3] [,4]          [,5]
 # [20,] 2.537608e-100 4.897769e-100 3.365588e-100    1 8.130234e-100
 #              [,1]        [,2]        [,3]      [,4]      [,5]
 # [20,] -0.05589784 -0.09768918 -0.07726762 -1.005526 0.1202261
-#            [,1]     [,2]      [,3]      [,4]      [,5]
-# [20,] -5.265356 -5.35144 -5.330008 -6.643955 -5.340213</code></pre>
+#              [,1]        [,2]        [,3]        [,4]        [,5]
+# [20,] 0.005167553 0.004741317 0.004844034 0.001301868 0.004794849</code></pre>
 <pre class="r"><code>plot(result$elbo, xlab = &quot;iter&quot;, ylab = &quot;elbo&quot;)</code></pre>
 <p><img src="figure/vi_poisson.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
@@ -1033,6 +1084,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/0d942f777d8210cd4204aa0cfa0141477d87d116/docs/figure/vi_poisson.Rmd/unnamed-chunk-9-1.png" target="_blank">0d942f7</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-05-08
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/970761bce6191e5e006180ecc84c83a21c8b6761/docs/figure/vi_poisson.Rmd/unnamed-chunk-9-1.png" target="_blank">970761b</a>
@@ -1085,10 +1147,10 @@ v2.vec = rep(1, p)
 alpha &lt;- rep(1/p, p)
 pi &lt;- rep(1/p, p)
 
-result &lt;- update_q(X, dat$y, ss, m.vec, v2.vec, sigma2 = 1, pi, alpha, maxiter = 50, tol, lower, upper)
+result &lt;- update_q(X, dat$y, ss, m.vec, v2.vec, sigma2 = 1, pi, alpha, maxiter = 50, tol)
 head(result$alpha)
 head(result$m.vec)
-head(result$logv2.vec)
+head(result$v2.vec)
 #             [,1]        [,2]        [,3]      [,4]        [,5]
 # [1,] 0.200000000 0.200000000 0.200000000 0.2000000 0.200000000
 # [2,] 0.009481848 0.005613518 0.005544442 0.9710396 0.008320616
@@ -1103,22 +1165,22 @@ head(result$logv2.vec)
 # [4,] -0.02049693 -0.0004463061 -0.0006695603 0.06413426 0.01786686
 # [5,] -0.02044858 -0.0004855282 -0.0006354725 0.06395415 0.01782245
 # [6,] -0.02042632 -0.0005388644 -0.0007260608 0.06392727 0.01780339
-#           [,1]      [,2]      [,3]      [,4]      [,5]
-# [1,]  1.000000  1.000000  1.000000  1.000000  1.000000
-# [2,] -7.608513 -7.616499 -7.641457 -7.622172 -7.643590
-# [3,] -7.695172 -7.616513 -7.641471 -7.708431 -7.726452
-# [4,] -7.711608 -7.616600 -7.641488 -7.725317 -7.742527
-# [5,] -7.711608 -7.616618 -7.641575 -7.726442 -7.742527
-# [6,] -7.711609 -7.616708 -7.641663 -7.726442 -7.742528</code></pre>
+#              [,1]         [,2]         [,3]         [,4]         [,5]
+# [1,] 2.7182818285 2.7182818285 2.7182818285 2.7182818285 2.7182818285
+# [2,] 0.0004962094 0.0004922624 0.0004801286 0.0004894777 0.0004791054
+# [3,] 0.0004550187 0.0004922552 0.0004801218 0.0004490256 0.0004410061
+# [4,] 0.0004476013 0.0004922126 0.0004801137 0.0004415069 0.0004339736
+# [5,] 0.0004476010 0.0004922038 0.0004800717 0.0004410104 0.0004339734
+# [6,] 0.0004476008 0.0004921595 0.0004800295 0.0004410103 0.0004339731</code></pre>
 <pre class="r"><code>tail(result$alpha, n = 1)
 tail(result$m.vec, n = 1)
-tail(result$logv2.vec, n = 1)
+tail(result$v2.vec, n = 1)
 #             [,1]        [,2]       [,3]      [,4]       [,5]
 # [50,] 0.01484259 0.009244983 0.00914377 0.9535519 0.01321675
 #             [,1]          [,2]         [,3]       [,4]       [,5]
 # [50,] -0.0204152 -0.0005187866 -0.000647722 0.06390733 0.01779386
-#            [,1]     [,2]      [,3]      [,4]      [,5]
-# [50,] -7.711716 -7.61955 -7.644713 -7.726482 -7.742653</code></pre>
+#               [,1]         [,2]         [,3]         [,4]        [,5]
+# [50,] 0.0004475528 0.0004907628 0.0004785675 0.0004409928 0.000433919</code></pre>
 <pre class="r"><code>plot(result$elbo, xlab = &quot;iter&quot;, ylab = &quot;elbo&quot;)</code></pre>
 <p><img src="figure/vi_poisson.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
@@ -1143,6 +1205,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/0d942f777d8210cd4204aa0cfa0141477d87d116/docs/figure/vi_poisson.Rmd/unnamed-chunk-13-1.png" target="_blank">0d942f7</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-05-08
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/970761bce6191e5e006180ecc84c83a21c8b6761/docs/figure/vi_poisson.Rmd/unnamed-chunk-13-1.png" target="_blank">970761b</a>
