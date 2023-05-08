@@ -15,7 +15,7 @@ compute_exp_quadratic <- function(x, m, logv2){
 # @param pi: prior distribution of gamma.
 compute_objective <- function(h.vec, alpha, pi){
   p = length(alpha)
-  elbo = sum(alpha*h.vec) - sum(alpha*log(alpha/pi))
+  elbo = sum(alpha*h.vec) - sum(alpha*log(alpha/pi), na.rm = TRUE)
   return(elbo)
 }
 
