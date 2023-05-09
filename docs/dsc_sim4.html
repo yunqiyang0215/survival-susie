@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree04442d94dae681b8cec8564a3a7278e3bc5e40c0targetblank04442d9a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/04442d94dae681b8cec8564a3a7278e3bc5e40c0" target="_blank">04442d9</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreeeba198bb1524e633ec8a8fc9e2ccce66ed432335targetblankeba198ba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/eba198bb1524e633ec8a8fc9e2ccce66ed432335" target="_blank">eba198b</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree04442d94dae681b8cec8564a3a7278e3bc5e40c0targetblank04442d9a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreeeba198bb1524e633ec8a8fc9e2ccce66ed432335targetblankeba198ba" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/04442d94dae681b8cec8564a3a7278e3bc5e40c0" target="_blank">04442d9</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/eba198bb1524e633ec8a8fc9e2ccce66ed432335" target="_blank">eba198b</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -551,6 +551,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/eba198bb1524e633ec8a8fc9e2ccce66ed432335/analysis/dsc_sim4.Rmd" target="_blank">eba198b</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-05-08
+</td>
+<td>
+wflow_publish("analysis/dsc_sim4.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/178ddf7798cc5b1521f8c6d38e6a076f398f05dd/docs/dsc_sim4.html" target="_blank">178ddf7</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-05-08
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -982,19 +1016,6 @@ coverage
 # censor:0.4 0.9767442 0.9776119 0.9752747
 # censor:0.6 0.9823009 0.9874477 0.9444444
 # censor:0.8 0.9670330 0.9906542 0.9678571</code></pre>
-<pre class="r"><code>calculate_tpr_vs_fdr &lt;- function(pip, is_effect, ts){
-  res &lt;- matrix(NA, nrow = length(ts), ncol = 2)
-  colnames(res) = c(&quot;tpr&quot;, &quot;fdr&quot;)
-  for (i in 1:length(ts)){
-    pred_pos = pip &gt;= ts[i]
-    tp = pip &gt;= ts[i] &amp; is_effect == 1
-    fp = pip &gt;= ts[i] &amp; is_effect == 0
-    tpr = sum(tp)/sum(is_effect)
-    fdr = sum(fp)/sum(pred_pos)
-    res[i, ] = c(tpr, fdr)
-  }
-  return(res)
-}</code></pre>
 <pre class="r"><code>power_cs = matrix(NA, ncol = 3, nrow = 5)
 censoring = c(0, 0.2, 0.4, 0.6, 0.8)
 colnames(power_cs) = c(&quot;effect:1&quot;, &quot;effect:2&quot;, &quot;effect:3&quot;)
@@ -1016,6 +1037,46 @@ power_cs
 # censor:0.4    0.630 0.6641604 0.5950000
 # censor:0.6    0.555 0.5925000 0.5976628
 # censor:0.8    0.440 0.5300000 0.4533333</code></pre>
+<pre class="r"><code>coverage = matrix(NA, ncol = 2, nrow = 5)
+censoring = c(0, 0.2, 0.4, 0.6, 0.8)
+cor_type = c(&quot;real&quot;, &quot;independent&quot;)
+colnames(coverage) = c(&quot;real correlation&quot;, &quot;independent&quot;)
+rownames(coverage) = c(&quot;censor:0&quot;, &quot;censor:0.2&quot;, &quot;censor:0.4&quot;, &quot;censor:0.6&quot;, &quot;censor:0.8&quot;)
+for (i in 1:2){
+  for (j in 1:5){
+    dat_indx = which(susie$simulate.num_effect == cor_type[i] &amp; susie$simulate.censor_lvl == censoring[j])
+    coverage[j, i] = calculate_cs_coverage(dat_indx)
+  }
+}
+
+coverage
+#            real correlation independent
+# censor:0                NaN         NaN
+# censor:0.2              NaN         NaN
+# censor:0.4              NaN         NaN
+# censor:0.6              NaN         NaN
+# censor:0.8              NaN         NaN</code></pre>
+<pre class="r"><code>power_cs = matrix(NA, ncol = 2, nrow = 5)
+censoring = c(0, 0.2, 0.4, 0.6, 0.8)
+colnames(power_cs) = c(&quot;real correlation&quot;, &quot;independent&quot;)
+rownames(power_cs) = c(&quot;censor:0&quot;, &quot;censor:0.2&quot;, &quot;censor:0.4&quot;, &quot;censor:0.6&quot;, &quot;censor:0.8&quot;)
+for (i in 1:2){
+  for (j in 1:5){
+    dat_indx = which(susie$simulate.num_effect == cor_type[i] &amp; susie$simulate.censor_lvl == censoring[j])
+    cs_effect = get_cs_effect(dat_indx, p = 1000)
+    is_effect = unlist(lapply(dat_indx, function(x) susie$simulate.is_effect[[x]]))
+    power = sum(cs_effect ==1 &amp; is_effect == 1)/sum(is_effect)
+    power_cs[j, i] = power
+  }
+}
+
+power_cs
+#            real correlation independent
+# censor:0                NaN         NaN
+# censor:0.2              NaN         NaN
+# censor:0.4              NaN         NaN
+# censor:0.6              NaN         NaN
+# censor:0.8              NaN         NaN</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
