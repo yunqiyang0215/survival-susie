@@ -64,3 +64,5 @@ Real data simulation:
 + [Updated simulation: power vs. FDR](power_fdr2.html)
 
 + [Version 3 simulation: power vs. FDR](dsc_sim3.html)
+
++ [Version 4 simulation: power vs. FDR](dsc_sim4.html)
