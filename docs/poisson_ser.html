@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Yunqi Yang" />
+
+
+<title>Poisson SER</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">survival-susie</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/yunqiyang0215/survival-susie">
+    <span class="fa fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Poisson SER</h1>
+<h4 class="author">Yunqi Yang</h4>
+<h4 class="date">5/2/2023</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> </a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2023-05-09
+</p>
+<p>
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 1
+</p>
+<p>
+<strong>Knit directory:</strong> <code>survival-susie/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
+</p>
+<p>
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the global environment can affect the analysis in your R Markdown file in unknown ways. For reproduciblity it’s best to always run the code in an empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20230201code"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Seed:</strong> <code>set.seed(20230201)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20230201code" class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20230201)</code> was run prior to running the code in the R Markdown file. Setting a seed ensures that any results that rely on randomness, e.g. subsampling or permutations, are reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Session information:</strong> recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be confident that you successfully produced the results during this run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongabsolute"> <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> <strong>File paths:</strong> absolute </a>
+</p>
+</div>
+<div id="strongFilepathsstrongabsolute" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Using absolute paths to the files within your workflowr project makes it difficult for you and others to run your code on a different machine. Change the absolute path(s) below to the suggested relative path(s) to make your code more reproducible.
+</p>
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th style="text-align:left;">
+absolute
+</th>
+<th style="text-align:left;">
+relative
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+/Users/nicholeyang/Downloads/survival-susie/code/vi_poisson.R
+</td>
+<td style="text-align:left;">
+code/vi_poisson.R
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree2ffc336dc88ae678a2b01a155fc30ded7de8831ctargetblank2ffc336a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/2ffc336dc88ae678a2b01a155fc30ded7de8831c" target="_blank">2ffc336</a> </a>
+</p>
+</div>
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree2ffc336dc88ae678a2b01a155fc30ded7de8831ctargetblank2ffc336a" class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/2ffc336dc88ae678a2b01a155fc30ded7de8831c" target="_blank">2ffc336</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+    Ignored:    .Rhistory
+    Ignored:    .Rproj.user/
+    Ignored:    analysis/.DS_Store
+    Ignored:    analysis/.RData
+    Ignored:    analysis/.Rhistory
+    Ignored:    data/.DS_Store
+
+Untracked files:
+    Untracked:  analysis/ibss_null_model.Rmd
+    Untracked:  analysis/poisson_susie.Rmd
+    Untracked:  data/dsc3/
+
+Unstaged changes:
+    Modified:   analysis/check_coxph_fit.Rmd
+    Modified:   analysis/compare_power_fdr.Rmd
+    Deleted:    analysis/null_model_demo.Rmd
+    Modified:   analysis/null_model_zscore.Rmd
+    Deleted:    analysis/one_predictor_investigation.Rmd
+    Deleted:    analysis/ser_survival.Rmd
+    Modified:   analysis/sim_survival_with_censoring.Rmd
+    Modified:   analysis/susie_poor_performance_example.Rmd
+    Deleted:    analysis/vi_poisson.Rmd
+    Modified:   code/VI_exponential.R
+    Modified:   code/vi_poisson.R
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/poisson_ser.Rmd</code>) and HTML (<code>docs/poisson_ser.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/2ffc336dc88ae678a2b01a155fc30ded7de8831c/analysis/poisson_ser.Rmd" target="_blank">2ffc336</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-05-09
+</td>
+<td>
+wflow_publish("analysis/poisson_ser.Rmd")
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div id="description" class="section level2">
+<h2>Description:</h2>
+<p>Test for implementation of Poisson SER. The derivation can be found here: <a href="https://www.overleaf.com/read/rnftbwbsqrrg" class="uri">https://www.overleaf.com/read/rnftbwbsqrrg</a></p>
+<pre class="r"><code>source(&quot;/Users/nicholeyang/Downloads/survival-susie/code/vi_poisson.R&quot;)</code></pre>
+<pre class="r"><code>sim.data = function(n, X, ss, sigma2, prior.prob){
+  gamma = rmultinom(1, size = 1, prob = prior.prob)
+  b = rnorm(1, 0, sqrt(sigma2))
+  b.vec = b*gamma
+  lambda = ss * exp( X%*% b.vec)
+  y = unlist(lapply(lambda, function(x) rpois(1, lambda = x)))
+  return(list(y = y, X = X, ss =ss, b.vec = b.vec))
+}</code></pre>
+</div>
+<div id="simulation-1" class="section level1">
+<h1>Simulation 1</h1>
+<pre class="r"><code>set.seed(1)
+n = 20
+p = 5
+ss = rep(1, 20)
+X = matrix(NA, nrow = n, ncol = p)
+for (i in 1:p){
+  X[, i] = rnorm(n)
+}
+
+dat = sim.data(n, X, ss, sigma2 = 1, prior.prob = rep(1/p, p))
+dat$b.vec
+#            [,1]
+# [1,]  0.0000000
+# [2,]  0.0000000
+# [3,]  0.0000000
+# [4,]  0.0000000
+# [5,] -0.9109216</code></pre>
+<pre class="r"><code># initializations 
+m.vec = rep(1, p)
+logv2.vec = rep(1, p)
+alpha &lt;- rep(1/p, p)
+pi &lt;- rep(1/p, p)
+
+lower = c(-1e2, 1e-12)
+upper = c(1e2, 1e4)
+
+result &lt;- poisson_ser(X, dat$y, ss, m.vec, logv2.vec, sigma2 = 1, pi, alpha, maxiter = 20, tol)
+head(result$alpha)
+head(result$m.vec)
+head(result$v2.vec)
+#            [,1]         [,2]         [,3]         [,4]      [,5]
+# [1,] 0.20000000 0.2000000000 0.2000000000 0.2000000000 0.2000000
+# [2,] 0.07292743 0.0001021124 0.0001111229 0.0001115133 0.9267478
+# [3,] 0.07423785 0.0001078727 0.0001173151 0.0001178385 0.9254191
+# [4,] 0.07434952 0.0001083742 0.0001178540 0.0001183892 0.9253059
+# [5,] 0.07435923 0.0001084179 0.0001179009 0.0001184371 0.9252960
+# [6,] 0.07436012 0.0001084219 0.0001179053 0.0001184416 0.9252951
+#           [,1]        [,2]      [,3]      [,4]       [,5]
+# [1,] 1.0000000  1.00000000 1.0000000 1.0000000  1.0000000
+# [2,] 0.7625934 -0.10056811 0.1228929 0.1661081 -0.9296355
+# [3,] 0.7590275 -0.09993198 0.1220576 0.1653934 -0.9249520
+# [4,] 0.7587173 -0.09988619 0.1220006 0.1653168 -0.9245491
+# [5,] 0.7586865 -0.09986875 0.1219760 0.1653349 -0.9245118
+# [6,] 0.7586884 -0.09984191 0.1219318 0.1653183 -0.9245082
+#            [,1]       [,2]       [,3]       [,4]       [,5]
+# [1,] 2.71828183 2.71828183 2.71828183 2.71828183 2.71828183
+# [2,] 0.03477527 0.05737539 0.06205195 0.03550702 0.03737092
+# [3,] 0.03474886 0.05698233 0.06160492 0.03537752 0.03734958
+# [4,] 0.03474452 0.05698159 0.06160405 0.03537723 0.03734636
+# [5,] 0.03474442 0.05698083 0.06160317 0.03537603 0.03734628
+# [6,] 0.03474434 0.05697715 0.06159899 0.03537580 0.03734598</code></pre>
+<pre class="r"><code>tail(result$alpha, n = 1)
+tail(result$m.vec, n = 1)
+tail(result$v2.vec, n = 1)
+#             [,1]        [,2]         [,3]         [,4]      [,5]
+# [20,] 0.07436014 0.000108422 0.0001179054 0.0001184417 0.9252951
+#          [,1]        [,2]     [,3]      [,4]       [,5]
+# [20,] 0.75869 -0.09987165 0.121979 0.1653244 -0.9245125
+#            [,1]       [,2]       [,3]       [,4]       [,5]
+# [20,] 0.0347409 0.05695839 0.06157782 0.03536586 0.03734354</code></pre>
+<pre class="r"><code>plot(result$elbo, xlab = &quot;iter&quot;, ylab = &quot;elbo&quot;)</code></pre>
+<p><img src="figure/poisson_ser.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="simulation-2" class="section level1">
+<h1>Simulation 2</h1>
+<pre class="r"><code>set.seed(3)
+n = 200
+p = 5
+ss = rep(1, n)
+X = matrix(NA, nrow = n, ncol = p)
+for (i in 1:p){
+  X[, i] = rnorm(n)
+}
+
+dat = sim.data(n, X, ss, sigma2 = 1, prior.prob = rep(1/p, p))
+dat$b.vec
+#            [,1]
+# [1,]  0.0000000
+# [2,]  0.0000000
+# [3,]  0.0000000
+# [4,] -0.9728448
+# [5,]  0.0000000</code></pre>
+<pre class="r"><code># initializations 
+m.vec = rep(1, p)
+v2.vec = rep(1, p)
+alpha &lt;- rep(1/p, p)
+pi &lt;- rep(1/p, p)
+
+lower = c(-1e2, 1e-12)
+upper = c(1e2, 1e4)
+
+result &lt;- poisson_ser(X, dat$y, ss, m.vec, v2.vec, sigma2 = 1, pi, alpha, maxiter = 20, tol)
+head(result$alpha)
+head(result$m.vec)
+head(result$v2.vec)
+#               [,1]          [,2]          [,3] [,4]          [,5]
+# [1,]  2.000000e-01  2.000000e-01  2.000000e-01  0.2  2.000000e-01
+# [2,] 2.553238e-100 4.927759e-100 3.386268e-100  1.0 8.179769e-100
+# [3,] 2.537648e-100 4.897846e-100 3.365642e-100  1.0 8.130362e-100
+# [4,] 2.537600e-100 4.897753e-100 3.365577e-100  1.0 8.130207e-100
+# [5,] 2.537611e-100 4.897774e-100 3.365592e-100  1.0 8.130242e-100
+# [6,] 2.537608e-100 4.897769e-100 3.365588e-100  1.0 8.130234e-100
+#             [,1]        [,2]        [,3]      [,4]      [,5]
+# [1,]  1.00000000  1.00000000  1.00000000  1.000000 1.0000000
+# [2,] -0.05597706 -0.09768037 -0.07726317 -1.005510 0.1202201
+# [3,] -0.05585003 -0.09769540 -0.07727092 -1.005529 0.1202310
+# [4,] -0.05591947 -0.09768510 -0.07726589 -1.005525 0.1202238
+# [5,] -0.05588152 -0.09769217 -0.07726916 -1.005526 0.1202286
+# [6,] -0.05590226 -0.09768731 -0.07726704 -1.005526 0.1202254
+#             [,1]        [,2]        [,3]        [,4]        [,5]
+# [1,] 2.718281828 2.718281828 2.718281828 2.718281828 2.718281828
+# [2,] 0.005166847 0.004741290 0.004843992 0.001301868 0.004794637
+# [3,] 0.005166872 0.004741291 0.004843993 0.001301869 0.004794646
+# [4,] 0.005166897 0.004741292 0.004843995 0.001301868 0.004794654
+# [5,] 0.005166921 0.004741293 0.004843997 0.001301868 0.004794663
+# [6,] 0.005166946 0.004741295 0.004843998 0.001301868 0.004794671</code></pre>
+<pre class="r"><code>tail(result$alpha, n = 1)
+tail(result$m.vec, n = 1)
+tail(result$v2.vec, n = 1)
+#                [,1]          [,2]          [,3] [,4]          [,5]
+# [20,] 2.537608e-100 4.897769e-100 3.365588e-100    1 8.130234e-100
+#              [,1]        [,2]        [,3]      [,4]      [,5]
+# [20,] -0.05589784 -0.09768918 -0.07726762 -1.005526 0.1202261
+#              [,1]        [,2]        [,3]        [,4]        [,5]
+# [20,] 0.005167553 0.004741317 0.004844034 0.001301868 0.004794849</code></pre>
+<pre class="r"><code>plot(result$elbo, xlab = &quot;iter&quot;, ylab = &quot;elbo&quot;)</code></pre>
+<p><img src="figure/poisson_ser.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="simulation-3" class="section level1">
+<h1>Simulation 3</h1>
+<pre class="r"><code>set.seed(2)
+n = 2e3
+p = 5
+ss = rep(1, n)
+X = matrix(NA, nrow = n, ncol = p)
+for (i in 1:p){
+  X[, i] = rnorm(n)
+}
+
+dat = sim.data(n, X, ss, sigma2 = 1, prior.prob = rep(1/p, p))
+dat$b.vec
+#         [,1]
+# [1,] 0.83707
+# [2,] 0.00000
+# [3,] 0.00000
+# [4,] 0.00000
+# [5,] 0.00000</code></pre>
+<pre class="r"><code># initializations 
+m.vec = rep(1, p)
+v2.vec = rep(1, p)
+alpha &lt;- rep(1/p, p)
+pi &lt;- rep(1/p, p)
+
+result &lt;- poisson_ser(X, dat$y, ss, m.vec, v2.vec, sigma2 = 1, pi, alpha, maxiter = 50, tol)
+head(result$alpha)
+head(result$m.vec)
+head(result$v2.vec)
+#      [,1] [,2] [,3] [,4] [,5]
+# [1,]  0.2  0.2  0.2  0.2  0.2
+# [2,]  1.0  0.0  0.0  0.0  0.0
+# [3,]  1.0  0.0  0.0  0.0  0.0
+# [4,]  1.0  0.0  0.0  0.0  0.0
+# [5,]  1.0  0.0  0.0  0.0  0.0
+# [6,]  1.0  0.0  0.0  0.0  0.0
+#           [,1]       [,2]       [,3]        [,4]       [,5]
+# [1,] 1.0000000 1.00000000 1.00000000  1.00000000 1.00000000
+# [2,] 0.8288838 0.05909036 0.04020810 -0.02647225 0.03700226
+# [3,] 0.8288264 0.05908217 0.04020271 -0.02646775 0.03699685
+# [4,] 0.8288639 0.05907935 0.04020059 -0.02646622 0.03699493
+# [5,] 0.8288394 0.05907838 0.04019975 -0.02646570 0.03699425
+# [6,] 0.8288554 0.05907805 0.04019942 -0.02646482 0.03699401
+#              [,1]         [,2]         [,3]         [,4]         [,5]
+# [1,] 2.7182818285 2.7182818285 2.7182818285 2.7182818285 2.7182818285
+# [2,] 0.0001933018 0.0004877523 0.0005285179 0.0004837930 0.0004959862
+# [3,] 0.0001933018 0.0004877522 0.0005285178 0.0004837931 0.0004959862
+# [4,] 0.0001933018 0.0004877522 0.0005285177 0.0004837931 0.0004959862
+# [5,] 0.0001933019 0.0004877522 0.0005285176 0.0004837932 0.0004959861
+# [6,] 0.0001933019 0.0004877522 0.0005285175 0.0004837936 0.0004959861</code></pre>
+<pre class="r"><code>tail(result$alpha, n = 1)
+tail(result$m.vec, n = 1)
+tail(result$v2.vec, n = 1)
+#       [,1] [,2] [,3] [,4] [,5]
+# [50,]    1    0    0    0    0
+#            [,1]       [,2]     [,3]        [,4]       [,5]
+# [50,] 0.8288493 0.05907813 0.040199 -0.02646531 0.03699369
+#               [,1]         [,2]         [,3]         [,4]         [,5]
+# [50,] 0.0001933021 0.0004877479 0.0005285019 0.0004838045 0.0004959819</code></pre>
+<pre class="r"><code>plot(result$elbo, xlab = &quot;iter&quot;, ylab = &quot;elbo&quot;)</code></pre>
+<p><img src="figure/poisson_ser.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()
+# R version 4.1.1 (2021-08-10)
+# Platform: x86_64-apple-darwin20.6.0 (64-bit)
+# Running under: macOS Monterey 12.0.1
+# 
+# Matrix products: default
+# BLAS:   /usr/local/Cellar/openblas/0.3.18/lib/libopenblasp-r0.3.18.dylib
+# LAPACK: /usr/local/Cellar/r/4.1.1_1/lib/R/lib/libRlapack.dylib
+# 
+# locale:
+# [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+# 
+# attached base packages:
+# [1] stats     graphics  grDevices utils     datasets  methods   base     
+# 
+# other attached packages:
+# [1] workflowr_1.6.2
+# 
+# loaded via a namespace (and not attached):
+#  [1] Rcpp_1.0.8.3     pillar_1.6.4     compiler_4.1.1   bslib_0.4.1     
+#  [5] later_1.3.0      jquerylib_0.1.4  git2r_0.28.0     highr_0.9       
+#  [9] tools_4.1.1      digest_0.6.28    jsonlite_1.7.2   evaluate_0.14   
+# [13] lifecycle_1.0.1  tibble_3.1.5     pkgconfig_2.0.3  rlang_1.0.6     
+# [17] cli_3.1.0        rstudioapi_0.13  yaml_2.2.1       xfun_0.27       
+# [21] fastmap_1.1.0    stringr_1.4.0    knitr_1.36       fs_1.5.0        
+# [25] vctrs_0.3.8      sass_0.4.4       rprojroot_2.0.2  glue_1.4.2      
+# [29] R6_2.5.1         fansi_0.5.0      rmarkdown_2.11   whisker_0.4     
+# [33] magrittr_2.0.1   promises_1.2.0.1 ellipsis_0.3.2   htmltools_0.5.2 
+# [37] httpuv_1.6.3     utf8_1.2.2       stringi_1.7.5    cachem_1.0.6    
+# [41] crayon_1.4.1</code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
