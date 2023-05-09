@@ -252,26 +252,6 @@ for (i in 1:3){
 coverage
 ```
 
-
-
-```{r}
-calculate_tpr_vs_fdr <- function(pip, is_effect, ts){
-  res <- matrix(NA, nrow = length(ts), ncol = 2)
-  colnames(res) = c("tpr", "fdr")
-  for (i in 1:length(ts)){
-    pred_pos = pip >= ts[i]
-    tp = pip >= ts[i] & is_effect == 1
-    fp = pip >= ts[i] & is_effect == 0
-    tpr = sum(tp)/sum(is_effect)
-    fdr = sum(fp)/sum(pred_pos)
-    res[i, ] = c(tpr, fdr)
-  }
-  return(res)
-}
-```
-
-
-
 ```{r}
 power_cs = matrix(NA, ncol = 3, nrow = 5)
 censoring = c(0, 0.2, 0.4, 0.6, 0.8)
@@ -290,3 +270,37 @@ for (i in 1:3){
 power_cs
 ```
 
+
+```{r}
+coverage = matrix(NA, ncol = 2, nrow = 5)
+censoring = c(0, 0.2, 0.4, 0.6, 0.8)
+cor_type = c("real", "independent")
+colnames(coverage) = c("real correlation", "independent")
+rownames(coverage) = c("censor:0", "censor:0.2", "censor:0.4", "censor:0.6", "censor:0.8")
+for (i in 1:2){
+  for (j in 1:5){
+    dat_indx = which(susie$simulate.num_effect == cor_type[i] & susie$simulate.censor_lvl == censoring[j])
+    coverage[j, i] = calculate_cs_coverage(dat_indx)
+  }
+}
+
+coverage
+```
+
+```{r}
+power_cs = matrix(NA, ncol = 2, nrow = 5)
+censoring = c(0, 0.2, 0.4, 0.6, 0.8)
+colnames(power_cs) = c("real correlation", "independent")
+rownames(power_cs) = c("censor:0", "censor:0.2", "censor:0.4", "censor:0.6", "censor:0.8")
+for (i in 1:2){
+  for (j in 1:5){
+    dat_indx = which(susie$simulate.num_effect == cor_type[i] & susie$simulate.censor_lvl == censoring[j])
+    cs_effect = get_cs_effect(dat_indx, p = 1000)
+    is_effect = unlist(lapply(dat_indx, function(x) susie$simulate.is_effect[[x]]))
+    power = sum(cs_effect ==1 & is_effect == 1)/sum(is_effect)
+    power_cs[j, i] = power
+  }
+}
+
+power_cs
+```
