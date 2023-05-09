@@ -28,14 +28,14 @@ negative_h <- function(post, x, y, ss, sigma2){
   return(-h)
 }
 
-softmax <- function (vec) {
+safenormalize <- function (vec) {
   a <- max(vec)
   vec <- exp(vec - a)
   return(vec/sum(vec))
 }
 
 
-update_q <- function(X, y, ss, m.vec, logv2.vec, sigma2, pi, alpha, maxiter, tol){
+poisson_ser <- function(X, y, ss, m.vec, logv2.vec, sigma2, pi, alpha, maxiter, tol){
   p = length(alpha)
   progress <- list(elbo = rep(NA, maxiter), sigma2 = rep(NA, maxiter),
                    h.vec = matrix(NA, nrow = maxiter, ncol = p),
@@ -70,7 +70,7 @@ update_q <- function(X, y, ss, m.vec, logv2.vec, sigma2, pi, alpha, maxiter, tol
     }
 
     h.weighted = h.vec + log(pi)
-    alpha = softmax(h.weighted)
+    alpha = safenormalize(h.weighted)
     sigma2 = sum(alpha*(m.vec^2 + exp(logv2.vec)))
 
     progress$elbo[iter] = compute_objective(h.vec, alpha, pi)
@@ -78,7 +78,46 @@ update_q <- function(X, y, ss, m.vec, logv2.vec, sigma2, pi, alpha, maxiter, tol
     progress$m.vec[iter, ] = m.vec
     progress$logv2.vec[iter, ] = logv2.vec
     progress$alpha[iter, ] = alpha
+    progress$sigma2[iter] = sigma2
   }
   progress$v2.vec = exp(progress$logv2.vec)
   return(progress)
 }
+
+
+# Function to compute the log-scalar for each observation for a specific l.
+# @return length-n vector contains log-scalar
+compute_log_smat <- function(X, m.mat, logv2.mat, l){
+  n = nrow(X)
+  log_scalar = rep(NA, n)
+  for (i in 1:n){
+    # Store the unweighted expectation exp(m_jx_{ij} + v_j^2x_{ij}^2/2) for observation i.
+    exp.mat = matrix(NA, nrow = L, ncol = p)
+    for (j in 1:p){
+      exp.mat[, j] = sapply(1:L, function(l) compute_exp_quadratic(X[i,j], m.mat[l, j], logv2.mat[l, j]))
+    }
+    # log of the weighted expectation, weighted by alpha.
+    logexp.vec = log(rowSums(exp.mat * alpha.mat))
+    log_scalar[i] = sum(logexp.vec[-l])
+  }
+  return(log_scalar)
+}
+
+poisson_susie <- function(X, y, L, m.mat, logv2.mat, alpha.mat, pi.mat, sigma2.vec, maxiter.out){
+  n = nrow(X)
+  log_scalar_mat = matrix(NA, ncol = L, nrow = n)
+  for (i in 1: maxiter.out){
+    for (l in 1:L){
+      log_scalar_mat[,l] = compute_log_smat(X, m.mat, logv2.mat, l)
+      result <- poisson_ser(X, y, exp(log_scalar_mat[,l]), m.mat[l, ], logv2.mat[l, ], sigma2 = sigma2.vec[l], pi.mat[l, ], alpha.mat[l, ], maxiter = 20, tol)
+
+      m.mat[l, ] = tail(result$m.vec, n =1)
+      logv2.mat[l, ] = tail(result$logv2.vec, n = 1)
+      alpha.mat[l, ] = tail(result$alpha, n = 1)
+      sigma2.vec[l] = tail(result$sigma2, n =1)
+    }
+  }
+  return(list(m.mat = m.mat, v2.mat = exp(logv2.mat), alpha.mat = alpha.mat, sigma2.vec = sigma2.vec))
+}
+
+
