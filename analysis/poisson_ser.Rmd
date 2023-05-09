@@ -1,0 +1,157 @@
+---
+title: "Poisson SER"
+author: "Yunqi Yang"
+date: "5/2/2023"
+output: html_document
+---
+
+## Description:
+
+Test for implementation of Poisson SER. The derivation can be found here: https://www.overleaf.com/read/rnftbwbsqrrg
+
+```{r knitr, echo=FALSE}
+knitr::opts_chunk$set(comment = "#",results = "hold",collapse = TRUE,
+                      fig.align = "center")
+```
+
+
+```{r}
+source("/Users/nicholeyang/Downloads/survival-susie/code/vi_poisson.R")
+```
+
+```{r simdata}
+sim.data = function(n, X, ss, sigma2, prior.prob){
+  gamma = rmultinom(1, size = 1, prob = prior.prob)
+  b = rnorm(1, 0, sqrt(sigma2))
+  b.vec = b*gamma
+  lambda = ss * exp( X%*% b.vec)
+  y = unlist(lapply(lambda, function(x) rpois(1, lambda = x)))
+  return(list(y = y, X = X, ss =ss, b.vec = b.vec))
+}
+```
+
+# Simulation 1
+```{r  }
+set.seed(1)
+n = 20
+p = 5
+ss = rep(1, 20)
+X = matrix(NA, nrow = n, ncol = p)
+for (i in 1:p){
+  X[, i] = rnorm(n)
+}
+
+dat = sim.data(n, X, ss, sigma2 = 1, prior.prob = rep(1/p, p))
+dat$b.vec
+```
+
+```{r}
+# initializations 
+m.vec = rep(1, p)
+logv2.vec = rep(1, p)
+alpha <- rep(1/p, p)
+pi <- rep(1/p, p)
+
+lower = c(-1e2, 1e-12)
+upper = c(1e2, 1e4)
+
+result <- poisson_ser(X, dat$y, ss, m.vec, logv2.vec, sigma2 = 1, pi, alpha, maxiter = 20, tol)
+head(result$alpha)
+head(result$m.vec)
+head(result$v2.vec)
+```
+
+```{r}
+tail(result$alpha, n = 1)
+tail(result$m.vec, n = 1)
+tail(result$v2.vec, n = 1)
+```
+
+
+```{r}
+plot(result$elbo, xlab = "iter", ylab = "elbo")
+```
+
+
+# Simulation 2
+```{r  }
+set.seed(3)
+n = 200
+p = 5
+ss = rep(1, n)
+X = matrix(NA, nrow = n, ncol = p)
+for (i in 1:p){
+  X[, i] = rnorm(n)
+}
+
+dat = sim.data(n, X, ss, sigma2 = 1, prior.prob = rep(1/p, p))
+dat$b.vec
+```
+
+```{r}
+# initializations 
+m.vec = rep(1, p)
+v2.vec = rep(1, p)
+alpha <- rep(1/p, p)
+pi <- rep(1/p, p)
+
+lower = c(-1e2, 1e-12)
+upper = c(1e2, 1e4)
+
+result <- poisson_ser(X, dat$y, ss, m.vec, v2.vec, sigma2 = 1, pi, alpha, maxiter = 20, tol)
+head(result$alpha)
+head(result$m.vec)
+head(result$v2.vec)
+```
+
+
+
+```{r}
+tail(result$alpha, n = 1)
+tail(result$m.vec, n = 1)
+tail(result$v2.vec, n = 1)
+```
+
+```{r}
+plot(result$elbo, xlab = "iter", ylab = "elbo")
+```
+
+
+# Simulation 3
+```{r  }
+set.seed(2)
+n = 2e3
+p = 5
+ss = rep(1, n)
+X = matrix(NA, nrow = n, ncol = p)
+for (i in 1:p){
+  X[, i] = rnorm(n)
+}
+
+dat = sim.data(n, X, ss, sigma2 = 1, prior.prob = rep(1/p, p))
+dat$b.vec
+```
+
+```{r  }
+# initializations 
+m.vec = rep(1, p)
+v2.vec = rep(1, p)
+alpha <- rep(1/p, p)
+pi <- rep(1/p, p)
+
+result <- poisson_ser(X, dat$y, ss, m.vec, v2.vec, sigma2 = 1, pi, alpha, maxiter = 50, tol)
+head(result$alpha)
+head(result$m.vec)
+head(result$v2.vec)
+```
+
+```{r}
+tail(result$alpha, n = 1)
+tail(result$m.vec, n = 1)
+tail(result$v2.vec, n = 1)
+```
+
+```{r}
+plot(result$elbo, xlab = "iter", ylab = "elbo")
+```
+
