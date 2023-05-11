@@ -44,6 +44,7 @@ calculate_tpr_vs_fdr <- function(pip, is_effect, ts){
   return(res)
 }
 
+# coverage: the proportion of CSs that contain an effect variable
 # @param dat_indx: the indx for the data from dsc
 calculate_cs_coverage = function(dat_indx){
   contain_status = c()
@@ -52,7 +53,7 @@ calculate_cs_coverage = function(dat_indx){
      true_effect = which(susie$simulate.is_effect[[indx]] == 1)
      if (!is.null(cs)){
        for (j in 1:length(cs)){
-         res = ifelse(sum(true_effect %in% unlist(cs[j]))!= 0, 1, 0)
+         res = ifelse(sum(true_effect %in% unlist(cs[j])) ==  1, 1, 0)
          contain_status = c(contain_status, res)
         }
      }
