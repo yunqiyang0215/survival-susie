@@ -20,9 +20,14 @@ The hazard in exponential model is $\lambda_i = 1/\mu_i=\frac{1}{\exp\{\beta_0+X
 
 *Conclusion*: 
 
-1. Mean center won't change the coefficient in coxph model.
+1. Operations only on x:
 
-2. The coefficient will be multiplied by $s$ if the variable is divided by $s$.
+(1) Mean center won't change the coefficient in coxph model.
+
+(2) The coefficient will be multiplied by $s$ if the variable is divided by $s$.
+
+
+2. Standardize both x and y: the beta estimate is the same as the original data without standardize x and y. 
 
 ```{r}
 library(mvtnorm)
@@ -61,24 +66,22 @@ b = c(1,0.1)
 X = as.matrix(rnorm(n, mean = 3, sd = 2))
 dat = sim_dat(b, X)
 
-Xc = X - mean(X)
-X.sd = (X - mean(X))/sd(X)
-sd = sd(X)
-print(sd)
+x.c = scale(X, center = TRUE, scale = FALSE)
+x.sd = scale(X, center = TRUE, scale = TRUE)
 ```
 
 ```{r}
 hist(dat$surT, breaks = 20)
 ```
 
-
+### Effect of mean center/standardize X
 ```{r}
 ## Create  survival object. status == 2 is death
 dat$y <- with(dat, Surv(surT, status == 2))
 # Fit cox ph. Cox ph model with select multiple significant predictors..
 cox1 <- coxph(y ~ x1, data =  dat)
-cox2 <- coxph(dat$y ~ X.sd)
-cox3 <- coxph(dat$y ~ Xc)
+cox2 <- coxph(dat$y ~ x.sd)
+cox3 <- coxph(dat$y ~ x.c)
 ```
 
 
@@ -87,4 +90,26 @@ coef(cox1)
 coef(cox2)
 coef(cox3)
 ```
+
+```{r}
+summary(cox1)
+summary(cox2)
+summary(cox3)
+```
+
+### Effect of standardize both y and X
+
+```{r}
+## Create  survival object. status == 2 is death
+surT = scale(dat$surT, center = TRUE, scale = TRUE)
+status = rep(2, length(surT))
+dat$y <- Surv(surT, status)
+
+# Fit cox ph.
+cox4 <- coxph(y ~ x.sd, data =  dat)
+summary(cox4)
+```
+
+
+
 
