@@ -384,7 +384,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2023-02-13
+<strong>Last updated:</strong> 2023-05-17
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreea865849c7f91f7edd28034acecb75121307f5783targetblanka865849a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/a865849c7f91f7edd28034acecb75121307f5783" target="_blank">a865849</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree9655002bde45308738035ab156080982d6a120a0targetblank9655002a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/9655002bde45308738035ab156080982d6a120a0" target="_blank">9655002</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreea865849c7f91f7edd28034acecb75121307f5783targetblanka865849a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree9655002bde45308738035ab156080982d6a120a0targetblank9655002a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/a865849c7f91f7edd28034acecb75121307f5783" target="_blank">a865849</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/9655002bde45308738035ab156080982d6a120a0" target="_blank">9655002</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -497,7 +497,24 @@ Ignored files:
     Ignored:    analysis/.DS_Store
     Ignored:    analysis/.RData
     Ignored:    analysis/.Rhistory
-    Ignored:    analysis/run_ser_simple_dat_cache/
+    Ignored:    data/.DS_Store
+
+Untracked files:
+    Untracked:  analysis/ibss_null_model.Rmd
+    Untracked:  analysis/poisson_susie.Rmd
+    Untracked:  data/dsc3/
+
+Unstaged changes:
+    Modified:   analysis/compare_power_fdr.Rmd
+    Deleted:    analysis/null_model_demo.Rmd
+    Modified:   analysis/null_model_zscore.Rmd
+    Deleted:    analysis/one_predictor_investigation.Rmd
+    Deleted:    analysis/ser_survival.Rmd
+    Modified:   analysis/sim_survival_with_censoring.Rmd
+    Modified:   analysis/susie_poor_performance_example.Rmd
+    Deleted:    analysis/vi_poisson.Rmd
+    Modified:   code/VI_exponential.R
+    Modified:   code/vi_poisson.R
 
 </code></pre>
 <p>
@@ -536,6 +553,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/9655002bde45308738035ab156080982d6a120a0/analysis/check_coxph_fit.Rmd" target="_blank">9655002</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-05-17
+</td>
+<td>
+wflow_publish("analysis/check_coxph_fit.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/0373c01a8974c4c86076d3d2a680065567099f5f/docs/check_coxph_fit.html" target="_blank">0373c01</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-02-13
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -605,8 +656,14 @@ E(T_i) &amp;= \mu_i\\
 \]</span> The hazard in exponential model is <span class="math inline">\(\lambda_i = 1/\mu_i=\frac{1}{\exp\{\beta_0+X\beta\}}=\lambda_0\exp\{X\alpha\}\)</span>. Therefore, <span class="math inline">\(\alpha\)</span> is the output from coxph model and <span class="math inline">\(\alpha=-\beta\)</span>.</p>
 <p><em>Conclusion</em>:</p>
 <ol style="list-style-type: decimal">
+<li>Operations only on x:</li>
+</ol>
+<ol style="list-style-type: decimal">
 <li><p>Mean center won’t change the coefficient in coxph model.</p></li>
 <li><p>The coefficient will be multiplied by <span class="math inline">\(s\)</span> if the variable is divided by <span class="math inline">\(s\)</span>.</p></li>
+</ol>
+<ol start="2" style="list-style-type: decimal">
+<li>Standardize both x and y: the beta estimate is the same as the original data without standardize x and y.</li>
 </ol>
 <pre class="r"><code>library(mvtnorm)
 library(survival)</code></pre>
@@ -636,11 +693,8 @@ b = c(1,0.1)
 X = as.matrix(rnorm(n, mean = 3, sd = 2))
 dat = sim_dat(b, X)
 
-Xc = X - mean(X)
-X.sd = (X - mean(X))/sd(X)
-sd = sd(X)
-print(sd)</code></pre>
-<pre><code>[1] 1.858195</code></pre>
+x.c = scale(X, center = TRUE, scale = FALSE)
+x.sd = scale(X, center = TRUE, scale = TRUE)</code></pre>
 <pre class="r"><code>hist(dat$surT, breaks = 20)</code></pre>
 <p><img src="figure/check_coxph_fit.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
@@ -680,21 +734,106 @@ yunqiyang0215
 </table>
 </div>
 </div>
+</div>
+<div id="effect-of-mean-centerstandardize-x" class="section level3">
+<h3>Effect of mean center/standardize X</h3>
 <pre class="r"><code>## Create  survival object. status == 2 is death
 dat$y &lt;- with(dat, Surv(surT, status == 2))
 # Fit cox ph. Cox ph model with select multiple significant predictors..
 cox1 &lt;- coxph(y ~ x1, data =  dat)
-cox2 &lt;- coxph(dat$y ~ X.sd)
-cox3 &lt;- coxph(dat$y ~ Xc)</code></pre>
+cox2 &lt;- coxph(dat$y ~ x.sd)
+cox3 &lt;- coxph(dat$y ~ x.c)</code></pre>
 <pre class="r"><code>coef(cox1)</code></pre>
 <pre><code>         x1 
 -0.09671461 </code></pre>
 <pre class="r"><code>coef(cox2)</code></pre>
-<pre><code>      X.sd 
+<pre><code>      x.sd 
 -0.1797146 </code></pre>
 <pre class="r"><code>coef(cox3)</code></pre>
-<pre><code>         Xc 
+<pre><code>        x.c 
 -0.09671461 </code></pre>
+<pre class="r"><code>summary(cox1)</code></pre>
+<pre><code>Call:
+coxph(formula = y ~ x1, data = dat)
+
+  n= 200, number of events= 200 
+
+       coef exp(coef) se(coef)      z Pr(&gt;|z|)  
+x1 -0.09671   0.90782  0.04239 -2.282   0.0225 *
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+   exp(coef) exp(-coef) lower .95 upper .95
+x1    0.9078      1.102    0.8354    0.9865
+
+Concordance= 0.566  (se = 0.02 )
+Likelihood ratio test= 5.27  on 1 df,   p=0.02
+Wald test            = 5.21  on 1 df,   p=0.02
+Score (logrank) test = 5.21  on 1 df,   p=0.02</code></pre>
+<pre class="r"><code>summary(cox2)</code></pre>
+<pre><code>Call:
+coxph(formula = dat$y ~ x.sd)
+
+  n= 200, number of events= 200 
+
+         coef exp(coef) se(coef)      z Pr(&gt;|z|)  
+x.sd -0.17971   0.83551  0.07877 -2.282   0.0225 *
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+     exp(coef) exp(-coef) lower .95 upper .95
+x.sd    0.8355      1.197     0.716     0.975
+
+Concordance= 0.566  (se = 0.02 )
+Likelihood ratio test= 5.27  on 1 df,   p=0.02
+Wald test            = 5.21  on 1 df,   p=0.02
+Score (logrank) test = 5.21  on 1 df,   p=0.02</code></pre>
+<pre class="r"><code>summary(cox3)</code></pre>
+<pre><code>Call:
+coxph(formula = dat$y ~ x.c)
+
+  n= 200, number of events= 200 
+
+        coef exp(coef) se(coef)      z Pr(&gt;|z|)  
+x.c -0.09671   0.90782  0.04239 -2.282   0.0225 *
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+    exp(coef) exp(-coef) lower .95 upper .95
+x.c    0.9078      1.102    0.8354    0.9865
+
+Concordance= 0.566  (se = 0.02 )
+Likelihood ratio test= 5.27  on 1 df,   p=0.02
+Wald test            = 5.21  on 1 df,   p=0.02
+Score (logrank) test = 5.21  on 1 df,   p=0.02</code></pre>
+</div>
+<div id="effect-of-standardize-both-y-and-x" class="section level3">
+<h3>Effect of standardize both y and X</h3>
+<pre class="r"><code>## Create  survival object. status == 2 is death
+surT = scale(dat$surT, center = TRUE, scale = TRUE)
+status = rep(2, length(surT))
+dat$y &lt;- Surv(surT, status)
+
+# Fit cox ph.
+cox4 &lt;- coxph(y ~ x.sd, data =  dat)
+summary(cox4)</code></pre>
+<pre><code>Call:
+coxph(formula = y ~ x.sd, data = dat)
+
+  n= 200, number of events= 200 
+
+         coef exp(coef) se(coef)      z Pr(&gt;|z|)  
+x.sd -0.17971   0.83551  0.07877 -2.282   0.0225 *
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+     exp(coef) exp(-coef) lower .95 upper .95
+x.sd    0.8355      1.197     0.716     0.975
+
+Concordance= 0.566  (se = 0.02 )
+Likelihood ratio test= 5.27  on 1 df,   p=0.02
+Wald test            = 5.21  on 1 df,   p=0.02
+Score (logrank) test = 5.21  on 1 df,   p=0.02</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
