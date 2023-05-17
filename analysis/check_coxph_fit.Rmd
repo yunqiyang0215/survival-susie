@@ -27,7 +27,7 @@ The hazard in exponential model is $\lambda_i = 1/\mu_i=\frac{1}{\exp\{\beta_0+X
 (2) The coefficient will be multiplied by $s$ if the variable is divided by $s$.
 
 
-2. Standardize both x and y: the beta estimate is the same as the original data without standardize x and y. 
+2. Standardize y: the beta estimate is the same as the original data without standardize y. 
 
 ```{r}
 library(mvtnorm)
@@ -97,16 +97,16 @@ summary(cox2)
 summary(cox3)
 ```
 
-### Effect of standardize both y and X
+### Effect of standardize y. 
 
 ```{r}
 ## Create  survival object. status == 2 is death
 surT = scale(dat$surT, center = TRUE, scale = TRUE)
 status = rep(2, length(surT))
-dat$y <- Surv(surT, status)
+y <- Surv(surT, status)
 
 # Fit cox ph.
-cox4 <- coxph(y ~ x.sd, data =  dat)
+cox4 <- coxph(y ~ dat$x1)
 summary(cox4)
 ```
 
