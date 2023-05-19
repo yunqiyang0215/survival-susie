@@ -248,7 +248,7 @@ power_cs
 ```
 
 
-### 5. Assess Susie.rss cs
+### 6. Assess Susie.rss cs
 
 ```{r}
 coverage = matrix(NA, ncol = 3, nrow = 5)
