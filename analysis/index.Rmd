@@ -70,3 +70,5 @@ Real data simulation:
 Susie RSS results:
 
 + [Susie rss diagnosis](susierss_failure.html)
+
++ [Susie vs. susie rss](survival_susierss.html)
