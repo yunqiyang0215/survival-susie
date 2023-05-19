@@ -1,0 +1,320 @@
+---
+title: "Survival susie vs. survival susie rss"
+author: "Yunqi Yang"
+date: "05/08/2023"
+output: html_document
+---
+
+### Description:
+
+Compare results for susie and susierss. 
+
+```{r knitr-opts, include=FALSE}
+knitr::opts_chunk$set(comment = "#",collapse = TRUE,results = "hold",
+                      fig.align = "center")
+```
+
+```{r}
+
+calculate_tpr_vs_fdr <- function(pip, is_effect, ts){
+  res <- matrix(NA, nrow = length(ts), ncol = 2)
+  colnames(res) = c("tpr", "fdr")
+  for (i in 1:length(ts)){
+    pred_pos = pip >= ts[i]
+    tp = pip >= ts[i] & is_effect == 1
+    fp = pip >= ts[i] & is_effect == 0
+    tpr = sum(tp)/sum(is_effect)
+    fdr = sum(fp)/sum(pred_pos)
+    res[i, ] = c(tpr, fdr)
+  }
+  return(res)
+}
+
+# coverage: the proportion of CSs that contain an effect variable
+# @param dat_indx: the indx for the data from dsc
+# @param res.cs: credible sets from dsc
+calculate_cs_coverage = function(res.cs, res.is_effect, dat_indx){
+  contain_status = c()
+  for (indx in dat_indx){
+     cs = res.cs[[indx]]$cs
+     true_effect = which(res.is_effect[[indx]] >= 1)
+     if (!is.null(cs)){
+       for (j in 1:length(cs)){
+         res = ifelse(sum(true_effect %in% unlist(cs[j])) ==  1, 1, 0)
+         contain_status = c(contain_status, res)
+        }
+     }
+  }
+  coverage = sum(contain_status)/length(contain_status)
+  return(coverage)
+}
+
+# @param res.cs: credible sets from dsc
+# @param dat_indx: the indx for the data from dsc
+# @p: number of variables in each simulation replicate. 
+get_cs_effect = function(res.cs, dat_indx, p){
+  cs_effect = c()
+  for (indx in dat_indx){
+    effect = rep(0, p)
+    cs_effect_indx = c(unlist(res.cs[[indx]]$cs))
+    effect[cs_effect_indx] = 1
+    cs_effect = c(cs_effect, effect)
+  }
+  return(cs_effect)
+}
+```
+
+```{r}
+susie = readRDS("./data/dsc3/susie.cs.rds")
+rss = readRDS("./data/dsc3/susie.rss.rds")
+rss.varY = readRDS("./data/dsc3/susie.rss.varY.rds")
+```
+
+### 1. Results using real correlation structure from data
+
+```{r, fig.width=12, fig.height=8}
+par(mfrow = c(2,3), cex.axis = 1.5)
+censor_lvl = c(0, 0.2, 0.4, 0.6, 0.8)
+for (i in 1:5){
+  indx = which(susie$simulate.cor_type == "real" & susie$simulate.censor_lvl == censor_lvl[i])
+  pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+  pip.rss = unlist(lapply(indx, function(x) rss$susie_rss.pip[[x]]))
+  pip.rss.varY = unlist(lapply(indx, function(x) rss.varY$susie_rss_varY.pip[[x]]))
+  is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
+  
+  ts = seq(from = 0, to = 0.99, by = 0.01)
+  res.susie = calculate_tpr_vs_fdr(pip.susie, is_effect, ts)
+  res.rss = calculate_tpr_vs_fdr(pip.rss, is_effect, ts)
+  res.rss.varY = calculate_tpr_vs_fdr(pip.rss.varY, is_effect, ts)
+  
+  plot(res.susie[,2], res.susie[,1], type = "l", xlim = c(0,1), ylim = c(0, 1), xlab = "FDR", ylab = "Power",
+       main = paste0("Real correlation, effect 0-3", ",censor=", censor_lvl[i]))
+  lines(res.rss[,2], res.rss[,1], type = "l", col = 2)
+  lines(res.rss.varY[,2], res.rss.varY[,1], type = "l", col = 3)
+  
+  points(res.susie[96,2], res.susie[96, 1])
+  points(res.rss[96,2], res.rss[96, 1])
+  points(res.rss.varY[96,2], res.rss.varY[96, 1])
+  
+  legend("topleft", legend = c("susie", "susie.rss.varY=1", "susie.rss.varY"), col = c(1,2,3), lty = 1)
+}
+
+```
+The dots indicate PIP threshold = 0.95
+
+
+
+
+### 2. Results using independent X, without data from null model. 
+
+```{r, fig.width=12, fig.height=8}
+par(mfrow = c(2,3),cex.axis = 1.5)
+censor_lvl = c(0, 0.2, 0.4, 0.6, 0.8)
+
+for (i in 1:5){
+  indx = which(susie$simulate.cor_type == "independent" & susie$simulate.censor_lvl == censor_lvl[i] & susie$simulate.num_effect != 0)
+  pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+  pip.rss = unlist(lapply(indx, function(x) rss$susie_rss.pip[[x]]))
+  pip.rss.varY = unlist(lapply(indx, function(x) rss.varY$susie_rss_varY.pip[[x]]))
+  is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
+  
+  ts = seq(from = 0, to = 0.99, by = 0.01)
+  res.susie = calculate_tpr_vs_fdr(pip.susie, is_effect, ts)
+  res.rss = calculate_tpr_vs_fdr(pip.rss, is_effect, ts)
+  res.rss.varY = calculate_tpr_vs_fdr(pip.rss.varY, is_effect, ts)
+
+  plot(res.susie[,2], res.susie[,1], type = "l", xlim = c(0,1), ylim = c(0, 1), xlab = "FDR", ylab = "Power",
+       main = paste0("Real correlation, effect 0-3", ",censor=", censor_lvl[i]))
+  lines(res.rss[,2], res.rss[,1], type = "l", col = 2)
+  lines(res.rss.varY[,2], res.rss.varY[,1], type = "l", col = 3)
+  
+  points(res.susie[96,2], res.susie[96, 1])
+  points(res.rss[96,2], res.rss[96, 1])
+  points(res.rss.varY[96,2], res.rss.varY[96, 1])
+  
+  legend("topleft", legend = c("susie", "susie.rss.varY=1", "susie.rss.varY"), col = c(1,2,3), lty = 1)
+  
+}
+
+```
+
+The dots indicate PIP threshold = 0.95.
+
+
+### 3. Results using independent X, with data from null model. 
+
+```{r, fig.width=10, fig.height=8}
+par(mfrow = c(2,3),cex.axis = 1.5)
+censor_lvl = c(0, 0.2, 0.4, 0.6, 0.8)
+
+
+for (i in 1:5){
+  indx = which(susie$simulate.cor_type == "independent" & susie$simulate.censor_lvl == censor_lvl[i])
+  pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+  pip.rss = unlist(lapply(indx, function(x) rss$susie_rss.pip[[x]]))
+  pip.rss.varY = unlist(lapply(indx, function(x) rss.varY$susie_rss_varY.pip[[x]]))
+  is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
+  
+  ts = seq(from = 0, to = 0.99, by = 0.01)
+  res.susie = calculate_tpr_vs_fdr(pip.susie, is_effect, ts)
+  res.rss = calculate_tpr_vs_fdr(pip.rss, is_effect, ts)
+  res.rss.varY = calculate_tpr_vs_fdr(pip.rss.varY, is_effect, ts)
+
+  plot(res.susie[,2], res.susie[,1], type = "l", xlim = c(0,1), ylim = c(0, 1), xlab = "FDR", ylab = "Power",
+       main = paste0("Real correlation, effect 0-3", ",censor=", censor_lvl[i]))
+  lines(res.rss[,2], res.rss[,1], type = "l", col = 2)
+  lines(res.rss.varY[,2], res.rss.varY[,1], type = "l", col = 3)
+  
+  points(res.susie[96,2], res.susie[96, 1])
+  points(res.rss[96,2], res.rss[96, 1])
+  points(res.rss.varY[96,2], res.rss.varY[96, 1])
+  
+  legend("topleft", legend = c("susie", "susie.rss.varY=1", "susie.rss.varY"), col = c(1,2,3), lty = 1)
+}
+
+```
+
+The dots indicate PIP threshold = 0.95.
+
+
+### 5. Assess Susie CS
+
+```{r}
+coverage = matrix(NA, ncol = 3, nrow = 5)
+censoring = c(0, 0.2, 0.4, 0.6, 0.8)
+colnames(coverage) = c("effect:1", "effect:2", "effect:3")
+rownames(coverage) = c("censor:0", "censor:0.2", "censor:0.4", "censor:0.6", "censor:0.8")
+for (i in 1:3){
+  for (j in 1:5){
+    dat_indx = which(susie$simulate.num_effect == i & susie$simulate.censor_lvl == censoring[j])
+    coverage[j, i] = calculate_cs_coverage(susie$susie.cs, susie$simulate.is_effect, dat_indx)
+  }
+}
+
+coverage
+```
+
+```{r}
+power_cs = matrix(NA, ncol = 3, nrow = 5)
+censoring = c(0, 0.2, 0.4, 0.6, 0.8)
+colnames(power_cs) = c("effect:1", "effect:2", "effect:3")
+rownames(power_cs) = c("censor:0", "censor:0.2", "censor:0.4", "censor:0.6", "censor:0.8")
+for (i in 1:3){
+  for (j in 1:5){
+    dat_indx = which(susie$simulate.num_effect == i & susie$simulate.censor_lvl == censoring[j])
+    cs_effect = get_cs_effect(susie$susie.cs, dat_indx, p = 1000)
+    is_effect = unlist(lapply(dat_indx, function(x) susie$simulate.is_effect[[x]]))
+    power = sum(cs_effect ==1 & is_effect == 1)/sum(is_effect)
+    power_cs[j, i] = power
+  }
+}
+
+power_cs
+```
+
+
+```{r}
+coverage = matrix(NA, ncol = 2, nrow = 5)
+censoring = c(0, 0.2, 0.4, 0.6, 0.8)
+cor_type = c("real", "independent")
+colnames(coverage) = c("real correlation", "independent")
+rownames(coverage) = c("censor:0", "censor:0.2", "censor:0.4", "censor:0.6", "censor:0.8")
+for (i in 1:2){
+  for (j in 1:5){
+    dat_indx = which(susie$simulate.num_effect != 0 & susie$simulate.cor_type == cor_type[i] & susie$simulate.censor_lvl == censoring[j])
+    coverage[j, i] = calculate_cs_coverage(susie$susie.cs, susie$simulate.is_effect, dat_indx)
+  }
+}
+
+coverage
+```
+
+```{r}
+power_cs = matrix(NA, ncol = 2, nrow = 5)
+censoring = c(0, 0.2, 0.4, 0.6, 0.8)
+colnames(power_cs) = c("real correlation", "independent")
+rownames(power_cs) = c("censor:0", "censor:0.2", "censor:0.4", "censor:0.6", "censor:0.8")
+for (i in 1:2){
+  for (j in 1:5){
+    dat_indx = which(susie$simulate.num_effect != 0 & susie$simulate.cor_type == cor_type[i] & susie$simulate.censor_lvl == censoring[j])
+    cs_effect = get_cs_effect(susie$susie.cs, dat_indx, p = 1000)
+    is_effect = unlist(lapply(dat_indx, function(x) susie$simulate.is_effect[[x]]))
+    power = sum(cs_effect ==1 & is_effect == 1)/sum(is_effect)
+    power_cs[j, i] = power
+  }
+}
+
+power_cs
+```
+
+
+### 5. Assess Susie.rss cs
+
+```{r}
+coverage = matrix(NA, ncol = 3, nrow = 5)
+censoring = c(0, 0.2, 0.4, 0.6, 0.8)
+colnames(coverage) = c("effect:1", "effect:2", "effect:3")
+rownames(coverage) = c("censor:0", "censor:0.2", "censor:0.4", "censor:0.6", "censor:0.8")
+for (i in 1:3){
+  for (j in 1:5){
+    dat_indx = which(rss$simulate.num_effect == i & rss$simulate.censor_lvl == censoring[j])
+    coverage[j, i] = calculate_cs_coverage(rss$susie_rss.cs, rss$simulate.is_effect, dat_indx)
+  }
+}
+
+coverage
+```
+
+```{r}
+power_cs = matrix(NA, ncol = 3, nrow = 5)
+censoring = c(0, 0.2, 0.4, 0.6, 0.8)
+colnames(power_cs) = c("effect:1", "effect:2", "effect:3")
+rownames(power_cs) = c("censor:0", "censor:0.2", "censor:0.4", "censor:0.6", "censor:0.8")
+for (i in 1:3){
+  for (j in 1:5){
+    dat_indx = which(rss$simulate.num_effect == i & rss$simulate.censor_lvl == censoring[j])
+    cs_effect = get_cs_effect(rss$susie_rss.cs, dat_indx, p = 1000)
+    is_effect = unlist(lapply(dat_indx, function(x) rss$simulate.is_effect[[x]]))
+    power = sum(cs_effect ==1 & is_effect == 1)/sum(is_effect)
+    power_cs[j, i] = power
+  }
+}
+
+power_cs
+```
+
+
+```{r}
+coverage = matrix(NA, ncol = 2, nrow = 5)
+censoring = c(0, 0.2, 0.4, 0.6, 0.8)
+cor_type = c("real", "independent")
+colnames(coverage) = c("real correlation", "independent")
+rownames(coverage) = c("censor:0", "censor:0.2", "censor:0.4", "censor:0.6", "censor:0.8")
+for (i in 1:2){
+  for (j in 1:5){
+    dat_indx = which(rss$simulate.num_effect != 0 & rss$simulate.cor_type == cor_type[i] & rss$simulate.censor_lvl == censoring[j])
+    coverage[j, i] = calculate_cs_coverage(rss$susie_rss.cs, rss$simulate.is_effect, dat_indx)
+  }
+}
+
+coverage
+```
+
+```{r}
+power_cs = matrix(NA, ncol = 2, nrow = 5)
+censoring = c(0, 0.2, 0.4, 0.6, 0.8)
+colnames(power_cs) = c("real correlation", "independent")
+rownames(power_cs) = c("censor:0", "censor:0.2", "censor:0.4", "censor:0.6", "censor:0.8")
+for (i in 1:2){
+  for (j in 1:5){
+    dat_indx = which(rss$simulate.num_effect != 0 & rss$simulate.cor_type == cor_type[i] & rss$simulate.censor_lvl == censoring[j])
+    cs_effect = get_cs_effect(rss$susie_rss.cs, dat_indx, p = 1000)
+    is_effect = unlist(lapply(dat_indx, function(x) rss$simulate.is_effect[[x]]))
+    power = sum(cs_effect ==1 & is_effect == 1)/sum(is_effect)
+    power_cs[j, i] = power
+  }
+}
+
+power_cs
+```
+
