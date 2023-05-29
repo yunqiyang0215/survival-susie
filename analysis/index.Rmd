@@ -67,8 +67,10 @@ Real data simulation:
 
 + [Version 4 simulation: power vs. FDR](dsc_sim4.html)
 
-Susie RSS results:
+Susie results:
 
 + [Susie rss diagnosis](susierss_failure.html)
 
 + [Susie vs. susie rss](survival_susierss.html)
+
++ [Susie convergence criteria](susie.convergence.html)
