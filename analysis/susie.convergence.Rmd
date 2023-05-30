@@ -163,7 +163,7 @@ for (i in 1:5){
   res.susie.lbf = calculate_tpr_vs_fdr(pip.susie.lbf, is_effect, ts)
   res.bvsnlp = calculate_tpr_vs_fdr(pip.bvsnlp, is_effect, ts)
   
-  plot(res.susie[,2], res.susie[,1], type = "l", xlim = c(0,1), ylim = c(0, 1), xlab = "FDR", ylab = "Power",
+  plot(res.susie[,2], res.susie[,1], type = "l", xlim = c(0, 0.2), ylim = c(0, 1), xlab = "FDR", ylab = "Power",
        main = paste0("Real correlation, effect 0-3", ",censor=", censor_lvl[i]))
   lines(res.susie.lbf[,2], res.susie.lbf[,1], type = "l", col = 2)
   lines(res.bvsnlp[,2], res.bvsnlp[,1], type = "l", col = 3)
