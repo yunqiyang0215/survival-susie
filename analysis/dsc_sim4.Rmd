@@ -245,7 +245,7 @@ colnames(coverage) = c("effect:1", "effect:2", "effect:3")
 rownames(coverage) = c("censor:0", "censor:0.2", "censor:0.4", "censor:0.6", "censor:0.8")
 for (i in 1:3){
   for (j in 1:5){
-    dat_indx = which(susie$simulate.num_effect == i & susie$simulate.censor_lvl == censoring[j])
+    dat_indx = which(susie$simulate.num_effect == i & susie$simulate.censor_lvl == censoring[j] & susie$simulate.cor_type == "real")
     coverage[j, i] = calculate_cs_coverage(dat_indx)
   }
 }
@@ -271,6 +271,13 @@ for (i in 1:3){
 power_cs
 ```
 
+```{r fig.height=4, fig.width=4}
+plot(c(0, 0.2, 0.4, 0.6, 0.8), power_cs[,1], pch = 20, ylim = c(0.4, 0.9), lty = 3, type = "b", xlab = "Censoring level", ylab = "Power of CSs")
+lines(c(0, 0.2, 0.4, 0.6, 0.8), power_cs[,2], pch = 20, col = 2, lty = 3, type = "b")
+lines(c(0, 0.2, 0.4, 0.6, 0.8), power_cs[,3], pch = 20, col = 3, lty = 3, type = "b")
+legend("topright", legend = c("1 effect", "2 effects", "3 effects"), col = c(1, 2, 3), lty = 3)
+
+```
 
 ```{r}
 coverage = matrix(NA, ncol = 2, nrow = 5)
@@ -286,6 +293,11 @@ for (i in 1:2){
 }
 
 coverage
+```
+
+```{r}
+plot(c(0, 0.2, 0.4, 0.6, 0.8), coverage[,1], pch = 20, ylim = c(0.9, 1))
+points(c(0, 0.2, 0.4, 0.6, 0.8), coverage[,2])
 ```
 
 ```{r}
@@ -305,3 +317,4 @@ for (i in 1:2){
 
 power_cs
 ```
+
