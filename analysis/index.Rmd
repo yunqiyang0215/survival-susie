@@ -74,3 +74,7 @@ Susie results:
 + [Susie vs. susie rss](survival_susierss.html)
 
 + [Susie convergence criteria](susie.convergence.html)
+
+Data application:
+
++ [Cancer subtype](cancer_subtype.html)
