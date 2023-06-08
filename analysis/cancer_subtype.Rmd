@@ -1,0 +1,80 @@
+---
+title: "Data application: cancer subtype"
+author: "Yunqi Yang"
+date: "6/8/2023"
+output: html_document
+---
+
+```{r}
+library(Matrix)
+library(pheatmap)
+library(My.stepwise)
+library(survival)
+library(susieR)
+```
+
+
+```{r}
+data.combined <- readRDS("./data/combined_data_resectable_v2.rds")
+### show the pairwise correlation between program signatures
+pheatmap(cor(data.combined[, -c(1:6)]), angle_col = 45)
+```
+
+```{r}
+### pre-processing
+data.combined$male <- ifelse(data.combined$sex=="Male", 1, 0)
+data.combined$stageIIb <- ifelse(data.combined$stage=="IIb", 1, 0)
+data.combined$stageIII <- ifelse(data.combined$stage=="III-higher", 1, 0)
+```
+
+### Method 1: stepwise selection
+```{r}
+fit.surv <- My.stepwise.coxph(Time = "futime", Status = "event", variable.list = colnames(data.combined)[7:32],
+                              in.variable = c("age", "male", "stageIIb", "stageIII"), data = data.combined)
+
+```
+
+### Method 2: survival susie
+```{r}
+source("./code/surv_susie_helper.R")
+devtools::load_all("/Users/nicholeyang/Desktop/logisticsusie")
+```
+
+```{r}
+fit_coxph <- ser_from_univariate(surv_uni_fun)
+#### parameter settings
+L = 10
+maxiter = 1e3
+
+X = data.combined[, c(5, 7:35)]
+X = as.matrix(X)
+p = ncol(X)
+
+
+## Create  survival object
+y <- Surv(data.combined$futime, data.combined$event)
+fit.susie <- ibss_from_ser(X, y, L = L, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = maxiter,
+                     estimate_intercept = TRUE, ser_function = fit_coxph)
+
+pip <- logisticsusie:::get_pip(fit.susie$alpha)
+effect_estimate <- colSums(fit.susie$alpha * fit.susie$mu)
+class(fit.susie) = "susie"
+cs <- susie_get_cs(fit.susie, X)
+```
+
+```{r}
+# Set wider margins to accommodate the labels
+par(mar = c(7, 4, 3, 3)) 
+plot(pip, xaxt = "n", xlab = "")
+axis(1, at=1:30, labels=colnames(X), las=2,  cex.axis = 0.7, xlab = "")
+```
+
+```{r}
+par(mar = c(7, 4, 3, 3)) 
+plot(effect_estimate, xaxt = "n", xlab = "", ylab = "Effect size estimate")
+axis(1, at=1:30, labels=colnames(X), las=2,  cex.axis = 0.7, xlab = "")
+```
+```{r}
+cs
+```
+
