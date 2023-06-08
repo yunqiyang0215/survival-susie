@@ -15,6 +15,7 @@ library(susieR)
 
 
 ```{r}
+# yusha's data
 data.combined <- readRDS("./data/combined_data_resectable_v2.rds")
 ### show the pairwise correlation between program signatures
 pheatmap(cor(data.combined[, -c(1:6)]), angle_col = 45)
