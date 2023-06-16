@@ -1,0 +1,150 @@
+---
+title: "Check coxph fit property"
+author: "Yunqi Yang"
+date: "6/15/2023"
+output: html_document
+---
+
+
+**Conclusion**: 
+
+1. Extremely high censoring rate probably won't affect effect size estimate as long as there are moderate number of events. 
+
+2. If we draw a contigency table ($2\times 2$). $\delta = 0,1$ indicates whether the outcome is observed, and $x=0,1$ indicates genotypes. As long as there are a couple observations in each cell, the effect size estimate is fine. Otherwise, coefficient tends to be infinite. 
+
+
+```{r}
+library(survival)
+```
+
+```{r}
+# Function to simulate survival time under exponential model. That is,
+# assuming survival time is exponentially distributed.
+# lambda(t) = lambda*exp(b0 + Xb). S(t) = exp(-lambda*t),
+# F(t) = 1- S(t) \sim Unif(0,1). Therefore, t = log(1-runif(0,1))/-exp(b0+Xb).
+# For censored objects, we simulate the censoring time by rescale the actual survival time.
+# @param b: vector of length (p+1) for true effect size, include intercept.
+# @param X: variable matrix of size n by p.
+# @param censor_lvl: a constant from [0,1], indicating the censoring level in the data.
+# @return  dat: a dataframe that contains `y`, `x` and `status`.
+# `status`: censoring status: 0 = censored, 1 = event observed. See Surv() in library(survival)
+sim_surv_exp <- function(b, X, censor_lvl){
+  n = nrow(X)
+  p = ncol(X)
+  dat = list()
+
+  status <- ifelse(runif(n) > censor_lvl, 1, 0)
+  lambda <- exp(cbind(rep(1,n), X) %*% b)
+  surT <- log(1 - runif(n)) /(-lambda)
+  # rescale censored subject to get observed time
+  surT[status == 0] = surT[status == 0] * runif(sum(status == 0))
+
+  y = cbind(surT, status)
+  colnames(y) = c("time", "status")
+  colnames(X) <- unlist(lapply(1:p, function(i) paste0("x", i)))
+  dat[["X"]] = X
+  dat[["y"]] = y
+  return(dat)
+}
+
+```
+
+### 1. Check discriminate power of coxph(). 
+
+```{r}
+set.seed(1)
+# simulate 2 variables 
+n = 100
+X = cbind(rbinom(n, size = 1, prob = 0.3), rbinom(n, size = 1, prob = 0.1))
+# the first element of b is for intercept
+b = c(1, 1, 0)
+censor_lvl = 0.7
+dat <- sim_surv_exp(b, X, censor_lvl)
+```
+
+#### Fit1: use all the data
+```{r}
+table(dat$y[,2], dat$X[,1])
+```
+
+```{r}
+surT <- Surv(dat$y[,1], dat$y[,2])
+fit1 <- coxph(surT ~ dat$X[,1])
+summary(fit1)
+```
+
+#### Fit2: 
+
+Select sub-samples where individuals who have event have x = 1. And individuals with x = 0 are all censored. 
+```{r}
+# let's just select sub-samples where individuals who have event have x = 1. 
+# And individuals with x = 0 are all censored. 
+indx = which(dat$y[,2] == dat$X[,1])
+y = dat$y[indx, ]
+x = dat$X[indx, 1]
+table(y[,2], x)
+```
+
+```{r}
+surT <- Surv(y[,1], y[,2])
+fit2 <- coxph(surT ~ x)
+summary(fit2)
+```
+
+#### Fit3 & Fit4:
+
+In fit3, we add 2 samples to data in fit2. Doesn't help in this case. 
+
+In fit4, we add 4 samples to data in fit2. It helped a lot. 
+```{r}
+indx2 = which(dat$y[,2] != dat$X[,1])[c(1,4)]
+y2 = rbind(y, dat$y[indx2, ])
+x2 = c(x, dat$X[,1][indx2])
+table(y2[,2], x2)
+```
+
+```{r}
+surT <- Surv(y2[,1], y2[,2])
+fit3 <- coxph(surT ~ x2)
+summary(fit3)
+```
+
+
+```{r}
+indx2 = which(dat$y[,2] != dat$X[,1])[c(1:4)]
+y2 = rbind(y, dat$y[indx2, ])
+x2 = c(x, dat$X[,1][indx2])
+table(y2[,2], x2)
+```
+
+```{r}
+surT <- Surv(y2[,1], y2[,2])
+fit4 <- coxph(surT ~ x2)
+summary(fit4)
+```
+
+### 2. Check coxph() under extremely high censoring. 
+
+```{r}
+set.seed(1)
+# simulate 2 variables 
+n = 1000
+X = cbind(rbinom(n, size = 1, prob = 0.3), rbinom(n, size = 1, prob = 0.1))
+# the first element of b is for intercept
+b = c(1, 1, 0)
+censor_lvl = 0.99
+dat <- sim_surv_exp(b, X, censor_lvl)
+```
+
+#### Fit1: use all the data
+
+In this case,
+```{r}
+table(dat$y[,2], dat$X[,1])
+```
+
+```{r}
+surT <- Surv(dat$y[,1], dat$y[,2])
+fit1 <- coxph(surT ~ dat$X[,1])
+summary(fit1)
+```
