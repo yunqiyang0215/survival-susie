@@ -12,6 +12,11 @@ output: html_document
 
 2. If we draw a contigency table ($2\times 2$). $\delta = 0,1$ indicates whether the outcome is observed, and $x=0,1$ indicates genotypes. As long as there are a couple observations in each cell, the effect size estimate is fine. Otherwise, coefficient tends to be infinite. 
 
+3. What if the SNP is very rare and censoring rate is extremely high? 
+
+As long as the total sample size is large, even there is only 1 event, the fit is not bad. 
+
+
 
 ```{r}
 library(survival)
@@ -147,6 +152,28 @@ table(dat$y[,2], dat$X[,1])
 ```
 
 ```{r}
+surT <- Surv(dat$y[,1], dat$y[,2])
+fit1 <- coxph(surT ~ dat$X[,1])
+summary(fit1)
+```
+
+
+### 3. What if the SNP is very rare and censoring rate is extremely high. 
+
+In this extreme case, the fit is not bad. 
+```{r}
+set.seed(1)
+# simulate 2 variables 
+n = 10000
+X = cbind(rbinom(n, size = 2, prob = 5e-3), rbinom(n, size = 1, prob = 0.1))
+# the first element of b is for intercept
+b = c(1, 1, 0)
+censor_lvl = 0.99
+dat <- sim_surv_exp(b, X, censor_lvl)
+```
+
+```{r}
+table(dat$y[,2], dat$X[,1])
 surT <- Surv(dat$y[,1], dat$y[,2])
 fit1 <- coxph(surT ~ dat$X[,1])
 summary(fit1)
