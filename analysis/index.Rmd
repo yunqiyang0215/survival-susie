@@ -16,6 +16,8 @@ Background and analysis on coxph model
 
 + [Check distribution of zscores under the null in coxph](null_model_zscore.html)
 
++ [Check more property of coxph()](coxph_fit.html)
+
 
 Simulation for survival data and run IBSS
 
