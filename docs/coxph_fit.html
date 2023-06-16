@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree4b699e2fe059d47aef529683f665bf3722422b61targetblank4b699e2a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/4b699e2fe059d47aef529683f665bf3722422b61" target="_blank">4b699e2</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree42db011f20b0e634dd41f590febc062919573865targetblank42db011a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/42db011f20b0e634dd41f590febc062919573865" target="_blank">42db011</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree4b699e2fe059d47aef529683f665bf3722422b61targetblank4b699e2a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree42db011f20b0e634dd41f590febc062919573865targetblank42db011a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/4b699e2fe059d47aef529683f665bf3722422b61" target="_blank">4b699e2</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/42db011f20b0e634dd41f590febc062919573865" target="_blank">42db011</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -538,6 +538,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/42db011f20b0e634dd41f590febc062919573865/analysis/coxph_fit.Rmd" target="_blank">42db011</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-06-16
+</td>
+<td>
+wflow_publish("analysis/coxph_fit.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/2aa5a4cf9cf1e022a27381ffefa5833ed1231818/docs/coxph_fit.html" target="_blank">2aa5a4c</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-06-16
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -600,7 +634,9 @@ wflow_publish("analysis/coxph_fit.Rmd")
 <ol style="list-style-type: decimal">
 <li><p>Extremely high censoring rate probably won’t affect effect size estimate as long as there are moderate number of events.</p></li>
 <li><p>If we draw a contigency table (<span class="math inline">\(2\times 2\)</span>). <span class="math inline">\(\delta = 0,1\)</span> indicates whether the outcome is observed, and <span class="math inline">\(x=0,1\)</span> indicates genotypes. As long as there are a couple observations in each cell, the effect size estimate is fine. Otherwise, coefficient tends to be infinite.</p></li>
+<li><p>What if the SNP is very rare and censoring rate is extremely high?</p></li>
 </ol>
+<p>As long as the total sample size is large, even there is only 1 event, the fit is not bad.</p>
 <pre class="r"><code>library(survival)</code></pre>
 <pre class="r"><code># Function to simulate survival time under exponential model. That is,
 # assuming survival time is exponentially distributed.
@@ -804,6 +840,42 @@ Concordance= 0.699  (se = 0.09 )
 Likelihood ratio test= 3.03  on 1 df,   p=0.08
 Wald test            = 3.53  on 1 df,   p=0.06
 Score (logrank) test = 4.09  on 1 df,   p=0.04</code></pre>
+</div>
+</div>
+<div id="what-if-the-snp-is-very-rare-and-censoring-rate-is-extremely-high." class="section level3">
+<h3>3. What if the SNP is very rare and censoring rate is extremely high.</h3>
+<p>In this extreme case, the fit is not bad.</p>
+<pre class="r"><code>set.seed(1)
+# simulate 2 variables 
+n = 10000
+X = cbind(rbinom(n, size = 2, prob = 5e-3), rbinom(n, size = 1, prob = 0.1))
+# the first element of b is for intercept
+b = c(1, 1, 0)
+censor_lvl = 0.99
+dat &lt;- sim_surv_exp(b, X, censor_lvl)</code></pre>
+<pre class="r"><code>table(dat$y[,2], dat$X[,1])</code></pre>
+<pre><code>   
+       0    1
+  0 9810   95
+  1   94    1</code></pre>
+<pre class="r"><code>surT &lt;- Surv(dat$y[,1], dat$y[,2])
+fit1 &lt;- coxph(surT ~ dat$X[,1])
+summary(fit1)</code></pre>
+<pre><code>Call:
+coxph(formula = surT ~ dat$X[, 1])
+
+  n= 10000, number of events= 95 
+
+            coef exp(coef) se(coef)     z Pr(&gt;|z|)
+dat$X[, 1] 1.380     3.974    1.010 1.366    0.172
+
+           exp(coef) exp(-coef) lower .95 upper .95
+dat$X[, 1]     3.974     0.2516    0.5492     28.76
+
+Concordance= 0.511  (se = 0.013 )
+Likelihood ratio test= 1.25  on 1 df,   p=0.3
+Wald test            = 1.87  on 1 df,   p=0.2
+Score (logrank) test = 2.18  on 1 df,   p=0.1</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -841,7 +913,6 @@ loaded via a namespace (and not attached):
 [33] rmarkdown_2.11   magrittr_2.0.1   whisker_0.4      splines_4.1.1   
 [37] promises_1.2.0.1 ellipsis_0.3.2   htmltools_0.5.5  httpuv_1.6.3    
 [41] utf8_1.2.2       stringi_1.7.5    cachem_1.0.6     crayon_1.4.1    </code></pre>
-</div>
 </div>
 </div>
 
