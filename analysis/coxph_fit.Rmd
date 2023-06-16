@@ -64,7 +64,10 @@ dat <- sim_surv_exp(b, X, censor_lvl)
 
 #### Fit1: use all the data
 ```{r}
+# rownames are unique y[,2] values, delta. delta = 1 indicates event happened. 
+# colnames are X values, genotype.
 table(dat$y[,2], dat$X[,1])
+
 ```
 
 ```{r}
