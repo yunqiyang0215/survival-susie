@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree6dd10910ecb240f62b3d4c8b44b0f3e24c1a6323targetblank6dd1091a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/6dd10910ecb240f62b3d4c8b44b0f3e24c1a6323" target="_blank">6dd1091</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreec3a005b7f921417d0ffce825d8fe1c218c09eef2targetblankc3a005ba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/c3a005b7f921417d0ffce825d8fe1c218c09eef2" target="_blank">c3a005b</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree6dd10910ecb240f62b3d4c8b44b0f3e24c1a6323targetblank6dd1091a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreec3a005b7f921417d0ffce825d8fe1c218c09eef2targetblankc3a005ba" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/6dd10910ecb240f62b3d4c8b44b0f3e24c1a6323" target="_blank">6dd1091</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/c3a005b7f921417d0ffce825d8fe1c218c09eef2" target="_blank">c3a005b</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -543,6 +543,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/c3a005b7f921417d0ffce825d8fe1c218c09eef2/analysis/numerical_integration.Rmd" target="_blank">c3a005b</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-06-28
+</td>
+<td>
+wflow_publish("analysis/numerical_integration.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/bc28e32f64a7e47d07e2d3971f11de06dcb66566/docs/numerical_integration.html" target="_blank">bc28e32</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-06-28
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/6dd10910ecb240f62b3d4c8b44b0f3e24c1a6323/analysis/numerical_integration.Rmd" target="_blank">6dd1091</a>
 </td>
 <td>
@@ -564,9 +598,9 @@ wflow_publish("analysis/numerical_integration.Rmd")
 </div>
 <div id="description-using-quadrature-method-to-compute-bayes-factor-in-survival-susie-model." class="section level3">
 <h3>Description: using quadrature method to compute Bayes factor in survival susie model.</h3>
-<p>The standard BF for comparing the hypothesis of having one predictor vs. the null model: $$</p>
-<p>=</p>
-<p>$$</p>
+<p>The standard BF for comparing the hypothesis of having one predictor vs. the null model: <span class="math display">\[
+\frac{P(D|H_1)}{P(D|H_0)}=\frac{\int\int p(y,\delta|x,b, h_0)p(b)dbdh_0}{\int p(y,\delta|x,b=0,h_0)dh_0}
+\]</span></p>
 <p>Based on the paper, “A Bayesian Justification of Cox’s Partial Likelihood” by Sinha, D. and others, we can safely use the partial likelihood to compute Bayes factor. That is,</p>
 <p><span class="math display">\[
 \begin{split}
