@@ -1,0 +1,113 @@
+---
+title: "compute_bf"
+author: "Yunqi Yang"
+date: "6/27/2023"
+output: html_document
+---
+
+
+### Description: using quadrature method to compute Bayes factor in survival susie model. 
+
+The standard BF for comparing the hypothesis of having one predictor vs. the null model:
+$$
+
+\frac{P(D|H_1)}{P(D|H_0)}=\frac{\int\int p(y,\delta|x,b, h_0)p(b)dbdh_0}{\int p(y,\delta|x,b=0,h_0)dh_0}
+
+$$
+
+Based on the paper, "A Bayesian Justification of Cox’s Partial Likelihood" by Sinha, D. and others, we can safely use the partial likelihood to compute Bayes factor. That is,
+
+$$
+\begin{split}
+\frac{P(D|H_1)}{P(D|H_0)}&=\frac{\int Lp(b)p(b)db}{Lp(b=0)}\\
+Lp(b)&=\prod_{i=1}^n\{\frac{\exp(x_ib)}{\sum_{j\in R(y_i)}\exp(x_jb)} \}^{\delta_i}
+\end{split}
+$$
+
+```{r}
+# Function to simulate survival time under exponential model. That is,
+# assuming survival time is exponentially distributed.
+# lambda(t) = lambda*exp(b0 + Xb). S(t) = exp(-lambda*t),
+# F(t) = 1- S(t) \sim Unif(0,1). Therefore, t = log(1-runif(0,1))/-exp(b0+Xb).
+# For censored objects, we simulate the censoring time by rescale the actual survival time.
+# @param b: vector of length (p+1) for true effect size, include intercept.
+# @param X: variable matrix of size n by p.
+# @param censor_lvl: a constant from [0,1], indicating the censoring level in the data.
+# @return  dat: a dataframe that contains `y`, `x` and `status`.
+# `status`: censoring status: 0 = censored, 1 = event observed. See Surv() in library(survival)
+sim_surv_exp <- function(b, X, censor_lvl){
+  n = nrow(X)
+  p = ncol(X)
+  dat = list()
+
+  status <- ifelse(runif(n) > censor_lvl, 1, 0)
+  lambda <- exp(cbind(rep(1,n), X) %*% b)
+  surT <- log(1 - runif(n)) /(-lambda)
+  # rescale censored subject to get observed time
+  surT[status == 0] = surT[status == 0] * runif(sum(status == 0))
+
+  y = cbind(surT, status)
+  colnames(y) = c("time", "status")
+  colnames(X) <- unlist(lapply(1:p, function(i) paste0("x", i)))
+  dat[["X"]] = X
+  dat[["y"]] = y
+  return(dat)
+}
+
+```
+
+```{r}
+library(survival)
+library(cubature)
+source("./code/surv_susie_helper.R")
+```
+
+
+### Simulate data
+```{r}
+set.seed(1)
+# simulate 2 variables 
+n = 100
+X = cbind(rbinom(n, size = 2, prob = 0.3), rbinom(n, size = 1, prob = 0.3))
+# the first element of b is for intercept
+b = c(1, 1, 0)
+censor_lvl = 0.7
+dat <- sim_surv_exp(b, X, censor_lvl)
+survT <- Surv(dat$y[,1], dat$y[,2])
+```
+
+
+### Use numerical integration 
+```{r code-numerical-integration}
+# @param b: the effect size
+# @param surT: a Surv() object, containing time and status
+# @param x: covariate
+get_partial_lik <- function(b, survT, x){
+  partial.loglik = logLik(coxph(survT ~ x, init = c(b), control=list('iter.max'= 0, timefix=FALSE)))
+  partial.lik = exp(partial.loglik) # handling ties...
+  return(as.numeric(partial.lik))
+}
+
+integrand <- function(b, survT, x, prior_sd){
+  val = get_partial_lik(b, survT, x)*dnorm(b, mean = 0, sd = prior_sd)
+  return(val)
+}
+```
+
+```{r numerical-integration-res}
+prior_sd = 1
+res = cubintegrate(f = integrand, survT = survT, x = dat$X[,1], prior_sd = 1, lower = -Inf, upper = Inf, method = "hcubature")
+res
+prob.h0 = get_partial_lik(b = 0, survT, dat$X[,1])
+lbf.numerical = log(res$integral) - log(prob.h0)
+```
+
+```{r}
+abf <-surv_uni_fun(x = dat$X[,1], y = survT, o = rep(0, n), prior_variance = prior_sd^2)$lbf
+```
+
+```{r}
+lbf.numerical
+abf
+```
+
