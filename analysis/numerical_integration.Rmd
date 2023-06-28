@@ -10,9 +10,7 @@ output: html_document
 
 The standard BF for comparing the hypothesis of having one predictor vs. the null model:
 $$
-
 \frac{P(D|H_1)}{P(D|H_0)}=\frac{\int\int p(y,\delta|x,b, h_0)p(b)dbdh_0}{\int p(y,\delta|x,b=0,h_0)dh_0}
-
 $$
 
 Based on the paper, "A Bayesian Justification of Cox’s Partial Likelihood" by Sinha, D. and others, we can safely use the partial likelihood to compute Bayes factor. That is,
