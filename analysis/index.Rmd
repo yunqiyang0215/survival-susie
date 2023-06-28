@@ -18,6 +18,10 @@ Background and analysis on coxph model
 
 + [Check more property of coxph()](coxph_fit.html)
 
+Check Bayes factor
+
++ [Numerical integration](numerical_integration.html)
+
 
 Simulation for survival data and run IBSS
 
