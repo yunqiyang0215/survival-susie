@@ -5,7 +5,9 @@ date: "7/31/2023"
 output: html_document
 ---
 
-### Description: assess difference in Bayes factor computed by numerical integration vs. ABF. The example of using numerical integration to compute BF is available at: https://yunqiyang0215.github.io/survival-susie/numerical_integration.html
+### Description: 
+
+Assess difference in Bayes factor computed by numerical integration vs. ABF. The example of using numerical integration to compute BF is available at: https://yunqiyang0215.github.io/survival-susie/numerical_integration.html
 
 
 We assess three scenarios under relatively large sample size, $n= 10,000$.
