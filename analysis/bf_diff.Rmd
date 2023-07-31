@@ -1,0 +1,184 @@
+---
+title: "Difference in BF computed by numerial intergration vs. ABF"
+author: "Yunqi Yang"
+date: "7/31/2023"
+output: html_document
+---
+
+### Description: assess difference in Bayes factor computed by numerical integration vs. ABF. The example of using numerical integration to compute BF is available at: https://yunqiyang0215.github.io/survival-susie/numerical_integration.html
+
+
+We assess three scenarios under relatively large sample size, $n= 10,000$.
+
+1. Extremely high censoring rate, censoring rate = 0.99
+
+2. Low allele frequency, MAF = 0.001
+
+3. Both. 
+
+
+Result shows that low allele frequency makes the difference between BF and ABF larger. 
+
+
+```{r}
+# Function to simulate survival time under exponential model. That is,
+# assuming survival time is exponentially distributed.
+# lambda(t) = lambda*exp(b0 + Xb). S(t) = exp(-lambda*t),
+# F(t) = 1- S(t) \sim Unif(0,1). Therefore, t = log(1-runif(0,1))/-exp(b0+Xb).
+# For censored objects, we simulate the censoring time by rescale the actual survival time.
+# @param b: vector of length (p+1) for true effect size, include intercept.
+# @param X: variable matrix of size n by p.
+# @param censor_lvl: a constant from [0,1], indicating the censoring level in the data.
+# @return  dat: a dataframe that contains `y`, `x` and `status`.
+# `status`: censoring status: 0 = censored, 1 = event observed. See Surv() in library(survival)
+sim_surv_exp <- function(b, X, censor_lvl){
+  n = nrow(X)
+  p = ncol(X)
+  dat = list()
+
+  status <- ifelse(runif(n) > censor_lvl, 1, 0)
+  lambda <- exp(cbind(rep(1,n), X) %*% b)
+  surT <- log(1 - runif(n)) /(-lambda)
+  # rescale censored subject to get observed time
+  surT[status == 0] = surT[status == 0] * runif(sum(status == 0))
+
+  y = cbind(surT, status)
+  colnames(y) = c("time", "status")
+  colnames(X) <- unlist(lapply(1:p, function(i) paste0("x", i)))
+  dat[["X"]] = X
+  dat[["y"]] = y
+  return(dat)
+}
+```
+
+```{r}
+# @param b: the effect size
+# @param surT: a Surv() object, containing time and status
+# @param x: covariate
+get_partial_lik <- function(b, survT, x){
+  ll.partial = logLik(coxph(survT ~ x, init = c(b), control=list('iter.max'= 0, timefix=FALSE)))
+  max.ll.partial = logLik(coxph(survT ~ x))
+  lik.partial.normed = exp(ll.partial - max.ll.partial) # partial likelihood / max(partial likelihood)
+  return(as.numeric(lik.partial.normed))
+}
+
+integrand <- function(b, survT, x, prior_sd){
+  val = get_partial_lik(b, survT, x) * dnorm(b, mean = 0, sd = prior_sd)
+  return(val)
+}
+```
+
+```{r}
+library(survival)
+library(cubature)
+source("./code/surv_susie_helper.R")
+
+```
+
+### Scenario 1:
+```{r}
+seeds = c(1:5)
+result = matrix(NA, ncol = 3, nrow = 5)
+colnames(result) = c("diff", "integral", "error")
+for (seed in seeds){
+  set.seed(seed)
+  # simulate 1 variable
+  n = 1e4
+  X = cbind(rbinom(n, size = 2, prob = 0.2))
+  # the first element of b is for intercept
+  b = c(1, 1)
+  censor_lvl = 0.99
+  dat <- sim_surv_exp(b, X, censor_lvl)
+  survT <- Surv(dat$y[,1], dat$y[,2])
+
+  
+  prior_sd = 1
+  res = cubintegrate(f = integrand, survT = survT, x = dat$X[,1], prior_sd = 1, lower = -100, upper = 100, method = "hcubature")
+  max.ll.partial = logLik(coxph(survT ~ dat$X[,1]))
+  prob.h1 = res$integral*exp(max.ll.partial)
+  prob.h0 = get_partial_lik(b = 0, survT, dat$X[,1])
+  lbf.numerical = log(res$integral) - log(prob.h0)
+  abf <-surv_uni_fun(x = dat$X[,1], y = survT, o = rep(0, n), prior_variance = prior_sd^2)$lbf
+  result[seed, 1] = lbf.numerical - abf
+  result[seed, 2] = res$integral
+  result[seed, 3] = res$error
+}
+
+```
+
+```{r}
+result
+```
+
+
+### Scenario 2:
+```{r}
+seeds = c(1:5)
+result = matrix(NA, ncol = 3, nrow = 5)
+colnames(result) = c("diff", "integral", "error")
+for (seed in seeds){
+  set.seed(seed)
+  # simulate 1 variable
+  n = 1e4
+  X = cbind(rbinom(n, size = 2, prob = 0.001))
+  # the first element of b is for intercept
+  b = c(1, 1)
+  censor_lvl = 0.6
+  dat <- sim_surv_exp(b, X, censor_lvl)
+  survT <- Surv(dat$y[,1], dat$y[,2])
+
+  
+  prior_sd = 1
+  res = cubintegrate(f = integrand, survT = survT, x = dat$X[,1], prior_sd = 1, lower = -100, upper = 100, method = "hcubature")
+  max.ll.partial = logLik(coxph(survT ~ dat$X[,1]))
+  prob.h1 = res$integral*exp(max.ll.partial)
+  prob.h0 = get_partial_lik(b = 0, survT, dat$X[,1])
+  lbf.numerical = log(res$integral) - log(prob.h0)
+  abf <-surv_uni_fun(x = dat$X[,1], y = survT, o = rep(0, n), prior_variance = prior_sd^2)$lbf
+  result[seed, 1] = lbf.numerical - abf
+  result[seed, 2] = res$integral
+  result[seed, 3] = res$error
+}
+
+```
+
+```{r}
+result
+```
+
+
+### Scenario 3:
+```{r}
+seeds = c(1:3)
+result = matrix(NA, ncol = 3, nrow = 3)
+colnames(result) = c("diff", "integral", "error")
+for (seed in seeds){
+  set.seed(seed)
+  # simulate 1 variable
+  n = 1e4
+  X = cbind(rbinom(n, size = 2, prob = 0.001))
+  # the first element of b is for intercept
+  b = c(1, 1)
+  censor_lvl = 0.99
+  dat <- sim_surv_exp(b, X, censor_lvl)
+  survT <- Surv(dat$y[,1], dat$y[,2])
+
+  
+  prior_sd = 1
+  res = cubintegrate(f = integrand, survT = survT, x = dat$X[,1], prior_sd = 1, lower = -100, upper = 100, method = "hcubature")
+  max.ll.partial = logLik(coxph(survT ~ dat$X[,1]))
+  prob.h1 = res$integral*exp(max.ll.partial)
+  prob.h0 = get_partial_lik(b = 0, survT, dat$X[,1])
+  lbf.numerical = log(res$integral) - log(prob.h0)
+  abf <-surv_uni_fun(x = dat$X[,1], y = survT, o = rep(0, n), prior_variance = prior_sd^2)$lbf
+  result[seed, 1] = lbf.numerical - abf
+  result[seed, 2] = res$integral
+  result[seed, 3] = res$error
+}
+
+```
+
+```{r}
+result
+```
+
