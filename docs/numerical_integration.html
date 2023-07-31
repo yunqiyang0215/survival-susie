@@ -384,7 +384,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2023-06-28
+<strong>Last updated:</strong> 2023-07-31
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree89521ea6475b188f0c9004f2c5ad1ee859e6decftargetblank89521eaa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/89521ea6475b188f0c9004f2c5ad1ee859e6decf" target="_blank">89521ea</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreecc8099e52498a9214adfd0247d3a988d1cf7d752targetblankcc8099ea"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/cc8099e52498a9214adfd0247d3a988d1cf7d752" target="_blank">cc8099e</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree89521ea6475b188f0c9004f2c5ad1ee859e6decftargetblank89521eaa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreecc8099e52498a9214adfd0247d3a988d1cf7d752targetblankcc8099ea" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/89521ea6475b188f0c9004f2c5ad1ee859e6decf" target="_blank">89521ea</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/cc8099e52498a9214adfd0247d3a988d1cf7d752" target="_blank">cc8099e</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -538,6 +538,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/cc8099e52498a9214adfd0247d3a988d1cf7d752/analysis/numerical_integration.Rmd" target="_blank">cc8099e</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-07-31
+</td>
+<td>
+wflow_publish("analysis/numerical_integration.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/c7f0240ed9737a4474fe759278f851634260021b/docs/numerical_integration.html" target="_blank">c7f0240</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-06-28
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -692,34 +726,38 @@ survT &lt;- Surv(dat$y[,1], dat$y[,2])</code></pre>
 # @param surT: a Surv() object, containing time and status
 # @param x: covariate
 get_partial_lik &lt;- function(b, survT, x){
-  partial.loglik = logLik(coxph(survT ~ x, init = c(b), control=list(&#39;iter.max&#39;= 0, timefix=FALSE)))
-  partial.lik = exp(partial.loglik) # handling ties...
-  return(as.numeric(partial.lik))
+  ll.partial = logLik(coxph(survT ~ x, init = c(b), control=list(&#39;iter.max&#39;= 0, timefix=FALSE)))
+  max.ll.partial = logLik(coxph(survT ~ x))
+  lik.partial.normed = exp(ll.partial - max.ll.partial) # partial likelihood / max(partial likelihood)
+  return(as.numeric(lik.partial.normed))
 }
 
 integrand &lt;- function(b, survT, x, prior_sd){
-  val = get_partial_lik(b, survT, x)*dnorm(b, mean = 0, sd = prior_sd)
+  val = get_partial_lik(b, survT, x) * dnorm(b, mean = 0, sd = prior_sd)
   return(val)
 }</code></pre>
-<pre class="r"><code>prior_sd = 1
-res = cubintegrate(f = integrand, survT = survT, x = dat$X[,1], prior_sd = 1, lower = -Inf, upper = Inf, method = &quot;hcubature&quot;)
+<pre class="r"><code># setting lower/upper to -Inf and Inf cause underflow/overflow problem. 
+prior_sd = 1
+res = cubintegrate(f = integrand, survT = survT, x = dat$X[,1], prior_sd = 1, lower = -100, upper = 100, method = &quot;hcubature&quot;)
 res</code></pre>
 <pre><code>$integral
-[1] 3.867775e-27
+[1] 0.07495345
 
 $error
-[1] 6.23873e-27
+[1] 2.235502e-07
 
 $neval
-[1] 15
+[1] 405
 
 $returnCode
 [1] 0</code></pre>
+<pre class="r"><code>max.ll.partial = logLik(coxph(survT ~ dat$X[,1]))
+prob.h1 = res$integral*exp(max.ll.partial)</code></pre>
 <pre class="r"><code>prob.h0 = get_partial_lik(b = 0, survT, dat$X[,1])
 lbf.numerical = log(res$integral) - log(prob.h0)</code></pre>
 <pre class="r"><code>abf &lt;-surv_uni_fun(x = dat$X[,1], y = survT, o = rep(0, n), prior_variance = prior_sd^2)$lbf</code></pre>
 <pre class="r"><code>lbf.numerical</code></pre>
-<pre><code>[1] 6.984264</code></pre>
+<pre><code>[1] 7.077709</code></pre>
 <pre class="r"><code>abf</code></pre>
 <pre><code>[1] 7.086837</code></pre>
 <br>
