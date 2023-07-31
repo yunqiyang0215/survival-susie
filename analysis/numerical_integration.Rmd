@@ -81,21 +81,29 @@ survT <- Surv(dat$y[,1], dat$y[,2])
 # @param surT: a Surv() object, containing time and status
 # @param x: covariate
 get_partial_lik <- function(b, survT, x){
-  partial.loglik = logLik(coxph(survT ~ x, init = c(b), control=list('iter.max'= 0, timefix=FALSE)))
-  partial.lik = exp(partial.loglik) # handling ties...
-  return(as.numeric(partial.lik))
+  ll.partial = logLik(coxph(survT ~ x, init = c(b), control=list('iter.max'= 0, timefix=FALSE)))
+  max.ll.partial = logLik(coxph(survT ~ x))
+  lik.partial.normed = exp(ll.partial - max.ll.partial) # partial likelihood / max(partial likelihood)
+  return(as.numeric(lik.partial.normed))
 }
 
 integrand <- function(b, survT, x, prior_sd){
-  val = get_partial_lik(b, survT, x)*dnorm(b, mean = 0, sd = prior_sd)
+  val = get_partial_lik(b, survT, x) * dnorm(b, mean = 0, sd = prior_sd)
   return(val)
 }
 ```
 
 ```{r numerical-integration-res}
+# setting lower/upper to -Inf and Inf cause underflow/overflow problem. 
 prior_sd = 1
-res = cubintegrate(f = integrand, survT = survT, x = dat$X[,1], prior_sd = 1, lower = -Inf, upper = Inf, method = "hcubature")
+res = cubintegrate(f = integrand, survT = survT, x = dat$X[,1], prior_sd = 1, lower = -100, upper = 100, method = "hcubature")
 res
+max.ll.partial = logLik(coxph(survT ~ dat$X[,1]))
+prob.h1 = res$integral*exp(max.ll.partial)
+
+```
+
+```{r}
 prob.h0 = get_partial_lik(b = 0, survT, dat$X[,1])
 lbf.numerical = log(res$integral) - log(prob.h0)
 ```
