@@ -22,6 +22,8 @@ Check Bayes factor
 
 + [Numerical integration](numerical_integration.html)
 
++ [Compare BF calculation: numerical integration vs. approximated BF](bf_diff.html)
+
 
 Simulation for survival data and run IBSS
 
