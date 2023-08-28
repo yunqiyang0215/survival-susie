@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree01ab8dd62f8e1e62f1b6b0af4eb997a8d05f21aetargetblank01ab8dda"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/01ab8dd62f8e1e62f1b6b0af4eb997a8d05f21ae" target="_blank">01ab8dd</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree4ff5354b721e97bf37c8fe7d31ef042cdc71ab32targetblank4ff5354a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/4ff5354b721e97bf37c8fe7d31ef042cdc71ab32" target="_blank">4ff5354</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree01ab8dd62f8e1e62f1b6b0af4eb997a8d05f21aetargetblank01ab8dda" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree4ff5354b721e97bf37c8fe7d31ef042cdc71ab32targetblank4ff5354a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/01ab8dd62f8e1e62f1b6b0af4eb997a8d05f21ae" target="_blank">01ab8dd</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/4ff5354b721e97bf37c8fe7d31ef042cdc71ab32" target="_blank">4ff5354</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -538,6 +538,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/4ff5354b721e97bf37c8fe7d31ef042cdc71ab32/analysis/cancer_subtype.Rmd" target="_blank">4ff5354</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-08-28
+</td>
+<td>
+wflow_publish("analysis/cancer_subtype.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/52c701d83cdb9bcc7d83c68bba8a171191420e42/docs/cancer_subtype.html" target="_blank">52c701d</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-08-28
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -636,8 +670,6 @@ library(My.stepwise)
 library(survival)
 library(susieR)
 library(mvtnorm)</code></pre>
-<div id="real-cancer-subtype-data-from-yusha" class="section level4">
-<h4>Real cancer subtype data from Yusha</h4>
 <pre class="r"><code># yusha&#39;s data
 data.combined &lt;- readRDS(&quot;./data/combined_data_resectable_v2.rds&quot;)
 ### show the pairwise correlation between program signatures
@@ -684,7 +716,6 @@ yunqiyang0215
 data.combined$male &lt;- ifelse(data.combined$sex==&quot;Male&quot;, 1, 0)
 data.combined$stageIIb &lt;- ifelse(data.combined$stage==&quot;IIb&quot;, 1, 0)
 data.combined$stageIII &lt;- ifelse(data.combined$stage==&quot;III-higher&quot;, 1, 0)</code></pre>
-</div>
 <div id="method-1-stepwise-selection" class="section level3">
 <h3>Method 1: stepwise selection</h3>
 <pre class="r"><code>fit.surv &lt;- My.stepwise.coxph(Time = &quot;futime&quot;, Status = &quot;event&quot;, variable.list = colnames(data.combined)[7:32],
@@ -887,7 +918,7 @@ p = ncol(X)
 y &lt;- Surv(data.combined$futime, data.combined$event)
 fit.susie &lt;- ibss_from_ser(X, y, L = L, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = maxiter,
                      estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
-<pre><code>20.252 sec elapsed</code></pre>
+<pre><code>24.944 sec elapsed</code></pre>
 <pre class="r"><code>pip &lt;- logisticsusie:::get_pip(fit.susie$alpha)
 effect_estimate &lt;- colSums(fit.susie$alpha * fit.susie$mu)
 class(fit.susie) = &quot;susie&quot;
@@ -1000,8 +1031,9 @@ $requested_coverage
 <pre class="r"><code>fit.susie$prior_vars</code></pre>
 <pre><code> [1] 0.1785702078 0.2870258412 0.0304814088 0.0004761711 0.0004415317
  [6] 0.0004345119 0.0004308481 0.0004286010 0.0004271116 0.0004260817</code></pre>
-<div id="simulated-gaussian-data-with-p-30" class="section level4">
-<h4>Simulated Gaussian data with p = 30</h4>
+</div>
+<div id="simulated-gaussian-data-with-p-30" class="section level3">
+<h3>3. Simulated Gaussian data with p = 30</h3>
 <pre class="r"><code>library(mvtnorm)</code></pre>
 <pre class="r"><code>set.seed(500)
 cmat = cor(data.combined[, -c(1:6)])
@@ -1121,6 +1153,43 @@ res &lt;- susie(X,y,L=10)
 plot(coef(res)[-1],pch = 20)
 plot(res$pip)</code></pre>
 <p><img src="figure/cancer_subtype.Rmd/unnamed-chunk-15-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-15-1">
+Past versions of unnamed-chunk-15-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-15-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/52c701d83cdb9bcc7d83c68bba8a171191420e42/docs/figure/cancer_subtype.Rmd/unnamed-chunk-15-1.png" target="_blank">52c701d</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-08-28
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>res$sets</code></pre>
 <pre><code>$cs
 $cs$L2
@@ -1192,7 +1261,6 @@ loaded via a namespace (and not attached):
 [73] rprojroot_2.0.2    desc_1.4.0         stringi_1.7.5      parallel_4.1.1    
 [77] Rcpp_1.0.8.3       vctrs_0.3.8        tidyselect_1.1.1   xfun_0.27         
 [81] lmtest_0.9-40     </code></pre>
-</div>
 </div>
 </div>
 
