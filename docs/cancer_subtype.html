@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree4ff5354b721e97bf37c8fe7d31ef042cdc71ab32targetblank4ff5354a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/4ff5354b721e97bf37c8fe7d31ef042cdc71ab32" target="_blank">4ff5354</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree256f794d7f95485b2db15e0b8d4d02de0781f0fdtargetblank256f794a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/256f794d7f95485b2db15e0b8d4d02de0781f0fd" target="_blank">256f794</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree4ff5354b721e97bf37c8fe7d31ef042cdc71ab32targetblank4ff5354a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree256f794d7f95485b2db15e0b8d4d02de0781f0fdtargetblank256f794a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/4ff5354b721e97bf37c8fe7d31ef042cdc71ab32" target="_blank">4ff5354</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/256f794d7f95485b2db15e0b8d4d02de0781f0fd" target="_blank">256f794</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -538,6 +538,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/256f794d7f95485b2db15e0b8d4d02de0781f0fd/analysis/cancer_subtype.Rmd" target="_blank">256f794</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-08-28
+</td>
+<td>
+wflow_publish("analysis/cancer_subtype.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/6472e731888dc864e4f4d607c75aa6f4552b1532/docs/cancer_subtype.html" target="_blank">6472e73</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-08-28
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -918,7 +952,7 @@ p = ncol(X)
 y &lt;- Surv(data.combined$futime, data.combined$event)
 fit.susie &lt;- ibss_from_ser(X, y, L = L, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = maxiter,
                      estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
-<pre><code>24.944 sec elapsed</code></pre>
+<pre><code>22.487 sec elapsed</code></pre>
 <pre class="r"><code>pip &lt;- logisticsusie:::get_pip(fit.susie$alpha)
 effect_estimate &lt;- colSums(fit.susie$alpha * fit.susie$mu)
 class(fit.susie) = &quot;susie&quot;
@@ -1033,7 +1067,7 @@ $requested_coverage
  [6] 0.0004345119 0.0004308481 0.0004286010 0.0004271116 0.0004260817</code></pre>
 </div>
 <div id="simulated-gaussian-data-with-p-30" class="section level3">
-<h3>3. Simulated Gaussian data with p = 30</h3>
+<h3>Simulated Gaussian data with p = 30</h3>
 <pre class="r"><code>library(mvtnorm)</code></pre>
 <pre class="r"><code>set.seed(500)
 cmat = cor(data.combined[, -c(1:6)])
