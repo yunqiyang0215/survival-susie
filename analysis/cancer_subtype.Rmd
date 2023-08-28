@@ -86,7 +86,7 @@ cs
 fit.susie$prior_vars
 ```
 
-### 3. Simulated Gaussian data with p = 30
+### Simulated Gaussian data with p = 30
 
 ```{r}
 library(mvtnorm)
