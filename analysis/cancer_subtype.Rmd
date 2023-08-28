@@ -14,7 +14,7 @@ library(susieR)
 library(mvtnorm)
 ```
 
-#### Real cancer subtype data from Yusha 
+
 
 ```{r}
 # yusha's data
@@ -86,7 +86,7 @@ cs
 fit.susie$prior_vars
 ```
 
-#### Simulated Gaussian data with p = 30
+### 3. Simulated Gaussian data with p = 30
 
 ```{r}
 library(mvtnorm)
