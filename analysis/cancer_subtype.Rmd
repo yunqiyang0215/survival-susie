@@ -11,8 +11,10 @@ library(pheatmap)
 library(My.stepwise)
 library(survival)
 library(susieR)
+library(mvtnorm)
 ```
 
+#### Real cancer subtype data from Yusha 
 
 ```{r}
 # yusha's data
@@ -63,6 +65,7 @@ class(fit.susie) = "susie"
 cs <- susie_get_cs(fit.susie, X)
 ```
 
+
 ```{r}
 # Set wider margins to accommodate the labels
 par(mar = c(7, 4, 3, 3)) 
@@ -78,4 +81,52 @@ axis(1, at=1:30, labels=colnames(X), las=2,  cex.axis = 0.7, xlab = "")
 ```{r}
 cs
 ```
+
+```{r}
+fit.susie$prior_vars
+```
+
+#### Simulated Gaussian data with p = 30
+
+```{r}
+library(mvtnorm)
+```
+
+```{r}
+set.seed(500)
+cmat = cor(data.combined[, -c(1:6)])
+n = 400
+p = ncol(cmat)
+X = rmvnorm(n=n, sigma=cmat, method="chol")
+X[, c(25:28)] = ifelse(X[, c(25:28)] > 0, 1, 0)
+b = rep(0, p)
+effect_indx = sample(1:p, size = 5, replace = FALSE)
+b[effect_indx] = rnorm(5, sd = 0.3)
+y  = X %*% b + rnorm(n)
+
+```
+
+```{r}
+summary(lm(y ~ X[,effect_indx[1]]))
+summary(lm(y ~ X[,effect_indx[2]]))
+summary(lm(y ~ X[,effect_indx[3]]))
+summary(lm(y ~ X[,effect_indx[4]]))
+summary(lm(y ~ X[,effect_indx[5]]))
+```
+
+```{r}
+b
+effect_indx
+```
+
+```{r fig.width=10, fig.height=6}
+par(mfrow = c(1,2))
+res <- susie(X,y,L=10)
+plot(coef(res)[-1],pch = 20)
+plot(res$pip)
+```
+```{r}
+res$sets
+```
+
 
