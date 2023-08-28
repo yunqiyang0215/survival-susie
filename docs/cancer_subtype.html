@@ -384,7 +384,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2023-06-08
+<strong>Last updated:</strong> 2023-08-28
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree017ab2aa79f2a8adb5b4c30945cf5916d1d7bf98targetblank017ab2aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/017ab2aa79f2a8adb5b4c30945cf5916d1d7bf98" target="_blank">017ab2a</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree01ab8dd62f8e1e62f1b6b0af4eb997a8d05f21aetargetblank01ab8dda"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/01ab8dd62f8e1e62f1b6b0af4eb997a8d05f21ae" target="_blank">01ab8dd</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree017ab2aa79f2a8adb5b4c30945cf5916d1d7bf98targetblank017ab2aa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree01ab8dd62f8e1e62f1b6b0af4eb997a8d05f21aetargetblank01ab8dda" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/017ab2aa79f2a8adb5b4c30945cf5916d1d7bf98" target="_blank">017ab2a</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/01ab8dd62f8e1e62f1b6b0af4eb997a8d05f21ae" target="_blank">01ab8dd</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -538,6 +538,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/01ab8dd62f8e1e62f1b6b0af4eb997a8d05f21ae/analysis/cancer_subtype.Rmd" target="_blank">01ab8dd</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-08-28
+</td>
+<td>
+wflow_publish("analysis/cancer_subtype.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/ab59186f908bbaaaed5be8f0857b251144f0ba12/docs/cancer_subtype.html" target="_blank">ab59186</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-06-08
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -600,7 +634,10 @@ wflow_publish("analysis/cancer_subtype.Rmd")
 library(pheatmap)
 library(My.stepwise)
 library(survival)
-library(susieR)</code></pre>
+library(susieR)
+library(mvtnorm)</code></pre>
+<div id="real-cancer-subtype-data-from-yusha" class="section level4">
+<h4>Real cancer subtype data from Yusha</h4>
 <pre class="r"><code># yusha&#39;s data
 data.combined &lt;- readRDS(&quot;./data/combined_data_resectable_v2.rds&quot;)
 ### show the pairwise correlation between program signatures
@@ -647,6 +684,7 @@ yunqiyang0215
 data.combined$male &lt;- ifelse(data.combined$sex==&quot;Male&quot;, 1, 0)
 data.combined$stageIIb &lt;- ifelse(data.combined$stage==&quot;IIb&quot;, 1, 0)
 data.combined$stageIII &lt;- ifelse(data.combined$stage==&quot;III-higher&quot;, 1, 0)</code></pre>
+</div>
 <div id="method-1-stepwise-selection" class="section level3">
 <h3>Method 1: stepwise selection</h3>
 <pre class="r"><code>fit.surv &lt;- My.stepwise.coxph(Time = &quot;futime&quot;, Status = &quot;event&quot;, variable.list = colnames(data.combined)[7:32],
@@ -849,7 +887,7 @@ p = ncol(X)
 y &lt;- Surv(data.combined$futime, data.combined$event)
 fit.susie &lt;- ibss_from_ser(X, y, L = L, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = maxiter,
                      estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
-<pre><code>21.593 sec elapsed</code></pre>
+<pre><code>20.252 sec elapsed</code></pre>
 <pre class="r"><code>pip &lt;- logisticsusie:::get_pip(fit.susie$alpha)
 effect_estimate &lt;- colSums(fit.susie$alpha * fit.susie$mu)
 class(fit.susie) = &quot;susie&quot;
@@ -959,6 +997,152 @@ $coverage
 
 $requested_coverage
 [1] 0.95</code></pre>
+<pre class="r"><code>fit.susie$prior_vars</code></pre>
+<pre><code> [1] 0.1785702078 0.2870258412 0.0304814088 0.0004761711 0.0004415317
+ [6] 0.0004345119 0.0004308481 0.0004286010 0.0004271116 0.0004260817</code></pre>
+<div id="simulated-gaussian-data-with-p-30" class="section level4">
+<h4>Simulated Gaussian data with p = 30</h4>
+<pre class="r"><code>library(mvtnorm)</code></pre>
+<pre class="r"><code>set.seed(500)
+cmat = cor(data.combined[, -c(1:6)])
+n = 400
+p = ncol(cmat)
+X = rmvnorm(n=n, sigma=cmat, method=&quot;chol&quot;)
+X[, c(25:28)] = ifelse(X[, c(25:28)] &gt; 0, 1, 0)
+b = rep(0, p)
+effect_indx = sample(1:p, size = 5, replace = FALSE)
+b[effect_indx] = rnorm(5, sd = 0.3)
+y  = X %*% b + rnorm(n)</code></pre>
+<pre class="r"><code>summary(lm(y ~ X[,effect_indx[1]]))</code></pre>
+<pre><code>
+Call:
+lm(formula = y ~ X[, effect_indx[1]])
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.7319 -0.6994 -0.0231  0.6973  3.5448 
+
+Coefficients:
+                    Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)         -0.25014    0.05766  -4.338 1.82e-05 ***
+X[, effect_indx[1]] -0.52505    0.06142  -8.548 2.72e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 1.148 on 398 degrees of freedom
+Multiple R-squared:  0.1551,    Adjusted R-squared:  0.153 
+F-statistic: 73.07 on 1 and 398 DF,  p-value: 2.717e-16</code></pre>
+<pre class="r"><code>summary(lm(y ~ X[,effect_indx[2]]))</code></pre>
+<pre><code>
+Call:
+lm(formula = y ~ X[, effect_indx[2]])
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.6736 -0.6834 -0.0006  0.6509  3.7880 
+
+Coefficients:
+                    Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)         -0.25640    0.05508  -4.655 4.43e-06 ***
+X[, effect_indx[2]] -0.61202    0.05645 -10.842  &lt; 2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 1.097 on 398 degrees of freedom
+Multiple R-squared:  0.228, Adjusted R-squared:  0.2261 
+F-statistic: 117.6 on 1 and 398 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code>summary(lm(y ~ X[,effect_indx[3]]))</code></pre>
+<pre><code>
+Call:
+lm(formula = y ~ X[, effect_indx[3]])
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.7295 -0.8176  0.0316  0.7989  3.6887 
+
+Coefficients:
+                    Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept)         -0.06875    0.08605  -0.799    0.425  
+X[, effect_indx[3]] -0.28140    0.12420  -2.266    0.024 *
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 1.241 on 398 degrees of freedom
+Multiple R-squared:  0.01273,   Adjusted R-squared:  0.01025 
+F-statistic: 5.133 on 1 and 398 DF,  p-value: 0.02401</code></pre>
+<pre class="r"><code>summary(lm(y ~ X[,effect_indx[4]]))</code></pre>
+<pre><code>
+Call:
+lm(formula = y ~ X[, effect_indx[4]])
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.9185 -0.7133 -0.0039  0.7496  3.6768 
+
+Coefficients:
+                    Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)         -0.24426    0.06095  -4.008 7.33e-05 ***
+X[, effect_indx[4]]  0.30494    0.05890   5.177 3.58e-07 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 1.209 on 398 degrees of freedom
+Multiple R-squared:  0.0631,    Adjusted R-squared:  0.06075 
+F-statistic:  26.8 on 1 and 398 DF,  p-value: 3.58e-07</code></pre>
+<pre class="r"><code>summary(lm(y ~ X[,effect_indx[5]]))</code></pre>
+<pre><code>
+Call:
+lm(formula = y ~ X[, effect_indx[5]])
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.3891 -0.6948 -0.0106  0.8151  4.0824 
+
+Coefficients:
+                    Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)         -0.24877    0.05607  -4.436 1.19e-05 ***
+X[, effect_indx[5]]  0.53380    0.05368   9.944  &lt; 2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 1.118 on 398 degrees of freedom
+Multiple R-squared:  0.199, Adjusted R-squared:  0.197 
+F-statistic: 98.88 on 1 and 398 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre class="r"><code>b</code></pre>
+<pre><code> [1]  0.0000000  0.0000000  0.0000000  0.0000000  0.0000000  0.0000000
+ [7]  0.0000000  0.0000000  0.0000000  0.0000000  0.0000000  0.0000000
+[13]  0.0000000  0.0000000  0.4433046  0.0000000 -0.1683850  0.0000000
+[19]  0.0000000  0.0000000 -0.6026197  0.0000000  0.2718256  0.0000000
+[25]  0.0000000  0.0000000  0.0000000 -0.4068480  0.0000000</code></pre>
+<pre class="r"><code>effect_indx</code></pre>
+<pre><code>[1] 23 21 28 17 15</code></pre>
+<pre class="r"><code>par(mfrow = c(1,2))
+res &lt;- susie(X,y,L=10)
+plot(coef(res)[-1],pch = 20)
+plot(res$pip)</code></pre>
+<p><img src="figure/cancer_subtype.Rmd/unnamed-chunk-15-1.png" width="960" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>res$sets</code></pre>
+<pre><code>$cs
+$cs$L2
+[1] 21
+
+$cs$L1
+[1]  1 15 16 18
+
+
+$purity
+   min.abs.corr mean.abs.corr median.abs.corr
+L2     1.000000     1.0000000       1.0000000
+L1     0.951815     0.9653002       0.9664299
+
+$cs_index
+[1] 2 1
+
+$coverage
+[1] 0.9855223 0.9968472
+
+$requested_coverage
+[1] 0.95</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -982,14 +1166,14 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] logisticsusie_0.0.0.9004 testthat_3.1.0           susieR_0.12.35          
-[4] survival_3.2-11          My.stepwise_0.1.0        pheatmap_1.0.12         
-[7] Matrix_1.5-3             workflowr_1.6.2         
+[1] logisticsusie_0.0.0.9004 testthat_3.1.0           mvtnorm_1.1-3           
+[4] susieR_0.12.35           survival_3.2-11          My.stepwise_0.1.0       
+[7] pheatmap_1.0.12          Matrix_1.5-3             workflowr_1.6.2         
 
 loaded via a namespace (and not attached):
  [1] sass_0.4.4         pkgload_1.2.3      jsonlite_1.7.2     splines_4.1.1     
  [5] carData_3.0-5      bslib_0.4.1        mixsqp_0.3-43      highr_0.9         
- [9] yaml_2.2.1         remotes_2.4.1      sessioninfo_1.1.1  pillar_1.6.4      
+ [9] yaml_2.2.1         remotes_2.4.2      sessioninfo_1.1.1  pillar_1.6.4      
 [13] lattice_0.20-44    glue_1.4.2         digest_0.6.28      RColorBrewer_1.1-2
 [17] promises_1.2.0.1   colorspace_2.0-2   htmltools_0.5.5    httpuv_1.6.3      
 [21] plyr_1.8.6         pkgconfig_2.0.3    devtools_2.4.2     purrr_0.3.4       
@@ -1001,13 +1185,14 @@ loaded via a namespace (and not attached):
 [45] fs_1.5.0           fansi_0.5.0        pkgbuild_1.2.0     RcppZiggurat_0.1.6
 [49] tools_4.1.1        prettyunits_1.1.1  lifecycle_1.0.1    matrixStats_0.63.0
 [53] stringr_1.4.0      munsell_0.5.0      irlba_2.3.5        callr_3.7.3       
-[57] Rfast_2.0.6        compiler_4.1.1     jquerylib_0.1.4    rlang_1.0.6       
+[57] Rfast_2.0.6        compiler_4.1.1     jquerylib_0.1.4    rlang_1.1.1       
 [61] grid_4.1.1         rstudioapi_0.13    rmarkdown_2.11     gtable_0.3.0      
 [65] abind_1.4-5        reshape_0.8.9      R6_2.5.1           zoo_1.8-11        
 [69] knitr_1.36         dplyr_1.0.7        fastmap_1.1.0      utf8_1.2.2        
 [73] rprojroot_2.0.2    desc_1.4.0         stringi_1.7.5      parallel_4.1.1    
 [77] Rcpp_1.0.8.3       vctrs_0.3.8        tidyselect_1.1.1   xfun_0.27         
 [81] lmtest_0.9-40     </code></pre>
+</div>
 </div>
 </div>
 
