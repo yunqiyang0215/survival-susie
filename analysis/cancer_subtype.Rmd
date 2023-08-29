@@ -15,7 +15,6 @@ library(mvtnorm)
 ```
 
 
-
 ```{r}
 # yusha's data
 data.combined <- readRDS("./data/combined_data_resectable_v2.rds")
