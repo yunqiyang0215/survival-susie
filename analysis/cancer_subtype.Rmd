@@ -64,6 +64,9 @@ class(fit.susie) = "susie"
 cs <- susie_get_cs(fit.susie, X)
 ```
 
+```{r}
+fit.susie$alpha
+```
 
 ```{r}
 # Set wider margins to accommodate the labels
