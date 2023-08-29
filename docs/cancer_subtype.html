@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree2ed94a0514c918e3584a7d718ac0d0508d1b972ftargetblank2ed94a0a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/2ed94a0514c918e3584a7d718ac0d0508d1b972f" target="_blank">2ed94a0</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree49760779357f1e24a1a966d51c5ba97d06b636a8targetblank4976077a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/49760779357f1e24a1a966d51c5ba97d06b636a8" target="_blank">4976077</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree2ed94a0514c918e3584a7d718ac0d0508d1b972ftargetblank2ed94a0a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree49760779357f1e24a1a966d51c5ba97d06b636a8targetblank4976077a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/2ed94a0514c918e3584a7d718ac0d0508d1b972f" target="_blank">2ed94a0</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/49760779357f1e24a1a966d51c5ba97d06b636a8" target="_blank">4976077</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -538,6 +538,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/49760779357f1e24a1a966d51c5ba97d06b636a8/analysis/cancer_subtype.Rmd" target="_blank">4976077</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-08-29
+</td>
+<td>
+wflow_publish("analysis/cancer_subtype.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/208a3f11afe7b7a4f474ceb66f1a8472782217ac/docs/cancer_subtype.html" target="_blank">208a3f1</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-08-29
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1037,66 +1071,81 @@ p = ncol(X)
 y &lt;- Surv(data.combined$futime, data.combined$event)
 fit.susie &lt;- ibss_from_ser(X, y, L = L, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = maxiter,
                      estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
-<pre><code>19.047 sec elapsed</code></pre>
+<pre><code>21.057 sec elapsed</code></pre>
 <pre class="r"><code>pip &lt;- logisticsusie:::get_pip(fit.susie$alpha)
 effect_estimate &lt;- colSums(fit.susie$alpha * fit.susie$mu)
 class(fit.susie) = &quot;susie&quot;
 cs &lt;- susie_get_cs(fit.susie, X)</code></pre>
+<pre class="r"><code>fit.susie$alpha</code></pre>
+<pre><code>              [,1]         [,2]         [,3]         [,4]         [,5]
+ [1,] 9.077002e-10 1.775708e-06 1.637247e-05 0.6571516629 0.0291000168
+ [2,] 5.012913e-05 2.368225e-04 2.541389e-04 0.0002223035 0.0002127505
+ [3,] 1.559306e-03 8.131596e-03 9.603318e-03 0.0085495339 0.0078215657
+ [4,] 3.435439e-02 3.371088e-02 3.372478e-02 0.0337040022 0.0337135529
+ [5,] 3.435439e-02 3.371088e-02 3.372478e-02 0.0337040022 0.0337135529
+ [6,] 3.435439e-02 3.371088e-02 3.372478e-02 0.0337040022 0.0337135529
+ [7,] 3.435439e-02 3.371088e-02 3.372478e-02 0.0337040022 0.0337135529
+ [8,] 3.435439e-02 3.371088e-02 3.372478e-02 0.0337040022 0.0337135529
+ [9,] 3.435439e-02 3.371088e-02 3.372478e-02 0.0337040022 0.0337135529
+[10,] 3.435439e-02 3.371088e-02 3.372478e-02 0.0337040022 0.0337135529
+              [,6]         [,7]         [,8]         [,9]        [,10]
+ [1,] 0.0020906630 9.640262e-09 0.0000244297 3.713704e-07 3.314570e-09
+ [2,] 0.0002196933 2.092147e-04 0.0009088008 2.130571e-04 2.700713e-04
+ [3,] 0.0080484333 7.245943e-03 0.0158386834 6.970563e-03 6.746850e-03
+ [4,] 0.0336975973 3.371386e-02 0.0340803435 3.371423e-02 3.371423e-02
+ [5,] 0.0336975973 3.371386e-02 0.0340803435 3.371423e-02 3.371423e-02
+ [6,] 0.0336975973 3.371386e-02 0.0340803435 3.371423e-02 3.371423e-02
+ [7,] 0.0336975973 3.371386e-02 0.0340803435 3.371423e-02 3.371423e-02
+ [8,] 0.0336975973 3.371386e-02 0.0340803435 3.371423e-02 3.371423e-02
+ [9,] 0.0336975973 3.371386e-02 0.0340803435 3.371423e-02 3.371423e-02
+[10,] 0.0336975973 3.371386e-02 0.0340803435 3.371423e-02 3.371423e-02
+             [,11]        [,12]        [,13]        [,14]        [,15]
+ [1,] 8.031203e-09 3.356080e-09 3.122874e-09 1.842121e-08 2.410391e-08
+ [2,] 2.303416e-04 2.347758e-04 4.467966e-04 2.482434e-04 5.964454e-04
+ [3,] 5.960467e-03 7.161210e-03 5.846314e-03 6.447664e-03 7.520618e-01
+ [4,] 3.371457e-02 3.371410e-02 3.382142e-02 3.371558e-02 3.342358e-02
+ [5,] 3.371457e-02 3.371410e-02 3.382142e-02 3.371558e-02 3.342358e-02
+ [6,] 3.371457e-02 3.371410e-02 3.382142e-02 3.371558e-02 3.342358e-02
+ [7,] 3.371457e-02 3.371410e-02 3.382142e-02 3.371558e-02 3.342358e-02
+ [8,] 3.371457e-02 3.371410e-02 3.382142e-02 3.371558e-02 3.342358e-02
+ [9,] 3.371457e-02 3.371410e-02 3.382142e-02 3.371558e-02 3.342358e-02
+[10,] 3.371457e-02 3.371410e-02 3.382142e-02 3.371558e-02 3.342358e-02
+             [,16]        [,17]        [,18]        [,19]        [,20]
+ [1,] 5.801256e-06 3.155495e-05 7.011291e-06 7.313144e-05 5.399864e-05
+ [2,] 2.486757e-04 2.319866e-04 2.508969e-04 2.377948e-04 2.462564e-04
+ [3,] 9.966125e-03 8.146961e-03 8.571510e-03 8.906771e-03 7.206083e-03
+ [4,] 3.369123e-02 3.370547e-02 3.371460e-02 3.370397e-02 3.371372e-02
+ [5,] 3.369123e-02 3.370547e-02 3.371460e-02 3.370397e-02 3.371372e-02
+ [6,] 3.369123e-02 3.370547e-02 3.371460e-02 3.370397e-02 3.371372e-02
+ [7,] 3.369123e-02 3.370547e-02 3.371460e-02 3.370397e-02 3.371372e-02
+ [8,] 3.369123e-02 3.370547e-02 3.371460e-02 3.370397e-02 3.371372e-02
+ [9,] 3.369123e-02 3.370547e-02 3.371460e-02 3.370397e-02 3.371372e-02
+[10,] 3.369123e-02 3.370547e-02 3.371460e-02 3.370397e-02 3.371372e-02
+             [,21]        [,22]        [,23]        [,24]        [,25]
+ [1,] 3.189192e-06 0.0156453106 7.767224e-07 0.2957430322 5.023537e-05
+ [2,] 2.526942e-04 0.0002169459 2.332186e-04 0.0002138327 2.026477e-04
+ [3,] 8.151991e-03 0.0068072742 6.036067e-03 0.0084354972 7.316384e-03
+ [4,] 3.372136e-02 0.0337007048 3.371359e-02 0.0336944941 3.371048e-02
+ [5,] 3.372136e-02 0.0337007048 3.371359e-02 0.0336944941 3.371048e-02
+ [6,] 3.372136e-02 0.0337007048 3.371359e-02 0.0336944941 3.371048e-02
+ [7,] 3.372136e-02 0.0337007048 3.371359e-02 0.0336944941 3.371048e-02
+ [8,] 3.372136e-02 0.0337007048 3.371359e-02 0.0336944941 3.371048e-02
+ [9,] 3.372136e-02 0.0337007048 3.371359e-02 0.0336944941 3.371048e-02
+[10,] 3.372136e-02 0.0337007048 3.371359e-02 0.0336944941 3.371048e-02
+             [,26]        [,27]        [,28]        [,29]        [,30]
+ [1,] 2.509383e-07 2.814662e-07 5.732256e-09 6.280751e-09 5.106184e-08
+ [2,] 2.796190e-04 2.770030e-04 4.935214e-04 9.911180e-01 9.433166e-04
+ [3,] 8.573001e-03 7.140600e-03 1.010089e-02 1.148845e-02 2.515914e-02
+ [4,] 3.383111e-02 3.377199e-02 3.371349e-02 3.372379e-02 2.137288e-02
+ [5,] 3.383111e-02 3.377199e-02 3.371349e-02 3.372379e-02 2.137288e-02
+ [6,] 3.383111e-02 3.377199e-02 3.371349e-02 3.372379e-02 2.137288e-02
+ [7,] 3.383111e-02 3.377199e-02 3.371349e-02 3.372379e-02 2.137288e-02
+ [8,] 3.383111e-02 3.377199e-02 3.371349e-02 3.372379e-02 2.137288e-02
+ [9,] 3.383111e-02 3.377199e-02 3.371349e-02 3.372379e-02 2.137288e-02
+[10,] 3.383111e-02 3.377199e-02 3.371349e-02 3.372379e-02 2.137288e-02</code></pre>
 <pre class="r"><code># Set wider margins to accommodate the labels
 par(mar = c(7, 4, 3, 3)) 
 plot(pip, xaxt = &quot;n&quot;, xlab = &quot;&quot;)
-axis(1, at=1:30, labels=colnames(X), las=2,  cex.axis = 0.7, xlab = &quot;&quot;)</code></pre>
-<p><img src="figure/cancer_subtype.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-1">
-Past versions of unnamed-chunk-7-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-7-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/yunqiyang0215/survival-susie/blob/779c10325f90e1dbbc1e5d036154b7fd5e169e64/docs/figure/cancer_subtype.Rmd/unnamed-chunk-7-1.png" target="_blank">779c103</a>
-</td>
-<td>
-yunqiyang0215
-</td>
-<td>
-2023-08-29
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/yunqiyang0215/survival-susie/blob/b693b0d04a7220caa0091faff2a3010a3312ac68/docs/figure/cancer_subtype.Rmd/unnamed-chunk-7-1.png" target="_blank">b693b0d</a>
-</td>
-<td>
-yunqiyang0215
-</td>
-<td>
-2023-06-08
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>par(mar = c(7, 4, 3, 3)) 
-plot(effect_estimate, xaxt = &quot;n&quot;, xlab = &quot;&quot;, ylab = &quot;Effect size estimate&quot;)
 axis(1, at=1:30, labels=colnames(X), las=2,  cex.axis = 0.7, xlab = &quot;&quot;)</code></pre>
 <p><img src="figure/cancer_subtype.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
@@ -1147,6 +1196,10 @@ yunqiyang0215
 </table>
 </div>
 </div>
+<pre class="r"><code>par(mar = c(7, 4, 3, 3)) 
+plot(effect_estimate, xaxt = &quot;n&quot;, xlab = &quot;&quot;, ylab = &quot;Effect size estimate&quot;)
+axis(1, at=1:30, labels=colnames(X), las=2,  cex.axis = 0.7, xlab = &quot;&quot;)</code></pre>
+<p><img src="figure/cancer_subtype.Rmd/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>cs</code></pre>
 <pre><code>$cs
 $cs$L2
@@ -1191,7 +1244,7 @@ fit.susie &lt;- ibss_from_ser(X, y, L = L, prior_variance = 1., prior_weights = 
                      estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
 <pre><code>Warning in coxph.fit(X, Y, istrat, offset, init, control, weights = weights, :
 Loglik converged before variable 1 ; coefficient may be infinite.</code></pre>
-<pre><code>12.67 sec elapsed</code></pre>
+<pre><code>13.436 sec elapsed</code></pre>
 <pre class="r"><code>pip &lt;- logisticsusie:::get_pip(fit.susie$alpha)
 effect_estimate &lt;- colSums(fit.susie$alpha * fit.susie$mu)
 class(fit.susie) = &quot;susie&quot;
@@ -1199,7 +1252,7 @@ cs &lt;- susie_get_cs(fit.susie, X)</code></pre>
 <pre class="r"><code>par(mfrow = c(1,2))
 plot(pip)
 plot(effect_estimate)</code></pre>
-<p><img src="figure/cancer_subtype.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/cancer_subtype.Rmd/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>fit.susie$prior_vars</code></pre>
 <pre><code> [1] 0.17052052 0.29891300 0.03709282 0.00000000 0.00000000 0.00000000
  [7] 0.00000000 0.00000000 0.00000000 0.00000000</code></pre>
@@ -1324,7 +1377,7 @@ F-statistic: 98.88 on 1 and 398 DF,  p-value: &lt; 2.2e-16</code></pre>
 res &lt;- susie(X,y,L=10)
 plot(coef(res)[-1],pch = 20)
 plot(res$pip)</code></pre>
-<p><img src="figure/cancer_subtype.Rmd/unnamed-chunk-18-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="figure/cancer_subtype.Rmd/unnamed-chunk-19-1.png" width="960" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>res$sets</code></pre>
 <pre><code>$cs
 $cs$L2
