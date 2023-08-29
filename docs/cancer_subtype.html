@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree4d1c64077bde545b26613e1fa961485db7f1be38targetblank4d1c640a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/4d1c64077bde545b26613e1fa961485db7f1be38" target="_blank">4d1c640</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree2ed94a0514c918e3584a7d718ac0d0508d1b972ftargetblank2ed94a0a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/2ed94a0514c918e3584a7d718ac0d0508d1b972f" target="_blank">2ed94a0</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree4d1c64077bde545b26613e1fa961485db7f1be38targetblank4d1c640a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree2ed94a0514c918e3584a7d718ac0d0508d1b972ftargetblank2ed94a0a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/4d1c64077bde545b26613e1fa961485db7f1be38" target="_blank">4d1c640</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/2ed94a0514c918e3584a7d718ac0d0508d1b972f" target="_blank">2ed94a0</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -538,6 +538,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/2ed94a0514c918e3584a7d718ac0d0508d1b972f/analysis/cancer_subtype.Rmd" target="_blank">2ed94a0</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-08-29
+</td>
+<td>
+wflow_publish("analysis/cancer_subtype.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/d98d7aea34e71c54b0c961254ac9bd6d5424a929/docs/cancer_subtype.html" target="_blank">d98d7ae</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-08-29
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1003,7 +1037,7 @@ p = ncol(X)
 y &lt;- Surv(data.combined$futime, data.combined$event)
 fit.susie &lt;- ibss_from_ser(X, y, L = L, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = maxiter,
                      estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
-<pre><code>18.413 sec elapsed</code></pre>
+<pre><code>19.047 sec elapsed</code></pre>
 <pre class="r"><code>pip &lt;- logisticsusie:::get_pip(fit.susie$alpha)
 effect_estimate &lt;- colSums(fit.susie$alpha * fit.susie$mu)
 class(fit.susie) = &quot;susie&quot;
@@ -1139,6 +1173,37 @@ $requested_coverage
 <pre><code> [1] 0.18639942 0.28638222 0.02990417 0.00000000 0.00000000 0.00000000
  [7] 0.00000000 0.00000000 0.00000000 0.00000000</code></pre>
 </div>
+<div id="select-20-features-and-run-survival-susie" class="section level3">
+<h3>Select 20 features and run survival-susie</h3>
+<p>The pip for near-zero effects are inflated… from ~0.2 to 0.3 now.</p>
+<pre class="r"><code>#### parameter settings
+L = 10
+maxiter = 1e3
+
+X = data.combined[, c(16:35)]
+X = as.matrix(X)
+p = ncol(X)
+
+
+## Create  survival object
+y &lt;- Surv(data.combined$futime, data.combined$event)
+fit.susie &lt;- ibss_from_ser(X, y, L = L, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = maxiter,
+                     estimate_intercept = TRUE, ser_function = fit_coxph)</code></pre>
+<pre><code>Warning in coxph.fit(X, Y, istrat, offset, init, control, weights = weights, :
+Loglik converged before variable 1 ; coefficient may be infinite.</code></pre>
+<pre><code>12.67 sec elapsed</code></pre>
+<pre class="r"><code>pip &lt;- logisticsusie:::get_pip(fit.susie$alpha)
+effect_estimate &lt;- colSums(fit.susie$alpha * fit.susie$mu)
+class(fit.susie) = &quot;susie&quot;
+cs &lt;- susie_get_cs(fit.susie, X)</code></pre>
+<pre class="r"><code>par(mfrow = c(1,2))
+plot(pip)
+plot(effect_estimate)</code></pre>
+<p><img src="figure/cancer_subtype.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>fit.susie$prior_vars</code></pre>
+<pre><code> [1] 0.17052052 0.29891300 0.03709282 0.00000000 0.00000000 0.00000000
+ [7] 0.00000000 0.00000000 0.00000000 0.00000000</code></pre>
+</div>
 <div id="simulated-gaussian-data-with-p-30" class="section level3">
 <h3>Simulated Gaussian data with p = 30</h3>
 <pre class="r"><code>library(mvtnorm)</code></pre>
@@ -1259,44 +1324,7 @@ F-statistic: 98.88 on 1 and 398 DF,  p-value: &lt; 2.2e-16</code></pre>
 res &lt;- susie(X,y,L=10)
 plot(coef(res)[-1],pch = 20)
 plot(res$pip)</code></pre>
-<p><img src="figure/cancer_subtype.Rmd/unnamed-chunk-15-1.png" width="960" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-15-1">
-Past versions of unnamed-chunk-15-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-15-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/yunqiyang0215/survival-susie/blob/52c701d83cdb9bcc7d83c68bba8a171191420e42/docs/figure/cancer_subtype.Rmd/unnamed-chunk-15-1.png" target="_blank">52c701d</a>
-</td>
-<td>
-yunqiyang0215
-</td>
-<td>
-2023-08-28
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p><img src="figure/cancer_subtype.Rmd/unnamed-chunk-18-1.png" width="960" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>res$sets</code></pre>
 <pre><code>$cs
 $cs$L2
