@@ -92,17 +92,18 @@ p = ncol(X)
 
 ## Create  survival object
 y <- Surv(data.combined$futime, data.combined$event)
-fit.susie <- ibss_from_ser(X, y, L = L, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = maxiter,
-                     estimate_intercept = TRUE, ser_function = fit_coxph)
+fit.susie <- ibss_from_ser(X, y, L = L, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = maxiter, estimate_intercept = TRUE, ser_function = fit_coxph)
 
-pip <- logisticsusie:::get_pip(fit.susie$alpha)
+
+null_index = which(fit.susie$prior_vars == 0)
+pip <- logisticsusie:::get_pip(fit.susie$alpha[-null_index, ])
 effect_estimate <- colSums(fit.susie$alpha * fit.susie$mu)
 class(fit.susie) = "susie"
 cs <- susie_get_cs(fit.susie, X)
 ```
 
 ```{r}
-fit.susie$alpha
+fit.susie$prior_vars
 ```
 
 ```{r}
@@ -143,7 +144,8 @@ y <- Surv(data.combined$futime, data.combined$event)
 fit.susie <- ibss_from_ser(X, y, L = L, prior_variance = 1., prior_weights = rep(1/p, p), tol = 1e-3, maxit = maxiter,
                      estimate_intercept = TRUE, ser_function = fit_coxph)
 
-pip <- logisticsusie:::get_pip(fit.susie$alpha)
+null_index = which(fit.susie$prior_vars == 0)
+pip <- logisticsusie:::get_pip(fit.susie$alpha[-null_index, ])
 effect_estimate <- colSums(fit.susie$alpha * fit.susie$mu)
 class(fit.susie) = "susie"
 cs <- susie_get_cs(fit.susie, X)
