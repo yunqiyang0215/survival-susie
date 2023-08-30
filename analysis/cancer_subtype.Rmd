@@ -103,6 +103,10 @@ cs <- susie_get_cs(fit.susie, X)
 ```
 
 ```{r}
+fit.susie$alpha
+```
+
+```{r}
 fit.susie$prior_vars
 ```
 
@@ -122,9 +126,6 @@ axis(1, at=1:30, labels=colnames(X), las=2,  cex.axis = 0.7, xlab = "")
 cs
 ```
 
-```{r}
-fit.susie$prior_vars
-```
 
 ### Select 20 features and run survival-susie
 
@@ -156,11 +157,6 @@ par(mfrow = c(1,2))
 plot(pip)
 plot(effect_estimate)
 ```
-
-```{r}
-fit.susie$prior_vars
-```
-
 
 
 ### Simulated Gaussian data with p = 30
