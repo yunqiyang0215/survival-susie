@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreef62866a977ed9a0a09d72edb018f05a0240885a4targetblankf62866aa"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/f62866a977ed9a0a09d72edb018f05a0240885a4" target="_blank">f62866a</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree0e6ac3bddea68a9c0d541a214130f847f77ebe25targetblank0e6ac3ba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/0e6ac3bddea68a9c0d541a214130f847f77ebe25" target="_blank">0e6ac3b</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreef62866a977ed9a0a09d72edb018f05a0240885a4targetblankf62866aa" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree0e6ac3bddea68a9c0d541a214130f847f77ebe25targetblank0e6ac3ba" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/f62866a977ed9a0a09d72edb018f05a0240885a4" target="_blank">f62866a</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/0e6ac3bddea68a9c0d541a214130f847f77ebe25" target="_blank">0e6ac3b</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -538,6 +538,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/0e6ac3bddea68a9c0d541a214130f847f77ebe25/analysis/SPAcox.Rmd" target="_blank">0e6ac3b</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-09-11
+</td>
+<td>
+wflow_publish("analysis/SPAcox.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/18f98650e0cf98dd5e355855e6871859e4eba323/docs/SPAcox.html" target="_blank">18f9865</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-09-11
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -630,6 +664,8 @@ wflow_publish("analysis/SPAcox.Rmd")
 </div>
 </div>
 </div>
+<div id="understand-spacox" class="section level3">
+<h3>1. Understand SPAcox</h3>
 <pre class="r"><code>library(SPACox)</code></pre>
 <pre><code>Loading required package: seqminer</code></pre>
 <pre><code>Loading required package: data.table</code></pre>
@@ -676,14 +712,14 @@ obj.null = SPACox_Null_Model(Surv(time,event)~Cov1+Cov2, data=Phen.mtx,
 <pre><code>[1] &quot;Sample size is 1000.&quot;
 [1] &quot;Number of variants is 3.&quot;
 [1] &quot;Start Analyzing...&quot;
-[1] &quot;2023-09-11 16:19:38 CDT&quot;
+[1] &quot;2023-09-11 16:31:36 CDT&quot;
 [1] &quot;Analysis Complete.&quot;
-[1] &quot;2023-09-11 16:19:38 CDT&quot;</code></pre>
+[1] &quot;2023-09-11 16:31:36 CDT&quot;</code></pre>
 <pre class="r"><code>t2 = proc.time()
 
 t2 - t1</code></pre>
 <pre><code>   user  system elapsed 
-  1.156   0.497   1.686 </code></pre>
+  1.164   0.492   1.679 </code></pre>
 <pre class="r"><code># The below is an example code to use survival package
 t1 = proc.time()
 coxph(Surv(time,event)~Cov1+Cov2+Geno.mtx, data=Phen.mtx)</code></pre>
@@ -703,7 +739,7 @@ n= 1000, number of events= 480 </code></pre>
 
 t2 - t1</code></pre>
 <pre><code>   user  system elapsed 
-  0.010   0.001   0.010 </code></pre>
+  0.013   0.003   0.016 </code></pre>
 <pre class="r"><code># we recommand using column of &#39;p.value.spa&#39; to associate genotype with time-to-event phenotypes
 head(SPACox.res)</code></pre>
 <pre><code>             MAF missing.rate p.value.spa p.value.norm     Stat       Var
@@ -738,6 +774,73 @@ Geno.mtx[, 3]  0.01400   1.01410  0.03098  0.452 0.651
 
 Likelihood ratio test=2.38  on 3 df, p=0.497
 n= 1000, number of events= 480 </code></pre>
+</div>
+<div id="speed-comparison-between-spacox-and-coxph" class="section level3">
+<h3>2.Speed comparison between SPAcox and coxph()</h3>
+<pre class="r"><code># Simulation phenotype and genotype
+set.seed(1)
+N = 10000
+nSNP = 1000
+MAF = 0.1
+Phen.mtx = data.frame(ID = paste0(&quot;IID-&quot;,1:N),
+                      event=rbinom(N,1,0.5),
+                      time=runif(N),
+                      Cov1=rnorm(N),
+                      Cov2=rbinom(N,1,0.5))
+Geno.mtx = matrix(rbinom(N*nSNP,2,MAF),N,nSNP)
+
+# NOTE: The row and column names of genotype matrix are required.
+rownames(Geno.mtx) = paste0(&quot;IID-&quot;,1:N)
+colnames(Geno.mtx) = paste0(&quot;SNP-&quot;,1:nSNP)
+
+
+t1 = proc.time()
+obj.null = SPACox_Null_Model(Surv(time,event)~Cov1+Cov2, data=Phen.mtx,
+                             pIDs=Phen.mtx$ID, gIDs=rownames(Geno.mtx))</code></pre>
+<pre><code>[1] &quot;Start calculating empirical CGF for martingale residuals...&quot;
+[1] &quot;Complete 1000/10000.&quot;
+[1] &quot;Complete 2000/10000.&quot;
+[1] &quot;Complete 3000/10000.&quot;
+[1] &quot;Complete 4000/10000.&quot;
+[1] &quot;Complete 5000/10000.&quot;
+[1] &quot;Complete 6000/10000.&quot;
+[1] &quot;Complete 7000/10000.&quot;
+[1] &quot;Complete 8000/10000.&quot;
+[1] &quot;Complete 9000/10000.&quot;
+[1] &quot;Complete 10000/10000.&quot;</code></pre>
+<pre class="r"><code>SPACox.res = SPACox(obj.null, Geno.mtx)</code></pre>
+<pre><code>[1] &quot;Sample size is 10000.&quot;
+[1] &quot;Number of variants is 1000.&quot;
+[1] &quot;Start Analyzing...&quot;
+[1] &quot;2023-09-11 16:31:41 CDT&quot;
+[1] &quot;Analysis Complete.&quot;
+[1] &quot;2023-09-11 16:31:43 CDT&quot;</code></pre>
+<pre class="r"><code>t2 = proc.time()
+time.spa = t2 - t1
+
+
+# The below is an example code to use survival package
+t1 = proc.time()
+coxph(Surv(time,event)~Cov1+Cov2+Geno.mtx[,1], data=Phen.mtx)</code></pre>
+<pre><code>Call:
+coxph(formula = Surv(time, event) ~ Cov1 + Cov2 + Geno.mtx[, 
+    1], data = Phen.mtx)
+
+                   coef exp(coef)  se(coef)      z     p
+Cov1          -0.000685  0.999315  0.014318 -0.048 0.962
+Cov2          -0.029170  0.971251  0.028430 -1.026 0.305
+Geno.mtx[, 1]  0.008415  1.008450  0.032692  0.257 0.797
+
+Likelihood ratio test=1.12  on 3 df, p=0.7722
+n= 10000, number of events= 4953 </code></pre>
+<pre class="r"><code>t2 = proc.time()
+time.coxph = (t2 - t1)*nSNP</code></pre>
+<pre class="r"><code>time.spa</code></pre>
+<pre><code>   user  system elapsed 
+  4.183   1.934   6.221 </code></pre>
+<pre class="r"><code>time.coxph</code></pre>
+<pre><code>   user  system elapsed 
+     43       6      49 </code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -776,6 +879,7 @@ loaded via a namespace (and not attached):
 [33] rmarkdown_2.11   magrittr_2.0.1   whisker_0.4      splines_4.1.1   
 [37] promises_1.2.0.1 ellipsis_0.3.2   htmltools_0.5.5  httpuv_1.6.3    
 [41] utf8_1.2.2       stringi_1.7.5    cachem_1.0.6     crayon_1.4.1    </code></pre>
+</div>
 </div>
 
 
