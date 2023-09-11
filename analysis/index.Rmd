@@ -24,6 +24,8 @@ Check Bayes factor
 
 + [Compare BF calculation: numerical integration vs. approximated BF](bf_diff.html)
 
++ [Saddle point approximation using SPAcox](SPAcox.html)
+
 
 Simulation for survival data and run IBSS
 
