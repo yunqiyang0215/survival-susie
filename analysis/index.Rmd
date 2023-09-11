@@ -49,6 +49,8 @@ Try different methods on simple simulated data:
 
 Try different methods on simulated data with censoring:
 
++ [Time Comparison of susie & bvsnlp](time_comparison.html)
+
 + [Susie IBSS](ser_censoring_dat.html)
 
 + [survival.svb](survival.svb_censoring.html)
