@@ -51,3 +51,8 @@ t2 - t1
 head(SPACox.res)
 ```
 
+```{r}
+coxph(Surv(time,event)~Cov1+Cov2+Geno.mtx[,1], data=Phen.mtx)
+coxph(Surv(time,event)~Cov1+Cov2+Geno.mtx[,2], data=Phen.mtx)
+```
+
