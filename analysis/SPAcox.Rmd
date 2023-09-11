@@ -12,15 +12,21 @@ library(survival)
 
 ```{r}
 # Simulation phenotype and genotype
-N = 1e4
-nSNP = 2
+set.seed(1)
+N = 1e3
+nSNP = 3
 MAF = 0.1
 Phen.mtx = data.frame(ID = paste0("IID-",1:N),
                       event=rbinom(N,1,0.5),
                       time=runif(N),
                       Cov1=rnorm(N),
                       Cov2=rbinom(N,1,0.5))
-Geno.mtx = matrix(rbinom(N*nSNP,2,MAF),N,nSNP)
+
+# First two SNPs with cor = 1
+x1 = rnorm(N)
+x2 = x1 + rnorm(N, sd = 1)
+Geno.mtx = matrix(c(x1, x1, x2),N,nSNP)
+cor(Geno.mtx)
 
 # NOTE: The row and column names of genotype matrix are required.
 rownames(Geno.mtx) = paste0("IID-",1:N)
@@ -53,6 +59,6 @@ head(SPACox.res)
 
 ```{r}
 coxph(Surv(time,event)~Cov1+Cov2+Geno.mtx[,1], data=Phen.mtx)
-coxph(Surv(time,event)~Cov1+Cov2+Geno.mtx[,2], data=Phen.mtx)
+coxph(Surv(time,event)~Cov1+Cov2+Geno.mtx[,3], data=Phen.mtx)
 ```
 
