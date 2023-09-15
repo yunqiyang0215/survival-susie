@@ -80,7 +80,7 @@ source("./code/surv_susie_helper.R")
 ### Scenario 1:
 ```{r}
 seeds = c(1:5)
-result = matrix(NA, ncol = 3, nrow = 5)
+result = matrix(NA, ncol = 3, nrow = length(seeds))
 colnames(result) = c("diff", "integral", "error")
 for (seed in seeds){
   set.seed(seed)
@@ -109,14 +109,14 @@ for (seed in seeds){
 ```
 
 ```{r}
-result
+hist(result[,1], breaks = 10)
 ```
 
 
 ### Scenario 2:
 ```{r}
 seeds = c(1:5)
-result = matrix(NA, ncol = 3, nrow = 5)
+result = matrix(NA, ncol = 3, nrow = length(seeds))
 colnames(result) = c("diff", "integral", "error")
 for (seed in seeds){
   set.seed(seed)
@@ -150,7 +150,7 @@ result
 
 
 ### Scenario 3:
-```{r}
+```{r warning=FALSE}
 seeds = c(1:3)
 result = matrix(NA, ncol = 3, nrow = 3)
 colnames(result) = c("diff", "integral", "error")
