@@ -108,11 +108,6 @@ for (seed in seeds){
 
 ```
 
-```{r}
-hist(result[,1], breaks = 10)
-```
-
-
 ### Scenario 2:
 ```{r}
 seeds = c(1:5)
