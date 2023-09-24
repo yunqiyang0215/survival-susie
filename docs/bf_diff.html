@@ -384,7 +384,7 @@ div.tocify {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2023-09-15
+<strong>Last updated:</strong> 2023-09-24
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree528128017a168843137023920ba63883374b1195targetblank5281280a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/528128017a168843137023920ba63883374b1195" target="_blank">5281280</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreeb2ab7624285fffb6a4294a7d48bd6371fc983b6dtargetblankb2ab762a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/b2ab7624285fffb6a4294a7d48bd6371fc983b6d" target="_blank">b2ab762</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree528128017a168843137023920ba63883374b1195targetblank5281280a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreeb2ab7624285fffb6a4294a7d48bd6371fc983b6dtargetblankb2ab762a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/528128017a168843137023920ba63883374b1195" target="_blank">5281280</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/b2ab7624285fffb6a4294a7d48bd6371fc983b6d" target="_blank">b2ab762</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -539,6 +539,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/b2ab7624285fffb6a4294a7d48bd6371fc983b6d/analysis/bf_diff.Rmd" target="_blank">b2ab762</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-09-24
+</td>
+<td>
+wflow_publish("analysis/bf_diff.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/3f6c416a466a18ea9ca27b5089f1504f0319dedd/docs/bf_diff.html" target="_blank">3f6c416</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2023-09-15
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -719,6 +753,18 @@ sim_surv_exp &lt;- function(b, X, censor_lvl){
   dat[[&quot;X&quot;]] = X
   dat[[&quot;y&quot;]] = y
   return(dat)
+}
+
+compute_multiple_lbf &lt;- function(x, y, o, prior_variance, zscore.spa, ...){
+  fit &lt;- coxph(y~ x + offset(o))
+  bhat &lt;- summary(fit)$coefficients[1, 1] # bhat = -alphahat
+  sd &lt;- summary(fit)$coefficients[1, 3]
+  zscore &lt;- bhat/sd
+  lbf &lt;- compute_lbf(zscore, sd, prior_variance)
+  lbf.corr &lt;- lbf - bhat^2/sd^2/2+ as.numeric(summary(fit)$logtest[1]/2)
+  lbf.spa &lt;- compute_lbf(zscore.spa, sd, prior_variance)
+  return(list(zscore = zscore, sd = sd, 
+              lbf=lbf, lbf.corr = lbf.corr, lbf.spa = lbf.spa))
 }</code></pre>
 <pre class="r"><code># @param b: the effect size
 # @param surT: a Surv() object, containing time and status
@@ -734,15 +780,33 @@ integrand &lt;- function(b, survT, x, prior_sd){
   val = get_partial_lik(b, survT, x) * dnorm(b, mean = 0, sd = prior_sd)
   return(val)
 }</code></pre>
+<pre class="r"><code>get_zscore_spa &lt;- function(dat, X){
+  # genome matrix
+  n = nrow(X)
+  Geno.mtx = X
+  Phen.mtx = data.frame(ID = paste0(&quot;IID-&quot;,1:n),
+                      event=dat$y[,2],
+                      time=dat$y[,1])
+  rownames(Geno.mtx) = paste0(&quot;IID-&quot;,1:nrow(Geno.mtx))
+  colnames(Geno.mtx) = paste0(&quot;SNP-&quot;,1:ncol(Geno.mtx))
+  obj.null = SPACox_Null_Model(Surv(time,event) ~ 1, data=Phen.mtx, 
+                               pIDs=Phen.mtx$ID, gIDs=rownames(Geno.mtx))
+  SPACox.res = SPACox(obj.null, Geno.mtx)
+  zscore = SPACox.res[1, 7]
+  return(zscore)
+}</code></pre>
 <pre class="r"><code>library(survival)
 library(cubature)
-source(&quot;./code/surv_susie_helper.R&quot;)</code></pre>
+library(SPACox)</code></pre>
+<pre><code>Loading required package: seqminer</code></pre>
+<pre><code>Loading required package: data.table</code></pre>
+<pre class="r"><code>source(&quot;./code/surv_susie_helper.R&quot;)</code></pre>
 </div>
 <div id="scenario-1" class="section level3">
 <h3>Scenario 1:</h3>
 <pre class="r"><code>seeds = c(1:5)
-result = matrix(NA, ncol = 3, nrow = length(seeds))
-colnames(result) = c(&quot;diff&quot;, &quot;integral&quot;, &quot;error&quot;)
+result = matrix(NA, ncol = 5, nrow = length(seeds))
+colnames(result) = c(&quot;lbf.wakefeld&quot;, &quot;lbf.laplace&quot;, &quot;lbf.numerical&quot;, &quot;lbf.spa&quot;, &quot;error&quot;)
 for (seed in seeds){
   set.seed(seed)
   # simulate 1 variable
@@ -754,24 +818,123 @@ for (seed in seeds){
   dat &lt;- sim_surv_exp(b, X, censor_lvl)
   survT &lt;- Surv(dat$y[,1], dat$y[,2])
 
-  
+  # compute lbf using numerical integration 
   prior_sd = 1
   res = cubintegrate(f = integrand, survT = survT, x = dat$X[,1], prior_sd = 1, lower = -100, upper = 100, method = &quot;hcubature&quot;)
   max.ll.partial = logLik(coxph(survT ~ dat$X[,1]))
   prob.h1 = res$integral*exp(max.ll.partial)
   prob.h0 = get_partial_lik(b = 0, survT, dat$X[,1])
   lbf.numerical = log(res$integral) - log(prob.h0)
-  abf &lt;-surv_uni_fun(x = dat$X[,1], y = survT, o = rep(0, n), prior_variance = prior_sd^2)$lbf
-  result[seed, 1] = lbf.numerical - abf
-  result[seed, 2] = res$integral
-  result[seed, 3] = res$error
+  
+  # compute other lbf
+  zscore.spa &lt;- get_zscore_spa(dat, X)
+  res.lbf = compute_multiple_lbf(x = dat$X[,1], y = survT, o = rep(0, n), prior_variance = prior_sd^2, zscore.spa = zscore.spa)
+  
+  
+  result[seed, 1] = res.lbf$lbf
+  result[seed, 2] = res.lbf$lbf.corr
+  result[seed, 3] = lbf.numerical
+  result[seed, 4] = res.lbf$lbf.spa
+  result[seed, 5] = res$error
 }</code></pre>
+<pre><code>[1] &quot;Start calculating empirical CGF for martingale residuals...&quot;
+[1] &quot;Complete 1000/10000.&quot;
+[1] &quot;Complete 2000/10000.&quot;
+[1] &quot;Complete 3000/10000.&quot;
+[1] &quot;Complete 4000/10000.&quot;
+[1] &quot;Complete 5000/10000.&quot;
+[1] &quot;Complete 6000/10000.&quot;
+[1] &quot;Complete 7000/10000.&quot;
+[1] &quot;Complete 8000/10000.&quot;
+[1] &quot;Complete 9000/10000.&quot;
+[1] &quot;Complete 10000/10000.&quot;
+[1] &quot;Sample size is 10000.&quot;
+[1] &quot;Number of variants is 1.&quot;
+[1] &quot;Start Analyzing...&quot;
+[1] &quot;2023-09-24 13:48:02 CDT&quot;
+[1] &quot;Analysis Complete.&quot;
+[1] &quot;2023-09-24 13:48:02 CDT&quot;
+[1] &quot;Start calculating empirical CGF for martingale residuals...&quot;
+[1] &quot;Complete 1000/10000.&quot;
+[1] &quot;Complete 2000/10000.&quot;
+[1] &quot;Complete 3000/10000.&quot;
+[1] &quot;Complete 4000/10000.&quot;
+[1] &quot;Complete 5000/10000.&quot;
+[1] &quot;Complete 6000/10000.&quot;
+[1] &quot;Complete 7000/10000.&quot;
+[1] &quot;Complete 8000/10000.&quot;
+[1] &quot;Complete 9000/10000.&quot;
+[1] &quot;Complete 10000/10000.&quot;
+[1] &quot;Sample size is 10000.&quot;
+[1] &quot;Number of variants is 1.&quot;
+[1] &quot;Start Analyzing...&quot;
+[1] &quot;2023-09-24 13:48:27 CDT&quot;
+[1] &quot;Analysis Complete.&quot;
+[1] &quot;2023-09-24 13:48:27 CDT&quot;
+[1] &quot;Start calculating empirical CGF for martingale residuals...&quot;
+[1] &quot;Complete 1000/10000.&quot;
+[1] &quot;Complete 2000/10000.&quot;
+[1] &quot;Complete 3000/10000.&quot;
+[1] &quot;Complete 4000/10000.&quot;
+[1] &quot;Complete 5000/10000.&quot;
+[1] &quot;Complete 6000/10000.&quot;
+[1] &quot;Complete 7000/10000.&quot;
+[1] &quot;Complete 8000/10000.&quot;
+[1] &quot;Complete 9000/10000.&quot;
+[1] &quot;Complete 10000/10000.&quot;
+[1] &quot;Sample size is 10000.&quot;
+[1] &quot;Number of variants is 1.&quot;
+[1] &quot;Start Analyzing...&quot;
+[1] &quot;2023-09-24 13:48:54 CDT&quot;
+[1] &quot;Analysis Complete.&quot;
+[1] &quot;2023-09-24 13:48:54 CDT&quot;
+[1] &quot;Start calculating empirical CGF for martingale residuals...&quot;
+[1] &quot;Complete 1000/10000.&quot;
+[1] &quot;Complete 2000/10000.&quot;
+[1] &quot;Complete 3000/10000.&quot;
+[1] &quot;Complete 4000/10000.&quot;
+[1] &quot;Complete 5000/10000.&quot;
+[1] &quot;Complete 6000/10000.&quot;
+[1] &quot;Complete 7000/10000.&quot;
+[1] &quot;Complete 8000/10000.&quot;
+[1] &quot;Complete 9000/10000.&quot;
+[1] &quot;Complete 10000/10000.&quot;
+[1] &quot;Sample size is 10000.&quot;
+[1] &quot;Number of variants is 1.&quot;
+[1] &quot;Start Analyzing...&quot;
+[1] &quot;2023-09-24 13:49:16 CDT&quot;
+[1] &quot;Analysis Complete.&quot;
+[1] &quot;2023-09-24 13:49:16 CDT&quot;
+[1] &quot;Start calculating empirical CGF for martingale residuals...&quot;
+[1] &quot;Complete 1000/10000.&quot;
+[1] &quot;Complete 2000/10000.&quot;
+[1] &quot;Complete 3000/10000.&quot;
+[1] &quot;Complete 4000/10000.&quot;
+[1] &quot;Complete 5000/10000.&quot;
+[1] &quot;Complete 6000/10000.&quot;
+[1] &quot;Complete 7000/10000.&quot;
+[1] &quot;Complete 8000/10000.&quot;
+[1] &quot;Complete 9000/10000.&quot;
+[1] &quot;Complete 10000/10000.&quot;
+[1] &quot;Sample size is 10000.&quot;
+[1] &quot;Number of variants is 1.&quot;
+[1] &quot;Start Analyzing...&quot;
+[1] &quot;2023-09-24 13:49:45 CDT&quot;
+[1] &quot;Analysis Complete.&quot;
+[1] &quot;2023-09-24 13:49:45 CDT&quot;</code></pre>
+<pre class="r"><code>result</code></pre>
+<pre><code>     lbf.wakefeld lbf.laplace lbf.numerical   lbf.spa        error
+[1,]     15.21520    12.33433      12.34616  5.826518 1.147181e-07
+[2,]     18.73883    15.31115      15.32139  7.188096 1.543566e-07
+[3,]     28.33746    23.63167      23.63849 13.066644 3.369106e-07
+[4,]     20.55204    16.72506      16.73613  8.243768 1.205324e-07
+[5,]     27.03120    22.22531      22.23338 11.701627 1.220578e-07</code></pre>
 </div>
 <div id="scenario-2" class="section level3">
 <h3>Scenario 2:</h3>
 <pre class="r"><code>seeds = c(1:5)
-result = matrix(NA, ncol = 3, nrow = length(seeds))
-colnames(result) = c(&quot;diff&quot;, &quot;integral&quot;, &quot;error&quot;)
+result = matrix(NA, ncol = 5, nrow = length(seeds))
+colnames(result) = c(&quot;lbf.wakefeld&quot;, &quot;lbf.laplace&quot;, &quot;lbf.numerical&quot;, &quot;lbf.spa&quot;, &quot;error&quot;)
 for (seed in seeds){
   set.seed(seed)
   # simulate 1 variable
@@ -784,30 +947,123 @@ for (seed in seeds){
   survT &lt;- Surv(dat$y[,1], dat$y[,2])
 
   
+  # compute lbf using numerical integration 
   prior_sd = 1
   res = cubintegrate(f = integrand, survT = survT, x = dat$X[,1], prior_sd = 1, lower = -100, upper = 100, method = &quot;hcubature&quot;)
   max.ll.partial = logLik(coxph(survT ~ dat$X[,1]))
   prob.h1 = res$integral*exp(max.ll.partial)
   prob.h0 = get_partial_lik(b = 0, survT, dat$X[,1])
   lbf.numerical = log(res$integral) - log(prob.h0)
-  abf &lt;-surv_uni_fun(x = dat$X[,1], y = survT, o = rep(0, n), prior_variance = prior_sd^2)$lbf
-  result[seed, 1] = lbf.numerical - abf
-  result[seed, 2] = res$integral
-  result[seed, 3] = res$error
+  
+  # compute other lbf
+  zscore.spa &lt;- get_zscore_spa(dat, X)
+  res.lbf = compute_multiple_lbf(x = dat$X[,1], y = survT, o = rep(0, n), prior_variance = prior_sd^2, zscore.spa = zscore.spa)
+  
+  
+  result[seed, 1] = res.lbf$lbf
+  result[seed, 2] = res.lbf$lbf.corr
+  result[seed, 3] = lbf.numerical
+  result[seed, 4] = res.lbf$lbf.spa
+  result[seed, 5] = res$error
 }</code></pre>
+<pre><code>[1] &quot;Start calculating empirical CGF for martingale residuals...&quot;
+[1] &quot;Complete 1000/10000.&quot;
+[1] &quot;Complete 2000/10000.&quot;
+[1] &quot;Complete 3000/10000.&quot;
+[1] &quot;Complete 4000/10000.&quot;
+[1] &quot;Complete 5000/10000.&quot;
+[1] &quot;Complete 6000/10000.&quot;
+[1] &quot;Complete 7000/10000.&quot;
+[1] &quot;Complete 8000/10000.&quot;
+[1] &quot;Complete 9000/10000.&quot;
+[1] &quot;Complete 10000/10000.&quot;
+[1] &quot;Sample size is 10000.&quot;
+[1] &quot;Number of variants is 1.&quot;
+[1] &quot;Start Analyzing...&quot;
+[1] &quot;2023-09-24 13:50:18 CDT&quot;
+[1] &quot;Analysis Complete.&quot;
+[1] &quot;2023-09-24 13:50:18 CDT&quot;
+[1] &quot;Start calculating empirical CGF for martingale residuals...&quot;
+[1] &quot;Complete 1000/10000.&quot;
+[1] &quot;Complete 2000/10000.&quot;
+[1] &quot;Complete 3000/10000.&quot;
+[1] &quot;Complete 4000/10000.&quot;
+[1] &quot;Complete 5000/10000.&quot;
+[1] &quot;Complete 6000/10000.&quot;
+[1] &quot;Complete 7000/10000.&quot;
+[1] &quot;Complete 8000/10000.&quot;
+[1] &quot;Complete 9000/10000.&quot;
+[1] &quot;Complete 10000/10000.&quot;
+[1] &quot;Sample size is 10000.&quot;
+[1] &quot;Number of variants is 1.&quot;
+[1] &quot;Start Analyzing...&quot;
+[1] &quot;2023-09-24 13:50:52 CDT&quot;
+[1] &quot;Analysis Complete.&quot;
+[1] &quot;2023-09-24 13:50:52 CDT&quot;
+[1] &quot;Start calculating empirical CGF for martingale residuals...&quot;
+[1] &quot;Complete 1000/10000.&quot;
+[1] &quot;Complete 2000/10000.&quot;
+[1] &quot;Complete 3000/10000.&quot;
+[1] &quot;Complete 4000/10000.&quot;
+[1] &quot;Complete 5000/10000.&quot;
+[1] &quot;Complete 6000/10000.&quot;
+[1] &quot;Complete 7000/10000.&quot;
+[1] &quot;Complete 8000/10000.&quot;
+[1] &quot;Complete 9000/10000.&quot;
+[1] &quot;Complete 10000/10000.&quot;
+[1] &quot;Sample size is 10000.&quot;
+[1] &quot;Number of variants is 1.&quot;
+[1] &quot;Start Analyzing...&quot;
+[1] &quot;2023-09-24 13:51:24 CDT&quot;
+[1] &quot;Analysis Complete.&quot;
+[1] &quot;2023-09-24 13:51:24 CDT&quot;
+[1] &quot;Start calculating empirical CGF for martingale residuals...&quot;
+[1] &quot;Complete 1000/10000.&quot;
+[1] &quot;Complete 2000/10000.&quot;
+[1] &quot;Complete 3000/10000.&quot;
+[1] &quot;Complete 4000/10000.&quot;
+[1] &quot;Complete 5000/10000.&quot;
+[1] &quot;Complete 6000/10000.&quot;
+[1] &quot;Complete 7000/10000.&quot;
+[1] &quot;Complete 8000/10000.&quot;
+[1] &quot;Complete 9000/10000.&quot;
+[1] &quot;Complete 10000/10000.&quot;
+[1] &quot;Sample size is 10000.&quot;
+[1] &quot;Number of variants is 1.&quot;
+[1] &quot;Start Analyzing...&quot;
+[1] &quot;2023-09-24 13:51:55 CDT&quot;
+[1] &quot;Analysis Complete.&quot;
+[1] &quot;2023-09-24 13:51:55 CDT&quot;
+[1] &quot;Start calculating empirical CGF for martingale residuals...&quot;
+[1] &quot;Complete 1000/10000.&quot;
+[1] &quot;Complete 2000/10000.&quot;
+[1] &quot;Complete 3000/10000.&quot;
+[1] &quot;Complete 4000/10000.&quot;
+[1] &quot;Complete 5000/10000.&quot;
+[1] &quot;Complete 6000/10000.&quot;
+[1] &quot;Complete 7000/10000.&quot;
+[1] &quot;Complete 8000/10000.&quot;
+[1] &quot;Complete 9000/10000.&quot;
+[1] &quot;Complete 10000/10000.&quot;
+[1] &quot;Sample size is 10000.&quot;
+[1] &quot;Number of variants is 1.&quot;
+[1] &quot;Start Analyzing...&quot;
+[1] &quot;2023-09-24 13:52:31 CDT&quot;
+[1] &quot;Analysis Complete.&quot;
+[1] &quot;2023-09-24 13:52:31 CDT&quot;</code></pre>
 <pre class="r"><code>result</code></pre>
-<pre><code>           diff  integral        error
-[1,] 0.10664739 0.3084903 1.524437e-06
-[2,] 0.05312745 0.1639938 6.036238e-08
-[3,] 0.08580469 0.1176151 6.913447e-08
-[4,] 0.12090607 0.2083243 1.052610e-06
-[5,] 0.05529886 0.2403162 3.301337e-09</code></pre>
+<pre><code>     lbf.wakefeld lbf.laplace lbf.numerical    lbf.spa        error
+[1,]     1.107410   0.4316504     0.5382978 -0.2156671 1.524437e-06
+[2,]     5.556143   3.3666361     3.4197635  1.3888268 6.036238e-08
+[3,]     8.496663   4.6024045     4.6882092  1.8509981 6.913447e-08
+[4,]     3.066519   1.4709938     1.5918999 -0.1197060 1.052610e-06
+[5,]     1.963928   1.1080616     1.1633604  0.2814170 3.301337e-09</code></pre>
 </div>
 <div id="scenario-3" class="section level3">
 <h3>Scenario 3:</h3>
 <pre class="r"><code>seeds = c(1:3)
-result = matrix(NA, ncol = 3, nrow = 3)
-colnames(result) = c(&quot;diff&quot;, &quot;integral&quot;, &quot;error&quot;)
+result = matrix(NA, ncol = 5, nrow = length(seeds))
+colnames(result) = c(&quot;lbf.wakefeld&quot;, &quot;lbf.laplace&quot;, &quot;lbf.numerical&quot;, &quot;lbf.spa&quot;, &quot;error&quot;)
 for (seed in seeds){
   set.seed(seed)
   # simulate 1 variable
@@ -820,22 +1076,81 @@ for (seed in seeds){
   survT &lt;- Surv(dat$y[,1], dat$y[,2])
 
   
+  # compute lbf using numerical integration 
   prior_sd = 1
   res = cubintegrate(f = integrand, survT = survT, x = dat$X[,1], prior_sd = 1, lower = -100, upper = 100, method = &quot;hcubature&quot;)
   max.ll.partial = logLik(coxph(survT ~ dat$X[,1]))
   prob.h1 = res$integral*exp(max.ll.partial)
   prob.h0 = get_partial_lik(b = 0, survT, dat$X[,1])
   lbf.numerical = log(res$integral) - log(prob.h0)
-  abf &lt;-surv_uni_fun(x = dat$X[,1], y = survT, o = rep(0, n), prior_variance = prior_sd^2)$lbf
-  result[seed, 1] = lbf.numerical - abf
-  result[seed, 2] = res$integral
-  result[seed, 3] = res$error
+  
+  # compute other lbf
+  zscore.spa &lt;- get_zscore_spa(dat, X)
+  res.lbf = compute_multiple_lbf(x = dat$X[,1], y = survT, o = rep(0, n), prior_variance = prior_sd^2, zscore.spa = zscore.spa)
+  
+  
+  result[seed, 1] = res.lbf$lbf
+  result[seed, 2] = res.lbf$lbf.corr
+  result[seed, 3] = lbf.numerical
+  result[seed, 4] = res.lbf$lbf.spa
+  result[seed, 5] = res$error
 }</code></pre>
+<pre><code>[1] &quot;Start calculating empirical CGF for martingale residuals...&quot;
+[1] &quot;Complete 1000/10000.&quot;
+[1] &quot;Complete 2000/10000.&quot;
+[1] &quot;Complete 3000/10000.&quot;
+[1] &quot;Complete 4000/10000.&quot;
+[1] &quot;Complete 5000/10000.&quot;
+[1] &quot;Complete 6000/10000.&quot;
+[1] &quot;Complete 7000/10000.&quot;
+[1] &quot;Complete 8000/10000.&quot;
+[1] &quot;Complete 9000/10000.&quot;
+[1] &quot;Complete 10000/10000.&quot;
+[1] &quot;Sample size is 10000.&quot;
+[1] &quot;Number of variants is 1.&quot;
+[1] &quot;Start Analyzing...&quot;
+[1] &quot;2023-09-24 13:52:59 CDT&quot;
+[1] &quot;Analysis Complete.&quot;
+[1] &quot;2023-09-24 13:52:59 CDT&quot;
+[1] &quot;Start calculating empirical CGF for martingale residuals...&quot;
+[1] &quot;Complete 1000/10000.&quot;
+[1] &quot;Complete 2000/10000.&quot;
+[1] &quot;Complete 3000/10000.&quot;
+[1] &quot;Complete 4000/10000.&quot;
+[1] &quot;Complete 5000/10000.&quot;
+[1] &quot;Complete 6000/10000.&quot;
+[1] &quot;Complete 7000/10000.&quot;
+[1] &quot;Complete 8000/10000.&quot;
+[1] &quot;Complete 9000/10000.&quot;
+[1] &quot;Complete 10000/10000.&quot;
+[1] &quot;Sample size is 10000.&quot;
+[1] &quot;Number of variants is 1.&quot;
+[1] &quot;Start Analyzing...&quot;
+[1] &quot;2023-09-24 13:53:26 CDT&quot;
+[1] &quot;Analysis Complete.&quot;
+[1] &quot;2023-09-24 13:53:26 CDT&quot;
+[1] &quot;Start calculating empirical CGF for martingale residuals...&quot;
+[1] &quot;Complete 1000/10000.&quot;
+[1] &quot;Complete 2000/10000.&quot;
+[1] &quot;Complete 3000/10000.&quot;
+[1] &quot;Complete 4000/10000.&quot;
+[1] &quot;Complete 5000/10000.&quot;
+[1] &quot;Complete 6000/10000.&quot;
+[1] &quot;Complete 7000/10000.&quot;
+[1] &quot;Complete 8000/10000.&quot;
+[1] &quot;Complete 9000/10000.&quot;
+[1] &quot;Complete 10000/10000.&quot;
+[1] &quot;Sample size is 10000.&quot;
+[1] &quot;Number of variants is 1.&quot;
+[1] &quot;Start Analyzing...&quot;
+[1] &quot;2023-09-24 13:53:54 CDT&quot;
+[1] &quot;Analysis Complete.&quot;
+[1] &quot;2023-09-24 13:53:54 CDT&quot;</code></pre>
 <pre class="r"><code>result</code></pre>
-<pre><code>            diff  integral        error
-[1,] -0.03289383 0.9676211 3.969705e-08
-[2,] -0.07537664 0.9273741 4.480898e-08
-[3,] -0.08586509 0.9176952 4.704538e-08</code></pre>
+<pre><code>      lbf.wakefeld lbf.laplace lbf.numerical       lbf.spa        error
+[1,] -1.713396e-07  0.02051070   -0.01238313 -1.706615e-07 3.969705e-08
+[2,] -1.491693e-07  0.04862419   -0.02675245 -1.477403e-07 4.480898e-08
+[3,] -1.712154e-07  0.05576799   -0.03009710 -1.690265e-07 4.704538e-08</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -859,7 +1174,8 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] cubature_2.1.0  survival_3.2-11 workflowr_1.6.2
+[1] SPACox_0.1.2      data.table_1.14.9 seqminer_9.1      cubature_2.1.0   
+[5] survival_3.2-11   workflowr_1.6.2  
 
 loaded via a namespace (and not attached):
  [1] Rcpp_1.0.8.3     pillar_1.6.4     compiler_4.1.1   bslib_0.4.1     
