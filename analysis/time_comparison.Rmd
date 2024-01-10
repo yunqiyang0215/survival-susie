@@ -32,7 +32,12 @@ for (i in 1:length(num_effect)){
     indx = susie$simulate.num_effect == num_effect[i] & susie$simulate.censor_lvl == censor_lvl[j]
     time_susie = susie$susie.DSC_TIME[indx]
     time_bvsnlp = bvsnlp$bvsnlp.DSC_TIME[indx]
-    plot(time_susie, time_bvsnlp, main = paste0("num effect=", num_effect[i], ";censor_lvl =", censor_lvl[j]))
+    
+    dat <- list(time_susie, time_bvsnlp)
+    boxplot(dat, 
+        names = c("Time Susie", "Time BVSNLP"),
+        main = paste0("num effect=", num_effect[i], "; censor_lvl =", censor_lvl[j]),
+        ylab = "Time")
     abline(a = 0, b = 1, col = "red")
   }
 }
