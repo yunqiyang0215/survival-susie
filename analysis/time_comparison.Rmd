@@ -38,7 +38,6 @@ for (i in 1:length(num_effect)){
         names = c("Time Susie", "Time BVSNLP"),
         main = paste0("num effect=", num_effect[i], "; censor_lvl =", censor_lvl[j]),
         ylab = "Time")
-    abline(a = 0, b = 1, col = "red")
   }
 }
 ```
