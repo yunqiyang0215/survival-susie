@@ -59,6 +59,9 @@ Try different methods on simulated data with censoring:
 
 + [bhglm](bhglm_censoring.html)
 
++ [R2BGLiMS](R2BGLiMS.html)
+
+
 Try variational approximation:
 
 + [Variational approximation on exponential survival model](vi_exponential.html)
