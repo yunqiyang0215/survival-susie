@@ -11,6 +11,7 @@ library(R2BGLiMS)
 ```
 
 ```{r eval = FALSE}
+# https://github.com/pjnewcombe/R2BGLiMS/blob/master/Examples/R2BGLiMS_Examples.R
 # Example usage from the package
 utils::data(VA, package = "MASS")
 predictors <- c("treat","age","Karn","diag.time","prior")
