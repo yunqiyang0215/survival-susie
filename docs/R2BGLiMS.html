@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreea6faa50df12e4a90e44acebadd22fa4b1e5d99cdtargetblanka6faa50a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/a6faa50df12e4a90e44acebadd22fa4b1e5d99cd" target="_blank">a6faa50</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree5ef9ce0d551f220447c63a31dda9c68c9f75de8ctargetblank5ef9ce0a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/5ef9ce0d551f220447c63a31dda9c68c9f75de8c" target="_blank">5ef9ce0</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreea6faa50df12e4a90e44acebadd22fa4b1e5d99cdtargetblanka6faa50a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree5ef9ce0d551f220447c63a31dda9c68c9f75de8ctargetblank5ef9ce0a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/a6faa50df12e4a90e44acebadd22fa4b1e5d99cd" target="_blank">a6faa50</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/5ef9ce0d551f220447c63a31dda9c68c9f75de8c" target="_blank">5ef9ce0</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -543,6 +543,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/5ef9ce0d551f220447c63a31dda9c68c9f75de8c/analysis/R2BGLiMS.Rmd" target="_blank">5ef9ce0</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2024-01-18
+</td>
+<td>
+wflow_publish("analysis/R2BGLiMS.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/2c660007b36317c1351d015155b31bbb0905af22/docs/R2BGLiMS.html" target="_blank">2c66000</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2024-01-18
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/a6faa50df12e4a90e44acebadd22fa4b1e5d99cd/analysis/R2BGLiMS.Rmd" target="_blank">a6faa50</a>
 </td>
 <td>
@@ -564,7 +598,8 @@ wflow_publish("analysis/R2BGLiMS.Rmd")
 </div>
 <pre class="r"><code>#install_github(&quot;pjnewcombe/R2BGLiMS&quot;)
 library(R2BGLiMS)</code></pre>
-<pre class="r"><code># Example usage from the package
+<pre class="r"><code># https://github.com/pjnewcombe/R2BGLiMS/blob/master/Examples/R2BGLiMS_Examples.R
+# Example usage from the package
 utils::data(VA, package = &quot;MASS&quot;)
 predictors &lt;- c(&quot;treat&quot;,&quot;age&quot;,&quot;Karn&quot;,&quot;diag.time&quot;,&quot;prior&quot;)
 for (v in predictors) {VA[,v] &lt;- scale(as.numeric(VA[,v]))} # Normalise predictors
@@ -601,8 +636,82 @@ res &lt;- R2BGLiMS(
 
 plot(res@mcmc.output[,&quot;LogLikelihood&quot;], type=&quot;l&quot;) # Looks ok</code></pre>
 <p><img src="figure/R2BGLiMS.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
+Past versions of unnamed-chunk-4-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-4-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/2c660007b36317c1351d015155b31bbb0905af22/docs/figure/R2BGLiMS.Rmd/unnamed-chunk-4-1.png" target="_blank">2c66000</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2024-01-18
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>ManhattanPlot(res) # Clear signal at Kern</code></pre>
 <p><img src="figure/R2BGLiMS.Rmd/unnamed-chunk-4-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-2">
+Past versions of unnamed-chunk-4-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-4-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/2c660007b36317c1351d015155b31bbb0905af22/docs/figure/R2BGLiMS.Rmd/unnamed-chunk-4-2.png" target="_blank">2c66000</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2024-01-18
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>res@posterior.summary.table</code></pre>
 <pre><code>                    PostProb     Median   CrI_Lower  CrI_Upper Median_Present
 LogWeibullScale           NA  0.1610626 -0.03859787  0.3430198             NA
@@ -778,8 +887,82 @@ res &lt;- R2BGLiMS(
 
 plot(res@mcmc.output[,&quot;LogLikelihood&quot;], type=&quot;l&quot;) # Looks ok</code></pre>
 <p><img src="figure/R2BGLiMS.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
+Past versions of unnamed-chunk-5-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/2c660007b36317c1351d015155b31bbb0905af22/docs/figure/R2BGLiMS.Rmd/unnamed-chunk-5-1.png" target="_blank">2c66000</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2024-01-18
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>ManhattanPlot(res) # Clear signal at Kern</code></pre>
 <p><img src="figure/R2BGLiMS.Rmd/unnamed-chunk-5-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-2">
+Past versions of unnamed-chunk-5-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/2c660007b36317c1351d015155b31bbb0905af22/docs/figure/R2BGLiMS.Rmd/unnamed-chunk-5-2.png" target="_blank">2c66000</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2024-01-18
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>res@posterior.summary.table</code></pre>
 <pre><code>                    PostProb     Median   CrI_Lower  CrI_Upper Median_Present
 LogWeibullScale           NA  0.1573666 -0.03929995  0.3338704             NA
@@ -955,8 +1138,82 @@ res &lt;- R2BGLiMS(
 
 plot(res@mcmc.output[,&quot;LogLikelihood&quot;], type=&quot;l&quot;) # Looks ok</code></pre>
 <p><img src="figure/R2BGLiMS.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
+Past versions of unnamed-chunk-6-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/2c660007b36317c1351d015155b31bbb0905af22/docs/figure/R2BGLiMS.Rmd/unnamed-chunk-6-1.png" target="_blank">2c66000</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2024-01-18
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>ManhattanPlot(res) # Clear signal at Kern</code></pre>
 <p><img src="figure/R2BGLiMS.Rmd/unnamed-chunk-6-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-2">
+Past versions of unnamed-chunk-6-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/2c660007b36317c1351d015155b31bbb0905af22/docs/figure/R2BGLiMS.Rmd/unnamed-chunk-6-2.png" target="_blank">2c66000</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2024-01-18
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>res@posterior.summary.table</code></pre>
 <pre><code>                    PostProb      Median    CrI_Lower   CrI_Upper
 LogWeibullScale           NA   0.1223675  -0.07551654   0.3124062
@@ -1188,8 +1445,82 @@ res &lt;- R2BGLiMS(
 
 plot(res@mcmc.output[,&quot;LogLikelihood&quot;], type=&quot;l&quot;) # Looks ok</code></pre>
 <p><img src="figure/R2BGLiMS.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-1">
+Past versions of unnamed-chunk-7-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/2c660007b36317c1351d015155b31bbb0905af22/docs/figure/R2BGLiMS.Rmd/unnamed-chunk-7-1.png" target="_blank">2c66000</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2024-01-18
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>ManhattanPlot(res) # Clear signal at Kern</code></pre>
 <p><img src="figure/R2BGLiMS.Rmd/unnamed-chunk-7-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-2">
+Past versions of unnamed-chunk-7-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/2c660007b36317c1351d015155b31bbb0905af22/docs/figure/R2BGLiMS.Rmd/unnamed-chunk-7-2.png" target="_blank">2c66000</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2024-01-18
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>res@posterior.summary.table</code></pre>
 <pre><code>                    PostProb       Median    CrI_Lower   CrI_Upper
 LogWeibullScale           NA   0.13960359  -0.05458087   0.3246793
@@ -1421,8 +1752,82 @@ res &lt;- R2BGLiMS(
 
 plot(res@mcmc.output[,&quot;LogLikelihood&quot;], type=&quot;l&quot;) # Looks ok</code></pre>
 <p><img src="figure/R2BGLiMS.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-1">
+Past versions of unnamed-chunk-8-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/2c660007b36317c1351d015155b31bbb0905af22/docs/figure/R2BGLiMS.Rmd/unnamed-chunk-8-1.png" target="_blank">2c66000</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2024-01-18
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>ManhattanPlot(res) # Clear signal at Kern</code></pre>
 <p><img src="figure/R2BGLiMS.Rmd/unnamed-chunk-8-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-2">
+Past versions of unnamed-chunk-8-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-8-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/2c660007b36317c1351d015155b31bbb0905af22/docs/figure/R2BGLiMS.Rmd/unnamed-chunk-8-2.png" target="_blank">2c66000</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2024-01-18
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>res@posterior.summary.table</code></pre>
 <pre><code>                    PostProb       Median    CrI_Lower   CrI_Upper
 LogWeibullScale           NA   0.12434979  -0.06097042   0.3103664
