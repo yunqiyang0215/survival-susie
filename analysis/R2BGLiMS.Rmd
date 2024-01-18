@@ -1,0 +1,153 @@
+---
+title: "R2BGLiMS"
+author: "Yunqi Yang"
+date: "1/18/2024"
+output: html_document
+---
+
+```{r}
+#install_github("pjnewcombe/R2BGLiMS")
+library(R2BGLiMS)
+```
+
+```{r eval = FALSE}
+# Example usage from the package
+utils::data(VA, package = "MASS")
+predictors <- c("treat","age","Karn","diag.time","prior")
+for (v in predictors) {VA[,v] <- scale(as.numeric(VA[,v]))} # Normalise predictors
+VA$stime <- VA$stime/max(VA$stime)# Recommend scaling survival times to between 0 and 1
+
+va.results.weibull <- R2BGLiMS(
+  likelihood="Weibull",
+  data=VA,
+  outcome.var="status",
+  times.var="stime",
+  model.space.priors=list(list("a"=1,"b"=length(predictors),"Variables"=predictors)) # Beta-binomial(1,P) model space prior
+)
+
+plot(va.results.weibull@mcmc.output[,"LogLikelihood"], type="l") # Looks ok
+ManhattanPlot(va.results.weibull) # Clear signal at Kern
+va.results.weibull@posterior.summary.table
+TopModels(va.results.weibull)
+```
+
+
+```{r}
+dat = readRDS("./data/sim_dat_censoring.rds")
+```
+
+
+### Data 1: null model with X independent
+
+```{r}
+p = 50
+X = as.data.frame(dat[[1]][, c(2:(p+1))])
+data = dat[[1]]
+data$surT = data$surT/max(data$surT)
+predictors = names(data)[2:51]
+
+res <- R2BGLiMS(
+  likelihood="Weibull",
+  data=data,
+  outcome.var="status",
+  times.var="surT",
+  model.space.priors=list(list("a"=1,"b"=length(predictors),"Variables"=predictors)) # Beta-binomial(1,P) model space prior
+)
+
+plot(res@mcmc.output[,"LogLikelihood"], type="l") # Looks ok
+ManhattanPlot(res) # Clear signal at Kern
+res@posterior.summary.table
+TopModels(res)
+```
+
+
+### Data 2: simulated from null model with highly correlated X. corr = 0.9
+
+```{r}
+p = 50
+X = as.data.frame(dat[[2]][, c(2:(p+1))])
+data = dat[[2]]
+data$surT = data$surT/max(data$surT)
+predictors = names(data)[2:51]
+
+res <- R2BGLiMS(
+  likelihood="Weibull",
+  data=data,
+  outcome.var="status",
+  times.var="surT",
+  model.space.priors=list(list("a"=1,"b"=length(predictors),"Variables"=predictors)) # Beta-binomial(1,P) model space prior
+)
+
+plot(res@mcmc.output[,"LogLikelihood"], type="l") # Looks ok
+ManhattanPlot(res) # Clear signal at Kern
+res@posterior.summary.table
+TopModels(res)
+```
+
+### Data 3: simulated from one predictor model. Predictors are independent.
+```{r}
+p = 50
+X = as.data.frame(dat[[3]][, c(2:(p+1))])
+data = dat[[3]]
+data$surT = data$surT/max(data$surT)
+predictors = names(data)[2:51]
+
+res <- R2BGLiMS(
+  likelihood="Weibull",
+  data=data,
+  outcome.var="status",
+  times.var="surT",
+  model.space.priors=list(list("a"=1,"b"=length(predictors),"Variables"=predictors)) # Beta-binomial(1,P) model space prior
+)
+
+plot(res@mcmc.output[,"LogLikelihood"], type="l") # Looks ok
+ManhattanPlot(res) # Clear signal at Kern
+res@posterior.summary.table
+TopModels(res)
+```
+
+### Data 4: simulated from one predictor model. Predictors are highly correlated, corr = 0.9
+
+```{r}
+p = 50
+X = as.data.frame(dat[[4]][, c(2:(p+1))])
+data = dat[[4]]
+data$surT = data$surT/max(data$surT)
+predictors = names(data)[2:51]
+
+res <- R2BGLiMS(
+  likelihood="Weibull",
+  data=data,
+  outcome.var="status",
+  times.var="surT",
+  model.space.priors=list(list("a"=1,"b"=length(predictors),"Variables"=predictors)) # Beta-binomial(1,P) model space prior
+)
+
+plot(res@mcmc.output[,"LogLikelihood"], type="l") # Looks ok
+ManhattanPlot(res) # Clear signal at Kern
+res@posterior.summary.table
+TopModels(res)
+```
+
+### Data 5: simulated from two predictor model. Predictors have high correlation, corr = 0.9
+
+```{r}
+p = 50
+X = as.data.frame(dat[[5]][, c(2:(p+1))])
+data = dat[[5]]
+data$surT = data$surT/max(data$surT)
+predictors = names(data)[2:51]
+
+res <- R2BGLiMS(
+  likelihood="Weibull",
+  data=data,
+  outcome.var="status",
+  times.var="surT",
+  model.space.priors=list(list("a"=1,"b"=length(predictors),"Variables"=predictors)) # Beta-binomial(1,P) model space prior
+)
+
+plot(res@mcmc.output[,"LogLikelihood"], type="l") # Looks ok
+ManhattanPlot(res) # Clear signal at Kern
+res@posterior.summary.table
+TopModels(res)
+```
