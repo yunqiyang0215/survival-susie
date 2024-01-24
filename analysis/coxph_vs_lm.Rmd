@@ -64,11 +64,8 @@ Rprof(NULL)
 profile_lm <- summaryRprof("lm.out")
 ```
 
-```{r}
-print(profile_coxph$by.total)
-```
 
-```{r}
-print(profile_lm$by.total)
-```
 
+![lm()](/Users/nicholeyang/Downloads/survival-susie/figure/time_lm.png)
+
+![coxph()](/Users/nicholeyang/Downloads/survival-susie/figure/time_coxph.png)
