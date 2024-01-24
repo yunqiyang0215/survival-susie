@@ -66,6 +66,9 @@ profile_lm <- summaryRprof("lm.out")
 
 ```{r}
 print(profile_coxph$by.total)
+```
+
+```{r}
 print(profile_lm$by.total)
 ```
 
