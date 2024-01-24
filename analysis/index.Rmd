@@ -99,3 +99,5 @@ Time benchmark:
 
 + [coxph_vs_lm](coxph_vs_lm.html)
 
++ [survival susie (R version) per iteration time](coxph_vs_lm.html)
+
