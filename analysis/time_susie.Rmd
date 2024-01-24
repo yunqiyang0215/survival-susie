@@ -1,0 +1,19 @@
+---
+title: "Susie per iteration"
+author: "Yunqi Yang"
+date: "1/24/2024"
+output: html_document
+---
+
+### Description: 
+
+Running time of survival-susie (R version) for 1 iteration on $n = 50000$ and $p=1000$. 
+
+```{r}
+time = readRDS("/project2/mstephens/yunqiyang/surv-susie/time_susie202401/time_per_iter.rds")
+```
+
+```{r}
+hist(time$evaluate.DSC_TIME, breaks = 20)
+```
+
