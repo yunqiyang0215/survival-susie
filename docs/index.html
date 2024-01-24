@@ -305,7 +305,7 @@ $(document).ready(function () {
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2024-01-18
+<strong>Last updated:</strong> 2024-01-24
 </p>
 <p>
 <strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
@@ -336,16 +336,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree8f7c792edc85a3aa6bc1901c90ab13cebfe77d5ctargetblank8f7c792a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/8f7c792edc85a3aa6bc1901c90ab13cebfe77d5c" target="_blank">8f7c792</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree9bf9a5952c25603854c40b60c74e726e7ee2815atargetblank9bf9a59a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/9bf9a5952c25603854c40b60c74e726e7ee2815a" target="_blank">9bf9a59</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree8f7c792edc85a3aa6bc1901c90ab13cebfe77d5ctargetblank8f7c792a" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree9bf9a5952c25603854c40b60c74e726e7ee2815atargetblank9bf9a59a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/8f7c792edc85a3aa6bc1901c90ab13cebfe77d5c" target="_blank">8f7c792</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/9bf9a5952c25603854c40b60c74e726e7ee2815a" target="_blank">9bf9a59</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -356,6 +356,12 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
     Ignored:    data/.DS_Store
+
+Untracked files:
+    Untracked:  coxph.out
+    Untracked:  figure/
+    Untracked:  lm.out
+    Untracked:  my_profile_data.out
 
 Unstaged changes:
     Modified:   analysis/run_ser_simple_dat.Rmd
@@ -399,6 +405,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/9bf9a5952c25603854c40b60c74e726e7ee2815a/analysis/index.Rmd" target="_blank">9bf9a59</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2024-01-24
+</td>
+<td>
+wflow_publish("analysis/index.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/5e919f46e4663fa8701bf94d902270fb8912cb31/docs/index.html" target="_blank">5e919f4</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2024-01-18
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1722,6 +1762,10 @@ Start workflowr project.
 <p>Data application:</p>
 <ul>
 <li><a href="cancer_subtype.html">Cancer subtype</a></li>
+</ul>
+<p>Time benchmark:</p>
+<ul>
+<li><a href="coxph_vs_lm.html">coxph_vs_lm</a></li>
 </ul>
 
 
