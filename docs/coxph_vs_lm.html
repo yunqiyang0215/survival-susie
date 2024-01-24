@@ -475,16 +475,16 @@ This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree6abb35bf1d319f129b704ba64b0e91253689060dtargetblank6abb35ba"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/6abb35bf1d319f129b704ba64b0e91253689060d" target="_blank">6abb35b</a> </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree1db2af1760fc49c4438dd071795f3d64409bb28btargetblank1db2af1a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/1db2af1760fc49c4438dd071795f3d64409bb28b" target="_blank">1db2af1</a> </a>
 </p>
 </div>
-<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree6abb35bf1d319f129b704ba64b0e91253689060dtargetblank6abb35ba" class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree1db2af1760fc49c4438dd071795f3d64409bb28btargetblank1db2af1a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
 Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/6abb35bf1d319f129b704ba64b0e91253689060d" target="_blank">6abb35b</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/1db2af1760fc49c4438dd071795f3d64409bb28b" target="_blank">1db2af1</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
 Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
@@ -498,6 +498,7 @@ Ignored files:
 
 Untracked files:
     Untracked:  coxph.out
+    Untracked:  figure/
     Untracked:  lm.out
     Untracked:  my_profile_data.out
 
@@ -543,6 +544,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/1db2af1760fc49c4438dd071795f3d64409bb28b/analysis/coxph_vs_lm.Rmd" target="_blank">1db2af1</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2024-01-24
+</td>
+<td>
+wflow_publish("analysis/coxph_vs_lm.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/d3e37bb06a57b926ef153e0165cd344398305556/docs/coxph_vs_lm.html" target="_blank">d3e37bb</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2024-01-24
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -644,67 +679,14 @@ profile_coxph &lt;- summaryRprof(&quot;coxph.out&quot;)</code></pre>
 fit2 = lm(dat$y[,1] ~ x)
 Rprof(NULL)
 profile_lm &lt;- summaryRprof(&quot;lm.out&quot;)</code></pre>
-<pre class="r"><code>print(profile_coxph$by.total)</code></pre>
-<pre><code>                         total.time total.pct self.time self.pct
-&quot;&lt;Anonymous&gt;&quot;                  0.28    100.00      0.00     0.00
-&quot;block_exec&quot;                   0.28    100.00      0.00     0.00
-&quot;call_block&quot;                   0.28    100.00      0.00     0.00
-&quot;coxph&quot;                        0.28    100.00      0.00     0.00
-&quot;do.call&quot;                      0.28    100.00      0.00     0.00
-&quot;doTryCatch&quot;                   0.28    100.00      0.00     0.00
-&quot;eng_r&quot;                        0.28    100.00      0.00     0.00
-&quot;eval&quot;                         0.28    100.00      0.00     0.00
-&quot;evaluate_call&quot;                0.28    100.00      0.00     0.00
-&quot;evaluate::evaluate&quot;           0.28    100.00      0.00     0.00
-&quot;evaluate&quot;                     0.28    100.00      0.00     0.00
-&quot;generator$render&quot;             0.28    100.00      0.00     0.00
-&quot;handle&quot;                       0.28    100.00      0.00     0.00
-&quot;in_dir&quot;                       0.28    100.00      0.00     0.00
-&quot;knitr::knit&quot;                  0.28    100.00      0.00     0.00
-&quot;process_file&quot;                 0.28    100.00      0.00     0.00
-&quot;process_group.block&quot;          0.28    100.00      0.00     0.00
-&quot;process_group&quot;                0.28    100.00      0.00     0.00
-&quot;rmarkdown::render_site&quot;       0.28    100.00      0.00     0.00
-&quot;rmarkdown::render&quot;            0.28    100.00      0.00     0.00
-&quot;saveRDS&quot;                      0.28    100.00      0.00     0.00
-&quot;suppressMessages&quot;             0.28    100.00      0.00     0.00
-&quot;timing_fn&quot;                    0.28    100.00      0.00     0.00
-&quot;tryCatch&quot;                     0.28    100.00      0.00     0.00
-&quot;tryCatchList&quot;                 0.28    100.00      0.00     0.00
-&quot;tryCatchOne&quot;                  0.28    100.00      0.00     0.00
-&quot;withCallingHandlers&quot;          0.28    100.00      0.00     0.00
-&quot;withVisible&quot;                  0.28    100.00      0.00     0.00
-&quot;concordancefit&quot;               0.18     64.29      0.02     7.14
-&quot;docount&quot;                      0.16     57.14      0.04    14.29
-&quot;aeqSurv&quot;                      0.06     21.43      0.00     0.00
-&quot;survfit.formula&quot;              0.06     21.43      0.00     0.00
-&quot;survfit&quot;                      0.06     21.43      0.00     0.00
-&quot;coxph.fit&quot;                    0.04     14.29      0.04    14.29
-&quot;tfun&quot;                         0.04     14.29      0.04    14.29
-&quot;btree&quot;                        0.04     14.29      0.00     0.00
-&quot;c&quot;                            0.02      7.14      0.02     7.14
-&quot;factor&quot;                       0.02      7.14      0.02     7.14
-&quot;findInterval&quot;                 0.02      7.14      0.02     7.14
-&quot;ifelse&quot;                       0.02      7.14      0.02     7.14
-&quot;lazyLoadDBfetch&quot;              0.02      7.14      0.02     7.14
-&quot;logical&quot;                      0.02      7.14      0.02     7.14
-&quot;NextMethod&quot;                   0.02      7.14      0.02     7.14
-&quot;.External2&quot;                   0.02      7.14      0.00     0.00
-&quot;[.Surv&quot;                       0.02      7.14      0.00     0.00
-&quot;[&quot;                            0.02      7.14      0.00     0.00
-&quot;diff&quot;                         0.02      7.14      0.00     0.00
-&quot;eval.parent&quot;                  0.02      7.14      0.00     0.00
-&quot;get&quot;                          0.02      7.14      0.00     0.00
-&quot;model.frame.default&quot;          0.02      7.14      0.00     0.00
-&quot;na.omit.data.frame&quot;           0.02      7.14      0.00     0.00
-&quot;na.omit&quot;                      0.02      7.14      0.00     0.00
-&quot;sort&quot;                         0.02      7.14      0.00     0.00
-&quot;stats::model.frame&quot;           0.02      7.14      0.00     0.00
-&quot;survfitKM&quot;                    0.02      7.14      0.00     0.00
-&quot;unique&quot;                       0.02      7.14      0.00     0.00</code></pre>
-<pre class="r"><code>print(profile_lm$by.total)</code></pre>
-<pre><code>[1] total.time total.pct  self.time  self.pct  
-&lt;0 rows&gt; (or 0-length row.names)</code></pre>
+<div class="figure">
+<img src="/Users/nicholeyang/Downloads/survival-susie/figure/time_lm.png" alt="" />
+<p class="caption">lm()</p>
+</div>
+<div class="figure">
+<img src="/Users/nicholeyang/Downloads/survival-susie/figure/time_coxph.png" alt="" />
+<p class="caption">coxph()</p>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
