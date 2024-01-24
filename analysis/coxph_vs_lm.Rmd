@@ -50,14 +50,14 @@ y <- Surv(dat$y[,1], dat$y[,2])
 x <- dat$X
 ```
 
-```{r}
+```{r eval = FALSE}
 Rprof("coxph.out")
 fit1 = coxph(y ~ x)
 Rprof(NULL)
 profile_coxph <- summaryRprof("coxph.out")
 ```
 
-```{r}
+```{r eval = FALSE}
 Rprof("lm.out")
 fit2 = lm(dat$y[,1] ~ x)
 Rprof(NULL)
@@ -65,7 +65,3 @@ profile_lm <- summaryRprof("lm.out")
 ```
 
 
-
-![lm()](/Users/nicholeyang/Downloads/survival-susie/figure/time_lm.png)
-
-![coxph()](/Users/nicholeyang/Downloads/survival-susie/figure/time_coxph.png)
