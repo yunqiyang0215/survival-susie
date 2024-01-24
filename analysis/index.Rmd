@@ -93,3 +93,9 @@ Susie results:
 Data application:
 
 + [Cancer subtype](cancer_subtype.html)
+
+
+Time benchmark:
+
++ [coxph_vs_lm](coxph_vs_lm.html)
+
