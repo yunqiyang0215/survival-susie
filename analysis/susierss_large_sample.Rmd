@@ -7,7 +7,10 @@ output: html_document
 
 ### Description:
 
-Compare results for susie and susierss. 
+Compare results for susie and susierss on real genotype data from UKBiobank with $n=50000$ and $p=1000$. SuSIE and SuSIE-RSS run for 10 iterations. 
+
+Would be interesting to compare with SuSiE(10 iterations) and SUSIE-RSS (100 or 500 iterations). 
+
 
 ```{r knitr-opts, include=FALSE}
 knitr::opts_chunk$set(comment = "#",collapse = TRUE,results = "hold",
