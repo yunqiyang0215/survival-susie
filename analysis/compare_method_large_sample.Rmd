@@ -7,21 +7,20 @@ output: html_document
 
 ### Description:
 
-Version 4 simulation results, comparing power vs. FDR across 3 methods. I vary the threshold for claiming effect variables based on marginal PIP value. 
+Comparing power vs. FDR across 4 methods. I vary the threshold for claiming effect variables based on marginal PIP value. 
 
-**Difference between v3 and v4 simulation**:
+### Data details:
 
-1. Only susie has been changed, not the other two methods. 
+1. $n=50000$ and $p=1000$.
 
-2. Used corrected ABF instead of original Wakefeld ABF.
+2. SNPs with minor allele frequency < 1% were removed. 
 
-3. Computed susie credible sets. 
+### Fitting details:
 
-**Conclusion**:
+1. SuSIE with laplace BF. 
 
-1. After using corrected ABF, susie performance is improved. Now it's better than bvsnlp almost all the time. 
+2. SuSIE, survival svb runs for 10 iterations. The other 2 methods with 30 iterations. 
 
-2. Power of the credible sets and coverage of credible sets also look fine. 
 
 ```{r knitr-opts, include=FALSE}
 knitr::opts_chunk$set(comment = "#",collapse = TRUE,results = "hold",
@@ -80,13 +79,13 @@ get_cs_effect = function(dat_indx, p){
 ```{r}
 
 susie = readRDS("/project2/mstephens/yunqiyang/surv-susie/dsc202401/susie.rds")
-susie.rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/dsc202401/susie_rss.rds")
-susie.rss.varY = readRDS("/project2/mstephens/yunqiyang/surv-susie/dsc202401/susie_rss_varY.rds")
 survsvb = readRDS("/project2/mstephens/yunqiyang/surv-susie/dsc202401/survsvb.rds")
 bvsnlp = readRDS("/project2/mstephens/yunqiyang/surv-susie/dsc202401/bvsnlp.rds")
 r2b = readRDS("/project2/mstephens/yunqiyang/surv-susie/dsc202401/r2b.rds")
+```
 
-
+```{r}
+t95 = 951
 ```
 
 ### 1. Results using real correlation structure from data
@@ -114,10 +113,10 @@ for (i in 1:length(censor_lvl)){
   lines(res.bvsnlp[,2], res.bvsnlp[,1], type = "l", col = 3)
   lines(res.r2b[,2], res.r2b[,1], type = "l", col = 4)
   
-  points(res.susie[96,2], res.susie[96, 1])
-  points(res.svb[96,2], res.svb[96, 1])
-  points(res.bvsnlp[96,2], res.bvsnlp[96, 1])
-  points(res.r2b[96,2], res.r2b[96, 1])
+  points(res.susie[t95,2], res.susie[t95, 1])
+  points(res.svb[t95,2], res.svb[t95, 1])
+  points(res.bvsnlp[t95,2], res.bvsnlp[t95, 1])
+  points(res.r2b[t95,2], res.r2b[t95, 1])
   
   legend("topleft", legend = c("susie", "survival.svb", "bvsnlp", "r2b"), col = c(1,2,3, 4), lty = 1)
 }
@@ -154,9 +153,9 @@ for (i in 1:length(censor_lvl)){
   lines(res.bvsnlp[,2], res.bvsnlp[,1], type = "l", col = 3)
   lines(res.r2b[,2], res.r2b[,1], type = "l", col = 4)
   
-  points(res.susie[96,2], res.susie[96, 1])
-  points(res.svb[96,2], res.svb[96, 1])
-  points(res.bvsnlp[96,2], res.bvsnlp[96, 1])
+  points(res.susie[t95,2], res.susie[t95, 1])
+  points(res.svb[t95,2], res.svb[t95, 1])
+  points(res.bvsnlp[t95,2], res.bvsnlp[t95, 1])
   legend("bottomright", legend = c("susie", "survival.svb", "bvsnlp"), col = c(1,2,3), lty = 1)
 }
 
@@ -194,9 +193,9 @@ for (i in 1:length(censor_lvl)){
   lines(res.bvsnlp[,2], res.bvsnlp[,1], type = "l", col = 3)
   lines(res.r2b[,2], res.r2b[,1], type = "l", col = 4)
   
-  points(res.susie[96,2], res.susie[96, 1])
-  points(res.svb[96,2], res.svb[96, 1])
-  points(res.bvsnlp[96,2], res.bvsnlp[96, 1])
+  points(res.susie[t95,2], res.susie[t95, 1])
+  points(res.svb[t95,2], res.svb[t95, 1])
+  points(res.bvsnlp[t95,2], res.bvsnlp[t95, 1])
   legend("bottomright", legend = c("susie", "survival.svb", "bvsnlp"), col = c(1,2,3), lty = 1)
 }
 
