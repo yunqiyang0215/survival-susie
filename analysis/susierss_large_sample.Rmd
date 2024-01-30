@@ -75,6 +75,10 @@ rss.varY = readRDS("/project2/mstephens/yunqiyang/surv-susie/dsc202401/susie.rss
 
 ### 1. Results using real correlation structure from data
 
+```{r}
+t95 = 951
+```
+
 ```{r, fig.width=12, fig.height=8}
 par(mfrow = c(2,3), cex.axis = 1.5)
 censor_lvl = c(0, 0.2, 0.4, 0.6, 0.8, 0.99)
@@ -95,9 +99,9 @@ for (i in 1:length(censor_lvl)){
   lines(res.rss[,2], res.rss[,1], type = "l", col = 2)
   lines(res.rss.varY[,2], res.rss.varY[,1], type = "l", col = 3)
   
-  points(res.susie[96,2], res.susie[96, 1])
-  points(res.rss[96,2], res.rss[96, 1])
-  points(res.rss.varY[96,2], res.rss.varY[96, 1])
+  points(res.susie[t95,2], res.susie[t95, 1])
+  points(res.rss[t95,2], res.rss[t95, 1])
+  points(res.rss.varY[t95,2], res.rss.varY[t95, 1])
   
   legend("topleft", legend = c("susie", "susie.rss.varY=1", "susie.rss.varY"), col = c(1,2,3), lty = 1)
 }
@@ -121,7 +125,7 @@ for (i in 1:length(censor_lvl)){
   pip.rss.varY = unlist(lapply(indx, function(x) rss.varY$susie_rss_varY.pip[[x]]))
   is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
   
-  ts = seq(from = 0, to = 0.99, by = 0.01)
+  ts = seq(from = 0, to = 0.99, by = 0.001)
   res.susie = calculate_tpr_vs_fdr(pip.susie, is_effect, ts)
   res.rss = calculate_tpr_vs_fdr(pip.rss, is_effect, ts)
   res.rss.varY = calculate_tpr_vs_fdr(pip.rss.varY, is_effect, ts)
@@ -131,9 +135,9 @@ for (i in 1:length(censor_lvl)){
   lines(res.rss[,2], res.rss[,1], type = "l", col = 2)
   lines(res.rss.varY[,2], res.rss.varY[,1], type = "l", col = 3)
   
-  points(res.susie[96,2], res.susie[96, 1])
-  points(res.rss[96,2], res.rss[96, 1])
-  points(res.rss.varY[96,2], res.rss.varY[96, 1])
+  points(res.susie[t95,2], res.susie[t95, 1])
+  points(res.rss[t95,2], res.rss[t95, 1])
+  points(res.rss.varY[t95,2], res.rss.varY[t95, 1])
   
   legend("topleft", legend = c("susie", "susie.rss.varY=1", "susie.rss.varY"), col = c(1,2,3), lty = 1)
   
@@ -157,7 +161,7 @@ for (i in 1:length(censor_lvl)){
   pip.rss.varY = unlist(lapply(indx, function(x) rss.varY$susie_rss_varY.pip[[x]]))
   is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
   
-  ts = seq(from = 0, to = 0.99, by = 0.01)
+  ts = seq(from = 0, to = 0.99, by = 0.001)
   res.susie = calculate_tpr_vs_fdr(pip.susie, is_effect, ts)
   res.rss = calculate_tpr_vs_fdr(pip.rss, is_effect, ts)
   res.rss.varY = calculate_tpr_vs_fdr(pip.rss.varY, is_effect, ts)
@@ -167,9 +171,9 @@ for (i in 1:length(censor_lvl)){
   lines(res.rss[,2], res.rss[,1], type = "l", col = 2)
   lines(res.rss.varY[,2], res.rss.varY[,1], type = "l", col = 3)
   
-  points(res.susie[96,2], res.susie[96, 1])
-  points(res.rss[96,2], res.rss[96, 1])
-  points(res.rss.varY[96,2], res.rss.varY[96, 1])
+  points(res.susie[t95,2], res.susie[t95, 1])
+  points(res.rss[t95,2], res.rss[t95, 1])
+  points(res.rss.varY[t95,2], res.rss.varY[t95, 1])
   
   legend("topleft", legend = c("susie", "susie.rss.varY=1", "susie.rss.varY"), col = c(1,2,3), lty = 1)
 }
