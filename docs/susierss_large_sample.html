@@ -524,15 +524,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree10d9db12c94d06596d01de424ae55f1161846866targetblank10d9db1a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree86b0a55f281c7dad1f5a71398e88c67d195ab8e0targetblank86b0a55a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/10d9db12c94d06596d01de424ae55f1161846866" target="_blank">10d9db1</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/86b0a55f281c7dad1f5a71398e88c67d195ab8e0" target="_blank">86b0a55</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree10d9db12c94d06596d01de424ae55f1161846866targetblank10d9db1a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree86b0a55f281c7dad1f5a71398e88c67d195ab8e0targetblank86b0a55a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -542,7 +542,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/10d9db12c94d06596d01de424ae55f1161846866" target="_blank">10d9db1</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/86b0a55f281c7dad1f5a71398e88c67d195ab8e0" target="_blank">86b0a55</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -558,6 +558,7 @@ were generated:
 <pre><code>
 Ignored files:
     Ignored:    .Rproj.user/
+    Ignored:    analysis/figure/
 
 Untracked files:
     Untracked:  analysis/dat_analysis_cancer_subtype.Rmd
@@ -609,6 +610,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/86b0a55f281c7dad1f5a71398e88c67d195ab8e0/analysis/susierss_large_sample.Rmd" target="_blank">86b0a55</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-01-30
+</td>
+<td>
+wflow_publish("analysis/susierss_large_sample.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/5ff44724341ab51f0442b1cc03825f1cfc80526d/docs/susierss_large_sample.html" target="_blank">5ff4472</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-01-30
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -797,6 +832,7 @@ rss.varY = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/dsc202401/susi
 <div id="results-using-real-correlation-structure-from-data"
 class="section level3">
 <h3>1. Results using real correlation structure from data</h3>
+<pre class="r"><code>t95 = 951</code></pre>
 <pre class="r"><code>par(mfrow = c(2,3), cex.axis = 1.5)
 censor_lvl = c(0, 0.2, 0.4, 0.6, 0.8, 0.99)
 for (i in 1:length(censor_lvl)){
@@ -816,81 +852,11 @@ for (i in 1:length(censor_lvl)){
   lines(res.rss[,2], res.rss[,1], type = &quot;l&quot;, col = 2)
   lines(res.rss.varY[,2], res.rss.varY[,1], type = &quot;l&quot;, col = 3)
   
-  points(res.susie[96,2], res.susie[96, 1])
-  points(res.rss[96,2], res.rss[96, 1])
-  points(res.rss.varY[96,2], res.rss.varY[96, 1])
+  points(res.susie[t95,2], res.susie[t95, 1])
+  points(res.rss[t95,2], res.rss[t95, 1])
+  points(res.rss.varY[t95,2], res.rss.varY[t95, 1])
   
   legend(&quot;topleft&quot;, legend = c(&quot;susie&quot;, &quot;susie.rss.varY=1&quot;, &quot;susie.rss.varY&quot;), col = c(1,2,3), lty = 1)
-}</code></pre>
-<p><img src="figure/susierss_large_sample.Rmd/unnamed-chunk-3-1.png" width="1152" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-3-1">
-Past versions of unnamed-chunk-3-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-3-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/yunqiyang0215/survival-susie/blob/e6f9c762129774596d8fcc3521ba703ff42280f3/docs/figure/susierss_large_sample.Rmd/unnamed-chunk-3-1.png" target="_blank">e6f9c76</a>
-</td>
-<td>
-yunqi yang
-</td>
-<td>
-2024-01-29
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>The dots indicate PIP threshold = 0.95</p>
-</div>
-<div id="results-using-independent-x-without-data-from-null-model."
-class="section level3">
-<h3>2. Results using independent X, without data from null model.</h3>
-<pre class="r"><code>par(mfrow = c(2,3),cex.axis = 1.5)
-censor_lvl = c(0, 0.2, 0.4, 0.6, 0.8, 0.99)
-
-for (i in 1:length(censor_lvl)){
-  indx = which(susie$simulate.cor_type == &quot;independent&quot; &amp; susie$simulate.censor_lvl == censor_lvl[i] &amp; susie$simulate.num_effect != 0)
-  pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
-  pip.rss = unlist(lapply(indx, function(x) rss$susie_rss.pip[[x]]))
-  pip.rss.varY = unlist(lapply(indx, function(x) rss.varY$susie_rss_varY.pip[[x]]))
-  is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
-  
-  ts = seq(from = 0, to = 0.99, by = 0.01)
-  res.susie = calculate_tpr_vs_fdr(pip.susie, is_effect, ts)
-  res.rss = calculate_tpr_vs_fdr(pip.rss, is_effect, ts)
-  res.rss.varY = calculate_tpr_vs_fdr(pip.rss.varY, is_effect, ts)
-
-  plot(res.susie[,2], res.susie[,1], type = &quot;l&quot;, xlim = c(0,1), ylim = c(0, 1), xlab = &quot;FDR&quot;, ylab = &quot;Power&quot;,
-       main = paste0(&quot;Independent X, effect 0-3&quot;, &quot;,censor=&quot;, censor_lvl[i]))
-  lines(res.rss[,2], res.rss[,1], type = &quot;l&quot;, col = 2)
-  lines(res.rss.varY[,2], res.rss.varY[,1], type = &quot;l&quot;, col = 3)
-  
-  points(res.susie[96,2], res.susie[96, 1])
-  points(res.rss[96,2], res.rss[96, 1])
-  points(res.rss.varY[96,2], res.rss.varY[96, 1])
-  
-  legend(&quot;topleft&quot;, legend = c(&quot;susie&quot;, &quot;susie.rss.varY=1&quot;, &quot;susie.rss.varY&quot;), col = c(1,2,3), lty = 1)
-  
 }</code></pre>
 <p><img src="figure/susierss_large_sample.Rmd/unnamed-chunk-4-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>
@@ -930,38 +896,39 @@ yunqi yang
 </table>
 </div>
 </div>
-<p>The dots indicate PIP threshold = 0.95.</p>
+<p>The dots indicate PIP threshold = 0.95</p>
 </div>
-<div id="results-using-independent-x-with-data-from-null-model."
+<div id="results-using-independent-x-without-data-from-null-model."
 class="section level3">
-<h3>3. Results using independent X, with data from null model.</h3>
+<h3>2. Results using independent X, without data from null model.</h3>
 <pre class="r"><code>par(mfrow = c(2,3),cex.axis = 1.5)
 censor_lvl = c(0, 0.2, 0.4, 0.6, 0.8, 0.99)
 
 for (i in 1:length(censor_lvl)){
-  indx = which(susie$simulate.cor_type == &quot;independent&quot; &amp; susie$simulate.censor_lvl == censor_lvl[i])
+  indx = which(susie$simulate.cor_type == &quot;independent&quot; &amp; susie$simulate.censor_lvl == censor_lvl[i] &amp; susie$simulate.num_effect != 0)
   pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
   pip.rss = unlist(lapply(indx, function(x) rss$susie_rss.pip[[x]]))
   pip.rss.varY = unlist(lapply(indx, function(x) rss.varY$susie_rss_varY.pip[[x]]))
   is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
   
-  ts = seq(from = 0, to = 0.99, by = 0.01)
+  ts = seq(from = 0, to = 0.99, by = 0.001)
   res.susie = calculate_tpr_vs_fdr(pip.susie, is_effect, ts)
   res.rss = calculate_tpr_vs_fdr(pip.rss, is_effect, ts)
   res.rss.varY = calculate_tpr_vs_fdr(pip.rss.varY, is_effect, ts)
 
   plot(res.susie[,2], res.susie[,1], type = &quot;l&quot;, xlim = c(0,1), ylim = c(0, 1), xlab = &quot;FDR&quot;, ylab = &quot;Power&quot;,
-       main = paste0(&quot;Real correlation, effect 0-3&quot;, &quot;,censor=&quot;, censor_lvl[i]))
+       main = paste0(&quot;Independent X, effect 0-3&quot;, &quot;,censor=&quot;, censor_lvl[i]))
   lines(res.rss[,2], res.rss[,1], type = &quot;l&quot;, col = 2)
   lines(res.rss.varY[,2], res.rss.varY[,1], type = &quot;l&quot;, col = 3)
   
-  points(res.susie[96,2], res.susie[96, 1])
-  points(res.rss[96,2], res.rss[96, 1])
-  points(res.rss.varY[96,2], res.rss.varY[96, 1])
+  points(res.susie[t95,2], res.susie[t95, 1])
+  points(res.rss[t95,2], res.rss[t95, 1])
+  points(res.rss.varY[t95,2], res.rss.varY[t95, 1])
   
   legend(&quot;topleft&quot;, legend = c(&quot;susie&quot;, &quot;susie.rss.varY=1&quot;, &quot;susie.rss.varY&quot;), col = c(1,2,3), lty = 1)
+  
 }</code></pre>
-<p><img src="figure/susierss_large_sample.Rmd/unnamed-chunk-5-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="figure/susierss_large_sample.Rmd/unnamed-chunk-5-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
 Past versions of unnamed-chunk-5-1.png
@@ -999,6 +966,38 @@ yunqi yang
 </table>
 </div>
 </div>
+<p>The dots indicate PIP threshold = 0.95.</p>
+</div>
+<div id="results-using-independent-x-with-data-from-null-model."
+class="section level3">
+<h3>3. Results using independent X, with data from null model.</h3>
+<pre class="r"><code>par(mfrow = c(2,3),cex.axis = 1.5)
+censor_lvl = c(0, 0.2, 0.4, 0.6, 0.8, 0.99)
+
+for (i in 1:length(censor_lvl)){
+  indx = which(susie$simulate.cor_type == &quot;independent&quot; &amp; susie$simulate.censor_lvl == censor_lvl[i])
+  pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+  pip.rss = unlist(lapply(indx, function(x) rss$susie_rss.pip[[x]]))
+  pip.rss.varY = unlist(lapply(indx, function(x) rss.varY$susie_rss_varY.pip[[x]]))
+  is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
+  
+  ts = seq(from = 0, to = 0.99, by = 0.001)
+  res.susie = calculate_tpr_vs_fdr(pip.susie, is_effect, ts)
+  res.rss = calculate_tpr_vs_fdr(pip.rss, is_effect, ts)
+  res.rss.varY = calculate_tpr_vs_fdr(pip.rss.varY, is_effect, ts)
+
+  plot(res.susie[,2], res.susie[,1], type = &quot;l&quot;, xlim = c(0,1), ylim = c(0, 1), xlab = &quot;FDR&quot;, ylab = &quot;Power&quot;,
+       main = paste0(&quot;Real correlation, effect 0-3&quot;, &quot;,censor=&quot;, censor_lvl[i]))
+  lines(res.rss[,2], res.rss[,1], type = &quot;l&quot;, col = 2)
+  lines(res.rss.varY[,2], res.rss.varY[,1], type = &quot;l&quot;, col = 3)
+  
+  points(res.susie[t95,2], res.susie[t95, 1])
+  points(res.rss[t95,2], res.rss[t95, 1])
+  points(res.rss.varY[t95,2], res.rss.varY[t95, 1])
+  
+  legend(&quot;topleft&quot;, legend = c(&quot;susie&quot;, &quot;susie.rss.varY=1&quot;, &quot;susie.rss.varY&quot;), col = c(1,2,3), lty = 1)
+}</code></pre>
+<p><img src="figure/susierss_large_sample.Rmd/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto;" /></p>
 <p>The dots indicate PIP threshold = 0.95.</p>
 </div>
 <div id="assess-susie-cs" class="section level3">
