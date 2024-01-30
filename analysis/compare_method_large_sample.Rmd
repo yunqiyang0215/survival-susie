@@ -1,7 +1,7 @@
 ---
 title: "Power vs. fdr: version 4"
 author: "Yunqi Yang"
-date: "05/08/2023"
+date: "01/29/2024"
 output: html_document
 ---
 
