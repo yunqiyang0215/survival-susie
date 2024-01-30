@@ -1,5 +1,5 @@
 ---
-title: "Power vs. fdr: version 4"
+title: "Method comparison: Power vs. fdr"
 author: "Yunqi Yang"
 date: "01/29/2024"
 output: html_document
@@ -156,7 +156,7 @@ for (i in 1:length(censor_lvl)){
   points(res.susie[t95,2], res.susie[t95, 1])
   points(res.svb[t95,2], res.svb[t95, 1])
   points(res.bvsnlp[t95,2], res.bvsnlp[t95, 1])
-  legend("bottomright", legend = c("susie", "survival.svb", "bvsnlp"), col = c(1,2,3), lty = 1)
+  legend("bottomright", legend = c("susie", "survival.svb", "bvsnlp", "r2b"), col = c(1,2,3, 4), lty = 1)
 }
 
 ```
@@ -196,7 +196,8 @@ for (i in 1:length(censor_lvl)){
   points(res.susie[t95,2], res.susie[t95, 1])
   points(res.svb[t95,2], res.svb[t95, 1])
   points(res.bvsnlp[t95,2], res.bvsnlp[t95, 1])
-  legend("bottomright", legend = c("susie", "survival.svb", "bvsnlp"), col = c(1,2,3), lty = 1)
+  legend("bottomright", legend = c("susie", "survival.svb", "bvsnlp", "r2b"), col = c(1,2,3,4), lty = 1)
+  
 }
 
 ```
