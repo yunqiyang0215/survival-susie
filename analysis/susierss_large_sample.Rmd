@@ -139,7 +139,7 @@ for (i in 1:length(censor_lvl)){
   points(res.rss[t95,2], res.rss[t95, 1])
   points(res.rss.varY[t95,2], res.rss.varY[t95, 1])
   
-  legend("topleft", legend = c("susie", "susie.rss.varY=1", "susie.rss.varY"), col = c(1,2,3), lty = 1)
+  legend("bottomright", legend = c("susie", "susie.rss.varY=1", "susie.rss.varY"), col = c(1,2,3), lty = 1)
   
 }
 
@@ -175,7 +175,7 @@ for (i in 1:length(censor_lvl)){
   points(res.rss[t95,2], res.rss[t95, 1])
   points(res.rss.varY[t95,2], res.rss.varY[t95, 1])
   
-  legend("topleft", legend = c("susie", "susie.rss.varY=1", "susie.rss.varY"), col = c(1,2,3), lty = 1)
+  legend("bottomright", legend = c("susie", "susie.rss.varY=1", "susie.rss.varY"), col = c(1,2,3), lty = 1)
 }
 
 ```
