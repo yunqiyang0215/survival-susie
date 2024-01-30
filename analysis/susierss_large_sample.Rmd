@@ -66,8 +66,8 @@ get_cs_effect = function(res.cs, dat_indx, p){
 
 ```{r}
 susie = readRDS("/project2/mstephens/yunqiyang/surv-susie/dsc202401/susie.rds")
-rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/dsc202401/susie_rss.rds")
-rss.varY = readRDS("/project2/mstephens/yunqiyang/surv-susie/dsc202401/susie_rss_varY.rds")
+rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/dsc202401/susie.rss.rds")
+rss.varY = readRDS("/project2/mstephens/yunqiyang/surv-susie/dsc202401/susie.rss.varY.rds")
 ```
 
 ### 1. Results using real correlation structure from data
