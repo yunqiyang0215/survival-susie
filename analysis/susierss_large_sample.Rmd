@@ -131,7 +131,7 @@ for (i in 1:length(censor_lvl)){
   res.rss.varY = calculate_tpr_vs_fdr(pip.rss.varY, is_effect, ts)
 
   plot(res.susie[,2], res.susie[,1], type = "l", xlim = c(0,1), ylim = c(0, 1), xlab = "FDR", ylab = "Power",
-       main = paste0("Independent X, effect 0-3", ",censor=", censor_lvl[i]))
+       main = paste0("Independent X, effect 1-3", ",censor=", censor_lvl[i]))
   lines(res.rss[,2], res.rss[,1], type = "l", col = 2)
   lines(res.rss.varY[,2], res.rss.varY[,1], type = "l", col = 3)
   
