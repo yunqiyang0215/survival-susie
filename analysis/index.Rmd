@@ -27,7 +27,7 @@ Check Bayes factor
 + [Saddle point approximation using SPAcox](SPAcox.html)
 
 
-Simulation for survival data and run IBSS
+Simulating survival data
 
 + [Simulate survival data using exponential distribution](sim_survival.html)
 
@@ -68,7 +68,7 @@ Try variational approximation:
 
 + [Poisson SER](poisson_ser.html)
 
-Real data simulation:
+Real data simulation: GTEx genotype
 
 + [Plot PIPs](compare_pip.html)
 
@@ -82,7 +82,7 @@ Real data simulation:
 
 + [Version 4 simulation: power vs. FDR](dsc_sim4.html)
 
-Susie results:
+Susie(-rss) results:
 
 + [Susie rss diagnosis](susierss_failure.html)
 
@@ -90,7 +90,15 @@ Susie results:
 
 + [Susie convergence criteria](susie.convergence.html)
 
-Data application:
+Real data simulation: UKBiobank genotype
+
++ [Method comparison](compare_method_large_sample.html)
+
++ [SuSIE vs. SuSIE-RSS](susierss_large_sample.html)
+
+
+
+Data application result:
 
 + [Cancer subtype](cancer_subtype.html)
 
@@ -99,5 +107,5 @@ Time benchmark:
 
 + [coxph_vs_lm](coxph_vs_lm.html)
 
-+ [survival susie (R version) per iteration time](coxph_vs_lm.html)
++ [survival susie (R version) per iteration time](time_susie.html)
 
