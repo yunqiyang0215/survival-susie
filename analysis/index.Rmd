@@ -102,6 +102,7 @@ Data application result:
 
 + [Cancer subtype](cancer_subtype.html)
 
++ [Pdac gene expression](pdac_gene_expr.html)
 
 Time benchmark:
 
