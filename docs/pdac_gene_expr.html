@@ -523,15 +523,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreebdc42707f9370c9a35427223d9dbf60c72a83951targetblankbdc4270a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree1532236efd88c26a7159aea8a1ef94531078a37dtargetblank1532236a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/bdc42707f9370c9a35427223d9dbf60c72a83951" target="_blank">bdc4270</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/1532236efd88c26a7159aea8a1ef94531078a37d" target="_blank">1532236</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreebdc42707f9370c9a35427223d9dbf60c72a83951targetblankbdc4270a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree1532236efd88c26a7159aea8a1ef94531078a37dtargetblank1532236a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -541,7 +541,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/bdc42707f9370c9a35427223d9dbf60c72a83951" target="_blank">bdc4270</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/1532236efd88c26a7159aea8a1ef94531078a37d" target="_blank">1532236</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -610,6 +610,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/1532236efd88c26a7159aea8a1ef94531078a37d/analysis/pdac_gene_expr.Rmd" target="_blank">1532236</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-01-30
+</td>
+<td>
+wflow_publish("analysis/pdac_gene_expr.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/54c34dfa1d41687d9e035653ef9b4fe6e7208f23/docs/pdac_gene_expr.html" target="_blank">54c34df</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-01-30
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/bdc42707f9370c9a35427223d9dbf60c72a83951/analysis/pdac_gene_expr.Rmd" target="_blank">bdc4270</a>
 </td>
 <td>
@@ -629,8 +663,12 @@ wflow_publish("analysis/pdac_gene_expr.Rmd")
 </div>
 </div>
 </div>
-<p>The script for fitting coxph-susie and bvsnlp is available at:
-/project2/mstephens/yunqiyang/surv-susie/realdata/pdac_dat/fit_pdac.R</p>
+<ol style="list-style-type: decimal">
+<li><p>Model fitting script:
+/project2/mstephens/yunqiyang/surv-susie/realdata/pdac_dat/fit_pdac.R</p></li>
+<li><p>Result: coxph-SuSIE doesn’t find out any signal, while bvsnlp
+finds 2 genes.</p></li>
+</ol>
 <pre class="r"><code>library(survival)
 library(susieR)
 devtools::load_all(&quot;/project2/mstephens/yunqiyang/surv-susie/logisticsusie&quot;)</code></pre>
@@ -644,24 +682,24 @@ fit.bvsnlp = res[[2]]
 
 # Susie results
 pip &lt;- logisticsusie:::get_pip(fit.susie$alpha)
-
-null_index = which(fit.susie$prior_vars == 0)
-pip &lt;- logisticsusie:::get_pip(fit.susie$alpha[-null_index, ])
-range(pip)</code></pre>
-<pre><code>[1] 0 0</code></pre>
+pip.sorted = sort(pip, decreasing = TRUE)
+pip.sorted[1:5]</code></pre>
+<pre><code>[1] 0.03787553 0.03478948 0.02876501 0.02105820 0.01948770</code></pre>
 <pre class="r"><code>class(fit.susie) = &quot;susie&quot;
 cs &lt;- susie_get_cs(fit.susie, as.matrix(expression))
-iter = fit.susie$iter</code></pre>
+iter = fit.susie$iter
+print(iter)</code></pre>
+<pre><code>[1] 8</code></pre>
 <pre class="r"><code># bvsnlp result
 p = ncol(expression)
 effect_estimate = rep(0, p)
 effect_estimate[fit.bvsnlp$HPM] = fit.bvsnlp$beta_hat
 pip = fit.bvsnlp$inc_probs
-range(pip)</code></pre>
-<pre><code>[1] 0 1</code></pre>
-<pre class="r"><code>#pip.sorted = sort(pip, decreasing = TRUE)
-
-colnames(expression)[effect_estimate != 0]</code></pre>
+pip.sorted = sort(pip, decreasing = TRUE)
+pip.sorted[1:10]</code></pre>
+<pre><code> [1] 1.00000000 0.77348866 0.09537879 0.04545409 0.03460363 0.03123643
+ [7] 0.02280525 0.01757192 0.01507224 0.01337715</code></pre>
+<pre class="r"><code>colnames(expression)[effect_estimate != 0]</code></pre>
 <pre><code>[1] &quot;GTPBP6&quot; &quot;ACSF3&quot; </code></pre>
 <br>
 <p>
