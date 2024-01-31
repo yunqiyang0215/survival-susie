@@ -4,7 +4,11 @@ output: html_document
 date: '2024-01-31'
 ---
 
-The script for fitting coxph-susie and bvsnlp is available at: /project2/mstephens/yunqiyang/surv-susie/realdata/pdac_dat/fit_pdac.R
+1. Model fitting script: /project2/mstephens/yunqiyang/surv-susie/realdata/pdac_dat/fit_pdac.R
+
+2. Result: coxph-SuSIE doesn't find out any signal, while bvsnlp finds 2 genes. 
+
+
 
 ```{r}
 library(survival)
@@ -22,14 +26,12 @@ fit.bvsnlp = res[[2]]
 
 # Susie results
 pip <- logisticsusie:::get_pip(fit.susie$alpha)
-
-null_index = which(fit.susie$prior_vars == 0)
-pip <- logisticsusie:::get_pip(fit.susie$alpha[-null_index, ])
-range(pip)
+pip.sorted = sort(pip, decreasing = TRUE)
+pip.sorted[1:5]
 class(fit.susie) = "susie"
 cs <- susie_get_cs(fit.susie, as.matrix(expression))
 iter = fit.susie$iter
-
+print(iter)
 ```
 
 ```{r}
@@ -38,9 +40,8 @@ p = ncol(expression)
 effect_estimate = rep(0, p)
 effect_estimate[fit.bvsnlp$HPM] = fit.bvsnlp$beta_hat
 pip = fit.bvsnlp$inc_probs
-range(pip)
-#pip.sorted = sort(pip, decreasing = TRUE)
-
+pip.sorted = sort(pip, decreasing = TRUE)
+pip.sorted[1:10]
 colnames(expression)[effect_estimate != 0]
 ```
 
