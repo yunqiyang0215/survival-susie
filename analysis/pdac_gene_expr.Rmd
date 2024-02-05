@@ -6,36 +6,26 @@ date: '2024-01-31'
 
 1. Model fitting script: /project2/mstephens/yunqiyang/surv-susie/realdata/pdac_dat/fit_pdac.R
 
-2. Result: coxph-SuSIE doesn't find out any signal, while bvsnlp finds 2 genes. 
-
-
+2. Result: coxph-SuSIE doesn't find out any signal, while bvsnlp finds 2 genes. However, the 2 genes BVSNLP finds doesn't have significant p-value or large Bayes factor after controlling for stage variable. 
 
 ```{r}
 library(survival)
 library(susieR)
 devtools::load_all("/project2/mstephens/yunqiyang/surv-susie/logisticsusie")
-res = readRDS("/project2/mstephens/yunqiyang/surv-susie/realdata/pdac_dat/fit_pdac.rds")
+source("/project2/mstephens/yunqiyang/surv-susie/survival-susie/code/surv_susie_helper.R")
+```
 
+```{r}
+res = readRDS("/project2/mstephens/yunqiyang/surv-susie/realdata/pdac_dat/fit_pdac.rds")
 dat = readRDS("/project2/mstephens/yunqiyang/surv-susie/realdata/pdac_dat/dat_pdac.rds")
 expression = dat[[2]]
-```
-
-```{r}
 fit.susie = res[[1]]
 fit.bvsnlp = res[[2]]
-
-# Susie results
-pip <- logisticsusie:::get_pip(fit.susie$alpha)
-pip.sorted = sort(pip, decreasing = TRUE)
-pip.sorted[1:5]
-class(fit.susie) = "susie"
-cs <- susie_get_cs(fit.susie, as.matrix(expression))
-iter = fit.susie$iter
-print(iter)
 ```
 
+### 1. BVSNLP result:
+
 ```{r}
-# bvsnlp result
 p = ncol(expression)
 effect_estimate = rep(0, p)
 effect_estimate[fit.bvsnlp$HPM] = fit.bvsnlp$beta_hat
@@ -44,4 +34,45 @@ pip.sorted = sort(pip, decreasing = TRUE)
 pip.sorted[1:10]
 colnames(expression)[effect_estimate != 0]
 ```
+
+
+### 2. Susie result:
+
+Susie finds no credible sets even change min_abs_corr = 0.1. 
+
+```{r}
+
+pip <- logisticsusie:::get_pip(fit.susie$alpha)
+pip.sorted = sort(pip, decreasing = TRUE)
+pip.sorted[1:5]
+class(fit.susie) = "susie"
+cs <- susie_get_cs(fit.susie, as.matrix(expression), min_abs_corr = 0.1)
+print(cs)
+iter = fit.susie$iter
+print(iter)
+```
+
+### 3. Fit coxph and compute BF on the two genes BVSNLP found:
+
+```{r}
+y = Surv(dat[[1]]$futime, dat[[1]]$event)
+fit1 = coxph(y ~ dat[[1]]$stage + dat[[2]][, "GTPBP6"])
+fit2 = coxph(y ~ dat[[1]]$stage + dat[[2]][, "ACSF3"])
+summary(fit1)
+summary(fit2)
+```
+
+```{r}
+# adjust for stage variable
+cov_fit <- coxph(y ~ dat[[1]]$stage)
+fixed <- predict(cov_fit)
+      
+lbf1 = surv_uni_fun(x = dat[[2]][, "GTPBP6"], y = y, o = fixed, prior_variance = 0.1, estimate_intercept = 0)$lbf
+lbf2 = surv_uni_fun(x = dat[[2]][, "ACSF3"], y = y, o = fixed, prior_variance = 0.1, estimate_intercept = 0)$lbf
+print(lbf1)
+print(lbf2)
+```
+
+
+
 
