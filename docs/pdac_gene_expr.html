@@ -371,7 +371,7 @@ expression</h1>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
 <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-workflowr <span class="glyphicon glyphicon-ok text-success"
+workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
 aria-hidden="true"></span>
 </button>
 </p>
@@ -382,8 +382,8 @@ aria-hidden="true"></span>
 </li>
 <li>
 <a data-toggle="tab" href="#checks"> Checks <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
-</a>
+class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -392,13 +392,13 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2024-01-30
+<strong>Last updated:</strong> 2024-02-05
 </p>
 <p>
 <strong>Checks:</strong> <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6
 <span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> 0
+aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>survival-susie/</code> <span
@@ -508,30 +508,56 @@ run.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
-<span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongabsolute">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>File paths:</strong> absolute </a>
 </p>
 </div>
-<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div id="strongFilepathsstrongabsolute" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great job! Using relative paths to the files within your workflowr
-project makes it easier to run your code on other machines.</p>
+<p>
+Using absolute paths to the files within your workflowr project makes it
+difficult for you and others to run your code on a different machine.
+Change the absolute path(s) below to the suggested relative path(s) to
+make your code more reproducible.
+</p>
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th style="text-align:left;">
+absolute
+</th>
+<th style="text-align:left;">
+relative
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+/project2/mstephens/yunqiyang/surv-susie/survival-susie/code/surv_susie_helper.R
+</td>
+<td style="text-align:left;">
+code/surv_susie_helper.R
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree1532236efd88c26a7159aea8a1ef94531078a37dtargetblank1532236a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree2cb03e1501beaba192e5ee094af6466d3a7bec0ctargetblank2cb03e1a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/1532236efd88c26a7159aea8a1ef94531078a37d" target="_blank">1532236</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/2cb03e1501beaba192e5ee094af6466d3a7bec0c" target="_blank">2cb03e1</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree1532236efd88c26a7159aea8a1ef94531078a37dtargetblank1532236a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree2cb03e1501beaba192e5ee094af6466d3a7bec0ctargetblank2cb03e1a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -541,7 +567,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/1532236efd88c26a7159aea8a1ef94531078a37d" target="_blank">1532236</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/2cb03e1501beaba192e5ee094af6466d3a7bec0c" target="_blank">2cb03e1</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -556,9 +582,11 @@ were generated:
 </p>
 <pre><code>
 Ignored files:
+    Ignored:    .Rhistory
     Ignored:    .Rproj.user/
 
 Untracked files:
+    Untracked:  analysis/compare_bf.Rmd
     Untracked:  analysis/dat_analysis_cancer_subtype.Rmd
 
 </code></pre>
@@ -605,6 +633,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/2cb03e1501beaba192e5ee094af6466d3a7bec0c/analysis/pdac_gene_expr.Rmd" target="_blank">2cb03e1</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-02-05
+</td>
+<td>
+wflow_publish("analysis/pdac_gene_expr.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/6afab450576f74736b3ee47ad41b264775cbaa5d/docs/pdac_gene_expr.html" target="_blank">6afab45</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-01-30
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -667,31 +729,23 @@ wflow_publish("analysis/pdac_gene_expr.Rmd")
 <li><p>Model fitting script:
 /project2/mstephens/yunqiyang/surv-susie/realdata/pdac_dat/fit_pdac.R</p></li>
 <li><p>Result: coxph-SuSIE doesn’t find out any signal, while bvsnlp
-finds 2 genes.</p></li>
+finds 2 genes. However, the 2 genes BVSNLP finds doesn’t have
+significant p-value or large Bayes factor after controlling for stage
+variable.</p></li>
 </ol>
 <pre class="r"><code>library(survival)
 library(susieR)
 devtools::load_all(&quot;/project2/mstephens/yunqiyang/surv-susie/logisticsusie&quot;)</code></pre>
 <pre><code>ℹ Loading logisticsusie</code></pre>
+<pre class="r"><code>source(&quot;/project2/mstephens/yunqiyang/surv-susie/survival-susie/code/surv_susie_helper.R&quot;)</code></pre>
 <pre class="r"><code>res = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/realdata/pdac_dat/fit_pdac.rds&quot;)
-
 dat = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/realdata/pdac_dat/dat_pdac.rds&quot;)
-expression = dat[[2]]</code></pre>
-<pre class="r"><code>fit.susie = res[[1]]
-fit.bvsnlp = res[[2]]
-
-# Susie results
-pip &lt;- logisticsusie:::get_pip(fit.susie$alpha)
-pip.sorted = sort(pip, decreasing = TRUE)
-pip.sorted[1:5]</code></pre>
-<pre><code>[1] 0.03787553 0.03478948 0.02876501 0.02105820 0.01948770</code></pre>
-<pre class="r"><code>class(fit.susie) = &quot;susie&quot;
-cs &lt;- susie_get_cs(fit.susie, as.matrix(expression))
-iter = fit.susie$iter
-print(iter)</code></pre>
-<pre><code>[1] 8</code></pre>
-<pre class="r"><code># bvsnlp result
-p = ncol(expression)
+expression = dat[[2]]
+fit.susie = res[[1]]
+fit.bvsnlp = res[[2]]</code></pre>
+<div id="bvsnlp-result" class="section level3">
+<h3>1. BVSNLP result:</h3>
+<pre class="r"><code>p = ncol(expression)
 effect_estimate = rep(0, p)
 effect_estimate[fit.bvsnlp$HPM] = fit.bvsnlp$beta_hat
 pip = fit.bvsnlp$inc_probs
@@ -701,6 +755,89 @@ pip.sorted[1:10]</code></pre>
  [7] 0.02280525 0.01757192 0.01507224 0.01337715</code></pre>
 <pre class="r"><code>colnames(expression)[effect_estimate != 0]</code></pre>
 <pre><code>[1] &quot;GTPBP6&quot; &quot;ACSF3&quot; </code></pre>
+</div>
+<div id="susie-result" class="section level3">
+<h3>2. Susie result:</h3>
+<p>Susie finds no credible sets even change min_abs_corr = 0.1.</p>
+<pre class="r"><code>pip &lt;- logisticsusie:::get_pip(fit.susie$alpha)
+pip.sorted = sort(pip, decreasing = TRUE)
+pip.sorted[1:5]</code></pre>
+<pre><code>[1] 0.03787553 0.03478948 0.02876501 0.02105820 0.01948770</code></pre>
+<pre class="r"><code>class(fit.susie) = &quot;susie&quot;
+cs &lt;- susie_get_cs(fit.susie, as.matrix(expression), min_abs_corr = 0.1)
+print(cs)</code></pre>
+<pre><code>$cs
+NULL
+
+$coverage
+NULL
+
+$requested_coverage
+[1] 0.95</code></pre>
+<pre class="r"><code>iter = fit.susie$iter
+print(iter)</code></pre>
+<pre><code>[1] 8</code></pre>
+</div>
+<div id="fit-coxph-and-compute-bf-on-the-two-genes-bvsnlp-found"
+class="section level3">
+<h3>3. Fit coxph and compute BF on the two genes BVSNLP found:</h3>
+<pre class="r"><code>y = Surv(dat[[1]]$futime, dat[[1]]$event)
+fit1 = coxph(y ~ dat[[1]]$stage + dat[[2]][, &quot;GTPBP6&quot;])
+fit2 = coxph(y ~ dat[[1]]$stage + dat[[2]][, &quot;ACSF3&quot;])
+summary(fit1)</code></pre>
+<pre><code>Call:
+coxph(formula = y ~ dat[[1]]$stage + dat[[2]][, &quot;GTPBP6&quot;])
+
+  n= 391, number of events= 260 
+
+                             coef exp(coef) se(coef)      z Pr(&gt;|z|)    
+dat[[1]]$stageIIb         0.69938   2.01250  0.16495  4.240 2.23e-05 ***
+dat[[1]]$stageIII-higher  0.67425   1.96256  0.27067  2.491   0.0127 *  
+dat[[2]][, &quot;GTPBP6&quot;]     -0.03292   0.96761  0.06625 -0.497   0.6192    
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+                         exp(coef) exp(-coef) lower .95 upper .95
+dat[[1]]$stageIIb           2.0125     0.4969    1.4566     2.781
+dat[[1]]$stageIII-higher    1.9626     0.5095    1.1546     3.336
+dat[[2]][, &quot;GTPBP6&quot;]        0.9676     1.0335    0.8498     1.102
+
+Concordance= 0.559  (se = 0.021 )
+Likelihood ratio test= 21.19  on 3 df,   p=1e-04
+Wald test            = 18.49  on 3 df,   p=3e-04
+Score (logrank) test = 19.21  on 3 df,   p=2e-04</code></pre>
+<pre class="r"><code>summary(fit2)</code></pre>
+<pre><code>Call:
+coxph(formula = y ~ dat[[1]]$stage + dat[[2]][, &quot;ACSF3&quot;])
+
+  n= 391, number of events= 260 
+
+                             coef exp(coef) se(coef)      z Pr(&gt;|z|)    
+dat[[1]]$stageIIb         0.70775   2.02942  0.16520  4.284 1.83e-05 ***
+dat[[1]]$stageIII-higher  0.67232   1.95878  0.27072  2.483    0.013 *  
+dat[[2]][, &quot;ACSF3&quot;]      -0.05877   0.94292  0.06228 -0.944    0.345    
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+                         exp(coef) exp(-coef) lower .95 upper .95
+dat[[1]]$stageIIb           2.0294     0.4928    1.4681     2.805
+dat[[1]]$stageIII-higher    1.9588     0.5105    1.1523     3.330
+dat[[2]][, &quot;ACSF3&quot;]         0.9429     1.0605    0.8346     1.065
+
+Concordance= 0.575  (se = 0.021 )
+Likelihood ratio test= 21.83  on 3 df,   p=7e-05
+Wald test            = 19.06  on 3 df,   p=3e-04
+Score (logrank) test = 19.78  on 3 df,   p=2e-04</code></pre>
+<pre class="r"><code># adjust for stage variable
+cov_fit &lt;- coxph(y ~ dat[[1]]$stage)
+fixed &lt;- predict(cov_fit)
+      
+lbf1 = surv_uni_fun(x = dat[[2]][, &quot;GTPBP6&quot;], y = y, o = fixed, prior_variance = 0.1, estimate_intercept = 0)$lbf
+lbf2 = surv_uni_fun(x = dat[[2]][, &quot;ACSF3&quot;], y = y, o = fixed, prior_variance = 0.1, estimate_intercept = 0)$lbf
+print(lbf1)</code></pre>
+<pre><code>[1] -1.46604</code></pre>
+<pre class="r"><code>print(lbf2)</code></pre>
+<pre><code>[1] -1.220382</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -734,22 +871,24 @@ loaded via a namespace (and not attached):
  [1] Rcpp_1.0.8.3       lattice_0.20-45    prettyunits_1.1.1  getPass_0.2-2     
  [5] ps_1.7.0           assertthat_0.2.1   rprojroot_2.0.3    digest_0.6.29     
  [9] utf8_1.2.2         R6_2.5.1           plyr_1.8.7         evaluate_0.15     
-[13] httr_1.4.3         ggplot2_3.3.6      pillar_1.7.0       rlang_1.0.2       
-[17] rstudioapi_0.13    irlba_2.3.5        whisker_0.4        callr_3.7.3       
-[21] jquerylib_0.1.4    Matrix_1.5-3       rmarkdown_2.14     desc_1.4.1        
-[25] devtools_2.4.3     splines_4.2.0      stringr_1.4.0      munsell_0.5.0     
-[29] mixsqp_0.3-48      compiler_4.2.0     httpuv_1.6.5       xfun_0.30         
-[33] pkgconfig_2.0.3    pkgbuild_1.3.1     htmltools_0.5.2    tidyselect_1.1.2  
-[37] tibble_3.1.7       matrixStats_0.62.0 reshape_0.8.9      fansi_1.0.3       
-[41] crayon_1.5.1       dplyr_1.0.9        withr_2.5.0        later_1.3.0       
-[45] brio_1.1.3         grid_4.2.0         jsonlite_1.8.0     gtable_0.3.0      
-[49] lifecycle_1.0.1    DBI_1.1.2          git2r_0.30.1       magrittr_2.0.3    
-[53] scales_1.2.0       cli_3.3.0          stringi_1.7.6      cachem_1.0.6      
-[57] remotes_2.4.2.1    fs_1.5.2           promises_1.2.0.1   bslib_0.3.1       
-[61] ellipsis_0.3.2     generics_0.1.2     vctrs_0.4.1        tools_4.2.0       
-[65] glue_1.6.2         purrr_0.3.4        processx_3.8.0     pkgload_1.2.4     
-[69] fastmap_1.1.0      yaml_2.3.5         colorspace_2.0-3   sessioninfo_1.2.2 
-[73] memoise_2.0.1      knitr_1.39         usethis_2.1.5      sass_0.4.1        </code></pre>
+[13] httr_1.4.3         ggplot2_3.3.6      highr_0.9          pillar_1.7.0      
+[17] rlang_1.0.2        rstudioapi_0.13    irlba_2.3.5        whisker_0.4       
+[21] callr_3.7.3        jquerylib_0.1.4    Matrix_1.5-3       rmarkdown_2.14    
+[25] desc_1.4.1         devtools_2.4.3     splines_4.2.0      stringr_1.4.0     
+[29] munsell_0.5.0      mixsqp_0.3-48      compiler_4.2.0     httpuv_1.6.5      
+[33] xfun_0.30          pkgconfig_2.0.3    pkgbuild_1.3.1     htmltools_0.5.2   
+[37] tidyselect_1.1.2   tibble_3.1.7       matrixStats_0.62.0 reshape_0.8.9     
+[41] fansi_1.0.3        withr_2.5.0        crayon_1.5.1       dplyr_1.0.9       
+[45] later_1.3.0        brio_1.1.3         grid_4.2.0         jsonlite_1.8.0    
+[49] gtable_0.3.0       lifecycle_1.0.1    DBI_1.1.2          git2r_0.30.1      
+[53] magrittr_2.0.3     scales_1.2.0       cli_3.3.0          stringi_1.7.6     
+[57] cachem_1.0.6       remotes_2.4.2.1    fs_1.5.2           promises_1.2.0.1  
+[61] bslib_0.3.1        ellipsis_0.3.2     generics_0.1.2     vctrs_0.4.1       
+[65] tools_4.2.0        glue_1.6.2         purrr_0.3.4        processx_3.8.0    
+[69] pkgload_1.2.4      fastmap_1.1.0      yaml_2.3.5         colorspace_2.0-3  
+[73] sessioninfo_1.2.2  memoise_2.0.1      knitr_1.39         usethis_2.1.5     
+[77] sass_0.4.1        </code></pre>
+</div>
 </div>
 
 
