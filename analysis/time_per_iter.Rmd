@@ -6,7 +6,7 @@ date: '2024-02-08'
 
 ### Description:
 
-Documenting per iteration time across different methods. 
+Documenting per iteration time across different methods. $n=50000$ and $p=1000$.
 
 ```{r}
 res = readRDS("/project2/mstephens/yunqiyang/surv-susie/time_comparison202402/time_comparison.rds")
