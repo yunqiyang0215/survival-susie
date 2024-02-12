@@ -92,6 +92,8 @@ Susie(-rss) results:
 
 Real data simulation: UKBiobank genotype
 
++ [PIP Comparison](pip_comparison_large_sample.html)
+
 + [Method comparison](compare_method_large_sample.html)
 
 + [SuSIE vs. SuSIE-RSS](susierss_large_sample.html)
