@@ -393,7 +393,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2024-01-30
+<strong>Last updated:</strong> 2024-02-11
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -524,15 +524,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree579e29b4c0251c8f33101f48bf0a390d16035b9etargetblank579e29ba">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree9359caddd1aa4a746a9644797a7963f27808d544targetblank9359cada">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/579e29b4c0251c8f33101f48bf0a390d16035b9e" target="_blank">579e29b</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/9359caddd1aa4a746a9644797a7963f27808d544" target="_blank">9359cad</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree579e29b4c0251c8f33101f48bf0a390d16035b9etargetblank579e29ba"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree9359caddd1aa4a746a9644797a7963f27808d544targetblank9359cada"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -542,7 +542,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/579e29b4c0251c8f33101f48bf0a390d16035b9e" target="_blank">579e29b</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/9359caddd1aa4a746a9644797a7963f27808d544" target="_blank">9359cad</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -557,13 +557,16 @@ were generated:
 </p>
 <pre><code>
 Ignored files:
+    Ignored:    .Rhistory
     Ignored:    .Rproj.user/
 
 Untracked files:
+    Untracked:  analysis/compare_bf.Rmd
     Untracked:  analysis/dat_analysis_cancer_subtype.Rmd
 
 Unstaged changes:
-    Modified:   analysis/index.Rmd
+    Deleted:    analysis/time_comparison.Rmd
+    Deleted:    analysis/time_susie.Rmd
 
 </code></pre>
 <p>
@@ -609,6 +612,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/9359caddd1aa4a746a9644797a7963f27808d544/analysis/susierss_large_sample.Rmd" target="_blank">9359cad</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-02-11
+</td>
+<td>
+wflow_publish("analysis/susierss_large_sample.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/736da099e249b630a8033f3dc0142ec740898fdc/docs/susierss_large_sample.html" target="_blank">736da09</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-01-30
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -841,10 +878,8 @@ wflow_publish("analysis/susierss_large_sample.Rmd")
 <h3>Description:</h3>
 <p>Compare results for susie and susierss on real genotype data from
 UKBiobank with <span class="math inline">\(n=50000\)</span> and <span
-class="math inline">\(p=1000\)</span>. SuSIE and SuSIE-RSS run for 10
-iterations.</p>
-<p>Would be interesting to compare with SuSiE(10 iterations) and
-SUSIE-RSS (100 or 500 iterations).</p>
+class="math inline">\(p=1000\)</span>. Run SuSIE for 10 iterations, and
+SuSIE-RSS for similar amount of time (100 iterations).</p>
 <pre class="r"><code>
 calculate_tpr_vs_fdr &lt;- function(pip, is_effect, ts){
   res &lt;- matrix(NA, nrow = length(ts), ncol = 2)
@@ -893,8 +928,7 @@ get_cs_effect = function(res.cs, dat_indx, p){
   return(cs_effect)
 }</code></pre>
 <pre class="r"><code>susie = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/dsc202401/susie.rds&quot;)
-rss = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/dsc202401/susie.rss.rds&quot;)
-rss.varY = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/dsc202401/susie.rss.varY.rds&quot;)</code></pre>
+rss = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/dsc202401/susie_rss.rds&quot;)</code></pre>
 </div>
 <div id="results-using-real-correlation-structure-from-data"
 class="section level3">
@@ -906,24 +940,20 @@ for (i in 1:length(censor_lvl)){
   indx = which(susie$simulate.cor_type == &quot;real&quot; &amp; susie$simulate.censor_lvl == censor_lvl[i])
   pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
   pip.rss = unlist(lapply(indx, function(x) rss$susie_rss.pip[[x]]))
-  pip.rss.varY = unlist(lapply(indx, function(x) rss.varY$susie_rss_varY.pip[[x]]))
   is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
   
   ts = seq(from = 0, to = 0.99, by = 0.001)
   res.susie = calculate_tpr_vs_fdr(pip.susie, is_effect, ts)
   res.rss = calculate_tpr_vs_fdr(pip.rss, is_effect, ts)
-  res.rss.varY = calculate_tpr_vs_fdr(pip.rss.varY, is_effect, ts)
+
   
   plot(res.susie[,2], res.susie[,1], type = &quot;l&quot;, xlim = c(0,1), ylim = c(0, 1), xlab = &quot;FDR&quot;, ylab = &quot;Power&quot;,
        main = paste0(&quot;Real correlation, effect 0-3&quot;, &quot;,censor=&quot;, censor_lvl[i]))
   lines(res.rss[,2], res.rss[,1], type = &quot;l&quot;, col = 2)
-  lines(res.rss.varY[,2], res.rss.varY[,1], type = &quot;l&quot;, col = 3)
-  
   points(res.susie[t95,2], res.susie[t95, 1])
   points(res.rss[t95,2], res.rss[t95, 1])
-  points(res.rss.varY[t95,2], res.rss.varY[t95, 1])
   
-  legend(&quot;topleft&quot;, legend = c(&quot;susie&quot;, &quot;susie.rss.varY=1&quot;, &quot;susie.rss.varY&quot;), col = c(1,2,3), lty = 1)
+  legend(&quot;topleft&quot;, legend = c(&quot;susie&quot;, &quot;susie.rss.varY=1&quot;), col = c(1,2), lty = 1)
 }</code></pre>
 <p><img src="figure/susierss_large_sample.Rmd/unnamed-chunk-4-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>
@@ -986,25 +1016,19 @@ for (i in 1:length(censor_lvl)){
   indx = which(susie$simulate.cor_type == &quot;independent&quot; &amp; susie$simulate.censor_lvl == censor_lvl[i] &amp; susie$simulate.num_effect != 0)
   pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
   pip.rss = unlist(lapply(indx, function(x) rss$susie_rss.pip[[x]]))
-  pip.rss.varY = unlist(lapply(indx, function(x) rss.varY$susie_rss_varY.pip[[x]]))
   is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
   
   ts = seq(from = 0, to = 0.99, by = 0.001)
   res.susie = calculate_tpr_vs_fdr(pip.susie, is_effect, ts)
   res.rss = calculate_tpr_vs_fdr(pip.rss, is_effect, ts)
-  res.rss.varY = calculate_tpr_vs_fdr(pip.rss.varY, is_effect, ts)
 
   plot(res.susie[,2], res.susie[,1], type = &quot;l&quot;, xlim = c(0,1), ylim = c(0, 1), xlab = &quot;FDR&quot;, ylab = &quot;Power&quot;,
        main = paste0(&quot;Independent X, effect 1-3&quot;, &quot;,censor=&quot;, censor_lvl[i]))
   lines(res.rss[,2], res.rss[,1], type = &quot;l&quot;, col = 2)
-  lines(res.rss.varY[,2], res.rss.varY[,1], type = &quot;l&quot;, col = 3)
   
   points(res.susie[t95,2], res.susie[t95, 1])
   points(res.rss[t95,2], res.rss[t95, 1])
-  points(res.rss.varY[t95,2], res.rss.varY[t95, 1])
-  
   legend(&quot;bottomright&quot;, legend = c(&quot;susie&quot;, &quot;susie.rss.varY=1&quot;, &quot;susie.rss.varY&quot;), col = c(1,2,3), lty = 1)
-  
 }</code></pre>
 <p><img src="figure/susierss_large_sample.Rmd/unnamed-chunk-5-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>
@@ -1029,6 +1053,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/736da099e249b630a8033f3dc0142ec740898fdc/docs/figure/susierss_large_sample.Rmd/unnamed-chunk-5-1.png" target="_blank">736da09</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-01-30
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/25abdc36215ecc7097ac0afe0647596d94bdaa06/docs/figure/susierss_large_sample.Rmd/unnamed-chunk-5-1.png" target="_blank">25abdc3</a>
@@ -1078,22 +1113,18 @@ for (i in 1:length(censor_lvl)){
   indx = which(susie$simulate.cor_type == &quot;independent&quot; &amp; susie$simulate.censor_lvl == censor_lvl[i])
   pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
   pip.rss = unlist(lapply(indx, function(x) rss$susie_rss.pip[[x]]))
-  pip.rss.varY = unlist(lapply(indx, function(x) rss.varY$susie_rss_varY.pip[[x]]))
   is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
   
   ts = seq(from = 0, to = 0.99, by = 0.001)
   res.susie = calculate_tpr_vs_fdr(pip.susie, is_effect, ts)
   res.rss = calculate_tpr_vs_fdr(pip.rss, is_effect, ts)
-  res.rss.varY = calculate_tpr_vs_fdr(pip.rss.varY, is_effect, ts)
 
   plot(res.susie[,2], res.susie[,1], type = &quot;l&quot;, xlim = c(0,1), ylim = c(0, 1), xlab = &quot;FDR&quot;, ylab = &quot;Power&quot;,
        main = paste0(&quot;Real correlation, effect 0-3&quot;, &quot;,censor=&quot;, censor_lvl[i]))
   lines(res.rss[,2], res.rss[,1], type = &quot;l&quot;, col = 2)
-  lines(res.rss.varY[,2], res.rss.varY[,1], type = &quot;l&quot;, col = 3)
-  
+
   points(res.susie[t95,2], res.susie[t95, 1])
   points(res.rss[t95,2], res.rss[t95, 1])
-  points(res.rss.varY[t95,2], res.rss.varY[t95, 1])
   
   legend(&quot;bottomright&quot;, legend = c(&quot;susie&quot;, &quot;susie.rss.varY=1&quot;, &quot;susie.rss.varY&quot;), col = c(1,2,3), lty = 1)
 }</code></pre>
@@ -1248,13 +1279,13 @@ for (i in 1:3){
 }
 
 coverage
-#              effect:1  effect:2  effect:3
-# censor:0    0.5000000 0.4677419 0.5675676
-# censor:0.2  0.3260870 0.3750000 0.5194805
-# censor:0.4  0.4047619 0.3636364 0.4935065
-# censor:0.6  0.2954545 0.3035714 0.5479452
-# censor:0.8  0.4210526 0.4629630 0.5194805
-# censor:0.99 0.4615385 0.7352941 0.5098039</code></pre>
+#             effect:1 effect:2 effect:3
+# censor:0         NaN      NaN      NaN
+# censor:0.2       NaN      NaN      NaN
+# censor:0.4       NaN      NaN      NaN
+# censor:0.6       NaN      NaN      NaN
+# censor:0.8       NaN      NaN      NaN
+# censor:0.99      NaN      NaN      NaN</code></pre>
 <pre class="r"><code>power_cs = matrix(NA, ncol = 3, nrow = 6)
 censoring = c(0, 0.2, 0.4, 0.6, 0.8, 0.99)
 colnames(power_cs) = c(&quot;effect:1&quot;, &quot;effect:2&quot;, &quot;effect:3&quot;)
@@ -1270,13 +1301,13 @@ for (i in 1:3){
 }
 
 power_cs
-#      effect:1 effect:2  effect:3
-# [1,]     0.80    0.725 0.7000000
-# [2,]     0.75    0.600 0.6500000
-# [3,]     0.85    0.600 0.6166667
-# [4,]     0.65    0.475 0.6666667
-# [5,]     0.80    0.625 0.6500000
-# [6,]     0.60    0.625 0.4333333</code></pre>
+#      effect:1 effect:2 effect:3
+# [1,]        0        0        0
+# [2,]        0        0        0
+# [3,]        0        0        0
+# [4,]        0        0        0
+# [5,]        0        0        0
+# [6,]        0        0        0</code></pre>
 <pre class="r"><code>coverage = matrix(NA, ncol = 2, nrow = 6)
 censoring = c(0, 0.2, 0.4, 0.6, 0.8, 0.99)
 cor_type = c(&quot;real&quot;, &quot;independent&quot;)
@@ -1288,15 +1319,14 @@ for (i in 1:2){
     coverage[j, i] = calculate_cs_coverage(rss$susie_rss.cs, rss$simulate.is_effect, dat_indx)
   }
 }
-
 coverage
 #             real correlation independent
-# censor:0           0.2568807           1
-# censor:0.2         0.1755725           1
-# censor:0.4         0.1653543           1
-# censor:0.6         0.1344538           1
-# censor:0.8         0.2413793           1
-# censor:0.99        0.3239437           1</code></pre>
+# censor:0                 NaN         NaN
+# censor:0.2               NaN         NaN
+# censor:0.4               NaN         NaN
+# censor:0.6               NaN         NaN
+# censor:0.8               NaN         NaN
+# censor:0.99              NaN         NaN</code></pre>
 <pre class="r"><code>power_cs = matrix(NA, ncol = 2, nrow = 6)
 censoring = c(0, 0.2, 0.4, 0.6, 0.8, 0.99)
 colnames(power_cs) = c(&quot;real correlation&quot;, &quot;independent&quot;)
@@ -1313,12 +1343,12 @@ for (i in 1:2){
 
 power_cs
 #      real correlation independent
-# [1,]        0.4666667   0.9833333
-# [2,]        0.3666667   0.9333333
-# [3,]        0.3333333   0.9666667
-# [4,]        0.3000000   0.9000000
-# [5,]        0.4500000   0.8833333
-# [6,]        0.3833333   0.6666667</code></pre>
+# [1,]                0           0
+# [2,]                0           0
+# [3,]                0           0
+# [4,]                0           0
+# [5,]                0           0
+# [6,]                0           0</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
