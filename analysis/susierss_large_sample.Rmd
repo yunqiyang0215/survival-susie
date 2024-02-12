@@ -7,10 +7,7 @@ output: html_document
 
 ### Description:
 
-Compare results for susie and susierss on real genotype data from UKBiobank with $n=50000$ and $p=1000$. SuSIE and SuSIE-RSS run for 10 iterations. 
-
-Would be interesting to compare with SuSiE(10 iterations) and SUSIE-RSS (100 or 500 iterations). 
-
+Compare results for susie and susierss on real genotype data from UKBiobank with $n=50000$ and $p=1000$. Run SuSIE for 10 iterations, and SuSIE-RSS for similar amount of time (100 iterations).
 
 ```{r knitr-opts, include=FALSE}
 knitr::opts_chunk$set(comment = "#",collapse = TRUE,results = "hold",
@@ -69,8 +66,7 @@ get_cs_effect = function(res.cs, dat_indx, p){
 
 ```{r}
 susie = readRDS("/project2/mstephens/yunqiyang/surv-susie/dsc202401/susie.rds")
-rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/dsc202401/susie.rss.rds")
-rss.varY = readRDS("/project2/mstephens/yunqiyang/surv-susie/dsc202401/susie.rss.varY.rds")
+rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/dsc202401/susie_rss.rds")
 ```
 
 ### 1. Results using real correlation structure from data
@@ -86,24 +82,20 @@ for (i in 1:length(censor_lvl)){
   indx = which(susie$simulate.cor_type == "real" & susie$simulate.censor_lvl == censor_lvl[i])
   pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
   pip.rss = unlist(lapply(indx, function(x) rss$susie_rss.pip[[x]]))
-  pip.rss.varY = unlist(lapply(indx, function(x) rss.varY$susie_rss_varY.pip[[x]]))
   is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
   
   ts = seq(from = 0, to = 0.99, by = 0.001)
   res.susie = calculate_tpr_vs_fdr(pip.susie, is_effect, ts)
   res.rss = calculate_tpr_vs_fdr(pip.rss, is_effect, ts)
-  res.rss.varY = calculate_tpr_vs_fdr(pip.rss.varY, is_effect, ts)
+
   
   plot(res.susie[,2], res.susie[,1], type = "l", xlim = c(0,1), ylim = c(0, 1), xlab = "FDR", ylab = "Power",
        main = paste0("Real correlation, effect 0-3", ",censor=", censor_lvl[i]))
   lines(res.rss[,2], res.rss[,1], type = "l", col = 2)
-  lines(res.rss.varY[,2], res.rss.varY[,1], type = "l", col = 3)
-  
   points(res.susie[t95,2], res.susie[t95, 1])
   points(res.rss[t95,2], res.rss[t95, 1])
-  points(res.rss.varY[t95,2], res.rss.varY[t95, 1])
   
-  legend("topleft", legend = c("susie", "susie.rss.varY=1", "susie.rss.varY"), col = c(1,2,3), lty = 1)
+  legend("topleft", legend = c("susie", "susie.rss.varY=1"), col = c(1,2), lty = 1)
 }
 
 ```
@@ -122,25 +114,19 @@ for (i in 1:length(censor_lvl)){
   indx = which(susie$simulate.cor_type == "independent" & susie$simulate.censor_lvl == censor_lvl[i] & susie$simulate.num_effect != 0)
   pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
   pip.rss = unlist(lapply(indx, function(x) rss$susie_rss.pip[[x]]))
-  pip.rss.varY = unlist(lapply(indx, function(x) rss.varY$susie_rss_varY.pip[[x]]))
   is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
   
   ts = seq(from = 0, to = 0.99, by = 0.001)
   res.susie = calculate_tpr_vs_fdr(pip.susie, is_effect, ts)
   res.rss = calculate_tpr_vs_fdr(pip.rss, is_effect, ts)
-  res.rss.varY = calculate_tpr_vs_fdr(pip.rss.varY, is_effect, ts)
 
   plot(res.susie[,2], res.susie[,1], type = "l", xlim = c(0,1), ylim = c(0, 1), xlab = "FDR", ylab = "Power",
        main = paste0("Independent X, effect 1-3", ",censor=", censor_lvl[i]))
   lines(res.rss[,2], res.rss[,1], type = "l", col = 2)
-  lines(res.rss.varY[,2], res.rss.varY[,1], type = "l", col = 3)
   
   points(res.susie[t95,2], res.susie[t95, 1])
   points(res.rss[t95,2], res.rss[t95, 1])
-  points(res.rss.varY[t95,2], res.rss.varY[t95, 1])
-  
   legend("bottomright", legend = c("susie", "susie.rss.varY=1", "susie.rss.varY"), col = c(1,2,3), lty = 1)
-  
 }
 
 ```
@@ -158,22 +144,18 @@ for (i in 1:length(censor_lvl)){
   indx = which(susie$simulate.cor_type == "independent" & susie$simulate.censor_lvl == censor_lvl[i])
   pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
   pip.rss = unlist(lapply(indx, function(x) rss$susie_rss.pip[[x]]))
-  pip.rss.varY = unlist(lapply(indx, function(x) rss.varY$susie_rss_varY.pip[[x]]))
   is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
   
   ts = seq(from = 0, to = 0.99, by = 0.001)
   res.susie = calculate_tpr_vs_fdr(pip.susie, is_effect, ts)
   res.rss = calculate_tpr_vs_fdr(pip.rss, is_effect, ts)
-  res.rss.varY = calculate_tpr_vs_fdr(pip.rss.varY, is_effect, ts)
 
   plot(res.susie[,2], res.susie[,1], type = "l", xlim = c(0,1), ylim = c(0, 1), xlab = "FDR", ylab = "Power",
        main = paste0("Real correlation, effect 0-3", ",censor=", censor_lvl[i]))
   lines(res.rss[,2], res.rss[,1], type = "l", col = 2)
-  lines(res.rss.varY[,2], res.rss.varY[,1], type = "l", col = 3)
-  
+
   points(res.susie[t95,2], res.susie[t95, 1])
   points(res.rss[t95,2], res.rss[t95, 1])
-  points(res.rss.varY[t95,2], res.rss.varY[t95, 1])
   
   legend("bottomright", legend = c("susie", "susie.rss.varY=1", "susie.rss.varY"), col = c(1,2,3), lty = 1)
 }
@@ -302,7 +284,6 @@ for (i in 1:2){
     coverage[j, i] = calculate_cs_coverage(rss$susie_rss.cs, rss$simulate.is_effect, dat_indx)
   }
 }
-
 coverage
 ```
 
