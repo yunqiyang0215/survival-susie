@@ -1,8 +1,13 @@
 ---
-title: "pip_comparison_large_sample"
+title: "PIP Comparison in large sample"
 output: html_document
 date: '2024-02-12'
 ---
+
+### Description:
+
+Compare PIPs using simulated dataset, where $n=50000$ and $p=1000$.
+
 
 ```{r}
 compare_pip <- function(pip1, pip2, is_effect){
@@ -22,8 +27,6 @@ plot_pip <- function(res.pip, labs, main){
   red_indices <- res.pip$is_effect == 1
   points(res.pip$pip1[red_indices], res.pip$pip2[red_indices], col = "red", pch = pch, cex = cex[red_indices])
 }
-
-
 ```
 
 ```{r}
@@ -38,7 +41,7 @@ rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/dsc202401/susie_rss.rds"
 
 ### 1. Use the real correlation of SNPs
 
-```{r fig.height = 3, fig.width=5}
+```{r }
 par(mfrow = c(1,3))
 for (num in 1:3){
   indx = which(susie$simulate.cor_type == "real" & susie$simulate.num_effect == num)
@@ -64,5 +67,65 @@ for (num in 1:3){
   abline(a = 0, b = 1, lty = 2, col = "blue")
 }
 ```
+
+```{r}
+par(mfrow = c(1,3))
+for (num in 1:3){
+  indx = which(susie$simulate.cor_type == "real" & susie$simulate.num_effect == num)
+  pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+  pip.rss = unlist(lapply(indx, function(x) rss$susie_rss.pip[[x]]))
+  is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
+
+  res.pip = compare_pip(pip.susie, pip.rss, is_effect)
+  plot_pip(res.pip, labs = c("susie", "susie.rss"), main = paste0(num, " effect, max corr=0.9-0.99"))
+  abline(a = 0, b = 1, lty = 2, col = "blue")
+}
+```
+
+
+### 2. Near independent SNPs
+```{r}
+par(mfrow = c(1,3))
+for (num in 1:3){
+  indx = which(susie$simulate.cor_type == "independent" & susie$simulate.num_effect == num)
+  pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+  pip.survsvb = unlist(lapply(indx, function(x) survsvb$svb.pip[[x]]))
+  is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
+
+  res.pip = compare_pip(pip.susie, pip.survsvb, is_effect)
+  plot_pip(res.pip, labs = c("susie", "survival.svb"), main = paste0(num, " effect, X close to independent"))
+  abline(a = 0, b = 1, lty = 2, col = "blue")
+}
+```
+
+```{r}
+par(mfrow = c(1,3))
+for (num in 1:3){
+  indx = which(susie$simulate.cor_type == "independent" & susie$simulate.num_effect == num)
+  pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+  pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+  is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
+  res.pip = compare_pip(pip.susie, pip.survsvb, is_effect)
+  plot_pip(res.pip, labs = c("susie", "bvsnlp"), main = paste0(num, " effect, X close to independent"))
+  abline(a = 0, b = 1, lty = 2, col = "blue")
+}
+```
+
+
+```{r}
+par(mfrow = c(1,3))
+for (num in 1:3){
+  indx = which(susie$simulate.cor_type == "independent" & susie$simulate.num_effect == num)
+  pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+  pip.rss = unlist(lapply(indx, function(x) rss$susie_rss.pip[[x]]))
+  is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
+
+  res.pip = compare_pip(pip.susie, pip.rss, is_effect)
+  plot_pip(res.pip, labs = c("susie", "susie.rss"), main = paste0(num, " effect, max corr=0.9-0.99"))
+  abline(a = 0, b = 1, lty = 2, col = "blue")
+}
+
+```
+
 
 
