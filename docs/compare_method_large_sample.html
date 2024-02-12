@@ -393,7 +393,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2024-01-30
+<strong>Last updated:</strong> 2024-02-11
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -524,15 +524,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreec084cce51ac0ccb6f7732d614db50d1ac3ce9e98targetblankc084ccea">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree38dcd154bd9f580b53244c6c5959a9adbd1a3873targetblank38dcd15a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/c084cce51ac0ccb6f7732d614db50d1ac3ce9e98" target="_blank">c084cce</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/38dcd154bd9f580b53244c6c5959a9adbd1a3873" target="_blank">38dcd15</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreec084cce51ac0ccb6f7732d614db50d1ac3ce9e98targetblankc084ccea"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree38dcd154bd9f580b53244c6c5959a9adbd1a3873targetblank38dcd15a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -542,7 +542,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/c084cce51ac0ccb6f7732d614db50d1ac3ce9e98" target="_blank">c084cce</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/38dcd154bd9f580b53244c6c5959a9adbd1a3873" target="_blank">38dcd15</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -557,13 +557,16 @@ were generated:
 </p>
 <pre><code>
 Ignored files:
+    Ignored:    .Rhistory
     Ignored:    .Rproj.user/
 
 Untracked files:
+    Untracked:  analysis/compare_bf.Rmd
     Untracked:  analysis/dat_analysis_cancer_subtype.Rmd
 
 Unstaged changes:
-    Modified:   analysis/index.Rmd
+    Deleted:    analysis/time_comparison.Rmd
+    Deleted:    analysis/time_susie.Rmd
 
 </code></pre>
 <p>
@@ -610,6 +613,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/38dcd154bd9f580b53244c6c5959a9adbd1a3873/analysis/compare_method_large_sample.Rmd" target="_blank">38dcd15</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-02-11
+</td>
+<td>
+wflow_publish("analysis/compare_method_large_sample.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/ed5188d52307aadb83f73b61f51b564aea5959c1/docs/compare_method_large_sample.html" target="_blank">ed5188d</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-01-30
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -753,8 +790,8 @@ class="math inline">\(p=1000\)</span>.</p></li>
 <h3>Fitting details:</h3>
 <ol style="list-style-type: decimal">
 <li><p>SuSIE with laplace BF.</p></li>
-<li><p>SuSIE, survival svb runs for 10 iterations. The other 2 methods
-with 30 iterations.</p></li>
+<li><p>Run SuSIE for 10 iterations, and run other methods for similar
+amount of time that SuSIE takes.</p></li>
 </ol>
 <pre class="r"><code>
 calculate_tpr_vs_fdr &lt;- function(pip, is_effect, ts){
@@ -950,6 +987,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/ed5188d52307aadb83f73b61f51b564aea5959c1/docs/figure/compare_method_large_sample.Rmd/unnamed-chunk-5-1.png" target="_blank">ed5188d</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-01-30
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/b70bfac6255b666b60f366937b73df7c1f6385da/docs/figure/compare_method_large_sample.Rmd/unnamed-chunk-5-1.png" target="_blank">b70bfac</a>
 </td>
 <td>
@@ -1034,6 +1082,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/ed5188d52307aadb83f73b61f51b564aea5959c1/docs/figure/compare_method_large_sample.Rmd/unnamed-chunk-6-1.png" target="_blank">ed5188d</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-01-30
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/b70bfac6255b666b60f366937b73df7c1f6385da/docs/figure/compare_method_large_sample.Rmd/unnamed-chunk-6-1.png" target="_blank">b70bfac</a>
