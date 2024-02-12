@@ -19,7 +19,7 @@ Comparing power vs. FDR across 4 methods. I vary the threshold for claiming effe
 
 1. SuSIE with laplace BF. 
 
-2. SuSIE, survival svb runs for 10 iterations. The other 2 methods with 30 iterations. 
+2. Run SuSIE for 10 iterations, and run other methods for similar amount of time that SuSIE takes.
 
 
 ```{r knitr-opts, include=FALSE}
