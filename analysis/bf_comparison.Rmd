@@ -15,11 +15,13 @@ Compare different types of Bayes factor under different levels of censoring and 
 
 3. BFs: 
 
-1) Numerical BF using Gaussian quadrature, our gold standard. https://yunqiyang0215.github.io/survival-susie/gauss_quad.html
+(a) Numerical BF using Gaussian quadrature, our gold standard. https://yunqiyang0215.github.io/survival-susie/gauss_quad.html
 
-2) Wakefeld BF
+(b) Laplace BF
 
-3) Wakefeld BF with standard error corrected by saddle point approximation. https://yunqiyang0215.github.io/survival-susie/SPAcox.html
+(c) Wakefeld BF
+
+(d) Wakefeld BF with standard error corrected by saddle point approximation. https://yunqiyang0215.github.io/survival-susie/SPAcox.html
 
 ```{r}
 res = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/bf_comparison202402/res_bf.rds")
