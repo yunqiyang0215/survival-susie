@@ -15,7 +15,7 @@ Lp(b)&=\prod_{i=1}^n\{\frac{\exp(x_ib)}{\sum_{j\in R(y_i)}\exp(x_jb)} \}^{\delta
 $$
 
 
-Let $f(b)=L_p(b)p(b)$, which is the input $f(x)$ in the code. *mu* and *sd* are the posterior mean and standard error of $b$ if we approximate $L_p(b)\approx N(b;\hat b, s^2)$, where $\hat b$ is the maximize partial likelihood estimate and $s^2$ is the corresponding standard error. 
+Let $f(b)=L_p(b)p(b)$, which is the input $f(x)$ in the code. **mu** and **sd** are the posterior mean and standard error of $b$ if we approximate $L_p(b)\approx N(b;\hat b, s^2)$, where $\hat b$ is the maximize partial likelihood estimate and $s^2$ is the corresponding standard error. 
 
 
 ```{r}
