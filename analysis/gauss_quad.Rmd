@@ -1,0 +1,99 @@
+---
+title: "numerical_int_gauss_quad"
+author: "Yunqi Yang"
+date: "2/13/2024"
+output: html_document
+---
+
+We know we can use partial likelihood to compute BF from here: https://yunqiyang0215.github.io/survival-susie/numerical_integration.html. Here we use Gaussian Quadrature approach (implemented by Karl) to do numerical integration to compute BF.
+
+$$
+  \begin{split}
+BF&=\frac{P(D|H_1)}{P(D|H_0)}=\frac{\int Lp(b)p(b)db}{Lp(b=0)}\\
+Lp(b)&=\prod_{i=1}^n\{\frac{\exp(x_ib)}{\sum_{j\in R(y_i)}\exp(x_jb)} \}^{\delta_i}
+\end{split}
+$$
+
+
+Let $f(b)=L_p(b)p(b)$, which is the input $f(x)$ in the code. *mu* and *sd* are the posterior mean and standard error of $b$ if we approximate $L_p(b)\approx N(b;\hat b, s^2)$, where $\hat b$ is the maximize partial likelihood estimate and $s^2$ is the corresponding standard error. 
+
+
+```{r}
+#' Gaussian quadrature
+#'
+#' approximate log(\int f(x)dx) by quadrature on \int f(x)/p(x) p(x)
+#' where p(x) is a normal density, we approximate this integral
+#' with a gaussian quadrature rule via `statmod::gauss.quad.prob`
+#' done on a log scale for numerical stability (f is positive)
+#' the goal is to choose p(x) such that f(x)/p(x) is not too variable near the mode
+#' @param mu mean of gaussian quadrature
+#' @param sd sd of gaussian quadrature
+gauss_quad2 <- function(log_f, mu, sd, n=32){
+  q <- statmod::gauss.quad.prob(n, dist='normal', mu=mu, sigma=sd)
+  log_integrand <- function(x){log_f(x) - dnorm(x, mu, sd, log=T)}
+  return(matrixStats::logSumExp(log_integrand(q$nodes) + log(q$weights)))
+}
+```
+
+```{r}
+# @param b: the effect size
+# @param surT: a Surv() object, containing time and status
+# @param x: covariate
+get_partial_loglik <- function(b, survT, x){
+  ll.partial = logLik(coxph(survT ~ x, init = c(b), control=list('iter.max'= 0, timefix=FALSE)))
+  return(as.numeric(ll.partial))
+}
+
+# @param b: the effect size
+# @param surT: a Surv() object, containing time and status
+# @param x: covariate
+# @param sig0: prior standard deviation
+get_log_f <- function(b, survT, x, sig0){
+  partial_ll = get_partial_loglik(b, survT, x)
+  return(partial_ll + dnorm(b, 0, sd = sig0, log = TRUE))
+}
+
+```
+
+```{r}
+library(survival)
+library(statmod)
+source("./code/surv_susie_helper.R")
+source("./code/sim_surv.R")
+```
+
+
+### Simulate data
+
+```{r}
+set.seed(1)
+# simulate 2 variables 
+n = 100
+X = cbind(rbinom(n, size = 2, prob = 0.3), rbinom(n, size = 1, prob = 0.3))
+# the first element of b is for intercept
+b = c(1, 1, 0)
+censor_lvl = 0.7
+dat <- sim_surv_exp(b, X, censor_lvl)
+survT <- Surv(dat$y[,1], dat$y[,2])
+
+```
+
+```{r}
+prior_sd = 1
+res = surv_uni_fun(x = dat$X[,1], y = survT, o = rep(0, n), prior_variance = prior_sd^2)
+mu = res$mu
+sd = sqrt(res$var)
+```
+
+```{r}
+log_f <- function(b) get_log_f(b, survT, x = dat$X[,1], sig0 = prior_sd)
+lbf.numerical = gauss_quad2(Vectorize(log_f), mu, sd, n=32) - get_partial_loglik(b = 0, survT, dat$X[,1])
+```
+
+Result seems very reasonable!
+
+```{r}
+print(lbf.numerical)
+print(res$lbf)
+```
+
