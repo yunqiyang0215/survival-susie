@@ -22,6 +22,8 @@ Check Bayes factor
 
 + [Numerical integration](numerical_integration.html)
 
++ [Numerical integration: Gaussian Quadrature](gauss_quad.html)
+
 + [Compare BF calculation: numerical integration vs. approximated BF](bf_diff.html)
 
 + [Saddle point approximation using SPAcox](SPAcox.html)
