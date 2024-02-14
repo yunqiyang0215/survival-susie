@@ -15,17 +15,17 @@ af = unique(res$simulate.allele_freq)
 
 ```{r fig.width = 12, fig.height=5}
 par(mfrow = c(1,3))
-for (i in 1:4){
+for (i in 1:length(censor_lvl)){
   for (j in 1:length(af)){
     indx = which(res$simulate.censor_lvl == censor_lvl[i] & res$simulate.allele_freq == af[j])
     dat = t(sapply(indx, function(x) res$compute_bf.result[[x]]))
-    plot(x = dat[, 'lbf.numerical'], y = dat[, 'lbf.laplace'], main = paste0("censor=",censor_lvl[i], ", allele frequency=", af[j]),
-         ylim = c(min(dat)-1, max(dat)+1),
+    plot(x = dat[, 'lbf.numerical'], y = dat[, 'lbf.laplace'], pch = 20, main = paste0("censor=",censor_lvl[i], ", allele frequency=", af[j]),
+         ylim = c(min(dat[,3:5])-1, max(dat[,3:5])+1),
          xlab = "lbf.numerical", ylab = "Other lbf")
-    points(dat[, 'lbf.numerical'], dat[,'lbf.wakefeld'], col = "palegreen3")
-    points(dat[, 'lbf.numerical'], dat[,'lbf.spa'], col = "skyblue2")
+    points(dat[, 'lbf.numerical'], dat[,'lbf.wakefeld'], col = "palegreen3", pch = 20)
+    points(dat[, 'lbf.numerical'], dat[,'lbf.spa'], col = "skyblue2", pch = 20)
     abline(a = 0, b = 1, col = "red")
-    legend("topleft", legend = c("lbf.laplace", 'lbf.wakefeld', "lbf.wakefeld+spa", "y=x"), col = c(1, "palegreen3", "skyblue2", 2), pch = 1)
+    legend("topleft", legend = c("lbf.laplace", 'lbf.wakefeld', "lbf.wakefeld+spa", "y=x"), col = c(1, "palegreen3", "skyblue2", 2), pch = 20)
   }
 }
 ```
@@ -38,7 +38,7 @@ for (i in 5:6){
     indx = which(res$simulate.censor_lvl == censor_lvl[i] & res$simulate.allele_freq == af[j])
     dat = t(sapply(indx, function(x) res$compute_bf.result[[x]]))
     plot(x = dat[, 'lbf.numerical'], y = dat[, 'lbf.laplace'], main = paste0("censor=",censor_lvl[i], ", allele frequency=", af[j]),
-         #ylim = c(min(dat)-1, max(dat)+1),
+         ylim = c(min(dat[,3:5])-1, max(dat[,3:5])+1),
          xlab = "lbf.numerical", ylab = "Other lbf")
     points(dat[, 'lbf.numerical'], dat[,'lbf.wakefeld'], col = "palegreen3")
     points(dat[, 'lbf.numerical'], dat[,'lbf.spa'], col = "skyblue2")
