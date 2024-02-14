@@ -1,5 +1,5 @@
 ---
-title: "numerical_int_gauss_quad"
+title: "Numerical Integration using Gaussian Quadrature"
 author: "Yunqi Yang"
 date: "2/13/2024"
 output: html_document
