@@ -522,15 +522,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreecaeb89c1874b5bf1172fe16a70d50f28f833d9a0targetblankcaeb89ca">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreeea1515cfcf6006c7ddee310a5eb059e53b397219targetblankea1515ca">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/caeb89c1874b5bf1172fe16a70d50f28f833d9a0" target="_blank">caeb89c</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/ea1515cfcf6006c7ddee310a5eb059e53b397219" target="_blank">ea1515c</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreecaeb89c1874b5bf1172fe16a70d50f28f833d9a0targetblankcaeb89ca"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreeea1515cfcf6006c7ddee310a5eb059e53b397219targetblankea1515ca"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -540,7 +540,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/caeb89c1874b5bf1172fe16a70d50f28f833d9a0" target="_blank">caeb89c</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/ea1515cfcf6006c7ddee310a5eb059e53b397219" target="_blank">ea1515c</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -615,6 +615,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/ea1515cfcf6006c7ddee310a5eb059e53b397219/analysis/bf_comparison.Rmd" target="_blank">ea1515c</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-02-14
+</td>
+<td>
+wflow_publish("analysis/bf_comparison.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/ada4f1bba4b3b353dc627072a9e700b062f8cc1b/docs/bf_comparison.html" target="_blank">ada4f1b</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-02-14
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/caeb89c1874b5bf1172fe16a70d50f28f833d9a0/analysis/bf_comparison.Rmd" target="_blank">caeb89c</a>
 </td>
 <td>
@@ -672,7 +706,7 @@ wflow_publish("analysis/bf_comparison.Rmd")
 <pre class="r"><code>censor_lvl = unique(res$simulate.censor_lvl)
 af = unique(res$simulate.allele_freq)</code></pre>
 <pre class="r"><code>par(mfrow = c(1,3))
-for (i in 1:length(censor_lvl)){
+for (i in 1:4){
   for (j in 1:length(af)){
     indx = which(res$simulate.censor_lvl == censor_lvl[i] &amp; res$simulate.allele_freq == af[j])
     dat = t(sapply(indx, function(x) res$compute_bf.result[[x]]))
@@ -708,6 +742,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/ada4f1bba4b3b353dc627072a9e700b062f8cc1b/docs/figure/bf_comparison.Rmd/unnamed-chunk-3-1.png" target="_blank">ada4f1b</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-02-14
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/52a2aa56c12b42e014f33eb070c5f1a9b397bdfb/docs/figure/bf_comparison.Rmd/unnamed-chunk-3-1.png" target="_blank">52a2aa5</a>
@@ -748,6 +793,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/ada4f1bba4b3b353dc627072a9e700b062f8cc1b/docs/figure/bf_comparison.Rmd/unnamed-chunk-3-2.png" target="_blank">ada4f1b</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-02-14
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/52a2aa56c12b42e014f33eb070c5f1a9b397bdfb/docs/figure/bf_comparison.Rmd/unnamed-chunk-3-2.png" target="_blank">52a2aa5</a>
 </td>
 <td>
@@ -784,6 +840,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/ada4f1bba4b3b353dc627072a9e700b062f8cc1b/docs/figure/bf_comparison.Rmd/unnamed-chunk-3-3.png" target="_blank">ada4f1b</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-02-14
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/52a2aa56c12b42e014f33eb070c5f1a9b397bdfb/docs/figure/bf_comparison.Rmd/unnamed-chunk-3-3.png" target="_blank">52a2aa5</a>
@@ -824,6 +891,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/ada4f1bba4b3b353dc627072a9e700b062f8cc1b/docs/figure/bf_comparison.Rmd/unnamed-chunk-3-4.png" target="_blank">ada4f1b</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-02-14
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/52a2aa56c12b42e014f33eb070c5f1a9b397bdfb/docs/figure/bf_comparison.Rmd/unnamed-chunk-3-4.png" target="_blank">52a2aa5</a>
 </td>
 <td>
@@ -837,82 +915,21 @@ yunqi yang
 </table>
 </div>
 </div>
-<p><img src="figure/bf_comparison.Rmd/unnamed-chunk-3-5.png" width="1152" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-3-5">
-Past versions of unnamed-chunk-3-5.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-3-5" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/yunqiyang0215/survival-susie/blob/52a2aa56c12b42e014f33eb070c5f1a9b397bdfb/docs/figure/bf_comparison.Rmd/unnamed-chunk-3-5.png" target="_blank">52a2aa5</a>
-</td>
-<td>
-yunqi yang
-</td>
-<td>
-2024-02-14
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p><img src="figure/bf_comparison.Rmd/unnamed-chunk-3-6.png" width="1152" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-3-6">
-Past versions of unnamed-chunk-3-6.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-3-6" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/yunqiyang0215/survival-susie/blob/52a2aa56c12b42e014f33eb070c5f1a9b397bdfb/docs/figure/bf_comparison.Rmd/unnamed-chunk-3-6.png" target="_blank">52a2aa5</a>
-</td>
-<td>
-yunqi yang
-</td>
-<td>
-2024-02-14
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<pre class="r"><code>par(mfrow = c(1,3))
+for (i in 5:6){
+  for (j in 1:length(af)){
+    indx = which(res$simulate.censor_lvl == censor_lvl[i] &amp; res$simulate.allele_freq == af[j])
+    dat = t(sapply(indx, function(x) res$compute_bf.result[[x]]))
+    plot(x = dat[, &#39;lbf.numerical&#39;], y = dat[, &#39;lbf.laplace&#39;], main = paste0(&quot;censor=&quot;,censor_lvl[i], &quot;, allele frequency=&quot;, af[j]),
+         #ylim = c(min(dat)-1, max(dat)+1),
+         xlab = &quot;lbf.numerical&quot;, ylab = &quot;Other lbf&quot;)
+    points(dat[, &#39;lbf.numerical&#39;], dat[,&#39;lbf.wakefeld&#39;], col = &quot;palegreen3&quot;)
+    points(dat[, &#39;lbf.numerical&#39;], dat[,&#39;lbf.spa&#39;], col = &quot;skyblue2&quot;)
+    abline(a = 0, b = 1, col = &quot;red&quot;)
+    legend(&quot;topleft&quot;, legend = c(&quot;lbf.laplace&quot;, &#39;lbf.wakefeld&#39;, &quot;lbf.wakefeld+spa&quot;, &quot;y=x&quot;), col = c(1, &quot;palegreen3&quot;, &quot;skyblue2&quot;, 2), pch = 1)
+  }
+}</code></pre>
+<p><img src="figure/bf_comparison.Rmd/unnamed-chunk-4-1.png" width="1152" style="display: block; margin: auto;" /><img src="figure/bf_comparison.Rmd/unnamed-chunk-4-2.png" width="1152" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
