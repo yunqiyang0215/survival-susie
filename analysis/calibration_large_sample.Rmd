@@ -1,0 +1,69 @@
+---
+title: "Untitled"
+output: html_document
+date: '2024-02-20'
+---
+
+```{r}
+pip_calibration <- function(pips, is_effect){
+  ts = seq(0, 0.9, by = 0.1)
+  res = matrix(NA, ncol = 3, nrow = length(ts))
+  colnames(res) = c("range.start", "expected", "empirical")
+  for (i in 1:length(ts)){
+    lo = ts[i]
+    up = lo + 0.1
+    indx = which(pips >= lo & pips <= up)
+    res[i, 1] = lo
+    res[i, 2] = mean(pips[indx])
+    res[i, 3] = sum(is_effect[indx])/ length(indx)
+  }
+  res2 = na.omit(res)
+  return(res2)
+}
+```
+
+```{r}
+susie = readRDS("/project2/mstephens/yunqiyang/surv-susie/dsc202401/susie.rds")
+survsvb = readRDS("/project2/mstephens/yunqiyang/surv-susie/dsc202401/survsvb.rds")
+bvsnlp = readRDS("/project2/mstephens/yunqiyang/surv-susie/dsc202401/bvsnlp.rds")
+rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/dsc202401/susie_rss.rds")
+```
+
+
+```{r fig.width=12, fig.height = 8}
+par(mfrow = c(3,4))
+for (num in 1:3){
+  indx = which(susie$simulate.cor_type == "real" & susie$simulate.num_effect == num)
+  is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
+  pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+  pip.survsvb = unlist(lapply(indx, function(x) survsvb$svb.pip[[x]]))
+  pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+  pip.rss = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+  
+  # Calibration plot for pip.susie
+  calibration.susie = pip_calibration(pip.susie, is_effect)
+  plot(calibration.susie[,2],calibration.susie[,3], main="Calibration: susie", xlab="Expected", ylab="Observed")
+  abline(a = 0, b = 1, col = "red")
+  
+  # Calibration plot for pip.svb
+  calibration.survsvb = pip_calibration(pip.survsvb, is_effect)
+  plot(calibration.survsvb[,2], calibration.survsvb[,3], main="Calibration: survsvb", xlab="Expected", ylab="Observed")
+  abline(a = 0, b = 1, col = "red")
+  
+  # Calibration plot for pip.bvsnlp
+  calibration.bvsnlp = pip_calibration(pip.bvsnlp, is_effect)
+  plot(calibration.bvsnlp[,2], calibration.bvsnlp[,3], main="Calibration: bvsnlp", xlab="Expected", ylab="Observed")
+  abline(a = 0, b = 1, col = "red")
+  
+  # Calibration plot for pip.rss
+  calibration.rss = pip_calibration(pip.rss, is_effect)
+  plot(calibration.rss[,2], calibration.rss[,3], main="Calibration: susie.rss", xlab="Expected", ylab="Observed")
+  abline(a = 0, b = 1, col = "red")
+}
+
+```
+
+
+
+
+
