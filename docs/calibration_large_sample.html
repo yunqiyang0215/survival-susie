@@ -522,15 +522,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree3a3ae9d45e698de6b70b2ad73c529c13fd05718ctargetblank3a3ae9da">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree5f167fe9a7c2f65b4114ab365a8d31c4ad17b31ftargetblank5f167fea">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/3a3ae9d45e698de6b70b2ad73c529c13fd05718c" target="_blank">3a3ae9d</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/5f167fe9a7c2f65b4114ab365a8d31c4ad17b31f" target="_blank">5f167fe</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree3a3ae9d45e698de6b70b2ad73c529c13fd05718ctargetblank3a3ae9da"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree5f167fe9a7c2f65b4114ab365a8d31c4ad17b31ftargetblank5f167fea"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -540,7 +540,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/3a3ae9d45e698de6b70b2ad73c529c13fd05718c" target="_blank">3a3ae9d</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/5f167fe9a7c2f65b4114ab365a8d31c4ad17b31f" target="_blank">5f167fe</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -616,6 +616,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/5f167fe9a7c2f65b4114ab365a8d31c4ad17b31f/analysis/calibration_large_sample.Rmd" target="_blank">5f167fe</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-02-20
+</td>
+<td>
+wflow_publish("analysis/calibration_large_sample.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/5b2278cf319ba6232f3929db64151d9f2b0fb8fb/docs/calibration_large_sample.html" target="_blank">5b2278c</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-02-20
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/3a3ae9d45e698de6b70b2ad73c529c13fd05718c/analysis/calibration_large_sample.Rmd" target="_blank">3a3ae9d</a>
 </td>
 <td>
@@ -649,6 +683,12 @@ wflow_publish("analysis/calibration_large_sample.Rmd")
   }
   res2 = na.omit(res)
   return(res2)
+}
+
+plot_calibration &lt;- function(dat.calibration, method, num_effect){
+  plot(dat.calibration[,2], dat.calibration[,3], xlim = c(0, 1), ylim = c(0, 1),
+       main= paste0(&quot;Calibration: &quot;, method, &quot;,&quot;, num_effect), xlab=&quot;Expected&quot;, ylab=&quot;Observed&quot;)
+  abline(a = 0, b = 1, col = &quot;red&quot;)
 }</code></pre>
 <pre class="r"><code>susie = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/dsc202401/susie.rds&quot;)
 survsvb = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/dsc202401/survsvb.rds&quot;)
@@ -657,7 +697,7 @@ rss = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/dsc202401/susie_rss
 <pre class="r"><code>par(mfrow = c(3,4))
 for (num in 1:3){
   indx = which(susie$simulate.cor_type == &quot;real&quot; &amp; susie$simulate.num_effect == num)
-  is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
+  is_effect = unlist(lapply(indx, function(x) bvsnlp$simulate.is_effect[[x]]))
   pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
   pip.survsvb = unlist(lapply(indx, function(x) survsvb$svb.pip[[x]]))
   pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
@@ -665,25 +705,59 @@ for (num in 1:3){
   
   # Calibration plot for pip.susie
   calibration.susie = pip_calibration(pip.susie, is_effect)
-  plot(calibration.susie[,2],calibration.susie[,3], main=&quot;Calibration: susie&quot;, xlab=&quot;Expected&quot;, ylab=&quot;Observed&quot;)
-  abline(a = 0, b = 1, col = &quot;red&quot;)
+  plot_calibration(calibration.susie, method = &quot;susie&quot;, num_effect = num)
   
   # Calibration plot for pip.svb
   calibration.survsvb = pip_calibration(pip.survsvb, is_effect)
-  plot(calibration.survsvb[,2], calibration.survsvb[,3], main=&quot;Calibration: survsvb&quot;, xlab=&quot;Expected&quot;, ylab=&quot;Observed&quot;)
-  abline(a = 0, b = 1, col = &quot;red&quot;)
+  plot_calibration(calibration.survsvb, method = &quot;svb&quot;, num_effect = num)
   
   # Calibration plot for pip.bvsnlp
   calibration.bvsnlp = pip_calibration(pip.bvsnlp, is_effect)
-  plot(calibration.bvsnlp[,2], calibration.bvsnlp[,3], main=&quot;Calibration: bvsnlp&quot;, xlab=&quot;Expected&quot;, ylab=&quot;Observed&quot;)
-  abline(a = 0, b = 1, col = &quot;red&quot;)
+  plot_calibration(calibration.bvsnlp, method = &quot;bvsnlp&quot;, num_effect = num)
   
   # Calibration plot for pip.rss
   calibration.rss = pip_calibration(pip.rss, is_effect)
-  plot(calibration.rss[,2], calibration.rss[,3], main=&quot;Calibration: susie.rss&quot;, xlab=&quot;Expected&quot;, ylab=&quot;Observed&quot;)
-  abline(a = 0, b = 1, col = &quot;red&quot;)
+  plot_calibration(calibration.rss, method = &quot;susie rss&quot;, num_effect = num)
+  
 }</code></pre>
 <p><img src="figure/calibration_large_sample.Rmd/unnamed-chunk-3-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-3-1">
+Past versions of unnamed-chunk-3-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-3-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/5b2278cf319ba6232f3929db64151d9f2b0fb8fb/docs/figure/calibration_large_sample.Rmd/unnamed-chunk-3-1.png" target="_blank">5b2278c</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-02-20
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
