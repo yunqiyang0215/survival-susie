@@ -12,7 +12,7 @@
 
 <meta name="date" content="2024-02-20" />
 
-<title>Untitled</title>
+<title>PIP calibration on large data</title>
 
 <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -361,7 +361,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Untitled</h1>
+<h1 class="title toc-ignore">PIP calibration on large data</h1>
 <h4 class="date">2024-02-20</h4>
 
 </div>
@@ -522,15 +522,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree59a4e6d76bd8c8bf992ec4cac9c95a514a7d3490targetblank59a4e6da">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreefb610935d87296997bfd72a18a61bdb0722ae0b7targetblankfb61093a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/59a4e6d76bd8c8bf992ec4cac9c95a514a7d3490" target="_blank">59a4e6d</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/fb610935d87296997bfd72a18a61bdb0722ae0b7" target="_blank">fb61093</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree59a4e6d76bd8c8bf992ec4cac9c95a514a7d3490targetblank59a4e6da"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreefb610935d87296997bfd72a18a61bdb0722ae0b7targetblankfb61093a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -540,7 +540,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/59a4e6d76bd8c8bf992ec4cac9c95a514a7d3490" target="_blank">59a4e6d</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/fb610935d87296997bfd72a18a61bdb0722ae0b7" target="_blank">fb61093</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -611,6 +611,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/fb610935d87296997bfd72a18a61bdb0722ae0b7/analysis/calibration_large_sample.Rmd" target="_blank">fb61093</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-02-20
+</td>
+<td>
+wflow_publish("analysis/calibration_large_sample.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/86e1f3560a919fb9e206ec4774ea4022367f46ba/docs/calibration_large_sample.html" target="_blank">86e1f35</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-02-20
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -754,6 +788,12 @@ wflow_publish("analysis/calibration_large_sample.Rmd")
 </div>
 </div>
 </div>
+<div id="description-the-data-simulation-is-described-here"
+class="section level3">
+<h3>Description: the data simulation is described here:</h3>
+<p><a
+href="https://yunqiyang0215.github.io/survival-susie/compare_method_large_sample.html"
+class="uri">https://yunqiyang0215.github.io/survival-susie/compare_method_large_sample.html</a></p>
 <pre class="r"><code>pip_calibration &lt;- function(pips, is_effect){
   ts = seq(0, 0.9, by = 0.1)
   res = matrix(NA, ncol = 3, nrow = length(ts))
@@ -780,6 +820,7 @@ plot_calibration &lt;- function(dat.calibration, method, num_effect){
 survsvb = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/dsc202401/survsvb.rds&quot;)
 bvsnlp = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/dsc202401/bvsnlp.rds&quot;)
 rss = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/dsc202401/susie_rss.rds&quot;)</code></pre>
+</div>
 <div id="use-the-real-correlation-of-snps" class="section level3">
 <h3>1. Use the real correlation of SNPs</h3>
 <pre class="r"><code>par(mfrow = c(3,4))
