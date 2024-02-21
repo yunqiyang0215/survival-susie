@@ -4,9 +4,9 @@ output: html_document
 date: '2024-02-20'
 ---
 
-### Description: the data simulation is described here:
+### Description: 
 
-https://yunqiyang0215.github.io/survival-susie/compare_method_large_sample.html
+The data simulation is described here: https://yunqiyang0215.github.io/survival-susie/compare_method_large_sample.html
 
 ```{r}
 pip_calibration <- function(pips, is_effect){
