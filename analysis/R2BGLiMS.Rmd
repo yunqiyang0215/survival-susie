@@ -46,6 +46,7 @@ X = as.data.frame(dat[[1]][, c(2:(p+1))])
 data = dat[[1]]
 data$surT = data$surT/max(data$surT)
 predictors = names(data)[2:51]
+for (v in predictors) {data[,v] <- scale(as.numeric(data[,v]))} # Normalise predictors
 
 res <- R2BGLiMS(
   likelihood="Weibull",
@@ -70,6 +71,7 @@ X = as.data.frame(dat[[2]][, c(2:(p+1))])
 data = dat[[2]]
 data$surT = data$surT/max(data$surT)
 predictors = names(data)[2:51]
+for (v in predictors) {data[,v] <- scale(as.numeric(data[,v]))} # Normalise predictors
 
 res <- R2BGLiMS(
   likelihood="Weibull",
@@ -92,6 +94,7 @@ X = as.data.frame(dat[[3]][, c(2:(p+1))])
 data = dat[[3]]
 data$surT = data$surT/max(data$surT)
 predictors = names(data)[2:51]
+for (v in predictors) {data[,v] <- scale(as.numeric(data[,v]))} # Normalise predictors
 
 res <- R2BGLiMS(
   likelihood="Weibull",
@@ -115,6 +118,7 @@ X = as.data.frame(dat[[4]][, c(2:(p+1))])
 data = dat[[4]]
 data$surT = data$surT/max(data$surT)
 predictors = names(data)[2:51]
+for (v in predictors) {data[,v] <- scale(as.numeric(data[,v]))} # Normalise predictors
 
 res <- R2BGLiMS(
   likelihood="Weibull",
@@ -138,6 +142,7 @@ X = as.data.frame(dat[[5]][, c(2:(p+1))])
 data = dat[[5]]
 data$surT = data$surT/max(data$surT)
 predictors = names(data)[2:51]
+for (v in predictors) {data[,v] <- scale(as.numeric(data[,v]))} # Normalise predictors
 
 res <- R2BGLiMS(
   likelihood="Weibull",
