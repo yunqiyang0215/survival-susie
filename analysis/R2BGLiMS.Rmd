@@ -5,6 +5,8 @@ date: "1/18/2024"
 output: html_document
 ---
 
+Note: the default n.iter = 1e6. This method needs large number of iterations to converge. n.iter = 1e3 and n.iter = 1e6 can produce very different results. 
+
 ```{r}
 #install_github("pjnewcombe/R2BGLiMS")
 library(R2BGLiMS)
