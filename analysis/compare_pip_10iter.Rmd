@@ -80,7 +80,7 @@ censor_lvls = unique(susie$simulate.censor_lvl)
 ```
 
 ### 1. Use the real correlation of SNPs
-```{r fig.width= 10, fig.height=16}
+```{r fig.width= 12, fig.height=18}
 par(mfrow = c(5,4))
 for (i in 1:length(censor_lvls)){
   indx = which(susie$simulate.cor_type == "real" & susie$simulate.censor_lvl == censor_lvls[i])
@@ -95,25 +95,27 @@ for (i in 1:length(censor_lvls)){
 
   res.pip = compare_pip(pip.susie, pip.svb, is_effect)
   plot_pip(res.pip, labs = c("susie", "survival.svb"), main = paste0("censor=",censor_lvls[i]))
+  abline(a = 0, b = 1, lty = 2, col = "blue")
   
   res.pip = compare_pip(pip.susie, pip.bvsnlp, is_effect)
   plot_pip(res.pip, labs = c("susie", "bvsnlp"), main = paste0("censor=",censor_lvls[i]))
+  abline(a = 0, b = 1, lty = 2, col = "blue")
   
   res.pip = compare_pip(pip.susie, pip.r2b, is_effect)
   plot_pip(res.pip, labs = c("susie", "r2b"), main = paste0("censor=",censor_lvls[i]))
+  abline(a = 0, b = 1, lty = 2, col = "blue")
   
   res.pip = compare_pip(pip.susie, pip.rss, is_effect)
   plot_pip(res.pip, labs = c("susie", "rss"), main = paste0("censor=",censor_lvls[i]))
+  abline(a = 0, b = 1, lty = 2, col = "blue")
   
 }
 ```
 
 
-
-
 ### 2. Near independent SNPs
 
-```{r fig.width= 10, fig.height=16}
+```{r fig.width= 12, fig.height=18}
 par(mfrow = c(5,4))
 for (i in 1:length(censor_lvls)){
   indx = which(susie$simulate.cor_type == "independent" & susie$simulate.censor_lvl == censor_lvls[i])
@@ -128,15 +130,19 @@ for (i in 1:length(censor_lvls)){
 
   res.pip = compare_pip(pip.susie, pip.svb, is_effect)
   plot_pip(res.pip, labs = c("susie", "survival.svb"), main = paste0("censor=",censor_lvls[i]))
+  abline(a = 0, b = 1, lty = 2, col = "blue")
   
   res.pip = compare_pip(pip.susie, pip.bvsnlp, is_effect)
   plot_pip(res.pip, labs = c("susie", "bvsnlp"), main = paste0("censor=",censor_lvls[i]))
+  abline(a = 0, b = 1, lty = 2, col = "blue")
   
   res.pip = compare_pip(pip.susie, pip.r2b, is_effect)
   plot_pip(res.pip, labs = c("susie", "r2b"), main = paste0("censor=",censor_lvls[i]))
+  abline(a = 0, b = 1, lty = 2, col = "blue")
   
   res.pip = compare_pip(pip.susie, pip.rss, is_effect)
   plot_pip(res.pip, labs = c("susie", "rss"), main = paste0("censor=",censor_lvls[i]))
+  abline(a = 0, b = 1, lty = 2, col = "blue")
   
 }
 ```
