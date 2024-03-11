@@ -12,7 +12,7 @@
 <meta name="author" content="Yunqi Yang" />
 
 
-<title>Compare PIPs</title>
+<title>Compare PIPs: small sample + 10 iterations</title>
 
 <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -361,7 +361,8 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Compare PIPs</h1>
+<h1 class="title toc-ignore">Compare PIPs: small sample + 10
+iterations</h1>
 <h4 class="author">Yunqi Yang</h4>
 <h4 class="date">4/6/2023</h4>
 
@@ -371,7 +372,7 @@ div.tocify {
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
 <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-workflowr <span class="glyphicon glyphicon-ok text-success"
+workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
 aria-hidden="true"></span>
 </button>
 </p>
@@ -382,8 +383,8 @@ aria-hidden="true"></span>
 </li>
 <li>
 <a data-toggle="tab" href="#checks"> Checks <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
-</a>
+class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -396,9 +397,9 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 </p>
 <p>
 <strong>Checks:</strong> <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6
 <span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> 0
+aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>survival-susie/</code> <span
@@ -508,30 +509,56 @@ run.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
-<span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongabsolute">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>File paths:</strong> absolute </a>
 </p>
 </div>
-<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div id="strongFilepathsstrongabsolute" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great job! Using relative paths to the files within your workflowr
-project makes it easier to run your code on other machines.</p>
+<p>
+Using absolute paths to the files within your workflowr project makes it
+difficult for you and others to run your code on a different machine.
+Change the absolute path(s) below to the suggested relative path(s) to
+make your code more reproducible.
+</p>
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th style="text-align:left;">
+absolute
+</th>
+<th style="text-align:left;">
+relative
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+/project2/mstephens/yunqiyang/surv-susie/survival-susie/code/pip.R
+</td>
+<td style="text-align:left;">
+code/pip.R
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreea36eabb95e1c6a910ab90b33b93fb8a3d7b8cba4targetblanka36eabba">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree61892003790436363e3cd3ee85f9fd4daebf55bftargetblank6189200a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/a36eabb95e1c6a910ab90b33b93fb8a3d7b8cba4" target="_blank">a36eabb</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/61892003790436363e3cd3ee85f9fd4daebf55bf" target="_blank">6189200</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreea36eabb95e1c6a910ab90b33b93fb8a3d7b8cba4targetblanka36eabba"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree61892003790436363e3cd3ee85f9fd4daebf55bftargetblank6189200a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -541,7 +568,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/a36eabb95e1c6a910ab90b33b93fb8a3d7b8cba4" target="_blank">a36eabb</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/61892003790436363e3cd3ee85f9fd4daebf55bf" target="_blank">6189200</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -606,6 +633,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/61892003790436363e3cd3ee85f9fd4daebf55bf/analysis/compare_pip_10iter.Rmd" target="_blank">6189200</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-11
+</td>
+<td>
+wflow_publish("analysis/compare_pip_10iter.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/422903e8510353a6023b9bd54f693220e405fc4c/docs/compare_pip_10iter.html" target="_blank">422903e</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-11
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -743,9 +804,6 @@ SNPs for a certain gene, Thyroid.ENSG00000132855. Therefore, sample size
 <ol style="list-style-type: decimal">
 <li><p>Select a random point on the genome, indx_start. Then the
 predictors are from [indx_start:(indx_start + p -1)].</p></li>
-<li><p>Select effect variables. The number of effects are 1,2,3. Select
-SNPs that have correlation between (0.9 - 0.99) with other
-SNPs.</p></li>
 <li><p>Two correlation types: real correlation and independent. In
 independent, I simply permute each variable values. The max correlation
 can be 0.3, but a lot of correlation will be close to 0.</p></li>
@@ -754,50 +812,14 @@ N(0,1)\)</span>.</p></li>
 <li><p>Simulate survival time using exponential survival model.</p></li>
 </ol>
 </div>
-<div id="fitting-susie" class="section level4">
-<h4>Fitting susie:</h4>
+<div id="fitting" class="section level4">
+<h4>Fitting:</h4>
 <ol style="list-style-type: decimal">
-<li><p>Set L = true number of effects.</p></li>
-<li><p>Set prior variance to the true prior variance.</p></li>
+<li><p>susie: <span class="math inline">\(L=5\)</span> and estimate
+prior covariance</p></li>
+<li><p>r2b was set to default number of iterations</p></li>
 </ol>
-</div>
-<div id="method-comparison" class="section level4">
-<h4>Method comparison:</h4>
-<ol style="list-style-type: decimal">
-<li><p>survival.svb:<a
-href="https://doi.org/10.1093/bioinformatics/btac416"
-class="uri">https://doi.org/10.1093/bioinformatics/btac416</a></p></li>
-<li><p>bvsnlp: <a
-href="https://yunqiyang0215.github.io/survival-susie/bvsnlp.html"
-class="uri">https://yunqiyang0215.github.io/survival-susie/bvsnlp.html</a></p></li>
-</ol>
-</div>
-<div id="conclusion" class="section level4">
-<h4><strong>Conclusion</strong>:</h4>
-<ol style="list-style-type: decimal">
-<li><p>When using the real correlation matrix, susie result is very
-different from survival.svb. And survival.svb seems to have better
-results, as capturing more effects.</p></li>
-<li><p>In other scenarios, results are more consistent across
-methods.</p></li>
-</ol>
-<pre class="r"><code>compare_pip &lt;- function(pip1, pip2, is_effect){
-  res = data.frame(cbind(pip1, pip2, is_effect))
-  return(res)
-}
-
-
-plot_pip &lt;- function(res.pip, labs, main){
-  pch = 16
-  cex = ifelse(res.pip$is_effect == 1, 0.75, 1.2)
-  
-  # Plotting the grey circles first
-  grey_indices &lt;- res.pip$is_effect != 1
-  plot(res.pip$pip1[grey_indices], res.pip$pip2[grey_indices], col = &quot;dark grey&quot;, pch = 1, cex = cex[grey_indices], xlab = labs[1], ylab = labs[2], xlim = c(0, 1), ylim = c(0, 1), main = main)
-  
-  red_indices &lt;- res.pip$is_effect == 1
-  points(res.pip$pip1[red_indices], res.pip$pip2[red_indices], col = &quot;red&quot;, pch = pch, cex = cex[red_indices])
-}</code></pre>
+<pre class="r"><code>source(&quot;/project2/mstephens/yunqiyang/surv-susie/survival-susie/code/pip.R&quot;)</code></pre>
 <pre class="r"><code>susie = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_niter10/susie.rds&quot;)
 svb = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_niter10/svb.rds&quot;)
 bvsnlp = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_niter10/bvsnlp.rds&quot;)
@@ -862,6 +884,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/422903e8510353a6023b9bd54f693220e405fc4c/docs/figure/compare_pip_10iter.Rmd/unnamed-chunk-4-1.png" target="_blank">422903e</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-11
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/12387fc5d580cc40d3ccc10bd654d78aa3383ade/docs/figure/compare_pip_10iter.Rmd/unnamed-chunk-4-1.png" target="_blank">12387fc</a>
 </td>
 <td>
@@ -874,6 +907,152 @@ yunqi yang
 <tr>
 <td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/c55fa8f89d2346ef7fa44840239394edb3c06ed3/docs/figure/compare_pip_10iter.Rmd/unnamed-chunk-4-1.png" target="_blank">c55fa8f</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>par(mfrow = c(3,4))
+for (i in 1:length(censor_lvls)){
+  indx = which(bvsnlp$simulate.cor_type == &quot;real&quot; &amp; bvsnlp$simulate.censor_lvl == censor_lvls[i])
+  is_effect = unlist(lapply(indx, function(x) bvsnlp$simulate.is_effect[[x]]))
+  pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+  pip.survsvb = unlist(lapply(indx, function(x) svb$svb.pip[[x]]))
+  pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+  pip.rss = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+  
+  # Calibration plot for pip.susie
+  calibration.susie = pip_calibration(pip.susie, is_effect)
+  plot_calibration(calibration.susie, main = paste0(&quot;susie: censor=&quot;, censor_lvls[i]))
+  
+  # Calibration plot for pip.svb
+  calibration.survsvb = pip_calibration(pip.survsvb, is_effect)
+  plot_calibration(calibration.survsvb, main = paste0(&quot;svb: censor=&quot;, censor_lvls[i]))
+  
+  # Calibration plot for pip.bvsnlp
+  calibration.bvsnlp = pip_calibration(pip.bvsnlp, is_effect)
+  plot_calibration(calibration.bvsnlp, main = paste0(&quot;bvsnlp: censor=&quot;, censor_lvls[i]))
+  
+  # Calibration plot for pip.rss
+  calibration.rss = pip_calibration(pip.rss, is_effect)
+  plot_calibration(calibration.rss, main = paste0(&quot;rss: censor=&quot;, censor_lvls[i]))
+  
+}</code></pre>
+<p><img src="figure/compare_pip_10iter.Rmd/unnamed-chunk-5-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
+Past versions of unnamed-chunk-5-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/422903e8510353a6023b9bd54f693220e405fc4c/docs/figure/compare_pip_10iter.Rmd/unnamed-chunk-5-1.png" target="_blank">422903e</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-11
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/12387fc5d580cc40d3ccc10bd654d78aa3383ade/docs/figure/compare_pip_10iter.Rmd/unnamed-chunk-5-1.png" target="_blank">12387fc</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-11
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/c55fa8f89d2346ef7fa44840239394edb3c06ed3/docs/figure/compare_pip_10iter.Rmd/unnamed-chunk-5-1.png" target="_blank">c55fa8f</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-11
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/04c45c7597ce6774040a0eef7158cfb37120fa7d/docs/figure/compare_pip_10iter.Rmd/unnamed-chunk-5-1.png" target="_blank">04c45c7</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><img src="figure/compare_pip_10iter.Rmd/unnamed-chunk-5-2.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-2">
+Past versions of unnamed-chunk-5-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/c55fa8f89d2346ef7fa44840239394edb3c06ed3/docs/figure/compare_pip_10iter.Rmd/unnamed-chunk-5-2.png" target="_blank">c55fa8f</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-11
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/04c45c7597ce6774040a0eef7158cfb37120fa7d/docs/figure/compare_pip_10iter.Rmd/unnamed-chunk-5-2.png" target="_blank">04c45c7</a>
 </td>
 <td>
 yunqi yang
@@ -918,13 +1097,13 @@ for (i in 1:length(censor_lvls)){
   abline(a = 0, b = 1, lty = 2, col = &quot;blue&quot;)
   
 }</code></pre>
-<p><img src="figure/compare_pip_10iter.Rmd/unnamed-chunk-5-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p><img src="figure/compare_pip_10iter.Rmd/unnamed-chunk-6-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
-Past versions of unnamed-chunk-5-1.png
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
+Past versions of unnamed-chunk-6-1.png
 </button>
 </p>
-<div id="fig-unnamed-chunk-5-1" class="collapse">
+<div id="fig-unnamed-chunk-6-1" class="collapse">
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
 <thead>
@@ -943,7 +1122,7 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/yunqiyang0215/survival-susie/blob/12387fc5d580cc40d3ccc10bd654d78aa3383ade/docs/figure/compare_pip_10iter.Rmd/unnamed-chunk-5-1.png" target="_blank">12387fc</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/c55fa8f89d2346ef7fa44840239394edb3c06ed3/docs/figure/compare_pip_10iter.Rmd/unnamed-chunk-6-1.png" target="_blank">c55fa8f</a>
 </td>
 <td>
 yunqi yang
@@ -954,18 +1133,7 @@ yunqi yang
 </tr>
 <tr>
 <td>
-<a href="https://github.com/yunqiyang0215/survival-susie/blob/c55fa8f89d2346ef7fa44840239394edb3c06ed3/docs/figure/compare_pip_10iter.Rmd/unnamed-chunk-5-1.png" target="_blank">c55fa8f</a>
-</td>
-<td>
-yunqi yang
-</td>
-<td>
-2024-03-11
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/yunqiyang0215/survival-susie/blob/04c45c7597ce6774040a0eef7158cfb37120fa7d/docs/figure/compare_pip_10iter.Rmd/unnamed-chunk-5-1.png" target="_blank">04c45c7</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/04c45c7597ce6774040a0eef7158cfb37120fa7d/docs/figure/compare_pip_10iter.Rmd/unnamed-chunk-6-1.png" target="_blank">04c45c7</a>
 </td>
 <td>
 yunqi yang
@@ -978,6 +1146,32 @@ yunqi yang
 </table>
 </div>
 </div>
+<pre class="r"><code>par(mfrow = c(3,4))
+for (i in 1:length(censor_lvls)){
+  indx = which(bvsnlp$simulate.cor_type == &quot;independent&quot; &amp; bvsnlp$simulate.censor_lvl == censor_lvls[i])
+  is_effect = unlist(lapply(indx, function(x) bvsnlp$simulate.is_effect[[x]]))
+  pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+  pip.survsvb = unlist(lapply(indx, function(x) svb$svb.pip[[x]]))
+  pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+  pip.rss = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+  
+  # Calibration plot for pip.susie
+  calibration.susie = pip_calibration(pip.susie, is_effect)
+  plot_calibration(calibration.susie, main = paste0(&quot;susie: censor=&quot;, censor_lvls[i]))
+  
+  # Calibration plot for pip.svb
+  calibration.survsvb = pip_calibration(pip.survsvb, is_effect)
+  plot_calibration(calibration.survsvb, main = paste0(&quot;svb: censor=&quot;, censor_lvls[i]))
+  
+  # Calibration plot for pip.bvsnlp
+  calibration.bvsnlp = pip_calibration(pip.bvsnlp, is_effect)
+  plot_calibration(calibration.bvsnlp, main = paste0(&quot;bvsnlp: censor=&quot;, censor_lvls[i]))
+  
+  # Calibration plot for pip.rss
+  calibration.rss = pip_calibration(pip.rss, is_effect)
+  plot_calibration(calibration.rss, main = paste0(&quot;rss: censor=&quot;, censor_lvls[i]))
+}</code></pre>
+<p><img src="figure/compare_pip_10iter.Rmd/unnamed-chunk-7-1.png" width="1152" style="display: block; margin: auto;" /><img src="figure/compare_pip_10iter.Rmd/unnamed-chunk-7-2.png" width="1152" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
