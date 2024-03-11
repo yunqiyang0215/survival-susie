@@ -48,25 +48,22 @@ knitr::opts_chunk$set(comment = "#",results = "hold",collapse = TRUE,
 ```
 
 ```{r}
-compare_pip <- function(pip1, pip2, effect_indx, dat_indx, p){
-  is_effect = c()
-  for (i in dat_indx){
-    init = rep(0, p)
-    indx = effect_indx[[i]]
-    init[indx] = 1
-    is_effect = c(is_effect, init)
-  }
+compare_pip <- function(pip1, pip2, is_effect){
   res = data.frame(cbind(pip1, pip2, is_effect))
+  return(res)
 }
-```
 
-```{r}
+
 plot_pip <- function(res.pip, labs, main){
-  pch = ifelse(res.pip$is_effect == 1, 16, 1)
-  cex = ifelse(res.pip$is_effect == 1, 1, 0.5)
-  col = ifelse(res.pip$is_effect == 1, "red", "dark grey")
-  plot(res.pip$pip1, res.pip$pip2, col = col, pch = pch, cex = cex, 
-       xlab = labs[1], ylab = labs[2], main = main)
+  pch = 16
+  cex = ifelse(res.pip$is_effect == 1, 0.75, 1.2)
+  
+  # Plotting the grey circles first
+  grey_indices <- res.pip$is_effect != 1
+  plot(res.pip$pip1[grey_indices], res.pip$pip2[grey_indices], col = "dark grey", pch = 1, cex = cex[grey_indices], xlab = labs[1], ylab = labs[2], xlim = c(0, 1), ylim = c(0, 1), main = main)
+  
+  red_indices <- res.pip$is_effect == 1
+  points(res.pip$pip1[red_indices], res.pip$pip2[red_indices], col = "red", pch = pch, cex = cex[red_indices])
 }
 ```
 
@@ -84,7 +81,7 @@ censor_lvls = unique(susie$simulate.censor_lvl)
 
 ### 1. Use the real correlation of SNPs
 ```{r fig.width= 10, fig.height=8}
-par(mfrow = c(2,3))
+par(mfrow = c(5,4))
 for (i in 1:length(censor_lvls)){
   indx = which(susie$simulate.cor_type == "real" & susie$simulate.censor_lvl == censor_lvls[i])
   pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
@@ -92,17 +89,20 @@ for (i in 1:length(censor_lvls)){
   pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
   pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
   pip.rss = unlist(lapply(indx, function(x) rss$rss.pip[[x]]))
+  
+  is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
 
-  res.pip = compare_pip(pip.susie, pip.svb, susie$simulate.effect_indx, dat_indx = indx, p =1e3)
+
+  res.pip = compare_pip(pip.susie, pip.svb, is_effect)
   plot_pip(res.pip, labs = c("susie", "survival.svb"), main = paste0("censor=",censor_lvls[i]))
   
-  res.pip = compare_pip(pip.susie, pip.bvsnlp, susie$simulate.effect_indx, dat_indx = indx, p =1e3)
+  res.pip = compare_pip(pip.susie, pip.bvsnlp, is_effect)
   plot_pip(res.pip, labs = c("susie", "bvsnlp"), main = paste0("censor=",censor_lvls[i]))
   
-  res.pip = compare_pip(pip.susie, pip.r2b, susie$simulate.effect_indx, dat_indx = indx, p =1e3)
+  res.pip = compare_pip(pip.susie, pip.r2b, is_effect)
   plot_pip(res.pip, labs = c("susie", "r2b"), main = paste0("censor=",censor_lvls[i]))
   
-  res.pip = compare_pip(pip.susie, pip.rss, susie$simulate.effect_indx, dat_indx = indx, p =1e3)
+  res.pip = compare_pip(pip.susie, pip.rss, is_effect)
   plot_pip(res.pip, labs = c("susie", "rss"), main = paste0("censor=",censor_lvls[i]))
   
 }
@@ -114,7 +114,7 @@ for (i in 1:length(censor_lvls)){
 ### 2. Near independent SNPs
 
 ```{r fig.width= 10, fig.height=8}
-par(mfrow = c(2,3))
+par(mfrow = c(5,4))
 for (i in 1:length(censor_lvls)){
   indx = which(susie$simulate.cor_type == "independent" & susie$simulate.censor_lvl == censor_lvls[i])
   pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
@@ -122,17 +122,20 @@ for (i in 1:length(censor_lvls)){
   pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
   pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
   pip.rss = unlist(lapply(indx, function(x) rss$rss.pip[[x]]))
+  
+  is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
 
-  res.pip = compare_pip(pip.susie, pip.svb, susie$simulate.effect_indx, dat_indx = indx, p =1e3)
+
+  res.pip = compare_pip(pip.susie, pip.svb, is_effect)
   plot_pip(res.pip, labs = c("susie", "survival.svb"), main = paste0("censor=",censor_lvls[i]))
   
-  res.pip = compare_pip(pip.susie, pip.bvsnlp, susie$simulate.effect_indx, dat_indx = indx, p =1e3)
+  res.pip = compare_pip(pip.susie, pip.bvsnlp, is_effect)
   plot_pip(res.pip, labs = c("susie", "bvsnlp"), main = paste0("censor=",censor_lvls[i]))
   
-  res.pip = compare_pip(pip.susie, pip.r2b, susie$simulate.effect_indx, dat_indx = indx, p =1e3)
+  res.pip = compare_pip(pip.susie, pip.r2b, is_effect)
   plot_pip(res.pip, labs = c("susie", "r2b"), main = paste0("censor=",censor_lvls[i]))
   
-  res.pip = compare_pip(pip.susie, pip.rss, susie$simulate.effect_indx, dat_indx = indx, p =1e3)
+  res.pip = compare_pip(pip.susie, pip.rss, is_effect)
   plot_pip(res.pip, labs = c("susie", "rss"), main = paste0("censor=",censor_lvls[i]))
   
 }
