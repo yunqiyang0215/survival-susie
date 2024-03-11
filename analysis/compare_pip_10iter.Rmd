@@ -1,5 +1,5 @@
 ---
-title: "Compare PIPs"
+title: "Compare PIPs: small sample + 10 iterations"
 author: "Yunqi Yang"
 date: "4/6/2023"
 output: html_document
@@ -13,34 +13,19 @@ Simulation results based on real genotype data from GTEx. I took the SNPs for a 
 
 1. Select a random point on the genome, indx_start. Then the predictors are from [indx_start:(indx_start + p -1)]. 
 
-2. Select effect variables. The number of effects are 1,2,3. Select SNPs that have correlation between (0.9 - 0.99) with other SNPs. 
-
-3. Two correlation types: real correlation and independent. In independent, I simply permute each variable values. The max correlation can be 0.3, but a lot of correlation will be close to 0. 
+2. Two correlation types: real correlation and independent. In independent, I simply permute each variable values. The max correlation can be 0.3, but a lot of correlation will be close to 0. 
 
 4. Effect size $b\sim N(0,1)$.
 
 5. Simulate survival time using exponential survival model. 
 
 
-#### Fitting susie:
+#### Fitting:
 
-1. Set L = true number of effects. 
+1. susie: $L=5$ and estimate prior covariance
 
-2. Set prior variance to the true prior variance. 
+2. r2b was set to default number of iterations
 
-
-#### Method comparison:
-
-1. survival.svb:https://doi.org/10.1093/bioinformatics/btac416
-
-2. bvsnlp: https://yunqiyang0215.github.io/survival-susie/bvsnlp.html
-
-
-#### **Conclusion**:
-
-1. When using the real correlation matrix, susie result is very different from survival.svb. And survival.svb seems to have better results, as capturing more effects. 
-
-2. In other scenarios, results are more consistent across methods. 
 
 ```{r knitr, echo=FALSE}
 knitr::opts_chunk$set(comment = "#",results = "hold",collapse = TRUE,
@@ -48,23 +33,7 @@ knitr::opts_chunk$set(comment = "#",results = "hold",collapse = TRUE,
 ```
 
 ```{r}
-compare_pip <- function(pip1, pip2, is_effect){
-  res = data.frame(cbind(pip1, pip2, is_effect))
-  return(res)
-}
-
-
-plot_pip <- function(res.pip, labs, main){
-  pch = 16
-  cex = ifelse(res.pip$is_effect == 1, 0.75, 1.2)
-  
-  # Plotting the grey circles first
-  grey_indices <- res.pip$is_effect != 1
-  plot(res.pip$pip1[grey_indices], res.pip$pip2[grey_indices], col = "dark grey", pch = 1, cex = cex[grey_indices], xlab = labs[1], ylab = labs[2], xlim = c(0, 1), ylim = c(0, 1), main = main)
-  
-  red_indices <- res.pip$is_effect == 1
-  points(res.pip$pip1[red_indices], res.pip$pip2[red_indices], col = "red", pch = pch, cex = cex[red_indices])
-}
+source("/project2/mstephens/yunqiyang/surv-susie/survival-susie/code/pip.R")
 ```
 
 ```{r}
@@ -113,6 +82,35 @@ for (i in 1:length(censor_lvls)){
 ```
 
 
+```{r fig.width= 12, fig.height=18}
+par(mfrow = c(3,4))
+for (i in 1:length(censor_lvls)){
+  indx = which(bvsnlp$simulate.cor_type == "real" & bvsnlp$simulate.censor_lvl == censor_lvls[i])
+  is_effect = unlist(lapply(indx, function(x) bvsnlp$simulate.is_effect[[x]]))
+  pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+  pip.survsvb = unlist(lapply(indx, function(x) svb$svb.pip[[x]]))
+  pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+  pip.rss = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+  
+  # Calibration plot for pip.susie
+  calibration.susie = pip_calibration(pip.susie, is_effect)
+  plot_calibration(calibration.susie, main = paste0("susie: censor=", censor_lvls[i]))
+  
+  # Calibration plot for pip.svb
+  calibration.survsvb = pip_calibration(pip.survsvb, is_effect)
+  plot_calibration(calibration.survsvb, main = paste0("svb: censor=", censor_lvls[i]))
+  
+  # Calibration plot for pip.bvsnlp
+  calibration.bvsnlp = pip_calibration(pip.bvsnlp, is_effect)
+  plot_calibration(calibration.bvsnlp, main = paste0("bvsnlp: censor=", censor_lvls[i]))
+  
+  # Calibration plot for pip.rss
+  calibration.rss = pip_calibration(pip.rss, is_effect)
+  plot_calibration(calibration.rss, main = paste0("rss: censor=", censor_lvls[i]))
+  
+}
+```
+
 ### 2. Near independent SNPs
 
 ```{r fig.width= 12, fig.height=18}
@@ -144,5 +142,33 @@ for (i in 1:length(censor_lvls)){
   plot_pip(res.pip, labs = c("susie", "rss"), main = paste0("censor=",censor_lvls[i]))
   abline(a = 0, b = 1, lty = 2, col = "blue")
   
+}
+```
+
+```{r fig.width= 12, fig.height=18}
+par(mfrow = c(3,4))
+for (i in 1:length(censor_lvls)){
+  indx = which(bvsnlp$simulate.cor_type == "independent" & bvsnlp$simulate.censor_lvl == censor_lvls[i])
+  is_effect = unlist(lapply(indx, function(x) bvsnlp$simulate.is_effect[[x]]))
+  pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+  pip.survsvb = unlist(lapply(indx, function(x) svb$svb.pip[[x]]))
+  pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+  pip.rss = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+  
+  # Calibration plot for pip.susie
+  calibration.susie = pip_calibration(pip.susie, is_effect)
+  plot_calibration(calibration.susie, main = paste0("susie: censor=", censor_lvls[i]))
+  
+  # Calibration plot for pip.svb
+  calibration.survsvb = pip_calibration(pip.survsvb, is_effect)
+  plot_calibration(calibration.survsvb, main = paste0("svb: censor=", censor_lvls[i]))
+  
+  # Calibration plot for pip.bvsnlp
+  calibration.bvsnlp = pip_calibration(pip.bvsnlp, is_effect)
+  plot_calibration(calibration.bvsnlp, main = paste0("bvsnlp: censor=", censor_lvls[i]))
+  
+  # Calibration plot for pip.rss
+  calibration.rss = pip_calibration(pip.rss, is_effect)
+  plot_calibration(calibration.rss, main = paste0("rss: censor=", censor_lvls[i]))
 }
 ```
