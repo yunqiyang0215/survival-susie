@@ -80,7 +80,7 @@ censor_lvls = unique(susie$simulate.censor_lvl)
 ```
 
 ### 1. Use the real correlation of SNPs
-```{r fig.width= 10, fig.height=8}
+```{r fig.width= 10, fig.height=16}
 par(mfrow = c(5,4))
 for (i in 1:length(censor_lvls)){
   indx = which(susie$simulate.cor_type == "real" & susie$simulate.censor_lvl == censor_lvls[i])
@@ -113,7 +113,7 @@ for (i in 1:length(censor_lvls)){
 
 ### 2. Near independent SNPs
 
-```{r fig.width= 10, fig.height=8}
+```{r fig.width= 10, fig.height=16}
 par(mfrow = c(5,4))
 for (i in 1:length(censor_lvls)){
   indx = which(susie$simulate.cor_type == "independent" & susie$simulate.censor_lvl == censor_lvls[i])
