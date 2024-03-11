@@ -18,6 +18,8 @@ Background and analysis on coxph model
 
 + [Check more property of coxph()](coxph_fit.html)
 
++ [coxph() NA example](coxph_na.html)
+
 Check Bayes factor
 
 + [Numerical integration](numerical_integration.html)
