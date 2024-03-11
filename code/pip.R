@@ -15,9 +15,9 @@ pip_calibration <- function(pips, is_effect){
   return(res2)
 }
 
-plot_calibration <- function(dat.calibration, method, num_effect){
+plot_calibration <- function(dat.calibration, main){
   plot(dat.calibration[,2], dat.calibration[,3], xlim = c(0, 1), ylim = c(0, 1),
-       main= paste0("Calibration: ", method, ", # effect= ", num_effect), xlab="Expected", ylab="Observed")
+       main= main, xlab="Expected", ylab="Observed")
   abline(a = 0, b = 1, col = "red")
 }
 
