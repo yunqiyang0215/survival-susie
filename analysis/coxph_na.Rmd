@@ -1,0 +1,25 @@
+---
+title: "coxph() NA example"
+output: html_document
+date: '2024-03-11'
+---
+
+```{r}
+library(survival)
+```
+
+```{r}
+res = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_niter10/dsc_result/simulate/simulate_1120.rds")
+dat = res$dat
+```
+
+```{r}
+
+y <- Surv(dat$y[,1], dat$y[,2])
+X = as.matrix(dat$X)
+
+table(X[, 641])
+fit1 = coxph(y ~ X[, 641])
+summary(fit1)
+```
+
