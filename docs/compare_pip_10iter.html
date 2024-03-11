@@ -523,15 +523,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree8941841c68bb2107bbc565dd0963217a0ea48badtargetblank8941841a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreea36eabb95e1c6a910ab90b33b93fb8a3d7b8cba4targetblanka36eabba">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/8941841c68bb2107bbc565dd0963217a0ea48bad" target="_blank">8941841</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/a36eabb95e1c6a910ab90b33b93fb8a3d7b8cba4" target="_blank">a36eabb</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree8941841c68bb2107bbc565dd0963217a0ea48badtargetblank8941841a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreea36eabb95e1c6a910ab90b33b93fb8a3d7b8cba4targetblanka36eabba"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -541,7 +541,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/8941841c68bb2107bbc565dd0963217a0ea48bad" target="_blank">8941841</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/a36eabb95e1c6a910ab90b33b93fb8a3d7b8cba4" target="_blank">a36eabb</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -557,6 +557,7 @@ were generated:
 <pre><code>
 Ignored files:
     Ignored:    .Rproj.user/
+    Ignored:    analysis/figure/
 
 Unstaged changes:
     Modified:   analysis/coxph_na.Rmd
@@ -605,6 +606,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/a36eabb95e1c6a910ab90b33b93fb8a3d7b8cba4/analysis/compare_pip_10iter.Rmd" target="_blank">a36eabb</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-11
+</td>
+<td>
+wflow_publish("analysis/compare_pip_10iter.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/12387fc5d580cc40d3ccc10bd654d78aa3383ade/docs/compare_pip_10iter.html" target="_blank">12387fc</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-11
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -787,18 +822,22 @@ for (i in 1:length(censor_lvls)){
 
   res.pip = compare_pip(pip.susie, pip.svb, is_effect)
   plot_pip(res.pip, labs = c(&quot;susie&quot;, &quot;survival.svb&quot;), main = paste0(&quot;censor=&quot;,censor_lvls[i]))
+  abline(a = 0, b = 1, lty = 2, col = &quot;blue&quot;)
   
   res.pip = compare_pip(pip.susie, pip.bvsnlp, is_effect)
   plot_pip(res.pip, labs = c(&quot;susie&quot;, &quot;bvsnlp&quot;), main = paste0(&quot;censor=&quot;,censor_lvls[i]))
+  abline(a = 0, b = 1, lty = 2, col = &quot;blue&quot;)
   
   res.pip = compare_pip(pip.susie, pip.r2b, is_effect)
   plot_pip(res.pip, labs = c(&quot;susie&quot;, &quot;r2b&quot;), main = paste0(&quot;censor=&quot;,censor_lvls[i]))
+  abline(a = 0, b = 1, lty = 2, col = &quot;blue&quot;)
   
   res.pip = compare_pip(pip.susie, pip.rss, is_effect)
   plot_pip(res.pip, labs = c(&quot;susie&quot;, &quot;rss&quot;), main = paste0(&quot;censor=&quot;,censor_lvls[i]))
+  abline(a = 0, b = 1, lty = 2, col = &quot;blue&quot;)
   
 }</code></pre>
-<p><img src="figure/compare_pip_10iter.Rmd/unnamed-chunk-4-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="figure/compare_pip_10iter.Rmd/unnamed-chunk-4-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
 Past versions of unnamed-chunk-4-1.png
@@ -821,6 +860,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/12387fc5d580cc40d3ccc10bd654d78aa3383ade/docs/figure/compare_pip_10iter.Rmd/unnamed-chunk-4-1.png" target="_blank">12387fc</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-11
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/c55fa8f89d2346ef7fa44840239394edb3c06ed3/docs/figure/compare_pip_10iter.Rmd/unnamed-chunk-4-1.png" target="_blank">c55fa8f</a>
@@ -853,18 +903,22 @@ for (i in 1:length(censor_lvls)){
 
   res.pip = compare_pip(pip.susie, pip.svb, is_effect)
   plot_pip(res.pip, labs = c(&quot;susie&quot;, &quot;survival.svb&quot;), main = paste0(&quot;censor=&quot;,censor_lvls[i]))
+  abline(a = 0, b = 1, lty = 2, col = &quot;blue&quot;)
   
   res.pip = compare_pip(pip.susie, pip.bvsnlp, is_effect)
   plot_pip(res.pip, labs = c(&quot;susie&quot;, &quot;bvsnlp&quot;), main = paste0(&quot;censor=&quot;,censor_lvls[i]))
+  abline(a = 0, b = 1, lty = 2, col = &quot;blue&quot;)
   
   res.pip = compare_pip(pip.susie, pip.r2b, is_effect)
   plot_pip(res.pip, labs = c(&quot;susie&quot;, &quot;r2b&quot;), main = paste0(&quot;censor=&quot;,censor_lvls[i]))
+  abline(a = 0, b = 1, lty = 2, col = &quot;blue&quot;)
   
   res.pip = compare_pip(pip.susie, pip.rss, is_effect)
   plot_pip(res.pip, labs = c(&quot;susie&quot;, &quot;rss&quot;), main = paste0(&quot;censor=&quot;,censor_lvls[i]))
+  abline(a = 0, b = 1, lty = 2, col = &quot;blue&quot;)
   
 }</code></pre>
-<p><img src="figure/compare_pip_10iter.Rmd/unnamed-chunk-5-1.png" width="960" style="display: block; margin: auto;" /></p>
+<p><img src="figure/compare_pip_10iter.Rmd/unnamed-chunk-5-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
 Past versions of unnamed-chunk-5-1.png
@@ -887,6 +941,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/12387fc5d580cc40d3ccc10bd654d78aa3383ade/docs/figure/compare_pip_10iter.Rmd/unnamed-chunk-5-1.png" target="_blank">12387fc</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-11
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/c55fa8f89d2346ef7fa44840239394edb3c06ed3/docs/figure/compare_pip_10iter.Rmd/unnamed-chunk-5-1.png" target="_blank">c55fa8f</a>
