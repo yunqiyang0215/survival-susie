@@ -1,0 +1,139 @@
+---
+title: "Compare PIPs"
+author: "Yunqi Yang"
+date: "4/6/2023"
+output: html_document
+---
+
+### Description:
+
+Simulation results based on real genotype data from GTEx. I took the SNPs for a certain gene, Thyroid.ENSG00000132855. Therefore, sample size $n=584$, and I choose variable number $p=1000$.
+
+#### Steps for simulating survival data:
+
+1. Select a random point on the genome, indx_start. Then the predictors are from [indx_start:(indx_start + p -1)]. 
+
+2. Select effect variables. The number of effects are 1,2,3. Select SNPs that have correlation between (0.9 - 0.99) with other SNPs. 
+
+3. Two correlation types: real correlation and independent. In independent, I simply permute each variable values. The max correlation can be 0.3, but a lot of correlation will be close to 0. 
+
+4. Effect size $b\sim N(0,1)$.
+
+5. Simulate survival time using exponential survival model. 
+
+
+#### Fitting susie:
+
+1. Set L = true number of effects. 
+
+2. Set prior variance to the true prior variance. 
+
+
+#### Method comparison:
+
+1. survival.svb:https://doi.org/10.1093/bioinformatics/btac416
+
+2. bvsnlp: https://yunqiyang0215.github.io/survival-susie/bvsnlp.html
+
+
+#### **Conclusion**:
+
+1. When using the real correlation matrix, susie result is very different from survival.svb. And survival.svb seems to have better results, as capturing more effects. 
+
+2. In other scenarios, results are more consistent across methods. 
+
+```{r knitr, echo=FALSE}
+knitr::opts_chunk$set(comment = "#",results = "hold",collapse = TRUE,
+                      fig.align = "center", warning = FALSE)
+```
+
+```{r}
+compare_pip <- function(pip1, pip2, effect_indx, dat_indx, p){
+  is_effect = c()
+  for (i in dat_indx){
+    init = rep(0, p)
+    indx = effect_indx[[i]]
+    init[indx] = 1
+    is_effect = c(is_effect, init)
+  }
+  res = data.frame(cbind(pip1, pip2, is_effect))
+}
+```
+
+```{r}
+plot_pip <- function(res.pip, labs, main){
+  pch = ifelse(res.pip$is_effect == 1, 16, 1)
+  cex = ifelse(res.pip$is_effect == 1, 1, 0.5)
+  col = ifelse(res.pip$is_effect == 1, "red", "dark grey")
+  plot(res.pip$pip1, res.pip$pip2, col = col, pch = pch, cex = cex, 
+       xlab = labs[1], ylab = labs[2], main = main)
+}
+```
+
+```{r}
+susie = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_niter10/susie.rds")
+svb = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_niter10/svb.rds")
+bvsnlp = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_niter10/bvsnlp.rds")
+r2b = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_niter10/r2b.rds")
+rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_niter10/rss.rds")
+```
+
+```{r}
+censor_lvls = unique(susie$simulate.censor_lvl)
+```
+
+### 1. Use the real correlation of SNPs
+```{r fig.width= 10, fig.height=8}
+par(mfrow = c(2,3))
+for (i in 1:length(censor_lvls)){
+  indx = which(susie$simulate.cor_type == "real" & susie$simulate.censor_lvl == censor_lvls[i])
+  pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+  pip.svb = unlist(lapply(indx, function(x) svb$svb.pip[[x]]))
+  pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+  pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
+  pip.rss = unlist(lapply(indx, function(x) rss$rss.pip[[x]]))
+
+  res.pip = compare_pip(pip.susie, pip.svb, susie$simulate.effect_indx, dat_indx = indx, p =1e3)
+  plot_pip(res.pip, labs = c("susie", "survival.svb"), main = paste0("censor=",censor_lvls[i]))
+  
+  res.pip = compare_pip(pip.susie, pip.bvsnlp, susie$simulate.effect_indx, dat_indx = indx, p =1e3)
+  plot_pip(res.pip, labs = c("susie", "bvsnlp"), main = paste0("censor=",censor_lvls[i]))
+  
+  res.pip = compare_pip(pip.susie, pip.r2b, susie$simulate.effect_indx, dat_indx = indx, p =1e3)
+  plot_pip(res.pip, labs = c("susie", "r2b"), main = paste0("censor=",censor_lvls[i]))
+  
+  res.pip = compare_pip(pip.susie, pip.rss, susie$simulate.effect_indx, dat_indx = indx, p =1e3)
+  plot_pip(res.pip, labs = c("susie", "rss"), main = paste0("censor=",censor_lvls[i]))
+  
+}
+```
+
+
+
+
+### 2. Near independent SNPs
+
+```{r fig.width= 10, fig.height=8}
+par(mfrow = c(2,3))
+for (i in 1:length(censor_lvls)){
+  indx = which(susie$simulate.cor_type == "independent" & susie$simulate.censor_lvl == censor_lvls[i])
+  pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+  pip.svb = unlist(lapply(indx, function(x) svb$svb.pip[[x]]))
+  pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+  pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
+  pip.rss = unlist(lapply(indx, function(x) rss$rss.pip[[x]]))
+
+  res.pip = compare_pip(pip.susie, pip.svb, susie$simulate.effect_indx, dat_indx = indx, p =1e3)
+  plot_pip(res.pip, labs = c("susie", "survival.svb"), main = paste0("censor=",censor_lvls[i]))
+  
+  res.pip = compare_pip(pip.susie, pip.bvsnlp, susie$simulate.effect_indx, dat_indx = indx, p =1e3)
+  plot_pip(res.pip, labs = c("susie", "bvsnlp"), main = paste0("censor=",censor_lvls[i]))
+  
+  res.pip = compare_pip(pip.susie, pip.r2b, susie$simulate.effect_indx, dat_indx = indx, p =1e3)
+  plot_pip(res.pip, labs = c("susie", "r2b"), main = paste0("censor=",censor_lvls[i]))
+  
+  res.pip = compare_pip(pip.susie, pip.rss, susie$simulate.effect_indx, dat_indx = indx, p =1e3)
+  plot_pip(res.pip, labs = c("susie", "rss"), main = paste0("censor=",censor_lvls[i]))
+  
+}
+```
