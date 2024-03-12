@@ -74,7 +74,7 @@ Try variational approximation:
 
 + [Poisson SER](poisson_ser.html)
 
-Real data simulation: GTEx genotype
+Real data simulation: GTEx genotype 2023
 
 + [Plot PIPs](compare_pip.html)
 
@@ -95,6 +95,12 @@ Susie(-rss) results:
 + [Susie vs. susie rss](survival_susierss.html)
 
 + [Susie convergence criteria](susie.convergence.html)
+
+Real data simulation: GTEx genotype(2024)
+
++ [10 iteration result: pip](compare_pip_10iter.html)
+
++ [10 iteration result: power vs. fdr](gtex_10iter.html)
 
 Real data simulation: UKBiobank genotype
 
