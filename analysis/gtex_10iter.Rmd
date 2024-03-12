@@ -1,13 +1,13 @@
 ---
 title: "Power vs. fdr: gtex data + 10 iteration"
 author: "Yunqi Yang"
-date: "05/08/2023"
+date: "03/11/2024"
 output: html_document
 ---
 
 ### Description:
 
-Version 4 simulation results, comparing power vs. FDR across methods. I vary the threshold for claiming effect variables based on marginal PIP value. 
+Version 4 simulation results, comparing power vs. FDR across methods. I vary the threshold for claiming effect variables based on marginal PIP value. Also, I add the time comparison for different methods.
 
 ```{r knitr-opts, include=FALSE}
 knitr::opts_chunk$set(comment = "#",collapse = TRUE,results = "hold",
@@ -108,3 +108,20 @@ for (i in 1:5){
 ```
 
 The dots indicate PIP threshold = 0.95.
+
+
+### 3. Time comparison
+
+```{r}
+time = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_niter10/time.rds")
+```
+
+```{r}
+mean(time$susie.DSC_TIME, na.rm = TRUE)
+mean(time$svb.DSC_TIME, na.rm = TRUE)
+mean(time$bvsnlp.DSC_TIME, na.rm = TRUE)
+mean(time$rss.DSC_TIME, na.rm = TRUE)
+mean(time$r2b.DSC_TIME, na.rm = TRUE)
+```
+
+
