@@ -44,17 +44,24 @@ for (i in 1:5){
   res.susie = calculate_tpr_vs_fdr(pip.susie, is_effect, ts)
   res.svb = calculate_tpr_vs_fdr(pip.survsvb, is_effect, ts)
   res.bvsnlp = calculate_tpr_vs_fdr(pip.bvsnlp, is_effect, ts)
+  res.rss = calculate_tpr_vs_fdr(pip.rss, is_effect, ts)
+  res.r2b = calculate_tpr_vs_fdr(pip.r2b, is_effect, ts)
   
   plot(res.susie[,2], res.susie[,1], type = "l", xlim = c(0,1), ylim = c(0, 1), xlab = "FDR", ylab = "Power",
        main = paste0("Real correlation, effect 0-3", ",censor=", censor_lvl[i]))
   lines(res.svb[,2], res.svb[,1], type = "l", col = 2)
   lines(res.bvsnlp[,2], res.bvsnlp[,1], type = "l", col = 3)
+  lines(res.rss[,2], res.rss[,1], type = "l", col = 4)
+  lines(res.r2b[,2], res.r2b[,1], type = "l", col = 5)
   
   points(res.susie[96,2], res.susie[96, 1])
   points(res.svb[96,2], res.svb[96, 1])
   points(res.bvsnlp[96,2], res.bvsnlp[96, 1])
+  points(res.rss[96,2], res.rss[96, 1])
+  points(res.r2b[96,2], res.r2b[96, 1])
   
-  legend("topleft", legend = c("susie", "survival.svb", "bvsnlp"), col = c(1,2,3), lty = 1)
+  legend("topleft", legend = c("susie", "survival.svb", "bvsnlp", "rss", "r2b"), col = c(1,2,3,4,5), lty = 1)
+  
 }
 
 ```
@@ -67,7 +74,7 @@ The dots indicate PIP threshold = 0.95
 par(mfrow = c(2,3), cex.axis = 1.5)
 censor_lvl = c(0, 0.2, 0.4, 0.6, 0.8)
 for (i in 1:5){
-  indx = which(susie$simulate.cor_type == "real" & susie$simulate.censor_lvl == censor_lvl[i])
+  indx = which(susie$simulate.cor_type == "independent" & susie$simulate.censor_lvl == censor_lvl[i])
   pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
   pip.survsvb = unlist(lapply(indx, function(x) svb$svb.pip[[x]]))
   pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
@@ -101,179 +108,3 @@ for (i in 1:5){
 ```
 
 The dots indicate PIP threshold = 0.95.
-
-
-### 3. Results using independent X, with data from null model. 
-
-```{r, fig.width=10, fig.height=8}
-par(mfrow = c(2,3),cex.axis = 1.5)
-censor_lvl = c(0, 0.2, 0.4, 0.6, 0.8)
-
-for (i in 1:5){
-    indx = which(susie$simulate.cor_type == "independent" & susie$simulate.censor_lvl == censor_lvl[i])
-  pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
-  pip.survsvb = unlist(lapply(indx, function(x) svb$svb.pip[[x]]))
-  pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
-  pip.rss = unlist(lapply(indx, function(x) rss$rss.pip[[x]]))
-  pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
-  is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
-  
-  ts = seq(from = 0, to = 1, by = 0.01)
-  res.susie = calculate_tpr_vs_fdr(pip.susie, is_effect, ts)
-  res.svb = calculate_tpr_vs_fdr(pip.survsvb, is_effect, ts)
-  res.bvsnlp = calculate_tpr_vs_fdr(pip.bvsnlp, is_effect, ts)
-  res.rss = calculate_tpr_vs_fdr(pip.rss, is_effect, ts)
-  res.r2b = calculate_tpr_vs_fdr(pip.r2b, is_effect, ts)
-  
-  plot(res.susie[,2], res.susie[,1], type = "l", xlim = c(0,1), ylim = c(0, 1), xlab = "FDR", ylab = "Power",
-       main = paste0("Real correlation, effect 0-3", ",censor=", censor_lvl[i]))
-  lines(res.svb[,2], res.svb[,1], type = "l", col = 2)
-  lines(res.bvsnlp[,2], res.bvsnlp[,1], type = "l", col = 3)
-  lines(res.rss[,2], res.rss[,1], type = "l", col = 4)
-  lines(res.r2b[,2], res.r2b[,1], type = "l", col = 5)
-  
-  points(res.susie[96,2], res.susie[96, 1])
-  points(res.svb[96,2], res.svb[96, 1])
-  points(res.bvsnlp[96,2], res.bvsnlp[96, 1])
-  points(res.rss[96,2], res.rss[96, 1])
-  points(res.r2b[96,2], res.r2b[96, 1])
-  
-  legend("topleft", legend = c("susie", "survival.svb", "bvsnlp", "rss", "r2b"), col = c(1,2,3,4,5), lty = 1)
-}
-
-```
-
-The dots indicate PIP threshold = 0.95.
-
-### 4. Real/independent X, censoring = 0.8.
-
-For independent X, susie has ~1-1.5% less power than bvsnlp when fdr is around 0.1. 
-
-```{r fig.width=8, fig.height=4}
-par(mfrow = c(1,2))
-censor_lvl = 0.8
-indx = which(susie$simulate.cor_type == "real" & susie$simulate.censor_lvl == censor_lvl)
-pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
-pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
-is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
-  
-ts = seq(from = 0, to = 1, by = 0.01)
-res.susie = calculate_tpr_vs_fdr(pip.susie, is_effect, ts)
-res.bvsnlp = calculate_tpr_vs_fdr(pip.bvsnlp, is_effect, ts)
-  
-  
-plot(res.susie[,2], res.susie[,1], type = "l", xlim = c(0, 0.4), ylim = c(0,0.2), xlab = "FDR", ylab = "Power", main = paste0("Real X, effect 0-3", ",censor=", censor_lvl))
-lines(res.bvsnlp[,2], res.bvsnlp[,1], type = "l", col = 3)
-points(res.susie[96,2], res.susie[96, 1])
-points(res.bvsnlp[96,2], res.bvsnlp[96, 1])
-legend("topleft", legend = c("susie", "bvsnlp"), col = c(1,3), lty = 1)
-
-#####
-indx = which(susie$simulate.cor_type == "independent" & susie$simulate.censor_lvl == censor_lvl)
-pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
-pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
-is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
-  
-ts = seq(from = 0, to = 1, by = 0.01)
-res.susie = calculate_tpr_vs_fdr(pip.susie, is_effect, ts)
-res.bvsnlp = calculate_tpr_vs_fdr(pip.bvsnlp, is_effect, ts)
-  
-  
-plot(res.susie[,2], res.susie[,1], type = "l", xlim = c(0, 0.15), xlab = "FDR", ylab = "Power", main = paste0("X independent, effect 0-3", ",censor=", censor_lvl))
-lines(res.bvsnlp[,2], res.bvsnlp[,1], type = "l", col = 3)
-points(res.susie[96,2], res.susie[96, 1])
-points(res.bvsnlp[96,2], res.bvsnlp[96, 1])
-legend("bottomright", legend = c("susie", "bvsnlp"), col = c(1,3), lty = 1)
-
-
-```
-### 5. Assess Susie CS
-
-Among the 1000 null data, susie only wrongly output 1 credible set as below:
-```{r}
-indx = which(susie$simulate.num_effect == 0)
-res = lapply(indx, function(x) is.null(susie$susie.cs[[x]]$cs))
-which(res == FALSE)
-susie$susie.cs[[indx[756]]]$cs
-```
-
-```{r}
-coverage = matrix(NA, ncol = 3, nrow = 5)
-censoring = c(0, 0.2, 0.4, 0.6, 0.8)
-colnames(coverage) = c("effect:1", "effect:2", "effect:3")
-rownames(coverage) = c("censor:0", "censor:0.2", "censor:0.4", "censor:0.6", "censor:0.8")
-for (i in 1:3){
-  for (j in 1:5){
-    dat_indx = which(susie$simulate.num_effect == i & susie$simulate.censor_lvl == censoring[j] & susie$simulate.cor_type == "real")
-    coverage[j, i] = calculate_cs_coverage(dat_indx)
-  }
-}
-
-coverage
-```
-
-```{r}
-power_cs = matrix(NA, ncol = 3, nrow = 5)
-censoring = c(0, 0.2, 0.4, 0.6, 0.8)
-colnames(power_cs) = c("effect:1", "effect:2", "effect:3")
-rownames(power_cs) = c("censor:0", "censor:0.2", "censor:0.4", "censor:0.6", "censor:0.8")
-for (i in 1:3){
-  for (j in 1:5){
-    dat_indx = which(susie$simulate.num_effect == i & susie$simulate.censor_lvl == censoring[j])
-    cs_effect = get_cs_effect(dat_indx, p = 1000)
-    is_effect = unlist(lapply(dat_indx, function(x) susie$simulate.is_effect[[x]]))
-    power = sum(cs_effect ==1 & is_effect == 1)/sum(is_effect)
-    power_cs[j, i] = power
-  }
-}
-
-power_cs
-```
-
-```{r fig.height=4, fig.width=4}
-plot(c(0, 0.2, 0.4, 0.6, 0.8), power_cs[,1], pch = 20, ylim = c(0.4, 0.9), lty = 3, type = "b", xlab = "Censoring level", ylab = "Power of CSs")
-lines(c(0, 0.2, 0.4, 0.6, 0.8), power_cs[,2], pch = 20, col = 2, lty = 3, type = "b")
-lines(c(0, 0.2, 0.4, 0.6, 0.8), power_cs[,3], pch = 20, col = 3, lty = 3, type = "b")
-legend("topright", legend = c("1 effect", "2 effects", "3 effects"), col = c(1, 2, 3), lty = 3)
-
-```
-
-```{r}
-coverage = matrix(NA, ncol = 2, nrow = 5)
-censoring = c(0, 0.2, 0.4, 0.6, 0.8)
-cor_type = c("real", "independent")
-colnames(coverage) = c("real correlation", "independent")
-rownames(coverage) = c("censor:0", "censor:0.2", "censor:0.4", "censor:0.6", "censor:0.8")
-for (i in 1:2){
-  for (j in 1:5){
-    dat_indx = which(susie$simulate.num_effect != 0 & susie$simulate.cor_type == cor_type[i] & susie$simulate.censor_lvl == censoring[j])
-    coverage[j, i] = calculate_cs_coverage(dat_indx)
-  }
-}
-
-coverage
-```
-
-```{r}
-plot(c(0, 0.2, 0.4, 0.6, 0.8), coverage[,1], pch = 20, ylim = c(0.9, 1))
-points(c(0, 0.2, 0.4, 0.6, 0.8), coverage[,2])
-```
-
-```{r}
-power_cs = matrix(NA, ncol = 2, nrow = 5)
-censoring = c(0, 0.2, 0.4, 0.6, 0.8)
-colnames(power_cs) = c("real correlation", "independent")
-rownames(power_cs) = c("censor:0", "censor:0.2", "censor:0.4", "censor:0.6", "censor:0.8")
-for (i in 1:2){
-  for (j in 1:5){
-    dat_indx = which(susie$simulate.num_effect != 0 & susie$simulate.cor_type == cor_type[i] & susie$simulate.censor_lvl == censoring[j])
-    cs_effect = get_cs_effect(dat_indx, p = 1000)
-    is_effect = unlist(lapply(dat_indx, function(x) susie$simulate.is_effect[[x]]))
-    power = sum(cs_effect ==1 & is_effect == 1)/sum(is_effect)
-    power_cs[j, i] = power
-  }
-}
-
-power_cs
-```
-
