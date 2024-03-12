@@ -551,15 +551,15 @@ code/post_summary.R
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreed8a12478dfc227483edbde60a6d9d625075ed738targetblankd8a1247a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree17c31e60155c2c135f04ca49f0822cdf735434bbtargetblank17c31e6a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/d8a12478dfc227483edbde60a6d9d625075ed738" target="_blank">d8a1247</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/17c31e60155c2c135f04ca49f0822cdf735434bb" target="_blank">17c31e6</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreed8a12478dfc227483edbde60a6d9d625075ed738targetblankd8a1247a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree17c31e60155c2c135f04ca49f0822cdf735434bbtargetblank17c31e6a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -569,7 +569,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/d8a12478dfc227483edbde60a6d9d625075ed738" target="_blank">d8a1247</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/17c31e60155c2c135f04ca49f0822cdf735434bb" target="_blank">17c31e6</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -638,6 +638,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/17c31e60155c2c135f04ca49f0822cdf735434bb/analysis/gtex_10iter.Rmd" target="_blank">17c31e6</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-11
+</td>
+<td>
+wflow_publish("analysis/gtex_10iter.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/9bbabc9a1ebb1e6af4876bab13753e1693ce74c5/docs/gtex_10iter.html" target="_blank">9bbabc9</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-11
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/d8a12478dfc227483edbde60a6d9d625075ed738/analysis/gtex_10iter.Rmd" target="_blank">d8a1247</a>
 </td>
 <td>
@@ -687,20 +721,64 @@ for (i in 1:5){
   res.susie = calculate_tpr_vs_fdr(pip.susie, is_effect, ts)
   res.svb = calculate_tpr_vs_fdr(pip.survsvb, is_effect, ts)
   res.bvsnlp = calculate_tpr_vs_fdr(pip.bvsnlp, is_effect, ts)
+  res.rss = calculate_tpr_vs_fdr(pip.rss, is_effect, ts)
+  res.r2b = calculate_tpr_vs_fdr(pip.r2b, is_effect, ts)
   
   plot(res.susie[,2], res.susie[,1], type = &quot;l&quot;, xlim = c(0,1), ylim = c(0, 1), xlab = &quot;FDR&quot;, ylab = &quot;Power&quot;,
        main = paste0(&quot;Real correlation, effect 0-3&quot;, &quot;,censor=&quot;, censor_lvl[i]))
   lines(res.svb[,2], res.svb[,1], type = &quot;l&quot;, col = 2)
   lines(res.bvsnlp[,2], res.bvsnlp[,1], type = &quot;l&quot;, col = 3)
+  lines(res.rss[,2], res.rss[,1], type = &quot;l&quot;, col = 4)
+  lines(res.r2b[,2], res.r2b[,1], type = &quot;l&quot;, col = 5)
   
   points(res.susie[96,2], res.susie[96, 1])
   points(res.svb[96,2], res.svb[96, 1])
   points(res.bvsnlp[96,2], res.bvsnlp[96, 1])
+  points(res.rss[96,2], res.rss[96, 1])
+  points(res.r2b[96,2], res.r2b[96, 1])
   
-  legend(&quot;topleft&quot;, legend = c(&quot;susie&quot;, &quot;survival.svb&quot;, &quot;bvsnlp&quot;), col = c(1,2,3), lty = 1)
+  legend(&quot;topleft&quot;, legend = c(&quot;susie&quot;, &quot;survival.svb&quot;, &quot;bvsnlp&quot;, &quot;rss&quot;, &quot;r2b&quot;), col = c(1,2,3,4,5), lty = 1)
+  
 }</code></pre>
-<p><img src="figure/gtex_10iter.Rmd/unnamed-chunk-3-1.png" width="1152" style="display: block; margin: auto;" />
-The dots indicate PIP threshold = 0.95</p>
+<p><img src="figure/gtex_10iter.Rmd/unnamed-chunk-3-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-3-1">
+Past versions of unnamed-chunk-3-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-3-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/9bbabc9a1ebb1e6af4876bab13753e1693ce74c5/docs/figure/gtex_10iter.Rmd/unnamed-chunk-3-1.png" target="_blank">9bbabc9</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-11
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>The dots indicate PIP threshold = 0.95</p>
 </div>
 <div id="results-using-independent-x-without-data-from-null-model."
 class="section level3">
@@ -708,7 +786,7 @@ class="section level3">
 <pre class="r"><code>par(mfrow = c(2,3), cex.axis = 1.5)
 censor_lvl = c(0, 0.2, 0.4, 0.6, 0.8)
 for (i in 1:5){
-  indx = which(susie$simulate.cor_type == &quot;real&quot; &amp; susie$simulate.censor_lvl == censor_lvl[i])
+  indx = which(susie$simulate.cor_type == &quot;independent&quot; &amp; susie$simulate.censor_lvl == censor_lvl[i])
   pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
   pip.survsvb = unlist(lapply(indx, function(x) svb$svb.pip[[x]]))
   pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
@@ -739,183 +817,44 @@ for (i in 1:5){
   legend(&quot;topleft&quot;, legend = c(&quot;susie&quot;, &quot;survival.svb&quot;, &quot;bvsnlp&quot;, &quot;rss&quot;, &quot;r2b&quot;), col = c(1,2,3,4,5), lty = 1)
 }</code></pre>
 <p><img src="figure/gtex_10iter.Rmd/unnamed-chunk-4-1.png" width="1152" style="display: block; margin: auto;" /></p>
-<p>The dots indicate PIP threshold = 0.95.</p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
+Past versions of unnamed-chunk-4-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-4-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/9bbabc9a1ebb1e6af4876bab13753e1693ce74c5/docs/figure/gtex_10iter.Rmd/unnamed-chunk-4-1.png" target="_blank">9bbabc9</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-11
+</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="results-using-independent-x-with-data-from-null-model."
-class="section level3">
-<h3>3. Results using independent X, with data from null model.</h3>
-<pre class="r"><code>par(mfrow = c(2,3),cex.axis = 1.5)
-censor_lvl = c(0, 0.2, 0.4, 0.6, 0.8)
-
-for (i in 1:5){
-    indx = which(susie$simulate.cor_type == &quot;independent&quot; &amp; susie$simulate.censor_lvl == censor_lvl[i])
-  pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
-  pip.survsvb = unlist(lapply(indx, function(x) svb$svb.pip[[x]]))
-  pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
-  pip.rss = unlist(lapply(indx, function(x) rss$rss.pip[[x]]))
-  pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
-  is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
-  
-  ts = seq(from = 0, to = 1, by = 0.01)
-  res.susie = calculate_tpr_vs_fdr(pip.susie, is_effect, ts)
-  res.svb = calculate_tpr_vs_fdr(pip.survsvb, is_effect, ts)
-  res.bvsnlp = calculate_tpr_vs_fdr(pip.bvsnlp, is_effect, ts)
-  res.rss = calculate_tpr_vs_fdr(pip.rss, is_effect, ts)
-  res.r2b = calculate_tpr_vs_fdr(pip.r2b, is_effect, ts)
-  
-  plot(res.susie[,2], res.susie[,1], type = &quot;l&quot;, xlim = c(0,1), ylim = c(0, 1), xlab = &quot;FDR&quot;, ylab = &quot;Power&quot;,
-       main = paste0(&quot;Real correlation, effect 0-3&quot;, &quot;,censor=&quot;, censor_lvl[i]))
-  lines(res.svb[,2], res.svb[,1], type = &quot;l&quot;, col = 2)
-  lines(res.bvsnlp[,2], res.bvsnlp[,1], type = &quot;l&quot;, col = 3)
-  lines(res.rss[,2], res.rss[,1], type = &quot;l&quot;, col = 4)
-  lines(res.r2b[,2], res.r2b[,1], type = &quot;l&quot;, col = 5)
-  
-  points(res.susie[96,2], res.susie[96, 1])
-  points(res.svb[96,2], res.svb[96, 1])
-  points(res.bvsnlp[96,2], res.bvsnlp[96, 1])
-  points(res.rss[96,2], res.rss[96, 1])
-  points(res.r2b[96,2], res.r2b[96, 1])
-  
-  legend(&quot;topleft&quot;, legend = c(&quot;susie&quot;, &quot;survival.svb&quot;, &quot;bvsnlp&quot;, &quot;rss&quot;, &quot;r2b&quot;), col = c(1,2,3,4,5), lty = 1)
-}</code></pre>
-<p><img src="figure/gtex_10iter.Rmd/unnamed-chunk-5-1.png" width="960" style="display: block; margin: auto;" /></p>
-<p>The dots indicate PIP threshold = 0.95.</p>
 </div>
-<div id="realindependent-x-censoring-0.8." class="section level3">
-<h3>4. Real/independent X, censoring = 0.8.</h3>
-<p>For independent X, susie has ~1-1.5% less power than bvsnlp when fdr
-is around 0.1.</p>
-<pre class="r"><code>par(mfrow = c(1,2))
-censor_lvl = 0.8
-indx = which(susie$simulate.cor_type == &quot;real&quot; &amp; susie$simulate.censor_lvl == censor_lvl)
-pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
-pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
-is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
-  
-ts = seq(from = 0, to = 1, by = 0.01)
-res.susie = calculate_tpr_vs_fdr(pip.susie, is_effect, ts)
-res.bvsnlp = calculate_tpr_vs_fdr(pip.bvsnlp, is_effect, ts)
-  
-  
-plot(res.susie[,2], res.susie[,1], type = &quot;l&quot;, xlim = c(0, 0.4), ylim = c(0,0.2), xlab = &quot;FDR&quot;, ylab = &quot;Power&quot;, main = paste0(&quot;Real X, effect 0-3&quot;, &quot;,censor=&quot;, censor_lvl))
-lines(res.bvsnlp[,2], res.bvsnlp[,1], type = &quot;l&quot;, col = 3)
-points(res.susie[96,2], res.susie[96, 1])
-points(res.bvsnlp[96,2], res.bvsnlp[96, 1])
-legend(&quot;topleft&quot;, legend = c(&quot;susie&quot;, &quot;bvsnlp&quot;), col = c(1,3), lty = 1)
-
-#####
-indx = which(susie$simulate.cor_type == &quot;independent&quot; &amp; susie$simulate.censor_lvl == censor_lvl)
-pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
-pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
-is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
-  
-ts = seq(from = 0, to = 1, by = 0.01)
-res.susie = calculate_tpr_vs_fdr(pip.susie, is_effect, ts)
-res.bvsnlp = calculate_tpr_vs_fdr(pip.bvsnlp, is_effect, ts)
-  
-  
-plot(res.susie[,2], res.susie[,1], type = &quot;l&quot;, xlim = c(0, 0.15), xlab = &quot;FDR&quot;, ylab = &quot;Power&quot;, main = paste0(&quot;X independent, effect 0-3&quot;, &quot;,censor=&quot;, censor_lvl))
-lines(res.bvsnlp[,2], res.bvsnlp[,1], type = &quot;l&quot;, col = 3)
-points(res.susie[96,2], res.susie[96, 1])
-points(res.bvsnlp[96,2], res.bvsnlp[96, 1])
-legend(&quot;bottomright&quot;, legend = c(&quot;susie&quot;, &quot;bvsnlp&quot;), col = c(1,3), lty = 1)</code></pre>
-<p><img src="figure/gtex_10iter.Rmd/unnamed-chunk-6-1.png" width="768" style="display: block; margin: auto;" />
-### 5. Assess Susie CS</p>
-<p>Among the 1000 null data, susie only wrongly output 1 credible set as
-below:</p>
-<pre class="r"><code>indx = which(susie$simulate.num_effect == 0)
-res = lapply(indx, function(x) is.null(susie$susie.cs[[x]]$cs))
-which(res == FALSE)
-susie$susie.cs[[indx[756]]]$cs
-# integer(0)
-# NULL</code></pre>
-<pre class="r"><code>coverage = matrix(NA, ncol = 3, nrow = 5)
-censoring = c(0, 0.2, 0.4, 0.6, 0.8)
-colnames(coverage) = c(&quot;effect:1&quot;, &quot;effect:2&quot;, &quot;effect:3&quot;)
-rownames(coverage) = c(&quot;censor:0&quot;, &quot;censor:0.2&quot;, &quot;censor:0.4&quot;, &quot;censor:0.6&quot;, &quot;censor:0.8&quot;)
-for (i in 1:3){
-  for (j in 1:5){
-    dat_indx = which(susie$simulate.num_effect == i &amp; susie$simulate.censor_lvl == censoring[j] &amp; susie$simulate.cor_type == &quot;real&quot;)
-    coverage[j, i] = calculate_cs_coverage(dat_indx)
-  }
-}
-
-coverage
-#            effect:1 effect:2 effect:3
-# censor:0        NaN      NaN      NaN
-# censor:0.2      NaN      NaN      NaN
-# censor:0.4      NaN      NaN      NaN
-# censor:0.6      NaN      NaN      NaN
-# censor:0.8      NaN      NaN      NaN</code></pre>
-<pre class="r"><code>power_cs = matrix(NA, ncol = 3, nrow = 5)
-censoring = c(0, 0.2, 0.4, 0.6, 0.8)
-colnames(power_cs) = c(&quot;effect:1&quot;, &quot;effect:2&quot;, &quot;effect:3&quot;)
-rownames(power_cs) = c(&quot;censor:0&quot;, &quot;censor:0.2&quot;, &quot;censor:0.4&quot;, &quot;censor:0.6&quot;, &quot;censor:0.8&quot;)
-for (i in 1:3){
-  for (j in 1:5){
-    dat_indx = which(susie$simulate.num_effect == i &amp; susie$simulate.censor_lvl == censoring[j])
-    cs_effect = get_cs_effect(dat_indx, p = 1000)
-    is_effect = unlist(lapply(dat_indx, function(x) susie$simulate.is_effect[[x]]))
-    power = sum(cs_effect ==1 &amp; is_effect == 1)/sum(is_effect)
-    power_cs[j, i] = power
-  }
-}
-
-power_cs
-#            effect:1 effect:2 effect:3
-# censor:0          0        0        0
-# censor:0.2        0        0        0
-# censor:0.4        0        0        0
-# censor:0.6        0        0        0
-# censor:0.8        0        0        0</code></pre>
-<pre class="r"><code>plot(c(0, 0.2, 0.4, 0.6, 0.8), power_cs[,1], pch = 20, ylim = c(0.4, 0.9), lty = 3, type = &quot;b&quot;, xlab = &quot;Censoring level&quot;, ylab = &quot;Power of CSs&quot;)
-lines(c(0, 0.2, 0.4, 0.6, 0.8), power_cs[,2], pch = 20, col = 2, lty = 3, type = &quot;b&quot;)
-lines(c(0, 0.2, 0.4, 0.6, 0.8), power_cs[,3], pch = 20, col = 3, lty = 3, type = &quot;b&quot;)
-legend(&quot;topright&quot;, legend = c(&quot;1 effect&quot;, &quot;2 effects&quot;, &quot;3 effects&quot;), col = c(1, 2, 3), lty = 3)</code></pre>
-<p><img src="figure/gtex_10iter.Rmd/unnamed-chunk-10-1.png" width="384" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>coverage = matrix(NA, ncol = 2, nrow = 5)
-censoring = c(0, 0.2, 0.4, 0.6, 0.8)
-cor_type = c(&quot;real&quot;, &quot;independent&quot;)
-colnames(coverage) = c(&quot;real correlation&quot;, &quot;independent&quot;)
-rownames(coverage) = c(&quot;censor:0&quot;, &quot;censor:0.2&quot;, &quot;censor:0.4&quot;, &quot;censor:0.6&quot;, &quot;censor:0.8&quot;)
-for (i in 1:2){
-  for (j in 1:5){
-    dat_indx = which(susie$simulate.num_effect != 0 &amp; susie$simulate.cor_type == cor_type[i] &amp; susie$simulate.censor_lvl == censoring[j])
-    coverage[j, i] = calculate_cs_coverage(dat_indx)
-  }
-}
-
-coverage
-#            real correlation independent
-# censor:0                NaN         NaN
-# censor:0.2              NaN         NaN
-# censor:0.4              NaN         NaN
-# censor:0.6              NaN         NaN
-# censor:0.8              NaN         NaN</code></pre>
-<pre class="r"><code>plot(c(0, 0.2, 0.4, 0.6, 0.8), coverage[,1], pch = 20, ylim = c(0.9, 1))
-points(c(0, 0.2, 0.4, 0.6, 0.8), coverage[,2])</code></pre>
-<p><img src="figure/gtex_10iter.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>power_cs = matrix(NA, ncol = 2, nrow = 5)
-censoring = c(0, 0.2, 0.4, 0.6, 0.8)
-colnames(power_cs) = c(&quot;real correlation&quot;, &quot;independent&quot;)
-rownames(power_cs) = c(&quot;censor:0&quot;, &quot;censor:0.2&quot;, &quot;censor:0.4&quot;, &quot;censor:0.6&quot;, &quot;censor:0.8&quot;)
-for (i in 1:2){
-  for (j in 1:5){
-    dat_indx = which(susie$simulate.num_effect != 0 &amp; susie$simulate.cor_type == cor_type[i] &amp; susie$simulate.censor_lvl == censoring[j])
-    cs_effect = get_cs_effect(dat_indx, p = 1000)
-    is_effect = unlist(lapply(dat_indx, function(x) susie$simulate.is_effect[[x]]))
-    power = sum(cs_effect ==1 &amp; is_effect == 1)/sum(is_effect)
-    power_cs[j, i] = power
-  }
-}
-
-power_cs
-#            real correlation independent
-# censor:0                  0           0
-# censor:0.2                0           0
-# censor:0.4                0           0
-# censor:0.6                0           0
-# censor:0.8                0           0</code></pre>
+<p>The dots indicate PIP threshold = 0.95.</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
