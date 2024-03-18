@@ -394,7 +394,7 @@ aria-hidden="true"></span> </a>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2024-03-11
+<strong>Last updated:</strong> 2024-03-18
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -551,15 +551,15 @@ code/post_summary.R
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree6ec41c5923041b1ed22e8fa4b26da47935dc6ac2targetblank6ec41c5a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree1f7065849166bbc42b04e088d2686388c37082e8targetblank1f70658a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/6ec41c5923041b1ed22e8fa4b26da47935dc6ac2" target="_blank">6ec41c5</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/1f7065849166bbc42b04e088d2686388c37082e8" target="_blank">1f70658</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree6ec41c5923041b1ed22e8fa4b26da47935dc6ac2targetblank6ec41c5a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree1f7065849166bbc42b04e088d2686388c37082e8targetblank1f70658a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -569,7 +569,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/6ec41c5923041b1ed22e8fa4b26da47935dc6ac2" target="_blank">6ec41c5</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/1f7065849166bbc42b04e088d2686388c37082e8" target="_blank">1f70658</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -633,6 +633,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/1f7065849166bbc42b04e088d2686388c37082e8/analysis/gtex_10iter.Rmd" target="_blank">1f70658</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-18
+</td>
+<td>
+wflow_publish("analysis/gtex_10iter.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/948b4d25f402b1cf5a095fc0b09671ed03a816a9/docs/gtex_10iter.html" target="_blank">948b4d2</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-11
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -847,7 +881,7 @@ for (i in 1:5){
   res.r2b = calculate_tpr_vs_fdr(pip.r2b, is_effect, ts)
   
   plot(res.susie[,2], res.susie[,1], type = &quot;l&quot;, xlim = c(0,1), ylim = c(0, 1), xlab = &quot;FDR&quot;, ylab = &quot;Power&quot;,
-       main = paste0(&quot;Real correlation, effect 0-3&quot;, &quot;,censor=&quot;, censor_lvl[i]))
+       main = paste0(&quot;Independent, effect 0-3&quot;, &quot;,censor=&quot;, censor_lvl[i]))
   lines(res.svb[,2], res.svb[,1], type = &quot;l&quot;, col = 2)
   lines(res.bvsnlp[,2], res.bvsnlp[,1], type = &quot;l&quot;, col = 3)
   lines(res.rss[,2], res.rss[,1], type = &quot;l&quot;, col = 4)
