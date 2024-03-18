@@ -8,6 +8,16 @@ date: '2024-02-12'
 
 Compare PIPs using simulated dataset, where $n=50000$ and $p=1000$.
 
+1. susie: maxiter = 10
+
+2. susie.rss: maxiter = 100
+
+3. surv.svb: maxiter = 100
+
+4. r2b: niter = 50
+
+5. bvsnlp: niter = 30
+
 
 ```{r}
 source("/project2/mstephens/yunqiyang/surv-susie/survival-susie/code/pip.R")
