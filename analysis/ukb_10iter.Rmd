@@ -7,7 +7,7 @@ output: html_document
 
 ### Description:
 
-Version 4 simulation results, comparing power vs. FDR across methods. I vary the threshold for claiming effect variables based on marginal PIP value. Also, I add the time comparison for different methods.
+Comparing power vs. FDR across methods. I vary the threshold for claiming effect variables based on marginal PIP value. Also, I add the time comparison for different methods.
 
 ```{r knitr-opts, include=FALSE}
 knitr::opts_chunk$set(comment = "#",collapse = TRUE,results = "hold",
