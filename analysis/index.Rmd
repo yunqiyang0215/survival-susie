@@ -102,6 +102,10 @@ Real data simulation: GTEx genotype(2024)
 
 + [10 iteration result: power vs. fdr](gtex_10iter.html)
 
++ [Larger iteration result: pip](compare_pip_500iter.html)
+
++ [Larger iteration result: power vs. fdr](gtex_500iter.html)
+
 Real data simulation: UKBiobank genotype
 
 + [PIP Comparison](pip_comparison_large_sample.html)
