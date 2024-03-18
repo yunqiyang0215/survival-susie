@@ -551,15 +551,15 @@ code/post_summary.R
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreef86377eebe9bd17dad9212352fc7356184b67613targetblankf86377ea">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree9f4c215ff114330cee00a0a0a03f0c3e76b8bcc3targetblank9f4c215a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/f86377eebe9bd17dad9212352fc7356184b67613" target="_blank">f86377e</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/9f4c215ff114330cee00a0a0a03f0c3e76b8bcc3" target="_blank">9f4c215</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreef86377eebe9bd17dad9212352fc7356184b67613targetblankf86377ea"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree9f4c215ff114330cee00a0a0a03f0c3e76b8bcc3targetblank9f4c215a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -569,7 +569,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/f86377eebe9bd17dad9212352fc7356184b67613" target="_blank">f86377e</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/9f4c215ff114330cee00a0a0a03f0c3e76b8bcc3" target="_blank">9f4c215</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -588,6 +588,7 @@ Ignored files:
 
 Unstaged changes:
     Modified:   analysis/coxph_na.Rmd
+    Modified:   analysis/index.Rmd
 
 </code></pre>
 <p>
@@ -633,6 +634,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/9f4c215ff114330cee00a0a0a03f0c3e76b8bcc3/analysis/gtex_500iter.Rmd" target="_blank">9f4c215</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-18
+</td>
+<td>
+wflow_publish("analysis/gtex_500iter.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/ee9329760fbfa8b4fb7d96c49896ca7c30ded7da/docs/gtex_500iter.html" target="_blank">ee93297</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-18
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1245,6 +1280,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/ee9329760fbfa8b4fb7d96c49896ca7c30ded7da/docs/figure/gtex_500iter.Rmd/unnamed-chunk-4-1.png" target="_blank">ee93297</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-18
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/8df764342a187c4ed5faeb34323943dd1d23ff6a/docs/figure/gtex_500iter.Rmd/unnamed-chunk-4-1.png" target="_blank">8df7643</a>
 </td>
 <td>
@@ -1262,17 +1308,12 @@ yunqi yang
 </div>
 <div id="time-comparison" class="section level3">
 <h3>3. Time comparison</h3>
-<pre class="r"><code>time = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_niter500/time.rds&quot;)</code></pre>
-<pre class="r"><code>mean(time$susie.DSC_TIME, na.rm = TRUE)
-mean(time$svb.DSC_TIME, na.rm = TRUE)
-mean(time$bvsnlp.DSC_TIME, na.rm = TRUE)
-mean(time$rss.DSC_TIME, na.rm = TRUE)
-mean(time$r2b.DSC_TIME, na.rm = TRUE)
-# [1] 338.5969
-# [1] 134.6251
-# [1] 217.934
-# [1] 6.544555
-# [1] 182.3198</code></pre>
+<pre class="r"><code>res = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_niter500/time_comparison.rds&quot;)</code></pre>
+<pre class="r"><code>t = unlist(lapply(1:length(res), function(i) mean(res[[i]][,5], , na.rm = TRUE)))
+names(t) = c(&quot;susie&quot;, &quot;bvsnlp&quot;, &quot;susie_rss&quot;, &quot;svb&quot;, &quot;r2b&quot;)
+print(t)
+#      susie     bvsnlp  susie_rss        svb        r2b 
+# 338.596893 217.934045   6.544555 134.625127 182.319781</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
