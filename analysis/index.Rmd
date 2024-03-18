@@ -110,7 +110,7 @@ Real data simulation: UKBiobank genotype
 
 + [PIP Comparison](pip_comparison_large_sample.html)
 
-+ [PIP Calibration](calibration_large_sample.html)
++ [Power vs. fdr](ukb_10iter.html)
 
 + [Method comparison](compare_method_large_sample.html)
 
