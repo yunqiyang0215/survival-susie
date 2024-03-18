@@ -113,15 +113,13 @@ The dots indicate PIP threshold = 0.95.
 ### 3. Time comparison
 
 ```{r}
-time = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_niter10/time.rds")
+res = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_niter10/time_comparison.rds")
 ```
 
 ```{r}
-mean(time$susie.DSC_TIME, na.rm = TRUE)
-mean(time$svb.DSC_TIME, na.rm = TRUE)
-mean(time$bvsnlp.DSC_TIME, na.rm = TRUE)
-mean(time$rss.DSC_TIME, na.rm = TRUE)
-mean(time$r2b.DSC_TIME, na.rm = TRUE)
+t = unlist(lapply(1:length(res), function(i) mean(res[[i]][,5], , na.rm = TRUE)))
+names(t) = c("susie", "bvsnlp", "susie_rss", "svb", "r2b")
+print(t)
 ```
 
 
