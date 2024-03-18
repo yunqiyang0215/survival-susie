@@ -370,7 +370,7 @@ div.tocify {
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
 <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-workflowr <span class="glyphicon glyphicon-ok text-success"
+workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
 aria-hidden="true"></span>
 </button>
 </p>
@@ -381,8 +381,8 @@ aria-hidden="true"></span>
 </li>
 <li>
 <a data-toggle="tab" href="#checks"> Checks <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
-</a>
+class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -395,9 +395,9 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 </p>
 <p>
 <strong>Checks:</strong> <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6
 <span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> 0
+aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>survival-susie/</code> <span
@@ -507,30 +507,56 @@ run.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
-<span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongabsolute">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>File paths:</strong> absolute </a>
 </p>
 </div>
-<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div id="strongFilepathsstrongabsolute" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great job! Using relative paths to the files within your workflowr
-project makes it easier to run your code on other machines.</p>
+<p>
+Using absolute paths to the files within your workflowr project makes it
+difficult for you and others to run your code on a different machine.
+Change the absolute path(s) below to the suggested relative path(s) to
+make your code more reproducible.
+</p>
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th style="text-align:left;">
+absolute
+</th>
+<th style="text-align:left;">
+relative
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+/project2/mstephens/yunqiyang/surv-susie/survival-susie/code/pip.R
+</td>
+<td style="text-align:left;">
+code/pip.R
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreeb6fc38b4b39904b07cf19f6f4ed5231b14f5effftargetblankb6fc38ba">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreea755900697a03ff8852a09a200f7f23a8c715250targetblanka755900a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/b6fc38b4b39904b07cf19f6f4ed5231b14f5efff" target="_blank">b6fc38b</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/a755900697a03ff8852a09a200f7f23a8c715250" target="_blank">a755900</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreeb6fc38b4b39904b07cf19f6f4ed5231b14f5effftargetblankb6fc38ba"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreea755900697a03ff8852a09a200f7f23a8c715250targetblanka755900a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -540,7 +566,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/b6fc38b4b39904b07cf19f6f4ed5231b14f5efff" target="_blank">b6fc38b</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/a755900697a03ff8852a09a200f7f23a8c715250" target="_blank">a755900</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -605,6 +631,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/a755900697a03ff8852a09a200f7f23a8c715250/analysis/pip_comparison_large_sample.Rmd" target="_blank">a755900</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-18
+</td>
+<td>
+wflow_publish("analysis/pip_comparison_large_sample.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/069171568e7dbbcea0220cbf1ecf24f1f521da0b/docs/pip_comparison_large_sample.html" target="_blank">0691715</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-18
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -685,101 +745,46 @@ wflow_publish("analysis/pip_comparison_large_sample.Rmd")
 <p>Compare PIPs using simulated dataset, where <span
 class="math inline">\(n=50000\)</span> and <span
 class="math inline">\(p=1000\)</span>.</p>
-<pre class="r"><code>compare_pip &lt;- function(pip1, pip2, is_effect){
-  res = data.frame(cbind(pip1, pip2, is_effect))
-  return(res)
-}
-
-
-plot_pip &lt;- function(res.pip, labs, main){
-  pch = 16
-  cex = ifelse(res.pip$is_effect == 1, 0.75, 1.2)
-  
-  # Plotting the grey circles first
-  grey_indices &lt;- res.pip$is_effect != 1
-  plot(res.pip$pip1[grey_indices], res.pip$pip2[grey_indices], col = &quot;dark grey&quot;, pch = 1, cex = cex[grey_indices], xlab = labs[1], ylab = labs[2], xlim = c(0, 1), ylim = c(0, 1), main = main)
-  
-  red_indices &lt;- res.pip$is_effect == 1
-  points(res.pip$pip1[red_indices], res.pip$pip2[red_indices], col = &quot;red&quot;, pch = pch, cex = cex[red_indices])
-}</code></pre>
+<pre class="r"><code>source(&quot;/project2/mstephens/yunqiyang/surv-susie/survival-susie/code/pip.R&quot;)</code></pre>
 <pre class="r"><code>susie = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/dsc202401/susie.rds&quot;)
 survsvb = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/dsc202401/survsvb.rds&quot;)
 bvsnlp = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/dsc202401/bvsnlp.rds&quot;)
-rss = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/dsc202401/susie_rss.rds&quot;)</code></pre>
+rss = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/dsc202401/susie_rss.rds&quot;)
+r2b = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/dsc202401/r2b.rds&quot;)</code></pre>
+<pre class="r"><code>censor_lvls = unique(susie$simulate.censor_lvl)</code></pre>
 </div>
 <div id="use-the-real-correlation-of-snps" class="section level3">
 <h3>1. Use the real correlation of SNPs</h3>
-<pre class="r"><code>par(mfrow = c(1,3))
-for (num in 1:3){
-  indx = which(susie$simulate.cor_type == &quot;real&quot; &amp; susie$simulate.num_effect == num)
+<pre class="r"><code>par(mfrow = c(6,4))
+for (i in 1:length(censor_lvls)){
+  indx = which(susie$simulate.cor_type == &quot;real&quot; &amp; susie$simulate.censor_lvl == censor_lvls[i])
   pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
-  pip.survsvb = unlist(lapply(indx, function(x) survsvb$svb.pip[[x]]))
-  is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
-
-  res.pip = compare_pip(pip.susie, pip.survsvb, is_effect)
-  plot_pip(res.pip, labs = c(&quot;susie&quot;, &quot;survival.svb&quot;), main = paste0(num, &quot; effect, max corr=0.9-0.99&quot;))
-}</code></pre>
-<p><img src="figure/pip_comparison_large_sample.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-3-1">
-Past versions of unnamed-chunk-3-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-3-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/yunqiyang0215/survival-susie/blob/e08d6f05c3e5733be5d1f32167045c3129e8a772/docs/figure/pip_comparison_large_sample.Rmd/unnamed-chunk-3-1.png" target="_blank">e08d6f0</a>
-</td>
-<td>
-yunqi yang
-</td>
-<td>
-2024-02-12
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/yunqiyang0215/survival-susie/blob/c36cb5a8447da816bcdc65fee103a95e1461143a/docs/figure/pip_comparison_large_sample.Rmd/unnamed-chunk-3-1.png" target="_blank">c36cb5a</a>
-</td>
-<td>
-yunqi yang
-</td>
-<td>
-2024-02-12
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>par(mfrow = c(1,3))
-for (num in 1:3){
-  indx = which(susie$simulate.cor_type == &quot;real&quot; &amp; susie$simulate.num_effect == num)
-  pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+  pip.svb = unlist(lapply(indx, function(x) survsvb$svb.pip[[x]]))
   pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+  pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
+  pip.rss = unlist(lapply(indx, function(x) rss$susie_rss.pip[[x]]))
+  
   is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
 
-  res.pip = compare_pip(pip.susie, pip.bvsnlp, is_effect)
-  plot_pip(res.pip, labs = c(&quot;susie&quot;, &quot;bvsnlp&quot;), main = paste0(num, &quot; effect, max corr=0.9-0.99&quot;))
+
+  res.pip = compare_pip(pip.susie, pip.svb, is_effect)
+  plot_pip(res.pip, labs = c(&quot;susie&quot;, &quot;survival.svb&quot;), main = paste0(&quot;censor=&quot;,censor_lvls[i]))
   abline(a = 0, b = 1, lty = 2, col = &quot;blue&quot;)
+  
+  res.pip = compare_pip(pip.susie, pip.bvsnlp, is_effect)
+  plot_pip(res.pip, labs = c(&quot;susie&quot;, &quot;bvsnlp&quot;), main = paste0(&quot;censor=&quot;,censor_lvls[i]))
+  abline(a = 0, b = 1, lty = 2, col = &quot;blue&quot;)
+  
+  res.pip = compare_pip(pip.susie, pip.r2b, is_effect)
+  plot_pip(res.pip, labs = c(&quot;susie&quot;, &quot;r2b&quot;), main = paste0(&quot;censor=&quot;,censor_lvls[i]))
+  abline(a = 0, b = 1, lty = 2, col = &quot;blue&quot;)
+  
+  res.pip = compare_pip(pip.susie, pip.rss, is_effect)
+  plot_pip(res.pip, labs = c(&quot;susie&quot;, &quot;rss&quot;), main = paste0(&quot;censor=&quot;,censor_lvls[i]))
+  abline(a = 0, b = 1, lty = 2, col = &quot;blue&quot;)
+  
 }</code></pre>
-<p><img src="figure/pip_comparison_large_sample.Rmd/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/pip_comparison_large_sample.Rmd/unnamed-chunk-4-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
 Past versions of unnamed-chunk-4-1.png
@@ -804,6 +809,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/069171568e7dbbcea0220cbf1ecf24f1f521da0b/docs/figure/pip_comparison_large_sample.Rmd/unnamed-chunk-4-1.png" target="_blank">0691715</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-18
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/c36cb5a8447da816bcdc65fee103a95e1461143a/docs/figure/pip_comparison_large_sample.Rmd/unnamed-chunk-4-1.png" target="_blank">c36cb5a</a>
 </td>
 <td>
@@ -817,18 +833,37 @@ yunqi yang
 </table>
 </div>
 </div>
-<pre class="r"><code>par(mfrow = c(1,3))
-for (num in 1:3){
-  indx = which(susie$simulate.cor_type == &quot;real&quot; &amp; susie$simulate.num_effect == num)
+<pre class="r"><code>par(mfrow = c(6,5))
+for (i in 1:length(censor_lvls)){
+  indx = which(bvsnlp$simulate.cor_type == &quot;real&quot; &amp; bvsnlp$simulate.censor_lvl == censor_lvls[i])
+  is_effect = unlist(lapply(indx, function(x) bvsnlp$simulate.is_effect[[x]]))
   pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+  pip.survsvb = unlist(lapply(indx, function(x) survsvb$svb.pip[[x]]))
+  pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
   pip.rss = unlist(lapply(indx, function(x) rss$susie_rss.pip[[x]]))
-  is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
-
-  res.pip = compare_pip(pip.susie, pip.rss, is_effect)
-  plot_pip(res.pip, labs = c(&quot;susie&quot;, &quot;susie.rss&quot;), main = paste0(num, &quot; effect, max corr=0.9-0.99&quot;))
-  abline(a = 0, b = 1, lty = 2, col = &quot;blue&quot;)
+  pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
+  
+  # Calibration plot for pip.susie
+  calibration.susie = pip_calibration(pip.susie, is_effect)
+  plot_calibration(calibration.susie, main = paste0(&quot;susie: censor=&quot;, censor_lvls[i]))
+  
+  # Calibration plot for pip.svb
+  calibration.survsvb = pip_calibration(pip.survsvb, is_effect)
+  plot_calibration(calibration.survsvb, main = paste0(&quot;svb: censor=&quot;, censor_lvls[i]))
+  
+  # Calibration plot for pip.bvsnlp
+  calibration.bvsnlp = pip_calibration(pip.bvsnlp, is_effect)
+  plot_calibration(calibration.bvsnlp, main = paste0(&quot;bvsnlp: censor=&quot;, censor_lvls[i]))
+  
+  # Calibration plot for pip.rss
+  calibration.rss = pip_calibration(pip.rss, is_effect)
+  plot_calibration(calibration.rss, main = paste0(&quot;rss: censor=&quot;, censor_lvls[i]))
+  
+  # Calibration plot for pip.r2b
+  calibration.r2b = pip_calibration(pip.r2b, is_effect)
+  plot_calibration(calibration.r2b, main = paste0(&quot;r2b: censor=&quot;, censor_lvls[i]))
 }</code></pre>
-<p><img src="figure/pip_comparison_large_sample.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/pip_comparison_large_sample.Rmd/unnamed-chunk-5-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
 Past versions of unnamed-chunk-5-1.png
@@ -853,6 +888,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/069171568e7dbbcea0220cbf1ecf24f1f521da0b/docs/figure/pip_comparison_large_sample.Rmd/unnamed-chunk-5-1.png" target="_blank">0691715</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-18
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/e08d6f05c3e5733be5d1f32167045c3129e8a772/docs/figure/pip_comparison_large_sample.Rmd/unnamed-chunk-5-1.png" target="_blank">e08d6f0</a>
 </td>
 <td>
@@ -869,18 +915,36 @@ yunqi yang
 </div>
 <div id="near-independent-snps" class="section level3">
 <h3>2. Near independent SNPs</h3>
-<pre class="r"><code>par(mfrow = c(1,3))
-for (num in 1:3){
-  indx = which(susie$simulate.cor_type == &quot;independent&quot; &amp; susie$simulate.num_effect == num)
+<pre class="r"><code>par(mfrow = c(6,4))
+for (i in 1:length(censor_lvls)){
+  indx = which(susie$simulate.cor_type == &quot;independent&quot; &amp; susie$simulate.censor_lvl == censor_lvls[i])
   pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
-  pip.survsvb = unlist(lapply(indx, function(x) survsvb$svb.pip[[x]]))
+  pip.svb = unlist(lapply(indx, function(x) survsvb$svb.pip[[x]]))
+  pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+  pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
+  pip.rss = unlist(lapply(indx, function(x) rss$susie_rss.pip[[x]]))
+  
   is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
 
-  res.pip = compare_pip(pip.susie, pip.survsvb, is_effect)
-  plot_pip(res.pip, labs = c(&quot;susie&quot;, &quot;survival.svb&quot;), main = paste0(num, &quot; effect, X close to independent&quot;))
+
+  res.pip = compare_pip(pip.susie, pip.svb, is_effect)
+  plot_pip(res.pip, labs = c(&quot;susie&quot;, &quot;survival.svb&quot;), main = paste0(&quot;censor=&quot;,censor_lvls[i]))
   abline(a = 0, b = 1, lty = 2, col = &quot;blue&quot;)
+  
+  res.pip = compare_pip(pip.susie, pip.bvsnlp, is_effect)
+  plot_pip(res.pip, labs = c(&quot;susie&quot;, &quot;bvsnlp&quot;), main = paste0(&quot;censor=&quot;,censor_lvls[i]))
+  abline(a = 0, b = 1, lty = 2, col = &quot;blue&quot;)
+  
+  res.pip = compare_pip(pip.susie, pip.r2b, is_effect)
+  plot_pip(res.pip, labs = c(&quot;susie&quot;, &quot;r2b&quot;), main = paste0(&quot;censor=&quot;,censor_lvls[i]))
+  abline(a = 0, b = 1, lty = 2, col = &quot;blue&quot;)
+  
+  res.pip = compare_pip(pip.susie, pip.rss, is_effect)
+  plot_pip(res.pip, labs = c(&quot;susie&quot;, &quot;rss&quot;), main = paste0(&quot;censor=&quot;,censor_lvls[i]))
+  abline(a = 0, b = 1, lty = 2, col = &quot;blue&quot;)
+  
 }</code></pre>
-<p><img src="figure/pip_comparison_large_sample.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/pip_comparison_large_sample.Rmd/unnamed-chunk-6-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
 Past versions of unnamed-chunk-6-1.png
@@ -905,6 +969,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/069171568e7dbbcea0220cbf1ecf24f1f521da0b/docs/figure/pip_comparison_large_sample.Rmd/unnamed-chunk-6-1.png" target="_blank">0691715</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-18
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/e08d6f05c3e5733be5d1f32167045c3129e8a772/docs/figure/pip_comparison_large_sample.Rmd/unnamed-chunk-6-1.png" target="_blank">e08d6f0</a>
 </td>
 <td>
@@ -918,17 +993,37 @@ yunqi yang
 </table>
 </div>
 </div>
-<pre class="r"><code>par(mfrow = c(1,3))
-for (num in 1:3){
-  indx = which(susie$simulate.cor_type == &quot;independent&quot; &amp; susie$simulate.num_effect == num)
+<pre class="r"><code>par(mfrow = c(6,5))
+for (i in 1:length(censor_lvls)){
+  indx = which(bvsnlp$simulate.cor_type == &quot;independent&quot; &amp; bvsnlp$simulate.censor_lvl == censor_lvls[i])
+  is_effect = unlist(lapply(indx, function(x) bvsnlp$simulate.is_effect[[x]]))
   pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+  pip.survsvb = unlist(lapply(indx, function(x) survsvb$svb.pip[[x]]))
   pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
-  is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
-  res.pip = compare_pip(pip.susie, pip.survsvb, is_effect)
-  plot_pip(res.pip, labs = c(&quot;susie&quot;, &quot;bvsnlp&quot;), main = paste0(num, &quot; effect, X close to independent&quot;))
-  abline(a = 0, b = 1, lty = 2, col = &quot;blue&quot;)
+  pip.rss = unlist(lapply(indx, function(x) rss$susie_rss.pip[[x]]))
+  pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
+  
+  # Calibration plot for pip.susie
+  calibration.susie = pip_calibration(pip.susie, is_effect)
+  plot_calibration(calibration.susie, main = paste0(&quot;susie: censor=&quot;, censor_lvls[i]))
+  
+  # Calibration plot for pip.svb
+  calibration.survsvb = pip_calibration(pip.survsvb, is_effect)
+  plot_calibration(calibration.survsvb, main = paste0(&quot;svb: censor=&quot;, censor_lvls[i]))
+  
+  # Calibration plot for pip.bvsnlp
+  calibration.bvsnlp = pip_calibration(pip.bvsnlp, is_effect)
+  plot_calibration(calibration.bvsnlp, main = paste0(&quot;bvsnlp: censor=&quot;, censor_lvls[i]))
+  
+  # Calibration plot for pip.rss
+  calibration.rss = pip_calibration(pip.rss, is_effect)
+  plot_calibration(calibration.rss, main = paste0(&quot;rss: censor=&quot;, censor_lvls[i]))
+  
+  # Calibration plot for pip.r2b
+  calibration.r2b = pip_calibration(pip.r2b, is_effect)
+  plot_calibration(calibration.r2b, main = paste0(&quot;r2b: censor=&quot;, censor_lvls[i]))
 }</code></pre>
-<p><img src="figure/pip_comparison_large_sample.Rmd/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/pip_comparison_large_sample.Rmd/unnamed-chunk-7-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-1">
 Past versions of unnamed-chunk-7-1.png
@@ -953,56 +1048,18 @@ Date
 <tbody>
 <tr>
 <td>
-<a href="https://github.com/yunqiyang0215/survival-susie/blob/e08d6f05c3e5733be5d1f32167045c3129e8a772/docs/figure/pip_comparison_large_sample.Rmd/unnamed-chunk-7-1.png" target="_blank">e08d6f0</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/069171568e7dbbcea0220cbf1ecf24f1f521da0b/docs/figure/pip_comparison_large_sample.Rmd/unnamed-chunk-7-1.png" target="_blank">0691715</a>
 </td>
 <td>
 yunqi yang
 </td>
 <td>
-2024-02-12
+2024-03-18
 </td>
 </tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>par(mfrow = c(1,3))
-for (num in 1:3){
-  indx = which(susie$simulate.cor_type == &quot;independent&quot; &amp; susie$simulate.num_effect == num)
-  pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
-  pip.rss = unlist(lapply(indx, function(x) rss$susie_rss.pip[[x]]))
-  is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
-
-  res.pip = compare_pip(pip.susie, pip.rss, is_effect)
-  plot_pip(res.pip, labs = c(&quot;susie&quot;, &quot;susie.rss&quot;), main = paste0(num, &quot; effect, max corr=0.9-0.99&quot;))
-  abline(a = 0, b = 1, lty = 2, col = &quot;blue&quot;)
-}</code></pre>
-<p><img src="figure/pip_comparison_large_sample.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-8-1">
-Past versions of unnamed-chunk-8-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-8-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
 <tr>
 <td>
-<a href="https://github.com/yunqiyang0215/survival-susie/blob/e08d6f05c3e5733be5d1f32167045c3129e8a772/docs/figure/pip_comparison_large_sample.Rmd/unnamed-chunk-8-1.png" target="_blank">e08d6f0</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/e08d6f05c3e5733be5d1f32167045c3129e8a772/docs/figure/pip_comparison_large_sample.Rmd/unnamed-chunk-7-1.png" target="_blank">e08d6f0</a>
 </td>
 <td>
 yunqi yang
