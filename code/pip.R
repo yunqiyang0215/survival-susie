@@ -6,9 +6,12 @@ pip_calibration <- function(pips, is_effect){
     lo = ts[i]
     up = lo + 0.1
     indx = which(pips >= lo & pips <= up)
-    res[i, 1] = lo
-    res[i, 2] = mean(pips[indx])
-    res[i, 3] = sum(is_effect[indx])/ length(indx)
+    # if observations are too few in the range, skip it.
+    if (length(indx) > 10){
+      res[i, 1] = lo
+      res[i, 2] = mean(pips[indx])
+      res[i, 3] = sum(is_effect[indx])/ length(indx)
+    }
   }
   # when there is no pip in the certain range
   res2 = na.omit(res)
