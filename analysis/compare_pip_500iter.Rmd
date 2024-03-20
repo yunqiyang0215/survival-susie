@@ -87,6 +87,8 @@ for (i in 1:length(censor_lvls)){
 ```
 
 
+### Note: ranges with less than 10 observations are removed...
+
 ```{r fig.width= 12, fig.height=10}
 par(mfrow = c(2,3))
 indx = which(bvsnlp$simulate.cor_type == "real")
