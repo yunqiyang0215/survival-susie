@@ -13,11 +13,11 @@ Simulation results based on real genotype data from GTEx. I took the SNPs for a 
 
 1. Select a random point on the genome, indx_start. Then the predictors are from [indx_start:(indx_start + p -1)]. 
 
-2. Two correlation types: real correlation and independent. In independent, I simply permute each variable values. The max correlation can be 0.3, but a lot of correlation will be close to 0. 
+2. Two correlation types: real correlation and independent. In independent, I simply permute each variable values randomly.
 
-4. Effect size $b\sim N(0,1)$.
+3. Effect size $b\sim N(0,1)$.
 
-5. Simulate survival time using exponential survival model. 
+4. Simulate survival time using exponential survival model. 
 
 
 #### Fitting:
@@ -87,7 +87,7 @@ for (i in 1:length(censor_lvls)){
 ```
 
 
-```{r fig.width= 12, fig.height=6}
+```{r fig.width= 12, fig.height=10}
 par(mfrow = c(2,3))
 indx = which(bvsnlp$simulate.cor_type == "real")
 is_effect = unlist(lapply(indx, function(x) bvsnlp$simulate.is_effect[[x]]))
@@ -99,27 +99,27 @@ pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
   
 # Calibration plot for pip.susie
 calibration.susie = pip_calibration(pip.susie, is_effect)
-plot_calibration(calibration.susie, main = paste0("susie: censor=", censor_lvls[i]))
+plot_calibration(calibration.susie, main = "susie")
   
 # Calibration plot for pip.svb
 calibration.survsvb = pip_calibration(pip.survsvb, is_effect)
-plot_calibration(calibration.survsvb, main = paste0("svb: censor=", censor_lvls[i]))
+plot_calibration(calibration.survsvb, main = "svb")
   
 # Calibration plot for pip.bvsnlp
 calibration.bvsnlp = pip_calibration(pip.bvsnlp, is_effect)
-plot_calibration(calibration.bvsnlp, main = paste0("bvsnlp: censor=", censor_lvls[i]))
+plot_calibration(calibration.bvsnlp, main = "bvsnlp")
   
 # Calibration plot for pip.rss
 calibration.rss = pip_calibration(pip.rss, is_effect)
-plot_calibration(calibration.rss, main = paste0("rss: censor=", censor_lvls[i]))
+plot_calibration(calibration.rss, main = "rss")
   
 # Calibration plot for pip.r2b
 calibration.r2b = pip_calibration(pip.r2b, is_effect)
-plot_calibration(calibration.r2b, main = paste0("r2b: censor=", censor_lvls[i]))
+plot_calibration(calibration.r2b, main = "r2b")
 
 ```
 
-### 2. Near independent SNPs
+### 2. Independent SNPs
 
 ```{r fig.width= 12, fig.height=18}
 par(mfrow = c(5,4))
@@ -153,7 +153,7 @@ for (i in 1:length(censor_lvls)){
 }
 ```
 
-```{r fig.width= 12, fig.height=6}
+```{r fig.width= 12, fig.height=10}
 par(mfrow = c(2,3))
 indx = which(bvsnlp$simulate.cor_type == "independent")
 is_effect = unlist(lapply(indx, function(x) bvsnlp$simulate.is_effect[[x]]))
@@ -165,22 +165,22 @@ pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
   
 # Calibration plot for pip.susie
 calibration.susie = pip_calibration(pip.susie, is_effect)
-plot_calibration(calibration.susie, main = paste0("susie: censor=", censor_lvls[i]))
+plot_calibration(calibration.susie, main = "susie")
   
 # Calibration plot for pip.svb
 calibration.survsvb = pip_calibration(pip.survsvb, is_effect)
-plot_calibration(calibration.survsvb, main = paste0("svb: censor=", censor_lvls[i]))
+plot_calibration(calibration.survsvb, main = "svb")
   
 # Calibration plot for pip.bvsnlp
 calibration.bvsnlp = pip_calibration(pip.bvsnlp, is_effect)
-plot_calibration(calibration.bvsnlp, main = paste0("bvsnlp: censor=", censor_lvls[i]))
+plot_calibration(calibration.bvsnlp, main = "bvsnlp")
   
 # Calibration plot for pip.rss
 calibration.rss = pip_calibration(pip.rss, is_effect)
-plot_calibration(calibration.rss, main = paste0("rss: censor=", censor_lvls[i]))
+plot_calibration(calibration.rss, main = "rss")
   
 # Calibration plot for pip.r2b
 calibration.r2b = pip_calibration(pip.r2b, is_effect)
-plot_calibration(calibration.r2b, main = paste0("r2b: censor=", censor_lvls[i]))
+plot_calibration(calibration.r2b, main = "r2b")
 
 ```
