@@ -19,11 +19,11 @@ source("/project2/mstephens/yunqiyang/surv-susie/survival-susie/code/post_summar
 ```
 
 ```{r}
-susie = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_niter500/susie.rds")
-svb = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_niter500/svb.rds")
-bvsnlp = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_niter500/bvsnlp.rds")
-r2b = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_niter500/r2b.rds")
-rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_niter500/rss.rds")
+susie = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_default_iter/susie.rds")
+svb = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_default_iter/svb.rds")
+bvsnlp = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_default_iter/bvsnlp.rds")
+r2b = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_default_iter/r2b.rds")
+rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_default_iter/rss.rds")
 ```
 
 ### 1. Results using real correlation structure from data
@@ -113,7 +113,7 @@ The dots indicate PIP threshold = 0.95.
 ### 3. Time comparison
 
 ```{r}
-res = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_niter500/time_comparison.rds")
+res = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_default_iter/time_comparison.rds")
 ```
 
 ```{r}
