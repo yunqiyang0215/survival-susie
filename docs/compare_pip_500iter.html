@@ -550,15 +550,15 @@ code/pip.R
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree4bd96457f781ae62ee2c9ecfa1bedc7df5e279f2targetblank4bd9645a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreec141d2c535c9f03d361d6fca7fec7cb071d62995targetblankc141d2ca">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/4bd96457f781ae62ee2c9ecfa1bedc7df5e279f2" target="_blank">4bd9645</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/c141d2c535c9f03d361d6fca7fec7cb071d62995" target="_blank">c141d2c</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree4bd96457f781ae62ee2c9ecfa1bedc7df5e279f2targetblank4bd9645a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreec141d2c535c9f03d361d6fca7fec7cb071d62995targetblankc141d2ca"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -568,7 +568,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/4bd96457f781ae62ee2c9ecfa1bedc7df5e279f2" target="_blank">4bd9645</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/c141d2c535c9f03d361d6fca7fec7cb071d62995" target="_blank">c141d2c</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -633,6 +633,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/c141d2c535c9f03d361d6fca7fec7cb071d62995/analysis/compare_pip_500iter.Rmd" target="_blank">c141d2c</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-19
+</td>
+<td>
+wflow_publish("analysis/compare_pip_500iter.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/fccf83b3c71837527343ed04feae72bc3b5df234/docs/compare_pip_500iter.html" target="_blank">fccf83b</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-19
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -842,7 +876,7 @@ yunqi yang
 </table>
 </div>
 </div>
-<pre class="r"><code>
+<pre class="r"><code>par(mfrow = c(1,5))
 indx = which(bvsnlp$simulate.cor_type == &quot;real&quot;)
 is_effect = unlist(lapply(indx, function(x) bvsnlp$simulate.is_effect[[x]]))
 pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
@@ -853,7 +887,23 @@ pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
   
 # Calibration plot for pip.susie
 calibration.susie = pip_calibration(pip.susie, is_effect)
-plot_calibration(calibration.susie, main = paste0(&quot;susie: censor=&quot;, censor_lvls[i]))</code></pre>
+plot_calibration(calibration.susie, main = paste0(&quot;susie: censor=&quot;, censor_lvls[i]))
+  
+# Calibration plot for pip.svb
+calibration.survsvb = pip_calibration(pip.survsvb, is_effect)
+plot_calibration(calibration.survsvb, main = paste0(&quot;svb: censor=&quot;, censor_lvls[i]))
+  
+# Calibration plot for pip.bvsnlp
+calibration.bvsnlp = pip_calibration(pip.bvsnlp, is_effect)
+plot_calibration(calibration.bvsnlp, main = paste0(&quot;bvsnlp: censor=&quot;, censor_lvls[i]))
+  
+# Calibration plot for pip.rss
+calibration.rss = pip_calibration(pip.rss, is_effect)
+plot_calibration(calibration.rss, main = paste0(&quot;rss: censor=&quot;, censor_lvls[i]))
+  
+# Calibration plot for pip.r2b
+calibration.r2b = pip_calibration(pip.r2b, is_effect)
+plot_calibration(calibration.r2b, main = paste0(&quot;r2b: censor=&quot;, censor_lvls[i]))</code></pre>
 <p><img src="figure/compare_pip_500iter.Rmd/unnamed-chunk-5-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
@@ -877,6 +927,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/fccf83b3c71837527343ed04feae72bc3b5df234/docs/figure/compare_pip_500iter.Rmd/unnamed-chunk-5-1.png" target="_blank">fccf83b</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-19
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/375d706843c4e2856112420007e940b1ee2a3aab/docs/figure/compare_pip_500iter.Rmd/unnamed-chunk-5-1.png" target="_blank">375d706</a>
@@ -903,26 +964,6 @@ yunqi yang
 </table>
 </div>
 </div>
-<pre class="r"><code>  
-# Calibration plot for pip.svb
-calibration.survsvb = pip_calibration(pip.survsvb, is_effect)
-plot_calibration(calibration.survsvb, main = paste0(&quot;svb: censor=&quot;, censor_lvls[i]))</code></pre>
-<p><img src="figure/compare_pip_500iter.Rmd/unnamed-chunk-5-2.png" width="1152" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>  
-# Calibration plot for pip.bvsnlp
-calibration.bvsnlp = pip_calibration(pip.bvsnlp, is_effect)
-plot_calibration(calibration.bvsnlp, main = paste0(&quot;bvsnlp: censor=&quot;, censor_lvls[i]))</code></pre>
-<p><img src="figure/compare_pip_500iter.Rmd/unnamed-chunk-5-3.png" width="1152" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>  
-# Calibration plot for pip.rss
-calibration.rss = pip_calibration(pip.rss, is_effect)
-plot_calibration(calibration.rss, main = paste0(&quot;rss: censor=&quot;, censor_lvls[i]))</code></pre>
-<p><img src="figure/compare_pip_500iter.Rmd/unnamed-chunk-5-4.png" width="1152" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>  
-# Calibration plot for pip.r2b
-calibration.r2b = pip_calibration(pip.r2b, is_effect)
-plot_calibration(calibration.r2b, main = paste0(&quot;r2b: censor=&quot;, censor_lvls[i]))</code></pre>
-<p><img src="figure/compare_pip_500iter.Rmd/unnamed-chunk-5-5.png" width="1152" style="display: block; margin: auto;" /></p>
 </div>
 <div id="near-independent-snps" class="section level3">
 <h3>2. Near independent SNPs</h3>
@@ -1004,7 +1045,7 @@ yunqi yang
 </table>
 </div>
 </div>
-<pre class="r"><code>
+<pre class="r"><code>par(mfrow = c(1,5))
 indx = which(bvsnlp$simulate.cor_type == &quot;independent&quot;)
 is_effect = unlist(lapply(indx, function(x) bvsnlp$simulate.is_effect[[x]]))
 pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
@@ -1015,7 +1056,23 @@ pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
   
 # Calibration plot for pip.susie
 calibration.susie = pip_calibration(pip.susie, is_effect)
-plot_calibration(calibration.susie, main = paste0(&quot;susie: censor=&quot;, censor_lvls[i]))</code></pre>
+plot_calibration(calibration.susie, main = paste0(&quot;susie: censor=&quot;, censor_lvls[i]))
+  
+# Calibration plot for pip.svb
+calibration.survsvb = pip_calibration(pip.survsvb, is_effect)
+plot_calibration(calibration.survsvb, main = paste0(&quot;svb: censor=&quot;, censor_lvls[i]))
+  
+# Calibration plot for pip.bvsnlp
+calibration.bvsnlp = pip_calibration(pip.bvsnlp, is_effect)
+plot_calibration(calibration.bvsnlp, main = paste0(&quot;bvsnlp: censor=&quot;, censor_lvls[i]))
+  
+# Calibration plot for pip.rss
+calibration.rss = pip_calibration(pip.rss, is_effect)
+plot_calibration(calibration.rss, main = paste0(&quot;rss: censor=&quot;, censor_lvls[i]))
+  
+# Calibration plot for pip.r2b
+calibration.r2b = pip_calibration(pip.r2b, is_effect)
+plot_calibration(calibration.r2b, main = paste0(&quot;r2b: censor=&quot;, censor_lvls[i]))</code></pre>
 <p><img src="figure/compare_pip_500iter.Rmd/unnamed-chunk-7-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-1">
@@ -1039,6 +1096,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/fccf83b3c71837527343ed04feae72bc3b5df234/docs/figure/compare_pip_500iter.Rmd/unnamed-chunk-7-1.png" target="_blank">fccf83b</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-19
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/375d706843c4e2856112420007e940b1ee2a3aab/docs/figure/compare_pip_500iter.Rmd/unnamed-chunk-7-1.png" target="_blank">375d706</a>
@@ -1065,26 +1133,6 @@ yunqi yang
 </table>
 </div>
 </div>
-<pre class="r"><code>  
-# Calibration plot for pip.svb
-calibration.survsvb = pip_calibration(pip.survsvb, is_effect)
-plot_calibration(calibration.survsvb, main = paste0(&quot;svb: censor=&quot;, censor_lvls[i]))</code></pre>
-<p><img src="figure/compare_pip_500iter.Rmd/unnamed-chunk-7-2.png" width="1152" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>  
-# Calibration plot for pip.bvsnlp
-calibration.bvsnlp = pip_calibration(pip.bvsnlp, is_effect)
-plot_calibration(calibration.bvsnlp, main = paste0(&quot;bvsnlp: censor=&quot;, censor_lvls[i]))</code></pre>
-<p><img src="figure/compare_pip_500iter.Rmd/unnamed-chunk-7-3.png" width="1152" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>  
-# Calibration plot for pip.rss
-calibration.rss = pip_calibration(pip.rss, is_effect)
-plot_calibration(calibration.rss, main = paste0(&quot;rss: censor=&quot;, censor_lvls[i]))</code></pre>
-<p><img src="figure/compare_pip_500iter.Rmd/unnamed-chunk-7-4.png" width="1152" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>  
-# Calibration plot for pip.r2b
-calibration.r2b = pip_calibration(pip.r2b, is_effect)
-plot_calibration(calibration.r2b, main = paste0(&quot;r2b: censor=&quot;, censor_lvls[i]))</code></pre>
-<p><img src="figure/compare_pip_500iter.Rmd/unnamed-chunk-7-5.png" width="1152" style="display: block; margin: auto;" /></p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
