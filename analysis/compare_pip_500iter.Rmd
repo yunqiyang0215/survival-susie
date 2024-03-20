@@ -1,5 +1,5 @@
 ---
-title: "Compare PIPs: small sample with more iterations"
+title: "Compare PIPs: small sample with default iterations"
 author: "Yunqi Yang"
 date: "4/6/2023"
 output: html_document
@@ -22,13 +22,15 @@ Simulation results based on real genotype data from GTEx. I took the SNPs for a 
 
 #### Fitting:
 
-1. susie: $L=5$ and estimate prior covariance. niter = 500.
+All the methods were set to default number of iterations. 
 
-2. bvsnlp: niter = 500.
+1. susie & susie rss: $L=5$ and estimate prior covariance. niter = 100. 
 
-3. survival svb and susie rss: niter = 1000
+2. bvsnlp: niter = 30.
 
-4. r2b was set to default number of iterations
+3. survival.svb: niter = 1000
+
+4. r2b: 1e6
 
 
 ```{r knitr, echo=FALSE}
@@ -41,11 +43,11 @@ source("/project2/mstephens/yunqiyang/surv-susie/survival-susie/code/pip.R")
 ```
 
 ```{r}
-susie = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_niter500/susie.rds")
-svb = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_niter500/svb.rds")
-bvsnlp = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_niter500/bvsnlp.rds")
-r2b = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_niter500/r2b.rds")
-rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_niter500/rss.rds")
+susie = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_default_iter/susie.rds")
+svb = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_default_iter/svb.rds")
+bvsnlp = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_default_iter/bvsnlp.rds")
+r2b = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_default_iter/r2b.rds")
+rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_default_iter/rss.rds")
 ```
 
 ```{r}
