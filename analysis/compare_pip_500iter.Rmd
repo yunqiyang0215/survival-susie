@@ -88,7 +88,7 @@ for (i in 1:length(censor_lvls)){
 
 
 ```{r fig.width= 12, fig.height=6}
-par(mfrow = c(1,5))
+par(mfrow = c(2,3))
 indx = which(bvsnlp$simulate.cor_type == "real")
 is_effect = unlist(lapply(indx, function(x) bvsnlp$simulate.is_effect[[x]]))
 pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
@@ -154,7 +154,7 @@ for (i in 1:length(censor_lvls)){
 ```
 
 ```{r fig.width= 12, fig.height=6}
-par(mfrow = c(1,5))
+par(mfrow = c(2,3))
 indx = which(bvsnlp$simulate.cor_type == "independent")
 is_effect = unlist(lapply(indx, function(x) bvsnlp$simulate.is_effect[[x]]))
 pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
