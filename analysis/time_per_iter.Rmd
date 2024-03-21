@@ -8,12 +8,14 @@ date: '2024-02-08'
 
 Documenting per iteration time across different methods. $n=50000$ and $p=1000$.
 
+The time below is calculated as the different between elapsed time(2 iter) - elapsed time(1 iter). 
+
 ```{r}
 res = readRDS("/project2/mstephens/yunqiyang/surv-susie/time_comparison202402/time_comparison.rds")
 ```
 
 ```{r}
-t = unlist(lapply(1:length(res), function(i) mean(res[[i]][,5])))
+t = unlist(lapply(1:length(res), function(i) mean(res[[i]][,5], na.rm = TRUE)))
 names(t) = c("susie", "bvsnlp", "susie_rss", "svb", "r2b")
 print(t)
 ```
