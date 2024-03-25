@@ -372,7 +372,7 @@ div.tocify {
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
 <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-workflowr <span class="glyphicon glyphicon-ok text-success"
+workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
 aria-hidden="true"></span>
 </button>
 </p>
@@ -383,8 +383,8 @@ aria-hidden="true"></span>
 </li>
 <li>
 <a data-toggle="tab" href="#checks"> Checks <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
-</a>
+class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -393,13 +393,13 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2024-02-11
+<strong>Last updated:</strong> 2024-03-25
 </p>
 <p>
 <strong>Checks:</strong> <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6
 <span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> 0
+aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>survival-susie/</code> <span
@@ -509,30 +509,56 @@ run.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
-<span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongabsolute">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>File paths:</strong> absolute </a>
 </p>
 </div>
-<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div id="strongFilepathsstrongabsolute" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great job! Using relative paths to the files within your workflowr
-project makes it easier to run your code on other machines.</p>
+<p>
+Using absolute paths to the files within your workflowr project makes it
+difficult for you and others to run your code on a different machine.
+Change the absolute path(s) below to the suggested relative path(s) to
+make your code more reproducible.
+</p>
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th style="text-align:left;">
+absolute
+</th>
+<th style="text-align:left;">
+relative
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+/project2/mstephens/yunqiyang/surv-susie/survival-susie/code/post_summary.R
+</td>
+<td style="text-align:left;">
+code/post_summary.R
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree38dcd154bd9f580b53244c6c5959a9adbd1a3873targetblank38dcd15a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree333eadebb950e9cb7caa660dafcc47c57a9ac3c8targetblank333eadea">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/38dcd154bd9f580b53244c6c5959a9adbd1a3873" target="_blank">38dcd15</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/333eadebb950e9cb7caa660dafcc47c57a9ac3c8" target="_blank">333eade</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree38dcd154bd9f580b53244c6c5959a9adbd1a3873targetblank38dcd15a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree333eadebb950e9cb7caa660dafcc47c57a9ac3c8targetblank333eadea"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -542,7 +568,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/38dcd154bd9f580b53244c6c5959a9adbd1a3873" target="_blank">38dcd15</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/333eadebb950e9cb7caa660dafcc47c57a9ac3c8" target="_blank">333eade</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -560,13 +586,9 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
 
-Untracked files:
-    Untracked:  analysis/compare_bf.Rmd
-    Untracked:  analysis/dat_analysis_cancer_subtype.Rmd
-
 Unstaged changes:
-    Deleted:    analysis/time_comparison.Rmd
-    Deleted:    analysis/time_susie.Rmd
+    Deleted:    analysis/calibration_large_sample.Rmd
+    Modified:   analysis/coxph_na.Rmd
 
 </code></pre>
 <p>
@@ -613,6 +635,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/333eadebb950e9cb7caa660dafcc47c57a9ac3c8/analysis/compare_method_large_sample.Rmd" target="_blank">333eade</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-25
+</td>
+<td>
+wflow_publish("analysis/compare_method_large_sample.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/ef9d5589a24e6335f4d483fad58c21c94ace986e/docs/compare_method_large_sample.html" target="_blank">ef9d558</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-02-11
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -790,60 +846,16 @@ class="math inline">\(p=1000\)</span>.</p></li>
 <h3>Fitting details:</h3>
 <ol style="list-style-type: decimal">
 <li><p>SuSIE with laplace BF.</p></li>
-<li><p>Run SuSIE for 10 iterations, and run other methods for similar
-amount of time that SuSIE takes.</p></li>
+<li><p>See <a
+href="https://yunqiyang0215.github.io/survival-susie/pip_comparison_large_sample.html"
+class="uri">https://yunqiyang0215.github.io/survival-susie/pip_comparison_large_sample.html</a></p></li>
 </ol>
-<pre class="r"><code>
-calculate_tpr_vs_fdr &lt;- function(pip, is_effect, ts){
-  res &lt;- matrix(NA, nrow = length(ts), ncol = 2)
-  colnames(res) = c(&quot;tpr&quot;, &quot;fdr&quot;)
-  for (i in 1:length(ts)){
-    pred_pos = pip &gt;= ts[i]
-    tp = pip &gt;= ts[i] &amp; is_effect == 1
-    fp = pip &gt;= ts[i] &amp; is_effect == 0
-    tpr = sum(tp)/sum(is_effect)
-    fdr = sum(fp)/sum(pred_pos)
-    res[i, ] = c(tpr, fdr)
-  }
-  return(res)
-}
-
-# coverage: the proportion of CSs that contain an effect variable
-# @param dat_indx: the indx for the data from dsc
-calculate_cs_coverage = function(dat_indx){
-  contain_status = c()
-  for (indx in dat_indx){
-     cs = susie$susie.cs[[indx]]$cs
-     true_effect = which(susie$simulate.is_effect[[indx]] == 1)
-     if (!is.null(cs)){
-       for (j in 1:length(cs)){
-         res = ifelse(sum(true_effect %in% unlist(cs[j])) ==  1, 1, 0)
-         contain_status = c(contain_status, res)
-        }
-     }
-  }
-  coverage = sum(contain_status)/length(contain_status)
-  return(coverage)
-}
-
-
-# @param dat_indx: the indx for the data from dsc
-# @p: number of variables in each simulation replicate. 
-get_cs_effect = function(dat_indx, p){
-  cs_effect = c()
-  for (indx in dat_indx){
-    effect = rep(0, p)
-    cs_effect_indx = c(unlist(susie$susie.cs[[indx]]$cs))
-    effect[cs_effect_indx] = 1
-    cs_effect = c(cs_effect, effect)
-  }
-  return(cs_effect)
-}</code></pre>
-<pre class="r"><code>
-susie = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/dsc202401/susie.rds&quot;)
+<pre class="r"><code>source(&quot;/project2/mstephens/yunqiyang/surv-susie/survival-susie/code/post_summary.R&quot;)</code></pre>
+<pre class="r"><code>susie = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/dsc202401/susie.rds&quot;)
 survsvb = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/dsc202401/survsvb.rds&quot;)
 bvsnlp = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/dsc202401/bvsnlp.rds&quot;)
-r2b = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/dsc202401/r2b.rds&quot;)</code></pre>
+r2b = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/dsc202401/r2b.rds&quot;)
+rss = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/dsc202401/susie_rss.rds&quot;)</code></pre>
 <pre class="r"><code>t95 = 951</code></pre>
 </div>
 <div id="results-using-real-correlation-structure-from-data"
@@ -857,23 +869,27 @@ for (i in 1:length(censor_lvl)){
   pip.survsvb = unlist(lapply(indx, function(x) survsvb$svb.pip[[x]]))
   pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
   pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
+  pip.rss = unlist(lapply(indx, function(x) rss$susie_rss.pip[[x]]))
   is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
   
   ts = seq(from = 0, to = 1, by = 0.001)
   res.susie = calculate_tpr_vs_fdr(pip.susie, is_effect, ts)
   res.svb = calculate_tpr_vs_fdr(pip.survsvb, is_effect, ts)
   res.bvsnlp = calculate_tpr_vs_fdr(pip.bvsnlp, is_effect, ts)
+  res.rss = calculate_tpr_vs_fdr(pip.rss, is_effect, ts)
   res.r2b = calculate_tpr_vs_fdr(pip.r2b, is_effect, ts)
   
   plot(res.susie[,2], res.susie[,1], type = &quot;l&quot;, xlim = c(0,1), ylim = c(0, 1), xlab = &quot;FDR&quot;, ylab = &quot;Power&quot;,
        main = paste0(&quot;Real correlation, effect 0-3&quot;, &quot;,censor=&quot;, censor_lvl[i]))
   lines(res.svb[,2], res.svb[,1], type = &quot;l&quot;, col = 2)
   lines(res.bvsnlp[,2], res.bvsnlp[,1], type = &quot;l&quot;, col = 3)
-  lines(res.r2b[,2], res.r2b[,1], type = &quot;l&quot;, col = 4)
+  lines(res.rss[,2], res.rss[,1], type = &quot;l&quot;, col = 4)
+  lines(res.r2b[,2], res.r2b[,1], type = &quot;l&quot;, col = 5)
   
   points(res.susie[t95,2], res.susie[t95, 1])
   points(res.svb[t95,2], res.svb[t95, 1])
   points(res.bvsnlp[t95,2], res.bvsnlp[t95, 1])
+  points(res.rss[t95,2], res.rss[t95, 1])
   points(res.r2b[t95,2], res.r2b[t95, 1])
   
   legend(&quot;topleft&quot;, legend = c(&quot;susie&quot;, &quot;survival.svb&quot;, &quot;bvsnlp&quot;, &quot;r2b&quot;), col = c(1,2,3, 4), lty = 1)
@@ -903,6 +919,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/ef9d5589a24e6335f4d483fad58c21c94ace986e/docs/figure/compare_method_large_sample.Rmd/unnamed-chunk-4-1.png" target="_blank">ef9d558</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-02-11
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/b70bfac6255b666b60f366937b73df7c1f6385da/docs/figure/compare_method_large_sample.Rmd/unnamed-chunk-4-1.png" target="_blank">b70bfac</a>
 </td>
 <td>
@@ -929,38 +956,41 @@ yunqi yang
 </div>
 <p>The dots indicate PIP threshold = 0.95</p>
 </div>
-<div id="results-using-independent-x-without-data-from-null-model."
+<div id="results-using-independent-x-with-data-from-null-model."
 class="section level3">
-<h3>2. Results using independent X, without data from null model.</h3>
-<pre class="r"><code>par(mfrow = c(2,3),cex.axis = 1.5)
+<h3>2. Results using independent X, with data from null model.</h3>
+<pre class="r"><code>par(mfrow = c(2,3), cex.axis = 1.5)
 censor_lvl = c(0, 0.2, 0.4, 0.6, 0.8, 0.99)
-
 for (i in 1:length(censor_lvl)){
-  indx = which(susie$simulate.cor_type == &quot;independent&quot; &amp; susie$simulate.censor_lvl == censor_lvl[i] &amp; susie$simulate.num_effect != 0)
-  
+  indx = which(susie$simulate.cor_type == &quot;independent&quot; &amp; susie$simulate.censor_lvl == censor_lvl[i])
   pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
   pip.survsvb = unlist(lapply(indx, function(x) survsvb$svb.pip[[x]]))
   pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
   pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
+  pip.rss = unlist(lapply(indx, function(x) rss$susie_rss.pip[[x]]))
   is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
   
   ts = seq(from = 0, to = 1, by = 0.001)
   res.susie = calculate_tpr_vs_fdr(pip.susie, is_effect, ts)
   res.svb = calculate_tpr_vs_fdr(pip.survsvb, is_effect, ts)
   res.bvsnlp = calculate_tpr_vs_fdr(pip.bvsnlp, is_effect, ts)
+  res.rss = calculate_tpr_vs_fdr(pip.rss, is_effect, ts)
   res.r2b = calculate_tpr_vs_fdr(pip.r2b, is_effect, ts)
   
-  
-  plot(res.susie[,2], res.susie[,1], type = &quot;l&quot;, xlim = c(0, 0.1), ylim = c(0, 1), xlab = &quot;FDR&quot;, ylab = &quot;Power&quot;,
-       main = paste0(&quot;X independent, effect 1-3&quot;, &quot;,censor=&quot;, censor_lvl[i]))
+  plot(res.susie[,2], res.susie[,1], type = &quot;l&quot;, xlim = c(0,1), ylim = c(0, 1), xlab = &quot;FDR&quot;, ylab = &quot;Power&quot;,
+       main = paste0(&quot;Real correlation, effect 0-3&quot;, &quot;,censor=&quot;, censor_lvl[i]))
   lines(res.svb[,2], res.svb[,1], type = &quot;l&quot;, col = 2)
   lines(res.bvsnlp[,2], res.bvsnlp[,1], type = &quot;l&quot;, col = 3)
-  lines(res.r2b[,2], res.r2b[,1], type = &quot;l&quot;, col = 4)
+  lines(res.rss[,2], res.rss[,1], type = &quot;l&quot;, col = 4)
+  lines(res.r2b[,2], res.r2b[,1], type = &quot;l&quot;, col = 5)
   
   points(res.susie[t95,2], res.susie[t95, 1])
   points(res.svb[t95,2], res.svb[t95, 1])
   points(res.bvsnlp[t95,2], res.bvsnlp[t95, 1])
-  legend(&quot;bottomright&quot;, legend = c(&quot;susie&quot;, &quot;survival.svb&quot;, &quot;bvsnlp&quot;, &quot;r2b&quot;), col = c(1,2,3, 4), lty = 1)
+  points(res.rss[t95,2], res.rss[t95, 1])
+  points(res.r2b[t95,2], res.r2b[t95, 1])
+  
+  legend(&quot;topleft&quot;, legend = c(&quot;susie&quot;, &quot;survival.svb&quot;, &quot;bvsnlp&quot;, &quot;r2b&quot;), col = c(1,2,3, 4), lty = 1)
 }</code></pre>
 <p><img src="figure/compare_method_large_sample.Rmd/unnamed-chunk-5-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>
@@ -985,6 +1015,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/ef9d5589a24e6335f4d483fad58c21c94ace986e/docs/figure/compare_method_large_sample.Rmd/unnamed-chunk-5-1.png" target="_blank">ef9d558</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-02-11
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/ed5188d52307aadb83f73b61f51b564aea5959c1/docs/figure/compare_method_large_sample.Rmd/unnamed-chunk-5-1.png" target="_blank">ed5188d</a>
@@ -1024,91 +1065,15 @@ yunqi yang
 </div>
 <p>The dots indicate PIP threshold = 0.95.</p>
 </div>
-<div id="results-using-independent-x-with-data-from-null-model."
-class="section level3">
-<h3>3. Results using independent X, with data from null model.</h3>
-<pre class="r"><code>par(mfrow = c(2,3),cex.axis = 1.5)
+<div id="time-comparison" class="section level3">
+<h3>3. Time comparison</h3>
+<pre class="r"><code>res = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/dsc202401/time_comparison.rds&quot;)
 
-censor_lvl = c(0, 0.2, 0.4, 0.6, 0.8, 0.99)
-
-for (i in 1:length(censor_lvl)){
-  indx = which(susie$simulate.cor_type == &quot;independent&quot; &amp; susie$simulate.censor_lvl == censor_lvl[i])
-  pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
-  pip.survsvb = unlist(lapply(indx, function(x) survsvb$svb.pip[[x]]))
-  pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
-  pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
-  is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
-  
-  ts = seq(from = 0, to = 1, by = 0.001)
-  res.susie = calculate_tpr_vs_fdr(pip.susie, is_effect, ts)
-  res.svb = calculate_tpr_vs_fdr(pip.survsvb, is_effect, ts)
-  res.bvsnlp = calculate_tpr_vs_fdr(pip.bvsnlp, is_effect, ts)
-  res.r2b = calculate_tpr_vs_fdr(pip.r2b, is_effect, ts)
-  
-  
-  
-  plot(res.susie[,2], res.susie[,1], type = &quot;l&quot;, xlim = c(0, 1), ylim = c(0, 1), xlab = &quot;FDR&quot;, ylab = &quot;Power&quot;,
-       main = paste0(&quot;X independent, effect 0-3&quot;, &quot;,censor=&quot;, censor_lvl[i]))
-  lines(res.svb[,2], res.svb[,1], type = &quot;l&quot;, col = 2)
-  lines(res.bvsnlp[,2], res.bvsnlp[,1], type = &quot;l&quot;, col = 3)
-  lines(res.r2b[,2], res.r2b[,1], type = &quot;l&quot;, col = 4)
-  
-  points(res.susie[t95,2], res.susie[t95, 1])
-  points(res.svb[t95,2], res.svb[t95, 1])
-  points(res.bvsnlp[t95,2], res.bvsnlp[t95, 1])
-  legend(&quot;bottomright&quot;, legend = c(&quot;susie&quot;, &quot;survival.svb&quot;, &quot;bvsnlp&quot;, &quot;r2b&quot;), col = c(1,2,3,4), lty = 1)
-  
-}</code></pre>
-<p><img src="figure/compare_method_large_sample.Rmd/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
-Past versions of unnamed-chunk-6-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-6-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/yunqiyang0215/survival-susie/blob/ed5188d52307aadb83f73b61f51b564aea5959c1/docs/figure/compare_method_large_sample.Rmd/unnamed-chunk-6-1.png" target="_blank">ed5188d</a>
-</td>
-<td>
-yunqi yang
-</td>
-<td>
-2024-01-30
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/yunqiyang0215/survival-susie/blob/b70bfac6255b666b60f366937b73df7c1f6385da/docs/figure/compare_method_large_sample.Rmd/unnamed-chunk-6-1.png" target="_blank">b70bfac</a>
-</td>
-<td>
-yunqi yang
-</td>
-<td>
-2024-01-30
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>The dots indicate PIP threshold = 0.95.</p>
+t = unlist(lapply(1:length(res), function(i) mean(res[[i]][,5], , na.rm = TRUE)))
+names(t) = c(&quot;susie&quot;, &quot;bvsnlp&quot;, &quot;susie_rss&quot;, &quot;svb&quot;, &quot;r2b&quot;)
+print(t)
+#      susie     bvsnlp  susie_rss        svb        r2b 
+#  7982.7163  3727.9983   239.3761  2577.9607 11610.1981</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
