@@ -10,13 +10,13 @@ Compare PIPs using simulated dataset, where $n=50000$ and $p=1000$.
 
 1. susie: maxiter = 10
 
-2. susie.rss: maxiter = 100
+2. susie.rss: maxiter = 100 (default)
 
 3. surv.svb: maxiter = 100
 
-4. r2b: niter = 50
+4. r2b: niter = 1e6 (default)
 
-5. bvsnlp: niter = 30
+5. bvsnlp: niter = 30 (default)
 
 
 ```{r}
@@ -73,40 +73,39 @@ for (i in 1:length(censor_lvls)){
 }
 ```
 
-```{r fig.width= 12, fig.height=18}
-par(mfrow = c(6,5))
-for (i in 1:length(censor_lvls)){
-  indx = which(bvsnlp$simulate.cor_type == "real" & bvsnlp$simulate.censor_lvl == censor_lvls[i])
-  is_effect = unlist(lapply(indx, function(x) bvsnlp$simulate.is_effect[[x]]))
-  pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
-  pip.survsvb = unlist(lapply(indx, function(x) survsvb$svb.pip[[x]]))
-  pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
-  pip.rss = unlist(lapply(indx, function(x) rss$susie_rss.pip[[x]]))
-  pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
+### Note: ranges with less than 10 observations are removed...
+
+```{r fig.width= 12, fig.height=10}
+par(mfrow = c(2,3))
+indx = which(bvsnlp$simulate.cor_type == "real")
+is_effect = unlist(lapply(indx, function(x) bvsnlp$simulate.is_effect[[x]]))
+pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+pip.survsvb = unlist(lapply(indx, function(x) survsvb$svb.pip[[x]]))
+pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+pip.rss = unlist(lapply(indx, function(x) rss$rss.pip[[x]]))
+pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
   
-  # Calibration plot for pip.susie
-  calibration.susie = pip_calibration(pip.susie, is_effect)
-  plot_calibration(calibration.susie, main = paste0("susie: censor=", censor_lvls[i]))
+# Calibration plot for pip.susie
+calibration.susie = pip_calibration(pip.susie, is_effect)
+plot_calibration(calibration.susie, main = "susie")
   
-  # Calibration plot for pip.svb
-  calibration.survsvb = pip_calibration(pip.survsvb, is_effect)
-  plot_calibration(calibration.survsvb, main = paste0("svb: censor=", censor_lvls[i]))
+# Calibration plot for pip.svb
+calibration.survsvb = pip_calibration(pip.survsvb, is_effect)
+plot_calibration(calibration.survsvb, main = "svb")
   
-  # Calibration plot for pip.bvsnlp
-  calibration.bvsnlp = pip_calibration(pip.bvsnlp, is_effect)
-  plot_calibration(calibration.bvsnlp, main = paste0("bvsnlp: censor=", censor_lvls[i]))
+# Calibration plot for pip.bvsnlp
+calibration.bvsnlp = pip_calibration(pip.bvsnlp, is_effect)
+plot_calibration(calibration.bvsnlp, main = "bvsnlp")
   
-  # Calibration plot for pip.rss
-  calibration.rss = pip_calibration(pip.rss, is_effect)
-  plot_calibration(calibration.rss, main = paste0("rss: censor=", censor_lvls[i]))
+# Calibration plot for pip.rss
+calibration.rss = pip_calibration(pip.rss, is_effect)
+plot_calibration(calibration.rss, main = "rss")
   
-  # Calibration plot for pip.r2b
-  calibration.r2b = pip_calibration(pip.r2b, is_effect)
-  plot_calibration(calibration.r2b, main = paste0("r2b: censor=", censor_lvls[i]))
-}
+# Calibration plot for pip.r2b
+calibration.r2b = pip_calibration(pip.r2b, is_effect)
+plot_calibration(calibration.r2b, main = "r2b")
+
 ```
-
-
 
 ### 2. Near independent SNPs
 
@@ -142,35 +141,34 @@ for (i in 1:length(censor_lvls)){
 }
 ```
 
-```{r fig.width= 12, fig.height=18}
-par(mfrow = c(6,5))
-for (i in 1:length(censor_lvls)){
-  indx = which(bvsnlp$simulate.cor_type == "independent" & bvsnlp$simulate.censor_lvl == censor_lvls[i])
-  is_effect = unlist(lapply(indx, function(x) bvsnlp$simulate.is_effect[[x]]))
-  pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
-  pip.survsvb = unlist(lapply(indx, function(x) survsvb$svb.pip[[x]]))
-  pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
-  pip.rss = unlist(lapply(indx, function(x) rss$susie_rss.pip[[x]]))
-  pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
+```{r fig.width= 12, fig.height=10}
+par(mfrow = c(2,3))
+indx = which(bvsnlp$simulate.cor_type == "independent")
+is_effect = unlist(lapply(indx, function(x) bvsnlp$simulate.is_effect[[x]]))
+pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+pip.survsvb = unlist(lapply(indx, function(x) survsvb$svb.pip[[x]]))
+pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+pip.rss = unlist(lapply(indx, function(x) rss$rss.pip[[x]]))
+pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
   
-  # Calibration plot for pip.susie
-  calibration.susie = pip_calibration(pip.susie, is_effect)
-  plot_calibration(calibration.susie, main = paste0("susie: censor=", censor_lvls[i]))
+# Calibration plot for pip.susie
+calibration.susie = pip_calibration(pip.susie, is_effect)
+plot_calibration(calibration.susie, main = "susie")
   
-  # Calibration plot for pip.svb
-  calibration.survsvb = pip_calibration(pip.survsvb, is_effect)
-  plot_calibration(calibration.survsvb, main = paste0("svb: censor=", censor_lvls[i]))
+# Calibration plot for pip.svb
+calibration.survsvb = pip_calibration(pip.survsvb, is_effect)
+plot_calibration(calibration.survsvb, main = "svb")
   
-  # Calibration plot for pip.bvsnlp
-  calibration.bvsnlp = pip_calibration(pip.bvsnlp, is_effect)
-  plot_calibration(calibration.bvsnlp, main = paste0("bvsnlp: censor=", censor_lvls[i]))
+# Calibration plot for pip.bvsnlp
+calibration.bvsnlp = pip_calibration(pip.bvsnlp, is_effect)
+plot_calibration(calibration.bvsnlp, main = "bvsnlp")
   
-  # Calibration plot for pip.rss
-  calibration.rss = pip_calibration(pip.rss, is_effect)
-  plot_calibration(calibration.rss, main = paste0("rss: censor=", censor_lvls[i]))
+# Calibration plot for pip.rss
+calibration.rss = pip_calibration(pip.rss, is_effect)
+plot_calibration(calibration.rss, main = "rss")
   
-  # Calibration plot for pip.r2b
-  calibration.r2b = pip_calibration(pip.r2b, is_effect)
-  plot_calibration(calibration.r2b, main = paste0("r2b: censor=", censor_lvls[i]))
-}
+# Calibration plot for pip.r2b
+calibration.r2b = pip_calibration(pip.r2b, is_effect)
+plot_calibration(calibration.r2b, main = "r2b")
+
 ```
