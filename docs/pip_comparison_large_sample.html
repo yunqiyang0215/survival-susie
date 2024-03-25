@@ -548,15 +548,15 @@ code/pip.R
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree53d31835d299fbca38ff3fb0dbb1d46b01d04c3ctargetblank53d3183a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreee000d5deb8078dc4212ba000b9cc00c6c6406279targetblanke000d5da">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/53d31835d299fbca38ff3fb0dbb1d46b01d04c3c" target="_blank">53d3183</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/e000d5deb8078dc4212ba000b9cc00c6c6406279" target="_blank">e000d5d</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree53d31835d299fbca38ff3fb0dbb1d46b01d04c3ctargetblank53d3183a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreee000d5deb8078dc4212ba000b9cc00c6c6406279targetblanke000d5da"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -566,7 +566,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/53d31835d299fbca38ff3fb0dbb1d46b01d04c3c" target="_blank">53d3183</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/e000d5deb8078dc4212ba000b9cc00c6c6406279" target="_blank">e000d5d</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -583,7 +583,6 @@ were generated:
 Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
-    Ignored:    analysis/figure/
 
 Unstaged changes:
     Deleted:    analysis/calibration_large_sample.Rmd
@@ -634,6 +633,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/e000d5deb8078dc4212ba000b9cc00c6c6406279/analysis/pip_comparison_large_sample.Rmd" target="_blank">e000d5d</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-25
+</td>
+<td>
+wflow_publish("analysis/pip_comparison_large_sample.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/16ccbe51d5a140234008ab2284475a23677522e7/docs/pip_comparison_large_sample.html" target="_blank">16ccbe5</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-25
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -815,7 +848,8 @@ wflow_publish("analysis/pip_comparison_large_sample.Rmd")
 <h3>Description:</h3>
 <p>Compare PIPs using simulated dataset, where <span
 class="math inline">\(n=50000\)</span> and <span
-class="math inline">\(p=1000\)</span>.</p>
+class="math inline">\(p=1000\)</span>. The effect size of SNPs <span
+class="math inline">\(\sim N(0, 0.1)\)</span>.</p>
 <ol style="list-style-type: decimal">
 <li><p>susie: maxiter = 10</p></li>
 <li><p>susie.rss: maxiter = 100 (default)</p></li>
@@ -823,6 +857,9 @@ class="math inline">\(p=1000\)</span>.</p>
 <li><p>r2b: niter = 1e6 (default)</p></li>
 <li><p>bvsnlp: niter = 30 (default)</p></li>
 </ol>
+</div>
+<div id="comments" class="section level3">
+<h3>Comments:</h3>
 <pre class="r"><code>source(&quot;/project2/mstephens/yunqiyang/surv-susie/survival-susie/code/pip.R&quot;)</code></pre>
 <pre class="r"><code>susie = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/dsc202401/susie.rds&quot;)
 survsvb = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/dsc202401/survsvb.rds&quot;)
@@ -887,6 +924,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/16ccbe51d5a140234008ab2284475a23677522e7/docs/figure/pip_comparison_large_sample.Rmd/unnamed-chunk-4-1.png" target="_blank">16ccbe5</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-25
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/f89b38cac16cdbd899123e5866307d0075d0817e/docs/figure/pip_comparison_large_sample.Rmd/unnamed-chunk-4-1.png" target="_blank">f89b38c</a>
 </td>
 <td>
@@ -922,17 +970,16 @@ yunqi yang
 </table>
 </div>
 </div>
-</div>
 <div id="note-ranges-with-less-than-10-observations-are-removed"
-class="section level3">
-<h3>Note: ranges with less than 10 observations are removed…</h3>
+class="section level4">
+<h4>Note: ranges with less than 10 observations are removed…</h4>
 <pre class="r"><code>par(mfrow = c(2,3))
 indx = which(bvsnlp$simulate.cor_type == &quot;real&quot;)
 is_effect = unlist(lapply(indx, function(x) bvsnlp$simulate.is_effect[[x]]))
 pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
 pip.survsvb = unlist(lapply(indx, function(x) survsvb$svb.pip[[x]]))
 pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
-pip.rss = unlist(lapply(indx, function(x) rss$rss.pip[[x]]))
+pip.rss = unlist(lapply(indx, function(x) rss$susie_rss.pip[[x]]))
 pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
   
 # Calibration plot for pip.susie
@@ -979,6 +1026,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/16ccbe51d5a140234008ab2284475a23677522e7/docs/figure/pip_comparison_large_sample.Rmd/unnamed-chunk-5-1.png" target="_blank">16ccbe5</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-25
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/f89b38cac16cdbd899123e5866307d0075d0817e/docs/figure/pip_comparison_large_sample.Rmd/unnamed-chunk-5-1.png" target="_blank">f89b38c</a>
 </td>
 <td>
@@ -1015,8 +1073,9 @@ yunqi yang
 </div>
 </div>
 </div>
-<div id="near-independent-snps" class="section level3">
-<h3>2. Near independent SNPs</h3>
+</div>
+<div id="independent-snps" class="section level3">
+<h3>2. Independent SNPs</h3>
 <pre class="r"><code>par(mfrow = c(6,4))
 for (i in 1:length(censor_lvls)){
   indx = which(susie$simulate.cor_type == &quot;independent&quot; &amp; susie$simulate.censor_lvl == censor_lvls[i])
@@ -1071,6 +1130,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/16ccbe51d5a140234008ab2284475a23677522e7/docs/figure/pip_comparison_large_sample.Rmd/unnamed-chunk-6-1.png" target="_blank">16ccbe5</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-25
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/f89b38cac16cdbd899123e5866307d0075d0817e/docs/figure/pip_comparison_large_sample.Rmd/unnamed-chunk-6-1.png" target="_blank">f89b38c</a>
 </td>
 <td>
@@ -1112,7 +1182,7 @@ is_effect = unlist(lapply(indx, function(x) bvsnlp$simulate.is_effect[[x]]))
 pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
 pip.survsvb = unlist(lapply(indx, function(x) survsvb$svb.pip[[x]]))
 pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
-pip.rss = unlist(lapply(indx, function(x) rss$rss.pip[[x]]))
+pip.rss = unlist(lapply(indx, function(x) rss$susie_rss.pip[[x]]))
 pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
   
 # Calibration plot for pip.susie
@@ -1157,6 +1227,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/16ccbe51d5a140234008ab2284475a23677522e7/docs/figure/pip_comparison_large_sample.Rmd/unnamed-chunk-7-1.png" target="_blank">16ccbe5</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-25
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/f89b38cac16cdbd899123e5866307d0075d0817e/docs/figure/pip_comparison_large_sample.Rmd/unnamed-chunk-7-1.png" target="_blank">f89b38c</a>
