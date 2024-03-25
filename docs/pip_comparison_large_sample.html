@@ -391,7 +391,7 @@ aria-hidden="true"></span> </a>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2024-03-18
+<strong>Last updated:</strong> 2024-03-25
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -548,15 +548,15 @@ code/pip.R
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreef345f87522ba08e4f02dd85bbdc696bc75381cb6targetblankf345f87a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree53d31835d299fbca38ff3fb0dbb1d46b01d04c3ctargetblank53d3183a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/f345f87522ba08e4f02dd85bbdc696bc75381cb6" target="_blank">f345f87</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/53d31835d299fbca38ff3fb0dbb1d46b01d04c3c" target="_blank">53d3183</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreef345f87522ba08e4f02dd85bbdc696bc75381cb6targetblankf345f87a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree53d31835d299fbca38ff3fb0dbb1d46b01d04c3ctargetblank53d3183a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -566,7 +566,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/f345f87522ba08e4f02dd85bbdc696bc75381cb6" target="_blank">f345f87</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/53d31835d299fbca38ff3fb0dbb1d46b01d04c3c" target="_blank">53d3183</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -581,12 +581,12 @@ were generated:
 </p>
 <pre><code>
 Ignored files:
+    Ignored:    .Rhistory
     Ignored:    .Rproj.user/
-
-Untracked files:
-    Untracked:  analysis/ukb_10iter.Rmd
+    Ignored:    analysis/figure/
 
 Unstaged changes:
+    Deleted:    analysis/calibration_large_sample.Rmd
     Modified:   analysis/coxph_na.Rmd
 
 </code></pre>
@@ -634,6 +634,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/53d31835d299fbca38ff3fb0dbb1d46b01d04c3c/analysis/pip_comparison_large_sample.Rmd" target="_blank">53d3183</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-25
+</td>
+<td>
+wflow_publish("analysis/pip_comparison_large_sample.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/f82e491ddbce259e6ada8eec1dfeaf206ce69580/docs/pip_comparison_large_sample.html" target="_blank">f82e491</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-03-18
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -784,10 +818,10 @@ class="math inline">\(n=50000\)</span> and <span
 class="math inline">\(p=1000\)</span>.</p>
 <ol style="list-style-type: decimal">
 <li><p>susie: maxiter = 10</p></li>
-<li><p>susie.rss: maxiter = 100</p></li>
+<li><p>susie.rss: maxiter = 100 (default)</p></li>
 <li><p>surv.svb: maxiter = 100</p></li>
-<li><p>r2b: niter = 50</p></li>
-<li><p>bvsnlp: niter = 30</p></li>
+<li><p>r2b: niter = 1e6 (default)</p></li>
+<li><p>bvsnlp: niter = 30 (default)</p></li>
 </ol>
 <pre class="r"><code>source(&quot;/project2/mstephens/yunqiyang/surv-susie/survival-susie/code/pip.R&quot;)</code></pre>
 <pre class="r"><code>susie = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/dsc202401/susie.rds&quot;)
@@ -888,36 +922,38 @@ yunqi yang
 </table>
 </div>
 </div>
-<pre class="r"><code>par(mfrow = c(6,5))
-for (i in 1:length(censor_lvls)){
-  indx = which(bvsnlp$simulate.cor_type == &quot;real&quot; &amp; bvsnlp$simulate.censor_lvl == censor_lvls[i])
-  is_effect = unlist(lapply(indx, function(x) bvsnlp$simulate.is_effect[[x]]))
-  pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
-  pip.survsvb = unlist(lapply(indx, function(x) survsvb$svb.pip[[x]]))
-  pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
-  pip.rss = unlist(lapply(indx, function(x) rss$susie_rss.pip[[x]]))
-  pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
+</div>
+<div id="note-ranges-with-less-than-10-observations-are-removed"
+class="section level3">
+<h3>Note: ranges with less than 10 observations are removed…</h3>
+<pre class="r"><code>par(mfrow = c(2,3))
+indx = which(bvsnlp$simulate.cor_type == &quot;real&quot;)
+is_effect = unlist(lapply(indx, function(x) bvsnlp$simulate.is_effect[[x]]))
+pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+pip.survsvb = unlist(lapply(indx, function(x) survsvb$svb.pip[[x]]))
+pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+pip.rss = unlist(lapply(indx, function(x) rss$rss.pip[[x]]))
+pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
   
-  # Calibration plot for pip.susie
-  calibration.susie = pip_calibration(pip.susie, is_effect)
-  plot_calibration(calibration.susie, main = paste0(&quot;susie: censor=&quot;, censor_lvls[i]))
+# Calibration plot for pip.susie
+calibration.susie = pip_calibration(pip.susie, is_effect)
+plot_calibration(calibration.susie, main = &quot;susie&quot;)
   
-  # Calibration plot for pip.svb
-  calibration.survsvb = pip_calibration(pip.survsvb, is_effect)
-  plot_calibration(calibration.survsvb, main = paste0(&quot;svb: censor=&quot;, censor_lvls[i]))
+# Calibration plot for pip.svb
+calibration.survsvb = pip_calibration(pip.survsvb, is_effect)
+plot_calibration(calibration.survsvb, main = &quot;svb&quot;)
   
-  # Calibration plot for pip.bvsnlp
-  calibration.bvsnlp = pip_calibration(pip.bvsnlp, is_effect)
-  plot_calibration(calibration.bvsnlp, main = paste0(&quot;bvsnlp: censor=&quot;, censor_lvls[i]))
+# Calibration plot for pip.bvsnlp
+calibration.bvsnlp = pip_calibration(pip.bvsnlp, is_effect)
+plot_calibration(calibration.bvsnlp, main = &quot;bvsnlp&quot;)
   
-  # Calibration plot for pip.rss
-  calibration.rss = pip_calibration(pip.rss, is_effect)
-  plot_calibration(calibration.rss, main = paste0(&quot;rss: censor=&quot;, censor_lvls[i]))
+# Calibration plot for pip.rss
+calibration.rss = pip_calibration(pip.rss, is_effect)
+plot_calibration(calibration.rss, main = &quot;rss&quot;)
   
-  # Calibration plot for pip.r2b
-  calibration.r2b = pip_calibration(pip.r2b, is_effect)
-  plot_calibration(calibration.r2b, main = paste0(&quot;r2b: censor=&quot;, censor_lvls[i]))
-}</code></pre>
+# Calibration plot for pip.r2b
+calibration.r2b = pip_calibration(pip.r2b, is_effect)
+plot_calibration(calibration.r2b, main = &quot;r2b&quot;)</code></pre>
 <p><img src="figure/pip_comparison_large_sample.Rmd/unnamed-chunk-5-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
@@ -1070,36 +1106,34 @@ yunqi yang
 </table>
 </div>
 </div>
-<pre class="r"><code>par(mfrow = c(6,5))
-for (i in 1:length(censor_lvls)){
-  indx = which(bvsnlp$simulate.cor_type == &quot;independent&quot; &amp; bvsnlp$simulate.censor_lvl == censor_lvls[i])
-  is_effect = unlist(lapply(indx, function(x) bvsnlp$simulate.is_effect[[x]]))
-  pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
-  pip.survsvb = unlist(lapply(indx, function(x) survsvb$svb.pip[[x]]))
-  pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
-  pip.rss = unlist(lapply(indx, function(x) rss$susie_rss.pip[[x]]))
-  pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
+<pre class="r"><code>par(mfrow = c(2,3))
+indx = which(bvsnlp$simulate.cor_type == &quot;independent&quot;)
+is_effect = unlist(lapply(indx, function(x) bvsnlp$simulate.is_effect[[x]]))
+pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+pip.survsvb = unlist(lapply(indx, function(x) survsvb$svb.pip[[x]]))
+pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+pip.rss = unlist(lapply(indx, function(x) rss$rss.pip[[x]]))
+pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
   
-  # Calibration plot for pip.susie
-  calibration.susie = pip_calibration(pip.susie, is_effect)
-  plot_calibration(calibration.susie, main = paste0(&quot;susie: censor=&quot;, censor_lvls[i]))
+# Calibration plot for pip.susie
+calibration.susie = pip_calibration(pip.susie, is_effect)
+plot_calibration(calibration.susie, main = &quot;susie&quot;)
   
-  # Calibration plot for pip.svb
-  calibration.survsvb = pip_calibration(pip.survsvb, is_effect)
-  plot_calibration(calibration.survsvb, main = paste0(&quot;svb: censor=&quot;, censor_lvls[i]))
+# Calibration plot for pip.svb
+calibration.survsvb = pip_calibration(pip.survsvb, is_effect)
+plot_calibration(calibration.survsvb, main = &quot;svb&quot;)
   
-  # Calibration plot for pip.bvsnlp
-  calibration.bvsnlp = pip_calibration(pip.bvsnlp, is_effect)
-  plot_calibration(calibration.bvsnlp, main = paste0(&quot;bvsnlp: censor=&quot;, censor_lvls[i]))
+# Calibration plot for pip.bvsnlp
+calibration.bvsnlp = pip_calibration(pip.bvsnlp, is_effect)
+plot_calibration(calibration.bvsnlp, main = &quot;bvsnlp&quot;)
   
-  # Calibration plot for pip.rss
-  calibration.rss = pip_calibration(pip.rss, is_effect)
-  plot_calibration(calibration.rss, main = paste0(&quot;rss: censor=&quot;, censor_lvls[i]))
+# Calibration plot for pip.rss
+calibration.rss = pip_calibration(pip.rss, is_effect)
+plot_calibration(calibration.rss, main = &quot;rss&quot;)
   
-  # Calibration plot for pip.r2b
-  calibration.r2b = pip_calibration(pip.r2b, is_effect)
-  plot_calibration(calibration.r2b, main = paste0(&quot;r2b: censor=&quot;, censor_lvls[i]))
-}</code></pre>
+# Calibration plot for pip.r2b
+calibration.r2b = pip_calibration(pip.r2b, is_effect)
+plot_calibration(calibration.r2b, main = &quot;r2b&quot;)</code></pre>
 <p><img src="figure/pip_comparison_large_sample.Rmd/unnamed-chunk-7-1.png" width="1152" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-1">
