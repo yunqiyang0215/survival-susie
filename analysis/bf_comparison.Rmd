@@ -17,7 +17,7 @@ Compare different types of Bayes factor under different levels of censoring and 
 
 (a) Numerical BF using Gaussian quadrature, our gold standard. https://yunqiyang0215.github.io/survival-susie/gauss_quad.html
 
-(b) Laplace BF
+(b) Laplace-MLE BF
 
 (c) Wakefeld BF
 
@@ -44,9 +44,8 @@ for (i in 1:length(censor_lvl)){
          ylim = c(min(dat[,3:5])-1, max(dat[,3:5])+1),
          xlab = "lbf.numerical", ylab = "Other lbf")
     points(dat[, 'lbf.numerical'], dat[,'lbf.wakefeld'], col = "palegreen3", pch = 20)
-    points(dat[, 'lbf.numerical'], dat[,'lbf.spa'], col = "skyblue2", pch = 20)
     abline(a = 0, b = 1, col = "red")
-    legend("topleft", legend = c("lbf.laplace", 'lbf.wakefeld', "lbf.wakefeld+spa", "y=x"), col = c(1, "palegreen3", "skyblue2", 2), pch = 20)
+    legend("topleft", legend = c("lbf.laplace", 'lbf.wakefeld', "y=x"), col = c(1, "palegreen3", 2), pch = 20)
   }
 }
 ```
