@@ -1,0 +1,39 @@
+---
+title: "Running time benchmark"
+output: html_document
+date: '2024-04-02'
+---
+
+### Description: time comparison between small and large data
+
+1. Small data (n ~ 500) vs. Large data (n = 50000)
+
+(1) Susie: maxiter = 100 vs. maxiter = 10
+
+(2) BVSNLP: niter = 30
+
+(3) survival.svb: maxiter = 1000 vs. maxiter = 100
+
+(4) susie.rss: maxiter = 100
+
+(5) r2b: niter = 1e6. 
+
+```{r}
+time1 = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_niter10/time_comparison.rds")
+time2 = readRDS("/project2/mstephens/yunqiyang/surv-susie/dsc202401/time.rds")
+```
+
+```{r}
+t1 = unlist(lapply(1:length(time1), function(i) mean(time1[[i]][,5], na.rm = TRUE)))
+t2 = c(mean(time2$susie.DSC_TIME, na.rm = TRUE), mean(time2$bvsnlp.DSC_TIME, na.rm = TRUE),
+       mean(time2$susie_rss.DSC_TIME, na.rm = TRUE), mean(time2$svb.DSC_TIME, na.rm = TRUE),
+       mean(time2$r2b.DSC_TIME, na.rm = TRUE))
+```
+
+```{r}
+res = rbind(t1, t2)
+colnames(res) = c("susie", "bvsnlp", "susie.rss", "svb", "r2b")
+rownames(res) = c("n=500", "n=50000")
+res
+```
+
