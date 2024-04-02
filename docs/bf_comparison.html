@@ -391,7 +391,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2024-02-14
+<strong>Last updated:</strong> 2024-04-01
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -522,15 +522,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreea52c82db7cd974ad4f552009eb4a5e67956ce686targetblanka52c82da">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree09ad412827016fe8b8a2da070dd8fc7b3bef7222targetblank09ad412a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/a52c82db7cd974ad4f552009eb4a5e67956ce686" target="_blank">a52c82d</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/09ad412827016fe8b8a2da070dd8fc7b3bef7222" target="_blank">09ad412</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreea52c82db7cd974ad4f552009eb4a5e67956ce686targetblanka52c82da"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree09ad412827016fe8b8a2da070dd8fc7b3bef7222targetblank09ad412a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -540,7 +540,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/a52c82db7cd974ad4f552009eb4a5e67956ce686" target="_blank">a52c82d</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/09ad412827016fe8b8a2da070dd8fc7b3bef7222" target="_blank">09ad412</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -558,13 +558,9 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
 
-Untracked files:
-    Untracked:  analysis/compare_bf.Rmd
-    Untracked:  analysis/dat_analysis_cancer_subtype.Rmd
-
 Unstaged changes:
-    Deleted:    analysis/time_comparison.Rmd
-    Deleted:    analysis/time_susie.Rmd
+    Deleted:    analysis/calibration_large_sample.Rmd
+    Modified:   analysis/coxph_na.Rmd
 
 </code></pre>
 <p>
@@ -610,6 +606,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/09ad412827016fe8b8a2da070dd8fc7b3bef7222/analysis/bf_comparison.Rmd" target="_blank">09ad412</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-04-01
+</td>
+<td>
+wflow_publish("analysis/bf_comparison.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/868e62222b401e8b82a9a0e60530130d28bc0c2a/docs/bf_comparison.html" target="_blank">868e622</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-02-14
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -886,7 +916,7 @@ class="math inline">\(n=10000\)</span>.</p>
 <li><p>Numerical BF using Gaussian quadrature, our gold standard. <a
 href="https://yunqiyang0215.github.io/survival-susie/gauss_quad.html"
 class="uri">https://yunqiyang0215.github.io/survival-susie/gauss_quad.html</a></p></li>
-<li><p>Laplace BF</p></li>
+<li><p>Laplace-MLE BF</p></li>
 <li><p>Wakefeld BF</p></li>
 <li><p>Wakefeld BF with zscore from coxph() corrected by saddle point
 approximation. <a
@@ -909,9 +939,8 @@ for (i in 1:length(censor_lvl)){
          ylim = c(min(dat[,3:5])-1, max(dat[,3:5])+1),
          xlab = &quot;lbf.numerical&quot;, ylab = &quot;Other lbf&quot;)
     points(dat[, &#39;lbf.numerical&#39;], dat[,&#39;lbf.wakefeld&#39;], col = &quot;palegreen3&quot;, pch = 20)
-    points(dat[, &#39;lbf.numerical&#39;], dat[,&#39;lbf.spa&#39;], col = &quot;skyblue2&quot;, pch = 20)
     abline(a = 0, b = 1, col = &quot;red&quot;)
-    legend(&quot;topleft&quot;, legend = c(&quot;lbf.laplace&quot;, &#39;lbf.wakefeld&#39;, &quot;lbf.wakefeld+spa&quot;, &quot;y=x&quot;), col = c(1, &quot;palegreen3&quot;, &quot;skyblue2&quot;, 2), pch = 20)
+    legend(&quot;topleft&quot;, legend = c(&quot;lbf.laplace&quot;, &#39;lbf.wakefeld&#39;, &quot;y=x&quot;), col = c(1, &quot;palegreen3&quot;, 2), pch = 20)
   }
 }</code></pre>
 <p><img src="figure/bf_comparison.Rmd/unnamed-chunk-3-1.png" width="1152" style="display: block; margin: auto;" /></p>
