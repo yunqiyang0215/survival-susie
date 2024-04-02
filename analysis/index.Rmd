@@ -130,3 +130,4 @@ Time benchmark:
 
 + [Per iteration time across methods](time_per_iter.html)
 
++ [Running time of different methods](time_benchmark.html)
