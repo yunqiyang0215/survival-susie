@@ -112,9 +112,12 @@ Real data simulation: UKBiobank genotype
 
 + [Power vs. fdr](ukb_10iter.html)
 
++ [Compare credible sets](summarize_cs.html)
+
 + [Method comparison](compare_method_large_sample.html)
 
 + [SuSIE vs. SuSIE-RSS](susierss_large_sample.html)
+
 
 
 
