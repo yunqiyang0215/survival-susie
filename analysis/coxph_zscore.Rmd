@@ -1,0 +1,84 @@
+---
+title: "Untitled"
+author: "Yunqi Yang"
+date: "5/1/2024"
+output: html_document
+---
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(survival)
+```
+
+```{r}
+sim_surv_exp <- function(b, X, censor_lvl){
+  n = nrow(X)
+  p = ncol(X)
+  dat =list()
+  
+  status <- ifelse(runif(n) > censor_lvl, 1, 0)
+  lambda <- exp(cbind(rep(1,n), X) %*% b)
+  surT <- log(1 - runif(n)) /(-lambda)
+  # rescale censored subject to get observed time
+  surT[status == 0] = surT[status == 0] * runif(sum(status == 0))
+  
+  y = cbind(surT, status)
+  colnames(y) = c("time", "status")
+  colnames(X) <- unlist(lapply(1:p, function(i) paste0("x", i)))
+  dat[["X"]] = X
+  dat[["y"]] = y
+  return(dat)
+}
+```
+
+```{r }
+
+simdata = function(n,b, censor_lvl, binarize_x=FALSE){
+  x = rnorm(n)
+  if(binarize_x){
+    x = (x > 0) - ( x < 0 )
+  }
+  # generate survival data
+  x = as.matrix(x)
+  dat = sim_surv_exp(c(1, b), x, censor_lvl)
+  y <- Surv(dat$y[,1], dat$y[,2])
+  fit = 
+  coefs = summary(coxph(y ~ x))$coef
+  bhat = coefs[, 'coef']
+  z = coefs[, 'z']
+  se = coefs[, 'se(coef)']
+  
+  return(data.frame(n=n, b=b, z = z, se = se, bhat = bhat))
+}
+
+
+dsimdata = function(design){
+  design %>% rowwise() %>% mutate(simdata(n,b, censor_lvl))
+}
+
+```
+
+#### Normal X
+```{r}
+sim1 = dsimdata(data.frame(n=1000,b=rnorm(50,0,2), censor_lvl = 0.3))
+sim2 = dsimdata(data.frame(n=10000,b=rnorm(50,0,2), censor_lvl = 0.3))
+sim3 = dsimdata(data.frame(n=100000,b=rnorm(50,0,2), censor_lvl = 0.3))
+ggplot(rbind(sim1,sim2,sim3), 
+       mapping = aes(b, z)) +
+  geom_point(mapping = aes(color = b, shape=as.factor(n))) + 
+   ylab("z score (coxph)")
+```
+
+
+#### Binary X
+```{r}
+sim1b = dsimdata(data.frame(n=1000,b=rnorm(50,0,2), censor_lvl = 0.3, binarize_x = TRUE))
+sim2b = dsimdata(data.frame(n=10000,b=rnorm(50,0,2), censor_lvl = 0.3, binarize_x = TRUE))
+sim3b = dsimdata(data.frame(n=100000,b=rnorm(50,0,2), censor_lvl = 0.3, binarize_x = TRUE))
+ggplot(rbind(sim1b,sim2b,sim3b), 
+       mapping = aes(b, z)) +
+  geom_point(mapping = aes(color = b, shape=as.factor(n))) +
+  ylab("z score (coxph)")
+```
+
