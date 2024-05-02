@@ -20,6 +20,8 @@ Background and analysis on coxph model
 
 + [coxph() NA example](coxph_na.html)
 
++ [coxph zscore when effect is large](coxph_zscore.html)
+
 Check Bayes factor
 
 + [Numerical integration](numerical_integration.html)
