@@ -1,5 +1,5 @@
 ---
-title: "Untitled"
+title: "Simulation for coxph Zscore"
 author: "Yunqi Yang"
 date: "5/1/2024"
 output: html_document
