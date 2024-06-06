@@ -7,6 +7,22 @@ output: html_document
 
 ### 1. Understand SPAcox
 
+Result format: an R matrix with the following columns
+
+1. MAF: Minor allele frequencies
+
+2. missing.rate: Missing rates
+
+3. p.value.spa: p value (recommanded) from a saddlepoint approximation.
+
+4. p.value.norm: p value from a normal distribution approximation.
+
+5. Stat: score statistics
+
+6. Var: estimated variances of the score statistics
+
+7. z: z values corresponding to the score statistics
+
 ```{r}
 library(SPACox)
 library(survival)
