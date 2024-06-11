@@ -1,0 +1,125 @@
+---
+title: "Power vs. fdr: gtex data with more iteration"
+author: "Yunqi Yang"
+date: "03/18/2024"
+output: html_document
+---
+
+### Description:
+
+Version 4 simulation results, comparing power vs. FDR across methods. I vary the threshold for claiming effect variables based on marginal PIP value. Also, I add the time comparison for different methods.
+
+```{r knitr-opts, include=FALSE}
+knitr::opts_chunk$set(comment = "#",collapse = TRUE,results = "hold",
+                      fig.align = "center")
+```
+
+```{r}
+source("/project2/mstephens/yunqiyang/surv-susie/survival-susie/code/post_summary.R")
+```
+
+```{r}
+susie = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/susie.rds")
+svb = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/svb.rds")
+bvsnlp = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/bvsnlp.rds")
+r2b = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/r2b.rds")
+rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/rss.rds")
+```
+
+### 1. Results using real correlation structure from data
+
+```{r, fig.width=12, fig.height=8}
+par(mfrow = c(2,3), cex.axis = 1.5)
+censor_lvl = c(0, 0.2, 0.4, 0.6, 0.8)
+for (i in 1:5){
+  indx = which(susie$simulate.cor_type == "real" & susie$simulate.censor_lvl == censor_lvl[i])
+  pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+  pip.survsvb = unlist(lapply(indx, function(x) svb$svb.pip[[x]]))
+  pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+  pip.rss = unlist(lapply(indx, function(x) rss$rss.pip[[x]]))
+  pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
+  is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
+  
+  ts = seq(from = 0, to = 1, by = 0.01)
+  res.susie = calculate_tpr_vs_fdr(pip.susie, is_effect, ts)
+  res.svb = calculate_tpr_vs_fdr(pip.survsvb, is_effect, ts)
+  res.bvsnlp = calculate_tpr_vs_fdr(pip.bvsnlp, is_effect, ts)
+  res.rss = calculate_tpr_vs_fdr(pip.rss, is_effect, ts)
+  res.r2b = calculate_tpr_vs_fdr(pip.r2b, is_effect, ts)
+  
+  plot(res.susie[,2], res.susie[,1], type = "l", xlim = c(0,1), ylim = c(0, 1), xlab = "FDR", ylab = "Power",
+       main = paste0("Real correlation, effect 0-3", ",censor=", censor_lvl[i]))
+  lines(res.svb[,2], res.svb[,1], type = "l", col = 2)
+  lines(res.bvsnlp[,2], res.bvsnlp[,1], type = "l", col = 3)
+  lines(res.rss[,2], res.rss[,1], type = "l", col = 4)
+  lines(res.r2b[,2], res.r2b[,1], type = "l", col = 5)
+  
+  points(res.susie[96,2], res.susie[96, 1])
+  points(res.svb[96,2], res.svb[96, 1])
+  points(res.bvsnlp[96,2], res.bvsnlp[96, 1])
+  points(res.rss[96,2], res.rss[96, 1])
+  points(res.r2b[96,2], res.r2b[96, 1])
+  
+  legend("topleft", legend = c("susie", "survival.svb", "bvsnlp", "rss", "r2b"), col = c(1,2,3,4,5), lty = 1)
+  
+}
+
+```
+The dots indicate PIP threshold = 0.95
+
+
+### 2. Results using independent X, without data from null model. 
+
+```{r, fig.width=12, fig.height=8}
+par(mfrow = c(2,3), cex.axis = 1.5)
+censor_lvl = c(0, 0.2, 0.4, 0.6, 0.8)
+for (i in 1:5){
+  indx = which(susie$simulate.cor_type == "independent" & susie$simulate.censor_lvl == censor_lvl[i])
+  pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+  pip.survsvb = unlist(lapply(indx, function(x) svb$svb.pip[[x]]))
+  pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+  pip.rss = unlist(lapply(indx, function(x) rss$rss.pip[[x]]))
+  pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
+  is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
+  
+  ts = seq(from = 0, to = 1, by = 0.01)
+  res.susie = calculate_tpr_vs_fdr(pip.susie, is_effect, ts)
+  res.svb = calculate_tpr_vs_fdr(pip.survsvb, is_effect, ts)
+  res.bvsnlp = calculate_tpr_vs_fdr(pip.bvsnlp, is_effect, ts)
+  res.rss = calculate_tpr_vs_fdr(pip.rss, is_effect, ts)
+  res.r2b = calculate_tpr_vs_fdr(pip.r2b, is_effect, ts)
+  
+  plot(res.susie[,2], res.susie[,1], type = "l", xlim = c(0,1), ylim = c(0, 1), xlab = "FDR", ylab = "Power",
+       main = paste0("Independent, effect 0-3", ",censor=", censor_lvl[i]))
+  lines(res.svb[,2], res.svb[,1], type = "l", col = 2)
+  lines(res.bvsnlp[,2], res.bvsnlp[,1], type = "l", col = 3)
+  lines(res.rss[,2], res.rss[,1], type = "l", col = 4)
+  lines(res.r2b[,2], res.r2b[,1], type = "l", col = 5)
+  
+  points(res.susie[96,2], res.susie[96, 1])
+  points(res.svb[96,2], res.svb[96, 1])
+  points(res.bvsnlp[96,2], res.bvsnlp[96, 1])
+  points(res.rss[96,2], res.rss[96, 1])
+  points(res.r2b[96,2], res.r2b[96, 1])
+  
+  legend("topleft", legend = c("susie", "survival.svb", "bvsnlp", "rss", "r2b"), col = c(1,2,3,4,5), lty = 1)
+}
+
+```
+
+The dots indicate PIP threshold = 0.95.
+
+
+### 3. Time comparison
+
+```{r}
+res = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_default_iter/time_comparison.rds")
+```
+
+```{r}
+t = unlist(lapply(1:length(res), function(i) mean(res[[i]][,5], , na.rm = TRUE)))
+names(t) = c("susie", "bvsnlp", "susie_rss", "svb", "r2b")
+print(t)
+```
+
+
