@@ -550,15 +550,15 @@ code/pip.R
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree2db86b1d08477a18375f2b246ffbc87648a3a076targetblank2db86b1a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreed66db4c5284e8fe239e59d23ae3ded5bcac0cfd6targetblankd66db4ca">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/2db86b1d08477a18375f2b246ffbc87648a3a076" target="_blank">2db86b1</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/d66db4c5284e8fe239e59d23ae3ded5bcac0cfd6" target="_blank">d66db4c</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree2db86b1d08477a18375f2b246ffbc87648a3a076targetblank2db86b1a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreed66db4c5284e8fe239e59d23ae3ded5bcac0cfd6targetblankd66db4ca"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -568,7 +568,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/2db86b1d08477a18375f2b246ffbc87648a3a076" target="_blank">2db86b1</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/d66db4c5284e8fe239e59d23ae3ded5bcac0cfd6" target="_blank">d66db4c</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -640,6 +640,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/d66db4c5284e8fe239e59d23ae3ded5bcac0cfd6/analysis/pip_default_iter_gtex.Rmd" target="_blank">d66db4c</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-06-10
+</td>
+<td>
+wflow_publish("analysis/pip_default_iter_gtex.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/d30fb806a61427e0f7a0afe04b8937cddd599e59/docs/pip_default_iter_gtex.html" target="_blank">d30fb80</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-06-10
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/2db86b1d08477a18375f2b246ffbc87648a3a076/analysis/pip_default_iter_gtex.Rmd" target="_blank">2db86b1</a>
 </td>
 <td>
@@ -674,7 +708,8 @@ predictors are from [indx_start:(indx_start + p -1)].</p></li>
 independent, I simply permute each variable values randomly.</p></li>
 <li><p>Effect size <span class="math inline">\(b\sim
 N(0,1)\)</span>.</p></li>
-<li><p>Simulate survival time using exponential survival model.</p></li>
+<li><p>Simulate survival time using exponential survival model. (New
+data simulation procedure)</p></li>
 </ol>
 </div>
 <div id="fitting" class="section level4">
@@ -727,6 +762,43 @@ for (i in 1:length(censor_lvls)){
   
 }</code></pre>
 <p><img src="figure/pip_default_iter_gtex.Rmd/unnamed-chunk-4-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
+Past versions of unnamed-chunk-4-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-4-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/d30fb806a61427e0f7a0afe04b8937cddd599e59/docs/figure/pip_default_iter_gtex.Rmd/unnamed-chunk-4-1.png" target="_blank">d30fb80</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-06-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="note-ranges-with-less-than-10-observations-are-removed"
 class="section level3">
@@ -760,6 +832,43 @@ plot_calibration(calibration.rss, main = &quot;rss&quot;)
 calibration.r2b = pip_calibration(pip.r2b, is_effect)
 plot_calibration(calibration.r2b, main = &quot;r2b&quot;)</code></pre>
 <p><img src="figure/pip_default_iter_gtex.Rmd/unnamed-chunk-5-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-5-1">
+Past versions of unnamed-chunk-5-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-5-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/d30fb806a61427e0f7a0afe04b8937cddd599e59/docs/figure/pip_default_iter_gtex.Rmd/unnamed-chunk-5-1.png" target="_blank">d30fb80</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-06-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="independent-snps" class="section level3">
 <h3>2. Independent SNPs</h3>
@@ -793,6 +902,43 @@ for (i in 1:length(censor_lvls)){
   
 }</code></pre>
 <p><img src="figure/pip_default_iter_gtex.Rmd/unnamed-chunk-6-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-6-1">
+Past versions of unnamed-chunk-6-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-6-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/d30fb806a61427e0f7a0afe04b8937cddd599e59/docs/figure/pip_default_iter_gtex.Rmd/unnamed-chunk-6-1.png" target="_blank">d30fb80</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-06-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>par(mfrow = c(2,3))
 indx = which(bvsnlp$simulate.cor_type == &quot;independent&quot;)
 is_effect = unlist(lapply(indx, function(x) bvsnlp$simulate.is_effect[[x]]))
@@ -822,6 +968,43 @@ plot_calibration(calibration.rss, main = &quot;rss&quot;)
 calibration.r2b = pip_calibration(pip.r2b, is_effect)
 plot_calibration(calibration.r2b, main = &quot;r2b&quot;)</code></pre>
 <p><img src="figure/pip_default_iter_gtex.Rmd/unnamed-chunk-7-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-7-1">
+Past versions of unnamed-chunk-7-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-7-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/d30fb806a61427e0f7a0afe04b8937cddd599e59/docs/figure/pip_default_iter_gtex.Rmd/unnamed-chunk-7-1.png" target="_blank">d30fb80</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-06-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
