@@ -108,6 +108,11 @@ Real data simulation: GTEx genotype(2024)
 
 + [Larger iteration result: power vs. fdr](gtex_500iter.html)
 
++ [Default iteration result: pip (new data simulation procedure)](pip_default_iter_gtex.html)
+
++ [Default iteration result: power vs. fdr (new data simulation procedure)](gtex_default_iter_fdr.html)
+
+
 Real data simulation: UKBiobank genotype
 
 + [PIP Comparison](pip_comparison_large_sample.html)
