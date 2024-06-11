@@ -17,7 +17,7 @@ Simulation results based on real genotype data from GTEx. I took the SNPs for a 
 
 3. Effect size $b\sim N(0,1)$.
 
-4. Simulate survival time using exponential survival model. 
+4. Simulate survival time using exponential survival model. (New data simulation procedure)
 
 
 #### Fitting:
