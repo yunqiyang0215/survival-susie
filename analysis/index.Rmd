@@ -117,7 +117,11 @@ Real data simulation: UKBiobank genotype
 
 + [PIP Comparison](pip_comparison_large_sample.html)
 
-+ [Power vs. fdr](ukb_10iter.html)
++ [Power vs. fdr ](ukb_10iter.html)
+
++ [PIP Comparison (new data simulation procedure)](pip_ukb_new_sim.html)
+
++ [Power vs. fdr (new data simulation procedure)](power_fdr_ukb_new_sim.html)
 
 + [Compare credible sets](summarize_cs.html)
 
