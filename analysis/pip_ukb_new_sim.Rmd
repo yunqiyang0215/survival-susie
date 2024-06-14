@@ -1,12 +1,12 @@
 ---
 title: "PIP Comparison in large sample"
 output: html_document
-date: '2024-02-12'
+date: '2024-06-14'
 ---
 
 ### Description:
 
-Compare PIPs using simulated dataset, where $n=50000$ and $p=1000$. The effect size of SNPs $\sim N(0, 0.1)$. 
+Compare PIPs using simulated dataset (new simulation procedure), where $n=50000$ and $p=1000$. The effect size of SNPs $\sim N(0, 0.1)$. 
 
 1. susie: maxiter = 10
 
