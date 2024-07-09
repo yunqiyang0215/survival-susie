@@ -29,7 +29,7 @@ r2b = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter1
 ### 1. Results using real correlation structure from data
 
 ```{r, fig.width=12, fig.height=8}
-pdf("/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/fdr_gtex.pdf", width= 12, height = 8)
+pdf("/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/fdr_ukb.pdf", width= 12, height = 8)
 par(mfrow = c(2,3), cex.axis = 1.5)
 censor_lvl = c(0, 0.2, 0.4, 0.6, 0.8, 0.99)
 for (i in 1:5){
