@@ -564,15 +564,15 @@ output/pip_ukb_calibration.pdf
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreef0efc9f592e9f7d02ed52d1c6b80e8a5ce47efeftargetblankf0efc9fa">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree4b841c9ccd76099b12b61eb95c7b6f01ac5a0a56targetblank4b841c9a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/f0efc9f592e9f7d02ed52d1c6b80e8a5ce47efef" target="_blank">f0efc9f</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/4b841c9ccd76099b12b61eb95c7b6f01ac5a0a56" target="_blank">4b841c9</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreef0efc9f592e9f7d02ed52d1c6b80e8a5ce47efeftargetblankf0efc9fa"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree4b841c9ccd76099b12b61eb95c7b6f01ac5a0a56targetblank4b841c9a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -582,7 +582,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/f0efc9f592e9f7d02ed52d1c6b80e8a5ce47efef" target="_blank">f0efc9f</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/4b841c9ccd76099b12b61eb95c7b6f01ac5a0a56" target="_blank">4b841c9</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -604,6 +604,8 @@ Ignored files:
 Untracked files:
     Untracked:  output/pip_gtex.pdf
     Untracked:  output/pip_gtex_calibration.pdf
+    Untracked:  output/pip_ukb.pdf
+    Untracked:  output/pip_ukb_calibration.pdf
 
 Unstaged changes:
     Modified:   analysis/bf_comparison.Rmd
@@ -654,6 +656,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/4b841c9ccd76099b12b61eb95c7b6f01ac5a0a56/analysis/pip_ukb_new_sim.Rmd" target="_blank">4b841c9</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-07-09
+</td>
+<td>
+wflow_publish("analysis/pip_ukb_new_sim.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/09448e2eec0115fa1f465afccbf0b0868f44656e/docs/pip_ukb_new_sim.html" target="_blank">09448e2</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-07-09
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -772,8 +808,8 @@ r2b = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_n
 </div>
 <div id="use-the-real-correlation-of-snps" class="section level3">
 <h3>1. Use the real correlation of SNPs</h3>
-<pre class="r"><code>pdf(&quot;/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/pip_ukb.pdf&quot;, width= 12, height = 18)
-par(mfrow = c(5,4))
+<pre class="r"><code>pdf(&quot;/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/pip_ukb.pdf&quot;, width= 12, height = 20)
+par(mfrow = c(6,4))
 for (i in 1:length(censor_lvls)){
   indx = which(susie$simulate.cor_type == &quot;real&quot; &amp; susie$simulate.censor_lvl == censor_lvls[i])
   pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
