@@ -566,15 +566,15 @@ output/pip_gtex_calibration.pdf
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree33a3d7cd4e29c1dba2241322b933224c04447f8etargetblank33a3d7ca">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreedfc36bb806309db8bd956f0b5217b539fbc57369targetblankdfc36bba">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/33a3d7cd4e29c1dba2241322b933224c04447f8e" target="_blank">33a3d7c</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/dfc36bb806309db8bd956f0b5217b539fbc57369" target="_blank">dfc36bb</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree33a3d7cd4e29c1dba2241322b933224c04447f8etargetblank33a3d7ca"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreedfc36bb806309db8bd956f0b5217b539fbc57369targetblankdfc36bba"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -584,7 +584,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/33a3d7cd4e29c1dba2241322b933224c04447f8e" target="_blank">33a3d7c</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/dfc36bb806309db8bd956f0b5217b539fbc57369" target="_blank">dfc36bb</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -607,6 +607,10 @@ Unstaged changes:
     Modified:   analysis/bf_comparison.Rmd
     Deleted:    analysis/calibration_large_sample.Rmd
     Modified:   analysis/coxph_na.Rmd
+    Modified:   analysis/gtex_default_iter_fdr.Rmd
+    Modified:   analysis/power_fdr_ukb_new_sim.Rmd
+    Modified:   output/pip_ukb.pdf
+    Modified:   output/pip_ukb_calibration.pdf
 
 </code></pre>
 <p>
@@ -652,6 +656,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/dfc36bb806309db8bd956f0b5217b539fbc57369/analysis/pip_default_iter_gtex.Rmd" target="_blank">dfc36bb</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-07-09
+</td>
+<td>
+wflow_publish("analysis/pip_default_iter_gtex.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/2c88dcf88527482796d1cd0bb00ef12d8a9ea1ed/docs/pip_default_iter_gtex.html" target="_blank">2c88dcf</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-07-09
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -797,19 +835,19 @@ for (i in 1:length(censor_lvls)){
   is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
 
   res.pip = compare_pip(pip.susie, pip.svb, is_effect)
-  plot_pip(res.pip, labs = c(&quot;SuSiE&quot;, &quot;survival.svb&quot;), main = paste0(&quot;censor=&quot;,censor_lvls[i]))
+  plot_pip(res.pip, labs = c(&quot;CoxPH-SuSiE&quot;, &quot;survival.svb&quot;), main = paste0(&quot;censor=&quot;,censor_lvls[i]))
   abline(a = 0, b = 1, lty = 2, col = &quot;blue&quot;)
   
   res.pip = compare_pip(pip.susie, pip.bvsnlp, is_effect)
-  plot_pip(res.pip, labs = c(&quot;SuSiE&quot;, &quot;BVSNLP&quot;), main = paste0(&quot;censor=&quot;,censor_lvls[i]))
+  plot_pip(res.pip, labs = c(&quot;CoxPH-SuSiE&quot;, &quot;BVSNLP&quot;), main = paste0(&quot;censor=&quot;,censor_lvls[i]))
   abline(a = 0, b = 1, lty = 2, col = &quot;blue&quot;)
   
   res.pip = compare_pip(pip.susie, pip.r2b, is_effect)
-  plot_pip(res.pip, labs = c(&quot;SuSiE&quot;, &quot;R2BGLiMS&quot;), main = paste0(&quot;censor=&quot;,censor_lvls[i]))
+  plot_pip(res.pip, labs = c(&quot;CoxPH-SuSiE&quot;, &quot;R2BGLiMS&quot;), main = paste0(&quot;censor=&quot;,censor_lvls[i]))
   abline(a = 0, b = 1, lty = 2, col = &quot;blue&quot;)
   
   res.pip = compare_pip(pip.susie, pip.rss, is_effect)
-  plot_pip(res.pip, labs = c(&quot;SuSiE&quot;, &quot;SuSiE.RSS&quot;), main = paste0(&quot;censor=&quot;,censor_lvls[i]))
+  plot_pip(res.pip, labs = c(&quot;CoxPH-SuSiE&quot;, &quot;SuSiE.RSS&quot;), main = paste0(&quot;censor=&quot;,censor_lvls[i]))
   abline(a = 0, b = 1, lty = 2, col = &quot;blue&quot;)
   
 }</code></pre>
