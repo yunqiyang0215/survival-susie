@@ -56,6 +56,7 @@ censor_lvls = unique(susie$simulate.censor_lvl)
 
 ### 1. Use the real correlation of SNPs
 ```{r fig.width= 12, fig.height=18}
+pdf("/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/pip_gtex.pdf", width= 12, height = 18)
 par(mfrow = c(5,4))
 for (i in 1:length(censor_lvls)){
   indx = which(susie$simulate.cor_type == "real" & susie$simulate.censor_lvl == censor_lvls[i])
@@ -68,19 +69,19 @@ for (i in 1:length(censor_lvls)){
   is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
 
   res.pip = compare_pip(pip.susie, pip.svb, is_effect)
-  plot_pip(res.pip, labs = c("susie", "survival.svb"), main = paste0("censor=",censor_lvls[i]))
+  plot_pip(res.pip, labs = c("SuSiE", "survival.svb"), main = paste0("censor=",censor_lvls[i]))
   abline(a = 0, b = 1, lty = 2, col = "blue")
   
   res.pip = compare_pip(pip.susie, pip.bvsnlp, is_effect)
-  plot_pip(res.pip, labs = c("susie", "bvsnlp"), main = paste0("censor=",censor_lvls[i]))
+  plot_pip(res.pip, labs = c("SuSiE", "BVSNLP"), main = paste0("censor=",censor_lvls[i]))
   abline(a = 0, b = 1, lty = 2, col = "blue")
   
   res.pip = compare_pip(pip.susie, pip.r2b, is_effect)
-  plot_pip(res.pip, labs = c("susie", "r2b"), main = paste0("censor=",censor_lvls[i]))
+  plot_pip(res.pip, labs = c("SuSiE", "R2BGLiMS"), main = paste0("censor=",censor_lvls[i]))
   abline(a = 0, b = 1, lty = 2, col = "blue")
   
   res.pip = compare_pip(pip.susie, pip.rss, is_effect)
-  plot_pip(res.pip, labs = c("susie", "rss"), main = paste0("censor=",censor_lvls[i]))
+  plot_pip(res.pip, labs = c("SuSiE", "SuSiE.RSS"), main = paste0("censor=",censor_lvls[i]))
   abline(a = 0, b = 1, lty = 2, col = "blue")
   
 }
@@ -90,6 +91,7 @@ for (i in 1:length(censor_lvls)){
 ### Note: ranges with less than 10 observations are removed...
 
 ```{r fig.width= 12, fig.height=10}
+pdf("/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/pip_gtex_calibration.pdf", width= 12, height = 8)
 par(mfrow = c(2,3))
 indx = which(bvsnlp$simulate.cor_type == "real")
 is_effect = unlist(lapply(indx, function(x) bvsnlp$simulate.is_effect[[x]]))
@@ -101,23 +103,23 @@ pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
   
 # Calibration plot for pip.susie
 calibration.susie = pip_calibration(pip.susie, is_effect)
-plot_calibration(calibration.susie, main = "susie")
+plot_calibration(calibration.susie, main = "SuSiE")
   
 # Calibration plot for pip.svb
 calibration.survsvb = pip_calibration(pip.survsvb, is_effect)
-plot_calibration(calibration.survsvb, main = "svb")
+plot_calibration(calibration.survsvb, main = "survival.svb")
   
 # Calibration plot for pip.bvsnlp
 calibration.bvsnlp = pip_calibration(pip.bvsnlp, is_effect)
-plot_calibration(calibration.bvsnlp, main = "bvsnlp")
+plot_calibration(calibration.bvsnlp, main = "BVSNLP")
   
 # Calibration plot for pip.rss
 calibration.rss = pip_calibration(pip.rss, is_effect)
-plot_calibration(calibration.rss, main = "rss")
+plot_calibration(calibration.rss, main = "SuSiE.RSS")
   
 # Calibration plot for pip.r2b
 calibration.r2b = pip_calibration(pip.r2b, is_effect)
-plot_calibration(calibration.r2b, main = "r2b")
+plot_calibration(calibration.r2b, main = "R2BGLiMS")
 
 ```
 
