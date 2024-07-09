@@ -394,7 +394,7 @@ aria-hidden="true"></span> </a>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2024-06-10
+<strong>Last updated:</strong> 2024-07-09
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -543,6 +543,14 @@ relative
 code/post_summary.R
 </td>
 </tr>
+<tr>
+<td style="text-align:left;">
+/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/fdr_gtex.pdf
+</td>
+<td style="text-align:left;">
+output/fdr_gtex.pdf
+</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -551,15 +559,15 @@ code/post_summary.R
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree382691307dddc4e18fa5f36a8f3b83a919a06c7dtargetblank3826913a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreeab091d49141904ed598aae94f99951134d82ab93targetblankab091d4a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/382691307dddc4e18fa5f36a8f3b83a919a06c7d" target="_blank">3826913</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/ab091d49141904ed598aae94f99951134d82ab93" target="_blank">ab091d4</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree382691307dddc4e18fa5f36a8f3b83a919a06c7dtargetblank3826913a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreeab091d49141904ed598aae94f99951134d82ab93targetblankab091d4a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -569,7 +577,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/382691307dddc4e18fa5f36a8f3b83a919a06c7d" target="_blank">3826913</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/ab091d49141904ed598aae94f99951134d82ab93" target="_blank">ab091d4</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -589,6 +597,7 @@ Ignored files:
     Ignored:    .Rproj.user/
 
 Unstaged changes:
+    Modified:   analysis/bf_comparison.Rmd
     Deleted:    analysis/calibration_large_sample.Rmd
     Modified:   analysis/coxph_na.Rmd
 
@@ -641,6 +650,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/ab091d49141904ed598aae94f99951134d82ab93/analysis/gtex_default_iter_fdr.Rmd" target="_blank">ab091d4</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-07-09
+</td>
+<td>
+wflow_publish("analysis/gtex_default_iter_fdr.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/c47cde62bdbf8d915a3190e974a51c23b9b6aaa9/docs/gtex_default_iter_fdr.html" target="_blank">c47cde6</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-06-10
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/382691307dddc4e18fa5f36a8f3b83a919a06c7d/analysis/gtex_default_iter_fdr.Rmd" target="_blank">3826913</a>
 </td>
 <td>
@@ -675,7 +718,8 @@ rss = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_
 <div id="results-using-real-correlation-structure-from-data"
 class="section level3">
 <h3>1. Results using real correlation structure from data</h3>
-<pre class="r"><code>par(mfrow = c(2,3), cex.axis = 1.5)
+<pre class="r"><code>pdf(&quot;/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/fdr_gtex.pdf&quot;, width= 12, height = 8)
+par(mfrow = c(2,3), cex.axis = 1.5)
 censor_lvl = c(0, 0.2, 0.4, 0.6, 0.8)
 for (i in 1:5){
   indx = which(susie$simulate.cor_type == &quot;real&quot; &amp; susie$simulate.censor_lvl == censor_lvl[i])
@@ -694,7 +738,7 @@ for (i in 1:5){
   res.r2b = calculate_tpr_vs_fdr(pip.r2b, is_effect, ts)
   
   plot(res.susie[,2], res.susie[,1], type = &quot;l&quot;, xlim = c(0,1), ylim = c(0, 1), xlab = &quot;FDR&quot;, ylab = &quot;Power&quot;,
-       main = paste0(&quot;Real correlation, effect 0-3&quot;, &quot;,censor=&quot;, censor_lvl[i]))
+       main = paste0(&quot;censor=&quot;, censor_lvl[i]))
   lines(res.svb[,2], res.svb[,1], type = &quot;l&quot;, col = 2)
   lines(res.bvsnlp[,2], res.bvsnlp[,1], type = &quot;l&quot;, col = 3)
   lines(res.rss[,2], res.rss[,1], type = &quot;l&quot;, col = 4)
@@ -706,11 +750,10 @@ for (i in 1:5){
   points(res.rss[96,2], res.rss[96, 1])
   points(res.r2b[96,2], res.r2b[96, 1])
   
-  legend(&quot;topleft&quot;, legend = c(&quot;susie&quot;, &quot;survival.svb&quot;, &quot;bvsnlp&quot;, &quot;rss&quot;, &quot;r2b&quot;), col = c(1,2,3,4,5), lty = 1)
+  legend(&quot;topleft&quot;, legend = c(&quot;SuSiE&quot;, &quot;survival.svb&quot;, &quot;BVSNLP&quot;, &quot;SuSiE.RSS&quot;, &quot;R2BGLiMS&quot;), col = c(1,2,3,4,5), lty = 1)
   
 }</code></pre>
-<p><img src="figure/gtex_default_iter_fdr.Rmd/unnamed-chunk-3-1.png" width="1152" style="display: block; margin: auto;" />
-The dots indicate PIP threshold = 0.95</p>
+<p>The dots indicate PIP threshold = 0.95</p>
 </div>
 <div id="results-using-independent-x-without-data-from-null-model."
 class="section level3">
@@ -749,6 +792,43 @@ for (i in 1:5){
   legend(&quot;topleft&quot;, legend = c(&quot;susie&quot;, &quot;survival.svb&quot;, &quot;bvsnlp&quot;, &quot;rss&quot;, &quot;r2b&quot;), col = c(1,2,3,4,5), lty = 1)
 }</code></pre>
 <p><img src="figure/gtex_default_iter_fdr.Rmd/unnamed-chunk-4-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-4-1">
+Past versions of unnamed-chunk-4-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-4-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/c47cde62bdbf8d915a3190e974a51c23b9b6aaa9/docs/figure/gtex_default_iter_fdr.Rmd/unnamed-chunk-4-1.png" target="_blank">c47cde6</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-06-10
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>The dots indicate PIP threshold = 0.95.</p>
 </div>
 <div id="time-comparison" class="section level3">
@@ -788,18 +868,17 @@ Session information
 # [1] workflowr_1.7.0
 # 
 # loaded via a namespace (and not attached):
-#  [1] Rcpp_1.0.8.3     highr_0.9        bslib_0.3.1      compiler_4.2.0  
-#  [5] pillar_1.7.0     later_1.3.0      git2r_0.30.1     jquerylib_0.1.4 
+#  [1] Rcpp_1.0.12      highr_0.9        compiler_4.2.0   pillar_1.9.0    
+#  [5] bslib_0.3.1      later_1.3.0      git2r_0.30.1     jquerylib_0.1.4 
 #  [9] tools_4.2.0      getPass_0.2-2    digest_0.6.29    jsonlite_1.8.0  
-# [13] evaluate_0.15    tibble_3.1.7     lifecycle_1.0.1  pkgconfig_2.0.3 
-# [17] rlang_1.0.2      cli_3.3.0        rstudioapi_0.13  yaml_2.3.5      
-# [21] xfun_0.30        fastmap_1.1.0    httr_1.4.3       stringr_1.4.0   
-# [25] knitr_1.39       sass_0.4.1       fs_1.5.2         vctrs_0.4.1     
+# [13] evaluate_0.15    lifecycle_1.0.4  tibble_3.2.1     pkgconfig_2.0.3 
+# [17] rlang_1.1.3      cli_3.6.2        rstudioapi_0.13  yaml_2.3.5      
+# [21] xfun_0.30        fastmap_1.1.0    httr_1.4.3       stringr_1.5.1   
+# [25] knitr_1.39       fs_1.5.2         vctrs_0.6.5      sass_0.4.1      
 # [29] rprojroot_2.0.3  glue_1.6.2       R6_2.5.1         processx_3.8.0  
 # [33] fansi_1.0.3      rmarkdown_2.14   callr_3.7.3      magrittr_2.0.3  
 # [37] whisker_0.4      ps_1.7.0         promises_1.2.0.1 htmltools_0.5.2 
-# [41] ellipsis_0.3.2   httpuv_1.6.5     utf8_1.2.2       stringi_1.7.6   
-# [45] crayon_1.5.1</code></pre>
+# [41] httpuv_1.6.5     utf8_1.2.2       stringi_1.7.6</code></pre>
 </div>
 </div>
 
