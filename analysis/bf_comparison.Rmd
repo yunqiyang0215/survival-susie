@@ -24,7 +24,7 @@ Compare different types of Bayes factor under different levels of censoring and 
 (d) Wakefeld BF with zscore from coxph() corrected by saddle point approximation. https://yunqiyang0215.github.io/survival-susie/SPAcox.html
 
 ```{r}
-res = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/bf_comparison202402/res_bf.rds")
+res = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/bf_comparison/res_bf.rds")
 ```
 
 ```{r}
