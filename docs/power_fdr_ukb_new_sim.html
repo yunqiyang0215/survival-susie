@@ -559,15 +559,15 @@ output/fdr_ukb.pdf
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree82c5d621d11d8c3d15c2f3ed88da4105020669c6targetblank82c5d62a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree9ac9ab3c9b3bd79a6b75abc72641f47235c691eatargetblank9ac9ab3a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/82c5d621d11d8c3d15c2f3ed88da4105020669c6" target="_blank">82c5d62</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/9ac9ab3c9b3bd79a6b75abc72641f47235c691ea" target="_blank">9ac9ab3</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree82c5d621d11d8c3d15c2f3ed88da4105020669c6targetblank82c5d62a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree9ac9ab3c9b3bd79a6b75abc72641f47235c691eatargetblank9ac9ab3a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -577,7 +577,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/82c5d621d11d8c3d15c2f3ed88da4105020669c6" target="_blank">82c5d62</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/9ac9ab3c9b3bd79a6b75abc72641f47235c691ea" target="_blank">9ac9ab3</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -596,14 +596,15 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
 
-Untracked files:
-    Untracked:  output/fdr_gtex.pdf
-    Untracked:  output/fdr_ukb.pdf
-
 Unstaged changes:
     Modified:   analysis/bf_comparison.Rmd
     Deleted:    analysis/calibration_large_sample.Rmd
     Modified:   analysis/coxph_na.Rmd
+    Modified:   output/fdr_gtex.pdf
+    Modified:   output/pip_gtex.pdf
+    Modified:   output/pip_gtex_calibration.pdf
+    Modified:   output/pip_ukb.pdf
+    Modified:   output/pip_ukb_calibration.pdf
 
 </code></pre>
 <p>
@@ -649,6 +650,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/9ac9ab3c9b3bd79a6b75abc72641f47235c691ea/analysis/power_fdr_ukb_new_sim.Rmd" target="_blank">9ac9ab3</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-07-09
+</td>
+<td>
+wflow_publish("analysis/power_fdr_ukb_new_sim.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/e27daacb2ecf15c2e2545526ed2b2412a96db360/docs/power_fdr_ukb_new_sim.html" target="_blank">e27daac</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-07-09
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -823,7 +858,7 @@ for (i in 1:6){
   points(res.rss[96,2], res.rss[96, 1])
   points(res.r2b[96,2], res.r2b[96, 1])
   
-  legend(&quot;topleft&quot;, legend = c(&quot;SuSiE&quot;, &quot;survival.svb&quot;, &quot;BVSNLP&quot;, &quot;SuSiE.RSS&quot;, &quot;R2BGLiMS&quot;), col = c(1,2,3,4,5), lty = 1)
+  legend(&quot;topleft&quot;, legend = c(&quot;CoxPH-SuSiE&quot;, &quot;survival.svb&quot;, &quot;BVSNLP&quot;, &quot;SuSiE.RSS&quot;, &quot;R2BGLiMS&quot;), col = c(1,2,3,4,5), lty = 1)
   
 }</code></pre>
 <p>The dots indicate PIP threshold = 0.95</p>
