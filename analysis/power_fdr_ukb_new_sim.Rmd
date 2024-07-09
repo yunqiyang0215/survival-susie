@@ -32,7 +32,7 @@ r2b = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter1
 pdf("/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/fdr_ukb.pdf", width= 12, height = 8)
 par(mfrow = c(2,3), cex.axis = 1.5)
 censor_lvl = c(0, 0.2, 0.4, 0.6, 0.8, 0.99)
-for (i in 1:5){
+for (i in 1:6){
   indx = which(susie$simulate.cor_type == "real" & susie$simulate.censor_lvl == censor_lvl[i])
   pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
   pip.survsvb = unlist(lapply(indx, function(x) survsvb$svb.pip[[x]]))
