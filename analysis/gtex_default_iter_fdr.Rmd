@@ -61,7 +61,7 @@ for (i in 1:5){
   points(res.rss[96,2], res.rss[96, 1])
   points(res.r2b[96,2], res.r2b[96, 1])
   
-  legend("topleft", legend = c("SuSiE", "survival.svb", "BVSNLP", "SuSiE.RSS", "R2BGLiMS"), col = c(1,2,3,4,5), lty = 1)
+  legend("topleft", legend = c("CoxPH-SuSiE", "survival.svb", "BVSNLP", "SuSiE.RSS", "R2BGLiMS"), col = c(1,2,3,4,5), lty = 1)
   
 }
 
