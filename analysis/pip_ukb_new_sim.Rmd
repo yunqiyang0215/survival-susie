@@ -60,19 +60,19 @@ for (i in 1:length(censor_lvls)){
 
 
   res.pip = compare_pip(pip.susie, pip.svb, is_effect)
-  plot_pip(res.pip, labs = c("SuSiE", "survival.svb"), main = paste0("censor=",censor_lvls[i]))
+  plot_pip(res.pip, labs = c("CoxPH-SuSiE", "survival.svb"), main = paste0("censor=",censor_lvls[i]))
   abline(a = 0, b = 1, lty = 2, col = "blue")
   
   res.pip = compare_pip(pip.susie, pip.bvsnlp, is_effect)
-  plot_pip(res.pip, labs = c("SuSiE", "BVSNLP"), main = paste0("censor=",censor_lvls[i]))
+  plot_pip(res.pip, labs = c("CoxPH-SuSiE", "BVSNLP"), main = paste0("censor=",censor_lvls[i]))
   abline(a = 0, b = 1, lty = 2, col = "blue")
   
   res.pip = compare_pip(pip.susie, pip.r2b, is_effect)
-  plot_pip(res.pip, labs = c("SuSiE", "R2BGLiMS"), main = paste0("censor=",censor_lvls[i]))
+  plot_pip(res.pip, labs = c("CoxPH-SuSiE", "R2BGLiMS"), main = paste0("censor=",censor_lvls[i]))
   abline(a = 0, b = 1, lty = 2, col = "blue")
   
   res.pip = compare_pip(pip.susie, pip.rss, is_effect)
-  plot_pip(res.pip, labs = c("SuSiE", "SuSiE.RSS"), main = paste0("censor=",censor_lvls[i]))
+  plot_pip(res.pip, labs = c("CoxPH-SuSiE", "SuSiE.RSS"), main = paste0("censor=",censor_lvls[i]))
   abline(a = 0, b = 1, lty = 2, col = "blue")
   
 }
@@ -93,7 +93,7 @@ pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
   
 # Calibration plot for pip.susie
 calibration.susie = pip_calibration(pip.susie, is_effect)
-plot_calibration(calibration.susie, main = "SuSiE")
+plot_calibration(calibration.susie, main = "CoxPH-SuSiE")
   
 # Calibration plot for pip.svb
 calibration.survsvb = pip_calibration(pip.survsvb, is_effect)
