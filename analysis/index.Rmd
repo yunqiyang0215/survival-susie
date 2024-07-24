@@ -30,6 +30,8 @@ Check Bayes factor
 
 + [BF comparison](bf_comparison.html)
 
++ [BF comparison: more settings](bf_comparison2.html)
+
 + [Compare BF calculation: numerical integration vs. approximated BF](bf_diff.html)
 
 + [Saddle point approximation using SPAcox](SPAcox.html)
