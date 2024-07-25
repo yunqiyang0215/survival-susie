@@ -13,7 +13,7 @@
 
 <title>Home</title>
 
-<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -35,7 +35,7 @@
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
-<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/master/img/reproducible.png">
 <!-- Add a small amount of space between sections. -->
 <style type="text/css">
 div.section {
@@ -72,7 +72,6 @@ if (window.hljs) {
 
 
 
-
 <style type = "text/css">
 .main-container {
   max-width: 940px;
@@ -93,9 +92,6 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
-}
-details > summary > p:only-child {
-  display: inline;
 }
 pre code {
   padding: 0;
@@ -248,7 +244,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -291,9 +287,7 @@ $(document).ready(function () {
 
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
-<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-workflowr <span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span>
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span> workflowr <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 </button>
 </p>
 <div id="workflowr-report" class="collapse">
@@ -302,9 +296,7 @@ aria-hidden="true"></span>
 <a data-toggle="tab" href="#summary">Summary</a>
 </li>
 <li>
-<a data-toggle="tab" href="#checks"> Checks <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
-</a>
+<a data-toggle="tab" href="#checks"> Checks <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -313,27 +305,17 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2024-06-14
+<strong>Last updated:</strong> 2024-07-24
 </p>
 <p>
-<strong>Checks:</strong> <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2
-<span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> 0
+<strong>Checks:</strong> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 2 <span class="glyphicon glyphicon-exclamation-sign text-danger" aria-hidden="true"></span> 0
 </p>
 <p>
-<strong>Knit directory:</strong> <code>survival-susie/</code> <span
-class="glyphicon glyphicon-question-sign" aria-hidden="true"
-title="This is the local directory in which the code in this file was executed.">
-</span>
+<strong>Knit directory:</strong> <code>survival-susie/</code> <span class="glyphicon glyphicon-question-sign" aria-hidden="true" title="This is the local directory in which the code in this file was executed."> </span>
 </p>
 <p>
-This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
-analysis was created with <a
-  href="https://github.com/workflowr/workflowr">workflowr</a> (version
-1.7.0). The <em>Checks</em> tab describes the reproducibility checks
-that were applied when the results were created. The <em>Past
-versions</em> tab lists the development history.
+This reproducible <a href="http://rmarkdown.rstudio.com">R Markdown</a> analysis was created with <a
+  href="https://github.com/jdblischak/workflowr">workflowr</a> (version 1.6.2). The <em>Checks</em> tab describes the reproducibility checks that were applied when the results were created. The <em>Past versions</em> tab lists the development history.
 </p>
 <hr>
 </div>
@@ -342,70 +324,41 @@ versions</em> tab lists the development history.
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
-<span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
-</a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date </a>
 </p>
 </div>
-<div id="strongRMarkdownfilestronguptodate"
-class="panel-collapse collapse">
+<div id="strongRMarkdownfilestronguptodate" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great! Since the R Markdown file has been committed to the Git
-repository, you know the exact version of the code that produced these
-results.</p>
+<p>Great! Since the R Markdown file has been committed to the Git repository, you know the exact version of the code that produced these results.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree4a7fe75c7ea905db7cdeb17fbe65063fc12eab15targetblank4a7fe75a">
-<span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/4a7fe75c7ea905db7cdeb17fbe65063fc12eab15" target="_blank">4a7fe75</a>
-</a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree920efb82d8f91962b06d05c6a1374c55c7f86c55targetblank920efb8a"> <span class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> <strong>Repository version:</strong> <a href="https://github.com/yunqiyang0215/survival-susie/tree/920efb82d8f91962b06d05c6a1374c55c7f86c55" target="_blank">920efb8</a> </a>
 </p>
 </div>
-<div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree4a7fe75c7ea905db7cdeb17fbe65063fc12eab15targetblank4a7fe75a"
-class="panel-collapse collapse">
+<div id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree920efb82d8f91962b06d05c6a1374c55c7f86c55targetblank920efb8a" class="panel-collapse collapse">
 <div class="panel-body">
 <p>
-Great! You are using Git for version control. Tracking code development
-and connecting the code version to the results is critical for
-reproducibility.
+Great! You are using Git for version control. Tracking code development and connecting the code version to the results is critical for reproducibility.
 </p>
 <p>
-The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/4a7fe75c7ea905db7cdeb17fbe65063fc12eab15" target="_blank">4a7fe75</a>.
-See the <em>Past versions</em> tab to see a history of the changes made
-to the R Markdown and HTML files.
+The results in this page were generated with repository version <a href="https://github.com/yunqiyang0215/survival-susie/tree/920efb82d8f91962b06d05c6a1374c55c7f86c55" target="_blank">920efb8</a>. See the <em>Past versions</em> tab to see a history of the changes made to the R Markdown and HTML files.
 </p>
 <p>
-Note that you need to be careful to ensure that all relevant files for
-the analysis have been committed to Git prior to generating the results
-(you can use <code>wflow_publish</code> or
-<code>wflow_git_commit</code>). workflowr only checks the R Markdown
-file, but you know if there are other scripts or data files that it
-depends on. Below is the status of the Git repository when the results
-were generated:
+Note that you need to be careful to ensure that all relevant files for the analysis have been committed to Git prior to generating the results (you can use <code>wflow_publish</code> or <code>wflow_git_commit</code>). workflowr only checks the R Markdown file, but you know if there are other scripts or data files that it depends on. Below is the status of the Git repository when the results were generated:
 </p>
 <pre><code>
 Ignored files:
-    Ignored:    .RData
+    Ignored:    .DS_Store
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
 
-Unstaged changes:
-    Deleted:    analysis/calibration_large_sample.Rmd
-    Modified:   analysis/coxph_na.Rmd
-
 </code></pre>
 <p>
-Note that any generated files, e.g. HTML, png, CSS, etc., are not
-included in this status report because it is ok for generated content to
-have uncommitted changes.
+Note that any generated files, e.g. HTML, png, CSS, etc., are not included in this status report because it is ok for generated content to have uncommitted changes.
 </p>
 </div>
 </div>
@@ -416,11 +369,7 @@ have uncommitted changes.
 <div id="versions" class="tab-pane fade">
 
 <p>
-These are the previous versions of the repository in which changes were
-made to the R Markdown (<code>analysis/index.Rmd</code>) and HTML
-(<code>docs/index.html</code>) files. If you’ve configured a remote Git
-repository (see <code>?wflow_git_remote</code>), click on the hyperlinks
-in the table below to view the files as they were in that past version.
+These are the previous versions of the repository in which changes were made to the R Markdown (<code>analysis/index.Rmd</code>) and HTML (<code>docs/index.html</code>) files. If you’ve configured a remote Git repository (see <code>?wflow_git_remote</code>), click on the hyperlinks in the table below to view the files as they were in that past version.
 </p>
 <div class="table-responsive">
 <table class="table table-condensed table-hover">
@@ -444,6 +393,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/920efb82d8f91962b06d05c6a1374c55c7f86c55/analysis/index.Rmd" target="_blank">920efb8</a>
+</td>
+<td>
+yunqiyang0215
+</td>
+<td>
+2024-07-24
+</td>
+<td>
+wflow_publish("analysis/index.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/ea4ffd5a0a4ae78e40acf1d918c2d1f8a1f17c99/docs/index.html" target="_blank">ea4ffd5</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-06-14
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -2323,36 +2306,26 @@ Start workflowr project.
 </div>
 <p>Background and analysis on coxph model</p>
 <ul>
-<li><p><a href="survival_example.html">Example of survival analysis in
-R</a></p></li>
-<li><p><a href="check_coxph_fit.html">Check effect of standardization in
-coxph model</a></p></li>
-<li><p><a href="null_model_zscore.html">Check distribution of zscores
-under the null in coxph</a></p></li>
-<li><p><a href="coxph_fit.html">Check more property of
-coxph()</a></p></li>
+<li><p><a href="survival_example.html">Example of survival analysis in R</a></p></li>
+<li><p><a href="check_coxph_fit.html">Check effect of standardization in coxph model</a></p></li>
+<li><p><a href="null_model_zscore.html">Check distribution of zscores under the null in coxph</a></p></li>
+<li><p><a href="coxph_fit.html">Check more property of coxph()</a></p></li>
 <li><p><a href="coxph_na.html">coxph() NA example</a></p></li>
-<li><p><a href="coxph_zscore.html">coxph zscore when effect is
-large</a></p></li>
+<li><p><a href="coxph_zscore.html">coxph zscore when effect is large</a></p></li>
 </ul>
 <p>Check Bayes factor</p>
 <ul>
-<li><p><a href="numerical_integration.html">Numerical
-integration</a></p></li>
-<li><p><a href="gauss_quad.html">Numerical integration: Gaussian
-Quadrature</a></p></li>
+<li><p><a href="numerical_integration.html">Numerical integration</a></p></li>
+<li><p><a href="gauss_quad.html">Numerical integration: Gaussian Quadrature</a></p></li>
 <li><p><a href="bf_comparison.html">BF comparison</a></p></li>
-<li><p><a href="bf_diff.html">Compare BF calculation: numerical
-integration vs. approximated BF</a></p></li>
-<li><p><a href="SPAcox.html">Saddle point approximation using
-SPAcox</a></p></li>
+<li><p><a href="bf_comparison2.html">BF comparison: more settings</a></p></li>
+<li><p><a href="bf_diff.html">Compare BF calculation: numerical integration vs. approximated BF</a></p></li>
+<li><p><a href="SPAcox.html">Saddle point approximation using SPAcox</a></p></li>
 </ul>
 <p>Simulating survival data</p>
 <ul>
-<li><p><a href="sim_survival.html">Simulate survival data using
-exponential distribution</a></p></li>
-<li><p><a href="sim_survival_with_censoring.html">Simulate survival data
-with censoring</a></p></li>
+<li><p><a href="sim_survival.html">Simulate survival data using exponential distribution</a></p></li>
+<li><p><a href="sim_survival_with_censoring.html">Simulate survival data with censoring</a></p></li>
 </ul>
 <p>Try different methods on simple simulated data:</p>
 <ul>
@@ -2364,8 +2337,7 @@ with censoring</a></p></li>
 </ul>
 <p>Try different methods on simulated data with censoring:</p>
 <ul>
-<li><p><a href="time_comparison.html">Time Comparison of susie &amp;
-bvsnlp</a></p></li>
+<li><p><a href="time_comparison.html">Time Comparison of susie &amp; bvsnlp</a></p></li>
 <li><p><a href="ser_censoring_dat.html">Susie IBSS</a></p></li>
 <li><p><a href="survival.svb_censoring.html">survival.svb</a></p></li>
 <li><p><a href="bvsnlp_censoring.html">bvsnlp</a></p></li>
@@ -2374,59 +2346,42 @@ bvsnlp</a></p></li>
 </ul>
 <p>Try variational approximation:</p>
 <ul>
-<li><p><a href="vi_exponential.html">Variational approximation on
-exponential survival model</a></p></li>
+<li><p><a href="vi_exponential.html">Variational approximation on exponential survival model</a></p></li>
 <li><p><a href="poisson_ser.html">Poisson SER</a></p></li>
 </ul>
 <p>Real data simulation: GTEx genotype 2023</p>
 <ul>
 <li><p><a href="compare_pip.html">Plot PIPs</a></p></li>
 <li><p><a href="compare_power_fdr.html">Power vs. FDR</a></p></li>
-<li><p><a href="susie_poor_performance_example.html">Data example: susie
-with poor performance</a></p></li>
-<li><p><a href="power_fdr2.html">Updated simulation: power
-vs. FDR</a></p></li>
-<li><p><a href="dsc_sim3.html">Version 3 simulation: power
-vs. FDR</a></p></li>
-<li><p><a href="dsc_sim4.html">Version 4 simulation: power
-vs. FDR</a></p></li>
+<li><p><a href="susie_poor_performance_example.html">Data example: susie with poor performance</a></p></li>
+<li><p><a href="power_fdr2.html">Updated simulation: power vs. FDR</a></p></li>
+<li><p><a href="dsc_sim3.html">Version 3 simulation: power vs. FDR</a></p></li>
+<li><p><a href="dsc_sim4.html">Version 4 simulation: power vs. FDR</a></p></li>
 </ul>
 <p>Susie(-rss) results:</p>
 <ul>
 <li><p><a href="susierss_failure.html">Susie rss diagnosis</a></p></li>
 <li><p><a href="survival_susierss.html">Susie vs. susie rss</a></p></li>
-<li><p><a href="susie.convergence.html">Susie convergence
-criteria</a></p></li>
+<li><p><a href="susie.convergence.html">Susie convergence criteria</a></p></li>
 </ul>
 <p>Real data simulation: GTEx genotype(2024)</p>
 <ul>
-<li><p><a href="compare_pip_10iter.html">10 iteration result:
-pip</a></p></li>
-<li><p><a href="gtex_10iter.html">10 iteration result: power
-vs. fdr</a></p></li>
-<li><p><a href="compare_pip_500iter.html">Larger iteration result:
-pip</a></p></li>
-<li><p><a href="gtex_500iter.html">Larger iteration result: power
-vs. fdr</a></p></li>
-<li><p><a href="pip_default_iter_gtex.html">Default iteration result:
-pip (new data simulation procedure)</a></p></li>
-<li><p><a href="gtex_default_iter_fdr.html">Default iteration result:
-power vs. fdr (new data simulation procedure)</a></p></li>
+<li><p><a href="compare_pip_10iter.html">10 iteration result: pip</a></p></li>
+<li><p><a href="gtex_10iter.html">10 iteration result: power vs. fdr</a></p></li>
+<li><p><a href="compare_pip_500iter.html">Larger iteration result: pip</a></p></li>
+<li><p><a href="gtex_500iter.html">Larger iteration result: power vs. fdr</a></p></li>
+<li><p><a href="pip_default_iter_gtex.html">Default iteration result: pip (new data simulation procedure)</a></p></li>
+<li><p><a href="gtex_default_iter_fdr.html">Default iteration result: power vs. fdr (new data simulation procedure)</a></p></li>
 </ul>
 <p>Real data simulation: UKBiobank genotype</p>
 <ul>
-<li><p><a href="pip_comparison_large_sample.html">PIP
-Comparison</a></p></li>
+<li><p><a href="pip_comparison_large_sample.html">PIP Comparison</a></p></li>
 <li><p><a href="ukb_10iter.html">Power vs. fdr</a></p></li>
-<li><p><a href="pip_ukb_new_sim.html">PIP Comparison (new data
-simulation procedure)</a></p></li>
-<li><p><a href="power_fdr_ukb_new_sim.html">Power vs. fdr (new data
-simulation procedure)</a></p></li>
+<li><p><a href="pip_ukb_new_sim.html">PIP Comparison (new data simulation procedure)</a></p></li>
+<li><p><a href="power_fdr_ukb_new_sim.html">Power vs. fdr (new data simulation procedure)</a></p></li>
 <li><p><a href="summarize_cs.html">Compare credible sets</a></p></li>
-<li><p><a href="compare_method_large_sample.html">Method
-comparison</a></p></li>
-<li><p><a href="susierss_large_sample.html">SuSIE
-vs. SuSIE-RSS</a></p></li>
+<li><p><a href="compare_method_large_sample.html">Method comparison</a></p></li>
+<li><p><a href="susierss_large_sample.html">SuSIE vs. SuSIE-RSS</a></p></li>
 </ul>
 <p>Data application result:</p>
 <ul>
@@ -2436,16 +2391,14 @@ vs. SuSIE-RSS</a></p></li>
 <p>Time benchmark:</p>
 <ul>
 <li><p><a href="coxph_vs_lm.html">coxph_vs_lm</a></p></li>
-<li><p><a href="time_per_iter.html">Per iteration time across
-methods</a></p></li>
-<li><p><a href="time_benchmark.html">Running time of different
-methods</a></p></li>
+<li><p><a href="time_per_iter.html">Per iteration time across methods</a></p></li>
+<li><p><a href="time_benchmark.html">Running time of different methods</a></p></li>
 </ul>
 
 
 <!-- Adjust MathJax settings so that all math formulae are shown using
 TeX fonts only; see
-https://docs.mathjax.org/en/latest/web/configuration.html. This will make
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
 the presentation more consistent at the cost of the webpage sometimes
 taking slightly longer to load. Note that this only works because the
 footer is added to webpages before the MathJax javascript. -->
