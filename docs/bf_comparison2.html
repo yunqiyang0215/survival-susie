@@ -588,15 +588,15 @@ output/bf_comparison_large_b_large_n.pdf
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree9e875e91ac92cb5f64e5485fa13e975349c598fetargetblank9e875e9a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreec49d023e3b6e13aad46f3027c2564ae81e340a77targetblankc49d023a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/9e875e91ac92cb5f64e5485fa13e975349c598fe" target="_blank">9e875e9</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/c49d023e3b6e13aad46f3027c2564ae81e340a77" target="_blank">c49d023</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree9e875e91ac92cb5f64e5485fa13e975349c598fetargetblank9e875e9a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreec49d023e3b6e13aad46f3027c2564ae81e340a77targetblankc49d023a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -606,7 +606,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/9e875e91ac92cb5f64e5485fa13e975349c598fe" target="_blank">9e875e9</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/c49d023e3b6e13aad46f3027c2564ae81e340a77" target="_blank">c49d023</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -635,6 +635,9 @@ Unstaged changes:
     Deleted:    analysis/calibration_large_sample.Rmd
     Modified:   analysis/coxph_na.Rmd
     Modified:   output/bf_comparison.pdf
+    Modified:   output/bf_comparison_large_b_large_n.pdf
+    Modified:   output/bf_comparison_large_b_small_n.pdf
+    Modified:   output/bf_comparison_small_b_large_n.pdf
 
 </code></pre>
 <p>
@@ -680,6 +683,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/c49d023e3b6e13aad46f3027c2564ae81e340a77/analysis/bf_comparison2.Rmd" target="_blank">c49d023</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-07-25
+</td>
+<td>
+wflow_publish("analysis/bf_comparison2.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/a052a7030a6ee8901f2693b92ee924597853b577/docs/bf_comparison2.html" target="_blank">a052a70</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-07-25
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -778,8 +815,8 @@ par(mfrow = c(6,3))
 for (i in 1:length(censor_lvl)){
   for (j in 1:length(af)){
     indx = which(dat2$censor_lvl == censor_lvl[i] &amp; dat2$allele_freq == af[j] &amp; dat2$b1 == 1)
-    diff1 = dat2$lbf.numerical - dat2$lbf.wakefeld
-    diff2 = dat2$lbf.numerical - dat2$lbf.laplace
+    diff1 = dat2$lbf.numerical - dat2$lbf.laplace
+    diff2 = dat2$lbf.numerical - dat2$lbf.wakefeld
     ymin = min(diff1[indx], diff2[indx]) - 1
     ymax = max(diff1[indx], diff2[indx]) + 1
     plot(dat2$n[indx], diff1[indx], ylim = c(ymin, ymax),
@@ -794,8 +831,8 @@ par(mfrow = c(6,3))
 for (i in 1:length(censor_lvl)){
   for (j in 1:length(af)){
     indx = which(dat2$censor_lvl == censor_lvl[i] &amp; dat2$allele_freq == af[j] &amp; dat2$n == 1e4)
-    diff1 = dat2$lbf.numerical - dat2$lbf.wakefeld
-    diff2 = dat2$lbf.numerical - dat2$lbf.laplace
+    diff1 = dat2$lbf.numerical - dat2$lbf.laplace
+    diff2 = dat2$lbf.numerical - dat2$lbf.wakefeld
     ymin = min(diff1[indx], diff2[indx]) - 0.5
     ymax = max(diff1[indx], diff2[indx]) + 0.5
     plot(dat2$bhat[indx], diff1[indx], ylim = c(ymin, ymax), xlab = &quot;bhat&quot;, ylab = &quot;difference in log(BF)&quot;,
@@ -804,13 +841,13 @@ for (i in 1:length(censor_lvl)){
     legend(&quot;bottomleft&quot;, legend = c(&quot;BF.lp&quot;, &#39;BF.wf&#39;), col = c(1, &quot;green&quot;), pch = 20, cex = 0.8)
   }
 }</code></pre>
-<pre class="r"><code>par(mfrow = c(6,3))
-pdf(&quot;/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/bf_different_bhat_large_n.pdf&quot;, width = 8, height = 18)
+<pre class="r"><code>pdf(&quot;/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/bf_different_bhat_large_n.pdf&quot;, width = 8, height = 18)
+par(mfrow = c(6,3))
 for (i in 1:length(censor_lvl)){
   for (j in 1:length(af)){
     indx = which(dat2$censor_lvl == censor_lvl[i] &amp; dat2$allele_freq == af[j] &amp; dat2$n == 1e5)
-    diff1 = dat2$lbf.numerical - dat2$lbf.wakefeld
-    diff2 = dat2$lbf.numerical - dat2$lbf.laplace
+    diff1 = dat2$lbf.numerical - dat2$lbf.laplace
+    diff2 = dat2$lbf.numerical - dat2$lbf.wakefeld
     ymin = min(diff1[indx], diff2[indx]) - 0.5
     ymax = max(diff1[indx], diff2[indx]) + 0.5
     plot(dat2$bhat[indx], diff1[indx], ylim = c(ymin, ymax), xlab = &quot;bhat&quot;, ylab = &quot;difference in log(BF)&quot;,
