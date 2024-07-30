@@ -13,7 +13,7 @@ Compare different types of Bayes factor under different levels of censoring, min
 
 2. MAF = 0.001, 0.01, 0.1
 
-3. n = 10000, 100000
+3. n = 5000, 50000, 500000
 
 4. b1 = 0.01, 0.1, 1
 
@@ -62,6 +62,8 @@ for (i in 1:length(censor_lvl)){
          main = paste0("censor=",censor_lvl[i], ", MAF=", af[j]),
          xlab = "sample size", ylab = "difference in log(BF)", cex = 0.8, pch = 20)
     points(dat2$n[indx], diff2[indx], col = "green", cex = 0.8, pch = 20)
+    fit = lm(diff2[indx] ~ dat2$n[indx])
+    abline(fit, col = "red", lty = 2) 
     legend("bottomleft", legend = c("BF.lp", 'BF.wf'), col = c(1, "green"), pch = 20, cex = 0.8)
   }
 }
@@ -72,7 +74,7 @@ pdf("/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/bf_different
 par(mfrow = c(6,3))
 for (i in 1:length(censor_lvl)){
   for (j in 1:length(af)){
-    indx = which(dat2$censor_lvl == censor_lvl[i] & dat2$allele_freq == af[j] & dat2$n == 1e4)
+    indx = which(dat2$censor_lvl == censor_lvl[i] & dat2$allele_freq == af[j] & dat2$n == 5e3)
     diff1 = dat2$lbf.numerical - dat2$lbf.laplace
     diff2 = dat2$lbf.numerical - dat2$lbf.wakefeld
     ymin = min(diff1[indx], diff2[indx]) - 0.5
@@ -91,7 +93,7 @@ pdf("/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/bf_different
 par(mfrow = c(6,3))
 for (i in 1:length(censor_lvl)){
   for (j in 1:length(af)){
-    indx = which(dat2$censor_lvl == censor_lvl[i] & dat2$allele_freq == af[j] & dat2$n == 1e5)
+    indx = which(dat2$censor_lvl == censor_lvl[i] & dat2$allele_freq == af[j] & dat2$n == 5e5)
     diff1 = dat2$lbf.numerical - dat2$lbf.laplace
     diff2 = dat2$lbf.numerical - dat2$lbf.wakefeld
     ymin = min(diff1[indx], diff2[indx]) - 0.5
@@ -105,7 +107,7 @@ for (i in 1:length(censor_lvl)){
 
 ```
 
-```{r fig.width = 12, fig.height=5}
+```{r eval = FALSE, fig.width = 12, fig.height=5}
 pdf("/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/bf_comparison_large_b_small_n.pdf", width = 8, height = 18)
 par(mfrow = c(6,3))
 
@@ -126,13 +128,13 @@ for (i in 1:length(censor_lvl)){
 
 
 ```{r fig.width = 12, fig.height=5}
-pdf("/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/bf_comparison_small_b_large_n.pdf", width = 8, height = 18)
+pdf("/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/bf_comparison_b_0.1_n_500000.pdf", width = 8, height = 18)
 par(mfrow = c(6,3))
 
 for (i in 1:length(censor_lvl)){
   for (j in 1:length(af)){
     indx = which(res$simulate.censor_lvl == censor_lvl[i] & res$simulate.allele_freq == af[j]
-                 & res$simulate.n == 1e5 & res$simulate.b1 == 0.01)
+                 & res$simulate.n == 5e5 & res$simulate.b1 == 0.01)
     dat = t(sapply(indx, function(x) res$compute_bf.result[[x]]))
     plot(x = dat[, 'lbf.numerical'], y = dat[, 'lbf.laplace'], pch = 20, main = paste0("censor=",censor_lvl[i], ", MAF=", af[j]),
          ylim = c(min(dat[,3:5])-1, max(dat[,3:5])+1),
@@ -145,13 +147,13 @@ for (i in 1:length(censor_lvl)){
 ```
 
 ```{r fig.width = 12, fig.height=5}
-pdf("/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/bf_comparison_large_b_large_n.pdf", width = 8, height = 18)
+pdf("/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/bf_comparison_b_0.01_n_500000.pdf", width = 8, height = 18)
 par(mfrow = c(6,3))
 
 for (i in 1:length(censor_lvl)){
   for (j in 1:length(af)){
     indx = which(res$simulate.censor_lvl == censor_lvl[i] & res$simulate.allele_freq == af[j]
-                 & res$simulate.n == 1e5 & res$simulate.b1 == 1)
+                 & res$simulate.n == 5e5 & res$simulate.b1 == 0.01)
     dat = t(sapply(indx, function(x) res$compute_bf.result[[x]]))
     plot(x = dat[, 'lbf.numerical'], y = dat[, 'lbf.laplace'], pch = 20, main = paste0("censor=",censor_lvl[i], ", MAF=", af[j]),
          ylim = c(min(dat[,3:5])-1, max(dat[,3:5])+1),
