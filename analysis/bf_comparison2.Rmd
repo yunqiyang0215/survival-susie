@@ -61,10 +61,10 @@ for (i in 1:length(censor_lvl)){
     plot(dat2$n[indx], diff1[indx], ylim = c(ymin, ymax),
          main = paste0("censor=",censor_lvl[i], ", MAF=", af[j]),
          xlab = "sample size", ylab = "difference in log(BF)", cex = 0.8, pch = 20)
-    points(dat2$n[indx], diff2[indx], col = "green", cex = 0.8, pch = 20)
+    points(dat2$n[indx], diff2[indx], col = "#00CCFF", cex = 0.8, pch = 20)
     fit = lm(diff2[indx] ~ dat2$n[indx])
-    abline(fit, col = "red", lty = 2) 
-    legend("bottomleft", legend = c("BF.lp", 'BF.wf'), col = c(1, "green"), pch = 20, cex = 0.8)
+    abline(fit, col = "grey", lty = 2) 
+    legend("bottomleft", legend = c("log(BF.lp)", 'log(BF.wf)'), col = c(1, "#00CCFF"), pch = 20, cex = 0.8)
   }
 }
 ```
@@ -81,8 +81,8 @@ for (i in 1:length(censor_lvl)){
     ymax = max(diff1[indx], diff2[indx]) + 0.5
     plot(dat2$bhat[indx], diff1[indx], ylim = c(ymin, ymax), xlab = "bhat", ylab = "difference in log(BF)",
          main = paste0("censor=",censor_lvl[i], ", MAF=", af[j]), cex = 0.8, pch = 20)
-    points(dat2$bhat[indx], diff2[indx], col = "green", cex = 0.8, pch = 20)
-    legend("bottomleft", legend = c("BF.lp", 'BF.wf'), col = c(1, "green"), pch = 20, cex = 0.8)
+    points(dat2$bhat[indx], diff2[indx], col = "#00CCFF", cex = 0.8, pch = 20)
+    legend("bottomleft", legend = c("BF.lp", 'BF.wf'), col = c(1, "#00CCFF"), pch = 20, cex = 0.8)
   }
 }
 
@@ -100,8 +100,8 @@ for (i in 1:length(censor_lvl)){
     ymax = max(diff1[indx], diff2[indx]) + 0.5
     plot(dat2$bhat[indx], diff1[indx], ylim = c(ymin, ymax), xlab = "bhat", ylab = "difference in log(BF)",
          main = paste0("censor=",censor_lvl[i], ", MAF=", af[j]), cex = 0.8, pch = 20)
-    points(dat2$bhat[indx], diff2[indx], col = "green", cex = 0.8, pch = 20)
-    legend("bottomleft", legend = c("BF.lp", 'BF.wf'), col = c(1, "green"), pch = 20, cex = 0.8)
+    points(dat2$bhat[indx], diff2[indx], col = "#00CCFF", cex = 0.8, pch = 20)
+    legend("bottomleft", legend = c("BF.lp", 'BF.wf'), col = c(1, "#00CCFF"), pch = 20, cex = 0.8)
   }
 }
 
@@ -120,7 +120,7 @@ for (i in 1:length(censor_lvl)){
          ylim = c(min(dat[,3:5])-1, max(dat[,3:5])+1),
          xlab = "BF.gh", ylab = "Other BFs")
     points(dat[, 'lbf.numerical'], dat[,'lbf.wakefeld'], col = "palegreen3", pch = 20)
-    abline(a = 0, b = 1, col = "red")
+    abline(a = 0, b = 1, col = "grey")
     legend("topleft", legend = c("BF.lp", 'BF.wf'), col = c(1, "palegreen3"), pch = 20, cex = 0.8)
   }
 }
@@ -137,11 +137,11 @@ for (i in 1:length(censor_lvl)){
                  & res$simulate.n == 5e5 & res$simulate.b1 == 0.1)
     dat = t(sapply(indx, function(x) res$compute_bf.result[[x]]))
     plot(x = dat[, 'lbf.numerical'], y = dat[, 'lbf.laplace'], pch = 20, main = paste0("censor=",censor_lvl[i], ", MAF=", af[j]),
-         ylim = c(min(dat[,3:5])-1, max(dat[,3:5])+1),
+         ylim = c(min(dat[,3:5])-1, max(dat[,3:5])+1), cex = 0.8,
          xlab = "BF.gh", ylab = "Other BFs")
-    points(dat[, 'lbf.numerical'], dat[,'lbf.wakefeld'], col = "palegreen3", pch = 20)
-    abline(a = 0, b = 1, col = "red")
-    legend("topleft", legend = c("BF.lp", 'BF.wf'), col = c(1, "palegreen3"), pch = 20, cex = 0.8)
+    points(dat[, 'lbf.numerical'], dat[,'lbf.wakefeld'], col = "#00CCFF", pch = 20, cex = 0.8)
+    abline(a = 0, b = 1, col = "grey")
+    legend("topleft", legend = c("BF.lp", 'BF.wf'), col = c(1, "#00CCFF"), pch = 20, cex = 0.8)
   }
 }
 ```
@@ -156,11 +156,11 @@ for (i in 1:length(censor_lvl)){
                  & res$simulate.n == 5e5 & res$simulate.b1 == 0.01)
     dat = t(sapply(indx, function(x) res$compute_bf.result[[x]]))
     plot(x = dat[, 'lbf.numerical'], y = dat[, 'lbf.laplace'], pch = 20, main = paste0("censor=",censor_lvl[i], ", MAF=", af[j]),
-         ylim = c(min(dat[,3:5])-1, max(dat[,3:5])+1),
+         ylim = c(min(dat[,3:5])-1, max(dat[,3:5])+1), cex = 0.8,
          xlab = "BF.gh", ylab = "Other BFs")
-    points(dat[, 'lbf.numerical'], dat[,'lbf.wakefeld'], col = "palegreen3", pch = 20)
-    abline(a = 0, b = 1, col = "red")
-    legend("topleft", legend = c("BF.lp", 'BF.wf'), col = c(1, "palegreen3"), pch = 20, cex = 0.8)
+    points(dat[, 'lbf.numerical'], dat[,'lbf.wakefeld'], col = "#00CCFF", pch = 20, cex = 0.8)
+    abline(a = 0, b = 1, col = "grey")
+    legend("topleft", legend = c("BF.lp", 'BF.wf'), col = c(1, "#00CCFF"), pch = 20, cex = 0.8)
   }
 }
 ```
