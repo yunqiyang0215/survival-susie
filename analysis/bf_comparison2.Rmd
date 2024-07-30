@@ -82,7 +82,7 @@ for (i in 1:length(censor_lvl)){
     plot(dat2$bhat[indx], diff1[indx], ylim = c(ymin, ymax), xlab = "bhat", ylab = "difference in log(BF)",
          main = paste0("censor=",censor_lvl[i], ", MAF=", af[j]), cex = 0.8, pch = 20)
     points(dat2$bhat[indx], diff2[indx], col = "#00CCFF", cex = 0.8, pch = 20)
-    legend("bottomleft", legend = c("BF.lp", 'BF.wf'), col = c(1, "#00CCFF"), pch = 20, cex = 0.8)
+    legend("bottomleft", legend = c("log(BF.lp)", 'log(BF.wf)'), col = c(1, "#00CCFF"), pch = 20, cex = 0.8)
   }
 }
 
@@ -101,29 +101,10 @@ for (i in 1:length(censor_lvl)){
     plot(dat2$bhat[indx], diff1[indx], ylim = c(ymin, ymax), xlab = "bhat", ylab = "difference in log(BF)",
          main = paste0("censor=",censor_lvl[i], ", MAF=", af[j]), cex = 0.8, pch = 20)
     points(dat2$bhat[indx], diff2[indx], col = "#00CCFF", cex = 0.8, pch = 20)
-    legend("bottomleft", legend = c("BF.lp", 'BF.wf'), col = c(1, "#00CCFF"), pch = 20, cex = 0.8)
+    legend("bottomleft", legend = c("log(BF.lp)", 'log(BF.wf)'), col = c(1, "#00CCFF"), pch = 20, cex = 0.8)
   }
 }
 
-```
-
-```{r eval = FALSE, fig.width = 12, fig.height=5}
-pdf("/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/bf_comparison_large_b_small_n.pdf", width = 8, height = 18)
-par(mfrow = c(6,3))
-
-for (i in 1:length(censor_lvl)){
-  for (j in 1:length(af)){
-    indx = which(res$simulate.censor_lvl == censor_lvl[i] & res$simulate.allele_freq == af[j]
-                 & res$simulate.n == 1e4 & res$simulate.b1 == 1)
-    dat = t(sapply(indx, function(x) res$compute_bf.result[[x]]))
-    plot(x = dat[, 'lbf.numerical'], y = dat[, 'lbf.laplace'], pch = 20, main = paste0("censor=",censor_lvl[i], ", MAF=", af[j]),
-         ylim = c(min(dat[,3:5])-1, max(dat[,3:5])+1),
-         xlab = "BF.gh", ylab = "Other BFs")
-    points(dat[, 'lbf.numerical'], dat[,'lbf.wakefeld'], col = "palegreen3", pch = 20)
-    abline(a = 0, b = 1, col = "grey")
-    legend("topleft", legend = c("BF.lp", 'BF.wf'), col = c(1, "palegreen3"), pch = 20, cex = 0.8)
-  }
-}
 ```
 
 
@@ -138,10 +119,10 @@ for (i in 1:length(censor_lvl)){
     dat = t(sapply(indx, function(x) res$compute_bf.result[[x]]))
     plot(x = dat[, 'lbf.numerical'], y = dat[, 'lbf.laplace'], pch = 20, main = paste0("censor=",censor_lvl[i], ", MAF=", af[j]),
          ylim = c(min(dat[,3:5])-1, max(dat[,3:5])+1), cex = 0.8,
-         xlab = "BF.gh", ylab = "Other BFs")
-    points(dat[, 'lbf.numerical'], dat[,'lbf.wakefeld'], col = "#00CCFF", pch = 20, cex = 0.8)
+         xlab = "log(BF.gh)", ylab = "Other log-BFs")
+    points(dat[, 'lbf.numerical'], dat[,'lbf.wakefeld'], col = "#FF91FF", pch = 20, cex = 0.8)
     abline(a = 0, b = 1, col = "grey")
-    legend("topleft", legend = c("BF.lp", 'BF.wf'), col = c(1, "#00CCFF"), pch = 20, cex = 0.8)
+    legend("topleft", legend = c("log(BF.lp)", 'log(BF.wf)'), col = c(1, "#FF91FF"), pch = 20, cex = 0.8)
   }
 }
 ```
@@ -157,10 +138,10 @@ for (i in 1:length(censor_lvl)){
     dat = t(sapply(indx, function(x) res$compute_bf.result[[x]]))
     plot(x = dat[, 'lbf.numerical'], y = dat[, 'lbf.laplace'], pch = 20, main = paste0("censor=",censor_lvl[i], ", MAF=", af[j]),
          ylim = c(min(dat[,3:5])-1, max(dat[,3:5])+1), cex = 0.8,
-         xlab = "BF.gh", ylab = "Other BFs")
-    points(dat[, 'lbf.numerical'], dat[,'lbf.wakefeld'], col = "#00CCFF", pch = 20, cex = 0.8)
+         xlab = "log(BF.gh)", ylab = "Other log-BFs")
+    points(dat[, 'lbf.numerical'], dat[,'lbf.wakefeld'], col = "#FF91FF", pch = 20, cex = 0.8)
     abline(a = 0, b = 1, col = "grey")
-    legend("topleft", legend = c("BF.lp", 'BF.wf'), col = c(1, "#00CCFF"), pch = 20, cex = 0.8)
+    legend("topleft", legend = c("log(BF.lp)", 'log(BF.wf)'), col = c(1, "#FF91FF"), pch = 20, cex = 0.8)
   }
 }
 ```
