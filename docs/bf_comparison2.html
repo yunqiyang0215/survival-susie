@@ -580,15 +580,15 @@ output/bf_comparison_b_0.01_n_500000.pdf
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree1dc809b745c7246a8d1bfec07ab9bdd87de1a23dtargetblank1dc809ba">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree5845f4843096e392f35d84e2eda5d360038beb8ctargetblank5845f48a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/1dc809b745c7246a8d1bfec07ab9bdd87de1a23d" target="_blank">1dc809b</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/5845f4843096e392f35d84e2eda5d360038beb8c" target="_blank">5845f48</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree1dc809b745c7246a8d1bfec07ab9bdd87de1a23dtargetblank1dc809ba"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree5845f4843096e392f35d84e2eda5d360038beb8ctargetblank5845f48a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -598,7 +598,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/1dc809b745c7246a8d1bfec07ab9bdd87de1a23d" target="_blank">1dc809b</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/5845f4843096e392f35d84e2eda5d360038beb8c" target="_blank">5845f48</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -617,21 +617,14 @@ Ignored files:
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
 
-Untracked files:
-    Untracked:  output/bf_comparison_b_0.01_n_500000.pdf
-    Untracked:  output/bf_comparison_b_0.1_n_500000.pdf
-
 Unstaged changes:
     Modified:   analysis/bf_comparison.Rmd
     Deleted:    analysis/calibration_large_sample.Rmd
     Modified:   analysis/coxph_na.Rmd
     Modified:   output/bf_comparison.pdf
-    Modified:   output/bf_comparison_large_b_large_n.pdf
-    Modified:   output/bf_comparison_large_b_small_n.pdf
-    Modified:   output/bf_comparison_small_b_large_n.pdf
-    Modified:   output/bf_different_bhat_large_n.pdf
-    Modified:   output/bf_different_bhat_small_n.pdf
-    Modified:   output/bf_different_n_large_b.pdf
+    Deleted:    output/bf_comparison_large_b_large_n.pdf
+    Deleted:    output/bf_comparison_large_b_small_n.pdf
+    Deleted:    output/bf_comparison_small_b_large_n.pdf
 
 </code></pre>
 <p>
@@ -677,6 +670,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/5845f4843096e392f35d84e2eda5d360038beb8c/analysis/bf_comparison2.Rmd" target="_blank">5845f48</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-07-30
+</td>
+<td>
+wflow_publish("analysis/bf_comparison2.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/3ec6becf0eda71b68db56c9ac7a7d03fee6b53d9/docs/bf_comparison2.html" target="_blank">3ec6bec</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-07-30
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1031,7 +1058,7 @@ for (i in 1:length(censor_lvl)){
                  &amp; res$simulate.n == 5e5 &amp; res$simulate.b1 == 0.1)
     dat = t(sapply(indx, function(x) res$compute_bf.result[[x]]))
     plot(x = dat[, &#39;lbf.numerical&#39;], y = dat[, &#39;lbf.laplace&#39;], pch = 20, main = paste0(&quot;censor=&quot;,censor_lvl[i], &quot;, MAF=&quot;, af[j]),
-         ylim = c(min(dat[,3:5])-1, max(dat[,3:5])+1), cex = 0.8,
+         ylim = c(min(dat[,4:5])-1, max(dat[,4:5])+1), cex = 0.8,
          xlab = &quot;log(BF.gh)&quot;, ylab = &quot;Other log-BFs&quot;)
     points(dat[, &#39;lbf.numerical&#39;], dat[,&#39;lbf.wakefeld&#39;], col = &quot;#26B300&quot;, pch = 20, cex = 0.8)
     abline(a = 0, b = 1, col = &quot;grey&quot;)
@@ -1047,7 +1074,7 @@ for (i in 1:length(censor_lvl)){
                  &amp; res$simulate.n == 5e5 &amp; res$simulate.b1 == 0.01)
     dat = t(sapply(indx, function(x) res$compute_bf.result[[x]]))
     plot(x = dat[, &#39;lbf.numerical&#39;], y = dat[, &#39;lbf.laplace&#39;], pch = 20, main = paste0(&quot;censor=&quot;,censor_lvl[i], &quot;, MAF=&quot;, af[j]),
-         ylim = c(min(dat[,3:5])-1, max(dat[,3:5])+1), cex = 0.8,
+         ylim = c(min(dat[,4:5])-1, max(dat[,4:5])+1), cex = 0.8,
          xlab = &quot;log(BF.gh)&quot;, ylab = &quot;Other log-BFs&quot;)
     points(dat[, &#39;lbf.numerical&#39;], dat[,&#39;lbf.wakefeld&#39;], col = &quot;#26B300&quot;, pch = 20, cex = 0.8)
     abline(a = 0, b = 1, col = &quot;grey&quot;)
