@@ -120,9 +120,9 @@ for (i in 1:length(censor_lvl)){
     plot(x = dat[, 'lbf.numerical'], y = dat[, 'lbf.laplace'], pch = 20, main = paste0("censor=",censor_lvl[i], ", MAF=", af[j]),
          ylim = c(min(dat[,3:5])-1, max(dat[,3:5])+1), cex = 0.8,
          xlab = "log(BF.gh)", ylab = "Other log-BFs")
-    points(dat[, 'lbf.numerical'], dat[,'lbf.wakefeld'], col = "#FF91FF", pch = 20, cex = 0.8)
+    points(dat[, 'lbf.numerical'], dat[,'lbf.wakefeld'], col = "#26B300", pch = 20, cex = 0.8)
     abline(a = 0, b = 1, col = "grey")
-    legend("topleft", legend = c("log(BF.lp)", 'log(BF.wf)'), col = c(1, "#FF91FF"), pch = 20, cex = 0.8)
+    legend("topleft", legend = c("log(BF.lp)", 'log(BF.wf)'), col = c(1, "#26B300"), pch = 20, cex = 0.8)
   }
 }
 ```
@@ -139,9 +139,9 @@ for (i in 1:length(censor_lvl)){
     plot(x = dat[, 'lbf.numerical'], y = dat[, 'lbf.laplace'], pch = 20, main = paste0("censor=",censor_lvl[i], ", MAF=", af[j]),
          ylim = c(min(dat[,3:5])-1, max(dat[,3:5])+1), cex = 0.8,
          xlab = "log(BF.gh)", ylab = "Other log-BFs")
-    points(dat[, 'lbf.numerical'], dat[,'lbf.wakefeld'], col = "#FF91FF", pch = 20, cex = 0.8)
+    points(dat[, 'lbf.numerical'], dat[,'lbf.wakefeld'], col = "#26B300", pch = 20, cex = 0.8)
     abline(a = 0, b = 1, col = "grey")
-    legend("topleft", legend = c("log(BF.lp)", 'log(BF.wf)'), col = c(1, "#FF91FF"), pch = 20, cex = 0.8)
+    legend("topleft", legend = c("log(BF.lp)", 'log(BF.wf)'), col = c(1, "#26B300"), pch = 20, cex = 0.8)
   }
 }
 ```
