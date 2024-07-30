@@ -134,7 +134,7 @@ par(mfrow = c(6,3))
 for (i in 1:length(censor_lvl)){
   for (j in 1:length(af)){
     indx = which(res$simulate.censor_lvl == censor_lvl[i] & res$simulate.allele_freq == af[j]
-                 & res$simulate.n == 5e5 & res$simulate.b1 == 0.01)
+                 & res$simulate.n == 5e5 & res$simulate.b1 == 0.1)
     dat = t(sapply(indx, function(x) res$compute_bf.result[[x]]))
     plot(x = dat[, 'lbf.numerical'], y = dat[, 'lbf.laplace'], pch = 20, main = paste0("censor=",censor_lvl[i], ", MAF=", af[j]),
          ylim = c(min(dat[,3:5])-1, max(dat[,3:5])+1),
