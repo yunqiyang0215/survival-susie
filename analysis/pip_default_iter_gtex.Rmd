@@ -103,7 +103,7 @@ pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
   
 # Calibration plot for pip.susie
 calibration.susie = pip_calibration(pip.susie, is_effect)
-plot_calibration(calibration.susie, main = "SuSiE")
+plot_calibration(calibration.susie, main = "CoxPH-SuSiE")
   
 # Calibration plot for pip.svb
 calibration.survsvb = pip_calibration(pip.survsvb, is_effect)
