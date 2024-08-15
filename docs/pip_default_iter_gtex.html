@@ -393,7 +393,7 @@ aria-hidden="true"></span> </a>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2024-07-09
+<strong>Last updated:</strong> 2024-08-15
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -566,15 +566,15 @@ output/pip_gtex_calibration.pdf
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreedfc36bb806309db8bd956f0b5217b539fbc57369targetblankdfc36bba">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree827ea38215316a4e6d38305f2e693080b79e0c16targetblank827ea38a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/dfc36bb806309db8bd956f0b5217b539fbc57369" target="_blank">dfc36bb</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/827ea38215316a4e6d38305f2e693080b79e0c16" target="_blank">827ea38</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreedfc36bb806309db8bd956f0b5217b539fbc57369targetblankdfc36bba"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree827ea38215316a4e6d38305f2e693080b79e0c16targetblank827ea38a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -584,7 +584,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/dfc36bb806309db8bd956f0b5217b539fbc57369" target="_blank">dfc36bb</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/827ea38215316a4e6d38305f2e693080b79e0c16" target="_blank">827ea38</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -607,10 +607,7 @@ Unstaged changes:
     Modified:   analysis/bf_comparison.Rmd
     Deleted:    analysis/calibration_large_sample.Rmd
     Modified:   analysis/coxph_na.Rmd
-    Modified:   analysis/gtex_default_iter_fdr.Rmd
-    Modified:   analysis/power_fdr_ukb_new_sim.Rmd
-    Modified:   output/pip_ukb.pdf
-    Modified:   output/pip_ukb_calibration.pdf
+    Modified:   output/bf_comparison.pdf
 
 </code></pre>
 <p>
@@ -656,6 +653,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/827ea38215316a4e6d38305f2e693080b79e0c16/analysis/pip_default_iter_gtex.Rmd" target="_blank">827ea38</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-08-15
+</td>
+<td>
+wflow_publish("analysis/pip_default_iter_gtex.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/a810e555604f3476a3a12f67a44c65f0d39f48af/docs/pip_default_iter_gtex.html" target="_blank">a810e55</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-07-09
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -867,7 +898,7 @@ pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
   
 # Calibration plot for pip.susie
 calibration.susie = pip_calibration(pip.susie, is_effect)
-plot_calibration(calibration.susie, main = &quot;SuSiE&quot;)
+plot_calibration(calibration.susie, main = &quot;CoxPH-SuSiE&quot;)
   
 # Calibration plot for pip.svb
 calibration.survsvb = pip_calibration(pip.survsvb, is_effect)
