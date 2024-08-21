@@ -15,7 +15,7 @@ Compare different types of Bayes factor under different levels of censoring, min
 
 3. n = 5000, 50000, 500000
 
-4. b1 = 0.01, 0.1, 1
+4. b1 = -1， -0.1, -0.01, 0.01, 0.1, 1
 
 5. BFs: 
 
@@ -118,7 +118,7 @@ for (i in 1:length(censor_lvl)){
                  & res$simulate.n == 5e5 & res$simulate.b1 == 0.1)
     dat = t(sapply(indx, function(x) res$compute_bf.result[[x]]))
     plot(x = dat[, 'lbf.numerical'], y = dat[, 'lbf.laplace'], pch = 20, main = paste0("censor=",censor_lvl[i], ", MAF=", af[j]),
-         ylim = c(min(dat[,c(4:5, 7)])-1, max(dat[, c(4:5, 7)])+1), cex = 0.8,
+         ylim = c(min(dat[,c(4:6)])-1, max(dat[, c(4:6)])+1), cex = 0.8,
          xlab = "log(BF.gh)", ylab = "Other log-BFs")
     points(dat[, 'lbf.numerical'], dat[,'lbf.wakefeld'], col = "#26B300", pch = 20, cex = 0.8)
     abline(a = 0, b = 1, col = "grey")
@@ -137,7 +137,7 @@ for (i in 1:length(censor_lvl)){
                  & res$simulate.n == 5e5 & res$simulate.b1 == 0.01)
     dat = t(sapply(indx, function(x) res$compute_bf.result[[x]]))
     plot(x = dat[, 'lbf.numerical'], y = dat[, 'lbf.laplace'], pch = 20, main = paste0("censor=",censor_lvl[i], ", MAF=", af[j]),
-         ylim = c(min(dat[,c(4:5, 7)])-1, max(dat[,c(4:5, 7)])+1), cex = 0.8,
+         ylim = c(min(dat[,c(4:6)])-1, max(dat[,c(4:6)])+1), cex = 0.8,
          xlab = "log(BF.gh)", ylab = "Other log-BFs")
     points(dat[, 'lbf.numerical'], dat[,'lbf.wakefeld'], col = "#26B300", pch = 20, cex = 0.8)
     abline(a = 0, b = 1, col = "grey")
