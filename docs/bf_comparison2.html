@@ -391,7 +391,7 @@ aria-hidden="true"></span> </a>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2024-08-20
+<strong>Last updated:</strong> 2024-08-22
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -580,15 +580,15 @@ output/bf_comparison_b_0.01_n_500000.pdf
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreef2b94f6ae88735f79411ace47789178292663814targetblankf2b94f6a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreeff1c9e9e35e3205f50653908dc49099bc5e7d250targetblankff1c9e9a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/f2b94f6ae88735f79411ace47789178292663814" target="_blank">f2b94f6</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/ff1c9e9e35e3205f50653908dc49099bc5e7d250" target="_blank">ff1c9e9</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreef2b94f6ae88735f79411ace47789178292663814targetblankf2b94f6a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreeff1c9e9e35e3205f50653908dc49099bc5e7d250targetblankff1c9e9a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -598,7 +598,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/f2b94f6ae88735f79411ace47789178292663814" target="_blank">f2b94f6</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/ff1c9e9e35e3205f50653908dc49099bc5e7d250" target="_blank">ff1c9e9</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -624,9 +624,6 @@ Unstaged changes:
     Modified:   output/bf_comparison.pdf
     Modified:   output/bf_comparison_b_0.01_n_500000.pdf
     Modified:   output/bf_comparison_b_0.1_n_500000.pdf
-    Modified:   output/bf_different_bhat_large_n.pdf
-    Modified:   output/bf_different_bhat_small_n.pdf
-    Modified:   output/bf_different_n_large_b.pdf
     Modified:   output/pip_gtex.pdf
 
 </code></pre>
@@ -673,6 +670,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/ff1c9e9e35e3205f50653908dc49099bc5e7d250/analysis/bf_comparison2.Rmd" target="_blank">ff1c9e9</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-08-22
+</td>
+<td>
+wflow_publish("analysis/bf_comparison2.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/0a749f719ee1dd62c226a189c77965dd6c53b89d/docs/bf_comparison2.html" target="_blank">0a749f7</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-08-20
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1059,6 +1090,7 @@ approximation. <a
 href="https://yunqiyang0215.github.io/survival-susie/SPAcox.html"
 class="uri">https://yunqiyang0215.github.io/survival-susie/SPAcox.html</a></p></li>
 </ol>
+<pre class="r"><code>library(latex2exp)</code></pre>
 <pre class="r"><code>res = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/sim202406/bf_comparison0712/res_bf.rds&quot;)</code></pre>
 <pre class="r"><code>dat_list = lapply(1:length(res$DSC), function(x) res$compute_bf.result[[x]])
 dat = do.call(rbind, dat_list)
@@ -1130,10 +1162,10 @@ for (i in 1:length(censor_lvl)){
     dat = t(sapply(indx, function(x) res$compute_bf.result[[x]]))
     plot(x = dat[, &#39;lbf.numerical&#39;], y = dat[, &#39;lbf.laplace&#39;], pch = 20, main = paste0(&quot;censor=&quot;,censor_lvl[i], &quot;, MAF=&quot;, af[j]),
          ylim = c(min(dat[,c(4:6)])-1, max(dat[, c(4:6)])+1), cex = 0.8,
-         xlab = &quot;log(BF.gh)&quot;, ylab = &quot;Other log-BFs&quot;)
+         xlab = TeX(&quot;$log_{10}$(BF.gh)&quot;), ylab = TeX(&quot;Other $log_{10}$(BFs)&quot;))
     points(dat[, &#39;lbf.numerical&#39;], dat[,&#39;lbf.wakefeld&#39;], col = &quot;#26B300&quot;, pch = 20, cex = 0.8)
     abline(a = 0, b = 1, col = &quot;grey&quot;)
-    legend(&quot;topleft&quot;, legend = c(&quot;log(BF.lp)&quot;, &#39;log(BF.wf)&#39;), col = c(1, &quot;#26B300&quot;), pch = 20, cex = 0.8)
+    legend(&quot;topleft&quot;, legend = c(TeX(&quot;$log_{10}$(BF.lp)&quot;), TeX(&quot;$log_{10}$(BF.wf)&quot;)), col = c(1, &quot;#26B300&quot;), pch = 20, cex = 0.8)
   }
 }</code></pre>
 <pre class="r"><code>pdf(&quot;/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/bf_comparison_b_0.01_n_500000.pdf&quot;, width = 8, height = 18)
@@ -1146,10 +1178,10 @@ for (i in 1:length(censor_lvl)){
     dat = t(sapply(indx, function(x) res$compute_bf.result[[x]]))
     plot(x = dat[, &#39;lbf.numerical&#39;], y = dat[, &#39;lbf.laplace&#39;], pch = 20, main = paste0(&quot;censor=&quot;,censor_lvl[i], &quot;, MAF=&quot;, af[j]),
          ylim = c(min(dat[,c(4:6)])-1, max(dat[,c(4:6)])+1), cex = 0.8,
-         xlab = &quot;log(BF.gh)&quot;, ylab = &quot;Other log-BFs&quot;)
+         xlab = TeX(&quot;$log_{10}$(BF.gh)&quot;), ylab = TeX(&quot;Other $log_{10}$(BFs)&quot;))
     points(dat[, &#39;lbf.numerical&#39;], dat[,&#39;lbf.wakefeld&#39;], col = &quot;#26B300&quot;, pch = 20, cex = 0.8)
     abline(a = 0, b = 1, col = &quot;grey&quot;)
-    legend(&quot;topleft&quot;, legend = c(&quot;log(BF.lp)&quot;, &#39;log(BF.wf)&#39;), col = c(1, &quot;#26B300&quot;), pch = 20, cex = 0.8)
+    legend(&quot;topleft&quot;, legend = c(TeX(&quot;$log_{10}$(BF.lp)&quot;), TeX(&quot;$log_{10}$(BF.wf)&quot;)), col = c(1, &quot;#26B300&quot;), pch = 20, cex = 0.8)
   }
 }</code></pre>
 <br>
@@ -1178,7 +1210,7 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] workflowr_1.7.0
+[1] latex2exp_0.9.4 workflowr_1.7.0
 
 loaded via a namespace (and not attached):
  [1] Rcpp_1.0.12      highr_0.9        compiler_4.2.0   pillar_1.9.0    
