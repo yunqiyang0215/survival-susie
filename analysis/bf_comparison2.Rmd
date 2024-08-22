@@ -28,6 +28,10 @@ Compare different types of Bayes factor under different levels of censoring, min
 (d) Wakefeld BF with zscore from coxph() corrected by saddle point approximation. https://yunqiyang0215.github.io/survival-susie/SPAcox.html
 
 ```{r}
+library(latex2exp)
+```
+
+```{r}
 res = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/bf_comparison0712/res_bf.rds")
 ```
 
@@ -119,10 +123,10 @@ for (i in 1:length(censor_lvl)){
     dat = t(sapply(indx, function(x) res$compute_bf.result[[x]]))
     plot(x = dat[, 'lbf.numerical'], y = dat[, 'lbf.laplace'], pch = 20, main = paste0("censor=",censor_lvl[i], ", MAF=", af[j]),
          ylim = c(min(dat[,c(4:6)])-1, max(dat[, c(4:6)])+1), cex = 0.8,
-         xlab = "log(BF.gh)", ylab = "Other log-BFs")
+         xlab = TeX("$log_{10}$(BF.gh)"), ylab = TeX("Other $log_{10}$(BFs)"))
     points(dat[, 'lbf.numerical'], dat[,'lbf.wakefeld'], col = "#26B300", pch = 20, cex = 0.8)
     abline(a = 0, b = 1, col = "grey")
-    legend("topleft", legend = c("log(BF.lp)", 'log(BF.wf)'), col = c(1, "#26B300"), pch = 20, cex = 0.8)
+    legend("topleft", legend = c(TeX("$log_{10}$(BF.lp)"), TeX("$log_{10}$(BF.wf)")), col = c(1, "#26B300"), pch = 20, cex = 0.8)
   }
 }
 ```
@@ -138,10 +142,10 @@ for (i in 1:length(censor_lvl)){
     dat = t(sapply(indx, function(x) res$compute_bf.result[[x]]))
     plot(x = dat[, 'lbf.numerical'], y = dat[, 'lbf.laplace'], pch = 20, main = paste0("censor=",censor_lvl[i], ", MAF=", af[j]),
          ylim = c(min(dat[,c(4:6)])-1, max(dat[,c(4:6)])+1), cex = 0.8,
-         xlab = "log(BF.gh)", ylab = "Other log-BFs")
+         xlab = TeX("$log_{10}$(BF.gh)"), ylab = TeX("Other $log_{10}$(BFs)"))
     points(dat[, 'lbf.numerical'], dat[,'lbf.wakefeld'], col = "#26B300", pch = 20, cex = 0.8)
     abline(a = 0, b = 1, col = "grey")
-    legend("topleft", legend = c("log(BF.lp)", 'log(BF.wf)'), col = c(1, "#26B300"), pch = 20, cex = 0.8)
+    legend("topleft", legend = c(TeX("$log_{10}$(BF.lp)"), TeX("$log_{10}$(BF.wf)")), col = c(1, "#26B300"), pch = 20, cex = 0.8)
   }
 }
 ```
