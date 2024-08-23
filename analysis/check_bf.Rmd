@@ -1,0 +1,88 @@
+---
+title: "check_bf"
+output: html_document
+date: '2024-08-23'
+---
+
+```{r}
+library(survival)
+```
+
+```{r}
+sim_surv <- function(b, X, censor_lvl, dist = "exp"){
+  n = nrow(X)
+  p = ncol(X)
+  
+  # survival distribution with rate lambda.surv
+  lamb.surv <- exp(cbind(rep(1,n), X) %*% b)
+  lamb.mean <- mean(lamb.surv)
+  
+  # censoring distribution with rate lambda.censor
+  lamb.censor <- censor_lvl*lamb.mean/(1-censor_lvl)
+  
+  # generate survival time and censor time
+  survT <- log(1 - runif(n)) /(-lamb.surv)
+  censorT <- log(1 - runif(n)) /(-lamb.censor)
+  
+  status <- ifelse(survT < censorT, 1, 0)
+  time = pmin(survT, censorT)
+  y = cbind(time, status)
+  colnames(y) = c("time", "status")
+  colnames(X) <- unlist(lapply(1:p, function(i) paste0("x", i)))
+  
+  dat = list()
+  dat[["X"]] = X
+  dat[["y"]] = y
+  return(dat)
+}
+```
+
+```{r}
+# simulation1: b1 = 1
+allele_freq <- 0.1
+censor_lvl <- 0
+n <- 1e4
+b1 <- 1
+nrep = 1000
+b = c(1, b1)
+
+sumstat1 <- matrix(NA, ncol = 2, nrow = nrep)
+colnames(sumstat1) = c("bhat", "zscore")
+for (i in 1:nrep){
+  X = cbind(rbinom(n, size = 2, prob = allele_freq))
+  dat <- sim_surv(b, X, censor_lvl)
+  fit <- coxph(Surv(dat$y) ~ dat$X)
+  sumstat1[i, ] = c(summary(fit)$coefficients[1, 1],summary(fit)$coefficients[1, 4])
+}
+```
+
+
+
+```{r}
+# simulation2: b1 = -1
+allele_freq <- 0.1
+censor_lvl <- 0
+n <- 1e4
+b1 <- -1
+nrep = 1000
+b = c(1, b1)
+
+sumstat2 <- matrix(NA, ncol = 2, nrow = nrep)
+colnames(sumstat2) = c("bhat", "zscore")
+for (i in 1:nrep){
+  X = cbind(rbinom(n, size = 2, prob = allele_freq))
+  dat <- sim_surv(b, X, censor_lvl)
+  fit <- coxph(Surv(dat$y) ~ dat$X)
+  sumstat2[i, ] = c(summary(fit)$coefficients[1, 1],summary(fit)$coefficients[1, 4])
+}
+```
+
+```{r fig.width=6, fig.height = 8}
+par(mfrow = c(2,2))
+hist(sumstat1[,  1],breaks = 50, main = "bhat: true b = 1")
+hist(sumstat2[,  1],breaks = 50, main = "bhat: true b = -1")
+hist(sumstat1[,  2],breaks = 50, main = "zscore: true b = 1")
+hist(sumstat2[,  2],breaks = 50, main = "zscore: true b = -1")
+
+```
+
