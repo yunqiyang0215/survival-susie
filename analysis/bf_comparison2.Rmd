@@ -150,3 +150,23 @@ for (i in 1:length(censor_lvl)){
 }
 ```
 
+```{r}
+dat.sub = dat2[dat2$censor_lvl == 0 & dat2$n == 5e5 & dat2$allele_freq == 0.1, ]
+```
+
+```{r fig.width=8, fig.height=6}
+par(mfrow = c(2,2))
+hist(dat.sub$zscore[dat.sub$b1 == -1], xlab = "zscore", main = "true b = -1; MAF = 0.1; n = 5e5; no censor")
+hist(dat.sub$zscore[dat.sub$b1 == 1],  xlab = "zscore", main = "true b = 1; MAF = 0.1; n = 5e5; no censor")
+hist(dat.sub$bhat[dat.sub$b1 == -1], xlab = "bhat", main = "true b = -1; MAF = 0.1; n = 5e5; no censor")
+hist(dat.sub$bhat[dat.sub$b1 == 1], xlab = "bhat", main = "true b = 1; MAF = 0.1; n = 5e5; no censor")
+```
+
+```{r fig.width=8, fig.height=6}
+par(mfrow = c(2,2))
+hist(dat.sub$lbf.numerical[dat.sub$b1 == -1],  xlab = "log(BF.numerical)", main = "true b = -1; MAF = 0.1; n = 5e5; no censor")
+hist(dat.sub$lbf.numerical[dat.sub$b1 == 1],  xlab = "log(BF.numerical)", main = "true b = 1; MAF = 0.1; n = 5e5; no censor")
+hist(dat.sub$lbf.wakefeld[dat.sub$b1 == -1],  xlab = "log(BF.wakefield)", main = "true b = -1; MAF = 0.1; n = 5e5; no censor")
+hist(dat.sub$lbf.wakefeld[dat.sub$b1 == 1],  xlab = "log(BF.wakefield)", main = "true b = 1; MAF = 0.1; n = 5e5; no censor")
+```
+
