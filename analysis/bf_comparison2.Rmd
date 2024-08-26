@@ -150,6 +150,7 @@ for (i in 1:length(censor_lvl)){
 }
 ```
 
+### 1. Check BF
 ```{r}
 dat.sub = dat2[dat2$censor_lvl == 0 & dat2$n == 5e5 & dat2$allele_freq == 0.1, ]
 ```
@@ -169,4 +170,64 @@ hist(dat.sub$lbf.numerical[dat.sub$b1 == 1],  xlab = "log(BF.numerical)", main =
 hist(dat.sub$lbf.wakefeld[dat.sub$b1 == -1],  xlab = "log(BF.wakefield)", main = "true b = -1; MAF = 0.1; n = 5e5; no censor")
 hist(dat.sub$lbf.wakefeld[dat.sub$b1 == 1],  xlab = "log(BF.wakefield)", main = "true b = 1; MAF = 0.1; n = 5e5; no censor")
 ```
+
+### 2. Check BF when flip binary x. 
+
+I experimented with two different sample sizes, n = 5e3 and 5e5. 
+
+```{r}
+res = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/bf_comparison0825/res_bf.rds")
+
+dat_list = lapply(1:length(res$DSC), function(x) res$compute_bf.result[[x]])
+dat = do.call(rbind, dat_list)
+dat2 = cbind(res$simulate.allele_freq, res$simulate.n, res$simulate.b1, dat)
+colnames(dat2)[1:3] = c("allele_freq", "n", "b1")
+dat2 = as.data.frame(dat2)
+dat2$flip = res$compute_bf.flip
+```
+
+#### 1. n = 5e3
+```{r fig.width=6, fig.height=6}
+par(mfrow = c(2,2))
+n = 5e3
+plot(dat2$zscore[dat2$n == n & dat2$flip == "flip"], dat2$zscore[dat2$n == n & dat2$flip == "nonflip"],
+     xlim = c(-23,-18), ylim = c(18, 23), main = "zscore", xlab = "x flipped", ylab = "x original")
+abline(a = 0, b = -1, col = "red")
+
+plot(dat2$bhat[dat2$n == n & dat2$flip == "flip"], dat2$bhat[dat2$n == n & dat2$flip == "nonflip"], main = "bhat",
+     xlab = "x flipped", ylab = "x original")
+abline(a = 0, b = -1, col = "red")
+
+plot(dat2$lbf.wakefeld[dat2$n == n & dat2$flip == "flip"], dat2$lbf.wakefeld[dat2$n == n & dat2$flip == "nonflip"], main = "Wakefield log(BF)", xlab = "x flipped", ylab = "x original")
+abline(a = 0, b = 1, col = "red")
+
+plot(dat2$lbf.numerical[dat2$n == n & dat2$flip == "flip"], dat2$lbf.numerical[dat2$n == n & dat2$flip == "nonflip"], main = "Numerical log(BF)", xlab = "x flipped", ylab = "x original")
+abline(a = 0, b = 1, col = "red")
+```
+
+```{r}
+plot(dat2$bhat[dat2$n == n], dat2$lbf.wakefeld[dat2$n == n]-dat2$lbf.numerical[dat2$n == n], xlab = "bhat", ylab = "log(BF.wakefield) - log(BF.numerical)")
+```
+
+#### 2. n = 5e5
+```{r}
+n = 5e5
+plot(dat2$zscore[dat2$n == n & dat2$flip == "flip"], dat2$zscore[dat2$n == n & dat2$flip == "nonflip"],
+     main = "zscore", xlab = "x flipped", ylab = "x original")
+abline(a = 0, b = -1, col = "red")
+
+plot(dat2$bhat[dat2$n == n & dat2$flip == "flip"], dat2$bhat[dat2$n == n & dat2$flip == "nonflip"], main = "bhat")
+abline(a = 0, b = -1, col = "red", xlab = "x flipped", ylab = "x original")
+
+plot(dat2$lbf.wakefeld[dat2$n == n & dat2$flip == "flip"], dat2$lbf.wakefeld[dat2$n == n & dat2$flip == "nonflip"], main = "Wakefield log(BF)", xlab = "x flipped", ylab = "x original")
+abline(a = 0, b = 1, col = "red")
+
+plot(dat2$lbf.numerical[dat2$n == n & dat2$flip == "flip"], dat2$lbf.numerical[dat2$n == n & dat2$flip == "nonflip"], main = "Numerical log(BF)", xlab = "x flipped", ylab = "x original")
+abline(a = 0, b = 1, col = "red")
+```
+
+```{r}
+plot(dat2$bhat[dat2$n == n], dat2$lbf.wakefeld[dat2$n == n]-dat2$lbf.numerical[dat2$n == n], xlab = "bhat", ylab = "log(BF.wakefield) - log(BF.numerical)")
+```
+
 
