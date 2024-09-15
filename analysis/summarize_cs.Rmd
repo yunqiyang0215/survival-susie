@@ -28,6 +28,8 @@ rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_default_iter
 ```
 
 ```{r}
+pdf("/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/cs_gtex.pdf", width = 10, height = 6)
+par(mfrow = c(2,3))
 # 1. coverage of cs
 coverage = matrix(NA, nrow = 2, ncol = 3)
 rownames(coverage) = c("susie", "susie.rss")
@@ -39,8 +41,6 @@ for (i in 1:3) {
   dat_indx = which(rss$simulate.num_effect == i)
   coverage[2, i] = calculate_cs_coverage(rss$rss.cs, rss$simulate.is_effect, dat_indx)
 }
-
-coverage
 
 # 2. power of cs
 power_cs = matrix(NA, ncol = 3, nrow = 2)
@@ -60,8 +60,6 @@ for (i in 1:3){
   power_cs[2, i] = power
 }
 
-power_cs
-
 # 3. mean abs correlation
 # 1. coverage of cs
 mac = matrix(NA, nrow = 2, ncol = 3)
@@ -73,10 +71,9 @@ for (i in 1:3) {
   mac[1, i] = mean(get_mean_abs_corr(susie$susie.cs, dat_indx), na.rm = TRUE)
   mac[2, i] = mean(get_mean_abs_corr(rss$rss.cs, dat_indx), na.rm = TRUE)
 }
-mac
-```
-```{r}
-par(mfrow = c(1,3))
+
+
+
 plot(coverage[1, ], pch = 20, ylim = c(min(coverage) - 0.1, 1), col = "darkred", xlab = "number of effect", ylab = "coverage")
 points(coverage[2, ], pch = 20, col = "blue")
 legend("bottomleft", legend = c("susie", "susie.rss"), pch = c(20, 20), col = c("darkred", "blue"))
@@ -88,9 +85,9 @@ legend("bottomleft", legend = c("susie", "susie.rss"), pch = c(20, 20), col = c(
 plot(mac[1, ], pch = 20, ylim = c(0.97, 1), col = "darkred", xlab = "number of effect", ylab = "mean absolute correlation")
 points(mac[2, ], pch = 20, col = "blue")
 legend("bottomleft", legend = c("susie", "susie.rss"), pch = c(20, 20), col = c("darkred", "blue"))
-```
 
-```{r}
+
+#### Plot against different censoring levels 
 censor_lvls = unique(susie$simulate.censor_lvl)
 coverage = matrix(NA, nrow = 2, ncol = length(censor_lvls))
 rownames(coverage) = c("susie", "susie.rss")
@@ -127,13 +124,7 @@ for (i in 1:length(censor_lvls)) {
   mac[2, i] = mean(get_mean_abs_corr(rss$rss.cs, dat_indx), na.rm = TRUE)
 }
 
-coverage
-power_cs
-mac
-```
 
-```{r}
-par(mfrow = c(1,3))
 plot(censor_lvls, coverage[1, ], pch = 20, ylim = c(min(coverage) - 0.1, 1), col = "darkred", xlab = "censor level", ylab = "coverage")
 points(censor_lvls, coverage[2, ], pch = 20, col = "blue")
 legend("bottomleft", legend = c("susie", "susie.rss"), pch = c(20, 20), col = c("darkred", "blue"))
@@ -156,6 +147,9 @@ censor_lvls = unique(susie$simulate.censor_lvl)
 ```
 
 ```{r}
+
+pdf("/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/cs_ukb.pdf", width = 10, height = 6)
+par(mfrow = c(2,3))
 # 1. coverage of cs
 coverage = matrix(NA, nrow = 2, ncol = 3)
 rownames(coverage) = c("susie", "susie.rss")
@@ -202,9 +196,8 @@ for (i in 1:3) {
   mac[2, i] = mean(get_mean_abs_corr(rss$susie_rss.cs, dat_indx), na.rm = TRUE)
 }
 mac
-```
-```{r}
-par(mfrow = c(1,3))
+
+### Plot against different number of effects
 plot(coverage[1, ], pch = 20, ylim = c(min(coverage) - 0.1, 1), col = "darkred", xlab = "number of effect", ylab = "coverage")
 points(coverage[2, ], pch = 20, col = "blue")
 legend("bottomleft", legend = c("susie", "susie.rss"), pch = c(20, 20), col = c("darkred", "blue"))
@@ -216,9 +209,9 @@ legend("bottomleft", legend = c("susie", "susie.rss"), pch = c(20, 20), col = c(
 plot(mac[1, ], pch = 20, ylim = c(0.97, 1), col = "darkred", xlab = "number of effect", ylab = "mean absolute correlation")
 points(mac[2, ], pch = 20, col = "blue")
 legend("bottomleft", legend = c("susie", "susie.rss"), pch = c(20, 20), col = c("darkred", "blue"))
-```
 
-```{r}
+
+#### Plot against different censoring level
 censor_lvls = unique(susie$simulate.censor_lvl)
 coverage = matrix(NA, nrow = 2, ncol = length(censor_lvls))
 rownames(coverage) = c("susie", "susie.rss")
@@ -258,10 +251,7 @@ for (i in 1:length(censor_lvls)) {
 coverage
 power_cs
 mac
-```
 
-```{r}
-par(mfrow = c(1,3))
 plot(censor_lvls, coverage[1, ], pch = 20, ylim = c(min(coverage) - 0.1, 1), col = "darkred", xlab = "censor level", ylab = "coverage")
 points(censor_lvls, coverage[2, ], pch = 20, col = "blue")
 legend("bottomleft", legend = c("susie", "susie.rss"), pch = c(20, 20), col = c("darkred", "blue"))
