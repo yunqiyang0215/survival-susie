@@ -249,3 +249,17 @@ plot(dat2$bhat[dat2$n == n], dat2$lbf.wakefeld[dat2$n == n]-dat2$lbf.numerical[d
 ```
 
 
+
+
+
+
+### 3. Computation time of Gauss-Hermite vs. laplace BF
+
+```{r}
+par(mfrow = c(1,2))
+hist(dat2$time.lp)
+hist(dat2$time.gh)
+mean(dat2$time.lp)
+mean(dat2$time.gh)
+```
+
