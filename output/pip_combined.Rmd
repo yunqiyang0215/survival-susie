@@ -1,0 +1,163 @@
+---
+title: "Untitled"
+output: html_document
+date: '2024-10-04'
+---
+
+```{r}
+source("/project2/mstephens/yunqiyang/surv-susie/survival-susie/code/pip.R")
+```
+
+```{r}
+pdf("/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/pip_combined.pdf", height = 8, width = 16)
+par(mfrow = c(2,4))
+
+# GTEx simulation
+susie = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/susie.rds")
+svb = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/svb.rds")
+bvsnlp = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/bvsnlp.rds")
+r2b = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/r2b.rds")
+rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/rss.rds")
+
+indx = which(susie$simulate.cor_type == "real")
+pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+pip.svb = unlist(lapply(indx, function(x) svb$svb.pip[[x]]))
+pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
+pip.rss = unlist(lapply(indx, function(x) rss$rss.pip[[x]]))
+  
+is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
+
+res.pip = compare_pip(pip.susie, pip.svb, is_effect)
+plot_pip(res.pip, labs = c("CoxPH-SuSiE", "survival.svb"), main = "GTEx simulation")
+abline(a = 0, b = 1, lty = 2, col = "blue")
+  
+res.pip = compare_pip(pip.susie, pip.bvsnlp, is_effect)
+plot_pip(res.pip, labs = c("CoxPH-SuSiE", "BVSNLP"), main = "GTEx simulation")
+abline(a = 0, b = 1, lty = 2, col = "blue")
+  
+res.pip = compare_pip(pip.susie, pip.r2b, is_effect)
+plot_pip(res.pip, labs = c("CoxPH-SuSiE", "R2BGLiMS"), main = "GTEx simulation")
+abline(a = 0, b = 1, lty = 2, col = "blue")
+  
+res.pip = compare_pip(pip.susie, pip.rss, is_effect)
+plot_pip(res.pip, labs = c("CoxPH-SuSiE", "SuSiE.RSS"), main = "GTEx simulation")
+abline(a = 0, b = 1, lty = 2, col = "blue")
+
+
+# UKB simulation
+susie = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/susie.rds")
+survsvb = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/survsvb.rds")
+bvsnlp = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/bvsnlp.rds")
+rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/susie_rss.rds")
+r2b = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/r2b.rds")
+
+
+indx = which(susie$simulate.cor_type == "real")
+pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+pip.svb = unlist(lapply(indx, function(x) survsvb$svb.pip[[x]]))
+pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
+pip.rss = unlist(lapply(indx, function(x) rss$susie_rss.pip[[x]]))
+  
+is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
+
+res.pip = compare_pip(pip.susie, pip.svb, is_effect)
+plot_pip(res.pip, labs = c("CoxPH-SuSiE", "survival.svb"), main = "UKB simulation")
+abline(a = 0, b = 1, lty = 2, col = "blue")
+  
+res.pip = compare_pip(pip.susie, pip.bvsnlp, is_effect)
+plot_pip(res.pip, labs = c("CoxPH-SuSiE", "BVSNLP"), main = "UKB simulation")
+abline(a = 0, b = 1, lty = 2, col = "blue")
+  
+res.pip = compare_pip(pip.susie, pip.r2b, is_effect)
+plot_pip(res.pip, labs = c("CoxPH-SuSiE", "R2BGLiMS"), main = "UKB simulation")
+abline(a = 0, b = 1, lty = 2, col = "blue")
+  
+res.pip = compare_pip(pip.susie, pip.rss, is_effect)
+plot_pip(res.pip, labs = c("CoxPH-SuSiE", "SuSiE.RSS"), main = "UKB simulation")
+abline(a = 0, b = 1, lty = 2, col = "blue")
+  
+
+```
+
+
+
+```{r}
+pdf("/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/pip_calibration_combined.pdf", height = 8, width = 20)
+par(mfrow = c(2,5))
+
+# GTEx simulation
+susie = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/susie.rds")
+svb = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/svb.rds")
+bvsnlp = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/bvsnlp.rds")
+r2b = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/r2b.rds")
+rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/rss.rds")
+
+indx = which(bvsnlp$simulate.cor_type == "real")
+is_effect = unlist(lapply(indx, function(x) bvsnlp$simulate.is_effect[[x]]))
+pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+pip.survsvb = unlist(lapply(indx, function(x) svb$svb.pip[[x]]))
+pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+pip.rss = unlist(lapply(indx, function(x) rss$rss.pip[[x]]))
+pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
+  
+# Calibration plot for pip.susie
+calibration.susie = pip_calibration(pip.susie, is_effect)
+plot_calibration(calibration.susie, main = "CoxPH-SuSiE")
+  
+# Calibration plot for pip.svb
+calibration.survsvb = pip_calibration(pip.survsvb, is_effect)
+plot_calibration(calibration.survsvb, main = "survival.svb")
+  
+# Calibration plot for pip.bvsnlp
+calibration.bvsnlp = pip_calibration(pip.bvsnlp, is_effect)
+plot_calibration(calibration.bvsnlp, main = "BVSNLP")
+  
+# Calibration plot for pip.rss
+calibration.rss = pip_calibration(pip.rss, is_effect)
+plot_calibration(calibration.rss, main = "SuSiE.RSS")
+  
+# Calibration plot for pip.r2b
+calibration.r2b = pip_calibration(pip.r2b, is_effect)
+plot_calibration(calibration.r2b, main = "R2BGLiMS")
+
+
+# UKB simulation
+susie = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/susie.rds")
+survsvb = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/survsvb.rds")
+bvsnlp = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/bvsnlp.rds")
+rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/susie_rss.rds")
+r2b = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/r2b.rds")
+
+
+indx = which(bvsnlp$simulate.cor_type == "real")
+is_effect = unlist(lapply(indx, function(x) bvsnlp$simulate.is_effect[[x]]))
+pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+pip.survsvb = unlist(lapply(indx, function(x) survsvb$svb.pip[[x]]))
+pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+pip.rss = unlist(lapply(indx, function(x) rss$susie_rss.pip[[x]]))
+pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
+  
+# Calibration plot for pip.susie
+calibration.susie = pip_calibration(pip.susie, is_effect)
+plot_calibration(calibration.susie, main = "CoxPH-SuSiE")
+  
+# Calibration plot for pip.svb
+calibration.survsvb = pip_calibration(pip.survsvb, is_effect)
+plot_calibration(calibration.survsvb, main = "survival.svb")
+  
+# Calibration plot for pip.bvsnlp
+calibration.bvsnlp = pip_calibration(pip.bvsnlp, is_effect)
+plot_calibration(calibration.bvsnlp, main = "BVSNLP")
+  
+# Calibration plot for pip.rss
+calibration.rss = pip_calibration(pip.rss, is_effect)
+plot_calibration(calibration.rss, main = "SuSiE.RSS")
+  
+# Calibration plot for pip.r2b
+calibration.r2b = pip_calibration(pip.r2b, is_effect)
+plot_calibration(calibration.r2b, main = "R2BGLiMS")
+
+
+```
