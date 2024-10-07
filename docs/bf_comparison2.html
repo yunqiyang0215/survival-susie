@@ -391,7 +391,7 @@ aria-hidden="true"></span> </a>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2024-09-18
+<strong>Last updated:</strong> 2024-10-07
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -534,34 +534,10 @@ relative
 <tbody>
 <tr>
 <td style="text-align:left;">
-/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/bf_different_n_large_b.pdf
+/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/bf_comparison_b_1_n_500000.pdf
 </td>
 <td style="text-align:left;">
-output/bf_different_n_large_b.pdf
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/bf_different_bhat_small_n.pdf
-</td>
-<td style="text-align:left;">
-output/bf_different_bhat_small_n.pdf
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/bf_different_bhat_large_n.pdf
-</td>
-<td style="text-align:left;">
-output/bf_different_bhat_large_n.pdf
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/bf_defense.pdf
-</td>
-<td style="text-align:left;">
-output/bf_defense.pdf
+output/bf_comparison_b_1_n_500000.pdf
 </td>
 </tr>
 <tr>
@@ -588,15 +564,15 @@ output/bf_comparison_b_0.01_n_500000.pdf
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreea68068aa34511cdc4b496910778b90d50cd61548targetblanka68068aa">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree08f38c469cc349fa24084976bff4977909c829d9targetblank08f38c4a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/a68068aa34511cdc4b496910778b90d50cd61548" target="_blank">a68068a</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/08f38c469cc349fa24084976bff4977909c829d9" target="_blank">08f38c4</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreea68068aa34511cdc4b496910778b90d50cd61548targetblanka68068aa"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree08f38c469cc349fa24084976bff4977909c829d9targetblank08f38c4a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -606,7 +582,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/a68068aa34511cdc4b496910778b90d50cd61548" target="_blank">a68068a</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/08f38c469cc349fa24084976bff4977909c829d9" target="_blank">08f38c4</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -633,12 +609,16 @@ Unstaged changes:
     Deleted:    analysis/calibration_large_sample.Rmd
     Modified:   analysis/check_bf.Rmd
     Modified:   analysis/coxph_na.Rmd
+    Modified:   analysis/pip_default_iter_gtex.Rmd
     Modified:   code/pip.R
     Modified:   output/bf_comparison.pdf
+    Modified:   output/bf_comparison_b_0.01_n_500000.pdf
+    Modified:   output/bf_comparison_b_0.1_n_500000.pdf
     Modified:   output/bf_defense.pdf
     Modified:   output/bf_different_bhat_large_n.pdf
     Modified:   output/bf_different_bhat_small_n.pdf
     Modified:   output/bf_different_n_large_b.pdf
+    Deleted:    output/pip_combined.Rmd
     Modified:   output/pip_gtex.pdf
     Modified:   output/pip_ukb.pdf
 
@@ -686,6 +666,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/08f38c469cc349fa24084976bff4977909c829d9/analysis/bf_comparison2.Rmd" target="_blank">08f38c4</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-10-07
+</td>
+<td>
+wflow_publish("analysis/bf_comparison2.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/6445624beedf5f4010dfe33639b65d77c36e6f48/docs/bf_comparison2.html" target="_blank">6445624</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-09-18
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1272,9 +1286,8 @@ af = unique(res$simulate.allele_freq)
 print(censor_lvl)</code></pre>
 <pre><code>[1] 0.00 0.20 0.40 0.60 0.80 0.99</code></pre>
 <pre class="r"><code>print(af)</code></pre>
-<pre><code>[1] 0.001 0.010 0.100</code></pre>
-<pre class="r"><code>pdf(&quot;/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/bf_different_n_large_b.pdf&quot;, width = 8, height = 18)
-par(mfrow = c(6,3))
+<pre><code>[1] 0.001 0.010 0.100 0.500</code></pre>
+<pre class="r"><code>par(mfrow = c(6,4))
 for (i in 1:length(censor_lvl)){
   for (j in 1:length(af)){
     indx = which(dat2$censor_lvl == censor_lvl[i] &amp; dat2$allele_freq == af[j] &amp; dat2$b1 == 1)
@@ -1291,8 +1304,27 @@ for (i in 1:length(censor_lvl)){
     legend(&quot;bottomleft&quot;, legend = c(&quot;log(BF.lp)&quot;, &#39;log(BF.wf)&#39;), col = c(1, &quot;#00CCFF&quot;), pch = 20, cex = 0.8)
   }
 }</code></pre>
-<pre class="r"><code>pdf(&quot;/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/bf_different_bhat_small_n.pdf&quot;, width = 8, height = 18)
-par(mfrow = c(6,3))
+<p><img src="figure/bf_comparison2.Rmd/unnamed-chunk-5-1.png" width="1344" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>par(mfrow = c(6,4))
+for (i in 1:length(censor_lvl)){
+  for (j in 1:length(af)){
+    indx = which(dat2$censor_lvl == censor_lvl[i] &amp; dat2$allele_freq == af[j] &amp; dat2$b1 == 0.01)
+    diff1 = dat2$lbf.numerical - dat2$lbf.laplace
+    diff2 = dat2$lbf.numerical - dat2$lbf.wakefeld
+    ymin = min(diff1[indx], diff2[indx]) - 1
+    ymax = max(diff1[indx], diff2[indx]) + 1
+    plot(dat2$n[indx], diff1[indx], ylim = c(ymin, ymax),
+         main = paste0(&quot;censor=&quot;,censor_lvl[i], &quot;, MAF=&quot;, af[j]),
+         xlab = &quot;sample size&quot;, ylab = &quot;difference in log(BF)&quot;, cex = 0.8, pch = 20)
+    points(dat2$n[indx], diff2[indx], col = &quot;#00CCFF&quot;, cex = 0.8, pch = 20)
+    fit = lm(diff2[indx] ~ dat2$n[indx])
+    abline(fit, col = &quot;grey&quot;, lty = 2) 
+    legend(&quot;bottomleft&quot;, legend = c(&quot;log(BF.lp)&quot;, &#39;log(BF.wf)&#39;), col = c(1, &quot;#00CCFF&quot;), pch = 20, cex = 0.8)
+  }
+}</code></pre>
+<p><img src="figure/bf_comparison2.Rmd/unnamed-chunk-6-1.png" width="1344" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Sample size small 
+par(mfrow = c(6,4))
 for (i in 1:length(censor_lvl)){
   for (j in 1:length(af)){
     indx = which(dat2$censor_lvl == censor_lvl[i] &amp; dat2$allele_freq == af[j] &amp; dat2$n == 5e3)
@@ -1303,11 +1335,12 @@ for (i in 1:length(censor_lvl)){
     plot(dat2$bhat[indx], diff1[indx], ylim = c(ymin, ymax), xlab = &quot;bhat&quot;, ylab = &quot;difference in log(BF)&quot;,
          main = paste0(&quot;censor=&quot;,censor_lvl[i], &quot;, MAF=&quot;, af[j]), cex = 0.8, pch = 20)
     points(dat2$bhat[indx], diff2[indx], col = &quot;#00CCFF&quot;, cex = 0.8, pch = 20)
-    legend(&quot;bottomleft&quot;, legend = c(&quot;log(BF.lp)&quot;, &#39;log(BF.wf)&#39;), col = c(1, &quot;#00CCFF&quot;), pch = 20, cex = 0.8)
+    legend(&quot;topleft&quot;, legend = c(&quot;log(BF.lp)&quot;, &#39;log(BF.wf)&#39;), col = c(1, &quot;#00CCFF&quot;), pch = 20, cex = 0.8)
   }
 }</code></pre>
-<pre class="r"><code>pdf(&quot;/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/bf_different_bhat_large_n.pdf&quot;, width = 8, height = 18)
-par(mfrow = c(6,3))
+<p><img src="figure/bf_comparison2.Rmd/unnamed-chunk-7-1.png" width="1344" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Large n
+par(mfrow = c(6,4))
 for (i in 1:length(censor_lvl)){
   for (j in 1:length(af)){
     indx = which(dat2$censor_lvl == censor_lvl[i] &amp; dat2$allele_freq == af[j] &amp; dat2$n == 5e5)
@@ -1318,16 +1351,17 @@ for (i in 1:length(censor_lvl)){
     plot(dat2$bhat[indx], diff1[indx], ylim = c(ymin, ymax), xlab = &quot;bhat&quot;, ylab = &quot;difference in log(BF)&quot;,
          main = paste0(&quot;censor=&quot;,censor_lvl[i], &quot;, MAF=&quot;, af[j]), cex = 0.8, pch = 20)
     points(dat2$bhat[indx], diff2[indx], col = &quot;#00CCFF&quot;, cex = 0.8, pch = 20)
-    legend(&quot;bottomleft&quot;, legend = c(&quot;log(BF.lp)&quot;, &#39;log(BF.wf)&#39;), col = c(1, &quot;#00CCFF&quot;), pch = 20, cex = 0.8)
+    #legend(&quot;topright&quot;, legend = c(&quot;log(BF.lp)&quot;, &#39;log(BF.wf)&#39;), col = c(1, &quot;#00CCFF&quot;), pch = 20, cex = 0.8)
   }
 }</code></pre>
-<pre class="r"><code>pdf(&quot;/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/bf_defense.pdf&quot;, width = 8, height = 18)
+<p><img src="figure/bf_comparison2.Rmd/unnamed-chunk-8-1.png" width="1344" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>pdf(&quot;/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/bf_comparison_b_1_n_500000.pdf&quot;, width = 8, height = 18)
 par(mfrow = c(6,3))
 
 for (i in 1:length(censor_lvl)){
   for (j in 1:length(af)){
     indx = which(res$simulate.censor_lvl == censor_lvl[i] &amp; res$simulate.allele_freq == af[j]
-                 &amp; res$simulate.n == 5e5 &amp; res$simulate.b1 == 0.01)
+                 &amp; res$simulate.n == 5e5 &amp; res$simulate.b1 == 1)
     dat = t(sapply(indx, function(x) res$compute_bf.result[[x]]))
     plot(x = dat[, &#39;lbf.numerical&#39;], y = dat[, &#39;lbf.laplace&#39;], pch = 20, main = paste0(&quot;censor=&quot;,censor_lvl[i], &quot;, MAF=&quot;, af[j]),
          ylim = c(min(dat[,c(4:6)])-1, max(dat[, c(4:6)])+1), cex = 0.8, col = &quot;blue&quot;,
@@ -1377,60 +1411,6 @@ hist(dat.sub$zscore[dat.sub$b1 == -1], xlab = &quot;zscore&quot;, main = &quot;t
 hist(dat.sub$zscore[dat.sub$b1 == 1],  xlab = &quot;zscore&quot;, main = &quot;true b = 1; MAF = 0.1; n = 5e5; no censor&quot;)
 hist(dat.sub$bhat[dat.sub$b1 == -1], xlab = &quot;bhat&quot;, main = &quot;true b = -1; MAF = 0.1; n = 5e5; no censor&quot;)
 hist(dat.sub$bhat[dat.sub$b1 == 1], xlab = &quot;bhat&quot;, main = &quot;true b = 1; MAF = 0.1; n = 5e5; no censor&quot;)</code></pre>
-<p><img src="figure/bf_comparison2.Rmd/unnamed-chunk-12-1.png" width="768" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-1">
-Past versions of unnamed-chunk-12-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-12-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/yunqiyang0215/survival-susie/blob/5b1f3bf6cd29c5c5cd1bc55f35bd1a228888cf63/docs/figure/bf_comparison2.Rmd/unnamed-chunk-12-1.png" target="_blank">5b1f3bf</a>
-</td>
-<td>
-yunqi yang
-</td>
-<td>
-2024-09-15
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/yunqiyang0215/survival-susie/blob/8e45b7bd1442d8131c174a526a68c2ef04928608/docs/figure/bf_comparison2.Rmd/unnamed-chunk-12-1.png" target="_blank">8e45b7b</a>
-</td>
-<td>
-yunqi yang
-</td>
-<td>
-2024-08-25
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>par(mfrow = c(2,2))
-hist(dat.sub$lbf.numerical[dat.sub$b1 == -1],  xlab = &quot;log(BF.numerical)&quot;, main = &quot;true b = -1; MAF = 0.1; n = 5e5; no censor&quot;)
-hist(dat.sub$lbf.numerical[dat.sub$b1 == 1],  xlab = &quot;log(BF.numerical)&quot;, main = &quot;true b = 1; MAF = 0.1; n = 5e5; no censor&quot;)
-hist(dat.sub$lbf.wakefeld[dat.sub$b1 == -1],  xlab = &quot;log(BF.wakefield)&quot;, main = &quot;true b = -1; MAF = 0.1; n = 5e5; no censor&quot;)
-hist(dat.sub$lbf.wakefeld[dat.sub$b1 == 1],  xlab = &quot;log(BF.wakefield)&quot;, main = &quot;true b = 1; MAF = 0.1; n = 5e5; no censor&quot;)</code></pre>
 <p><img src="figure/bf_comparison2.Rmd/unnamed-chunk-13-1.png" width="768" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-13-1">
@@ -1469,6 +1449,60 @@ yunqi yang
 </table>
 </div>
 </div>
+<pre class="r"><code>par(mfrow = c(2,2))
+hist(dat.sub$lbf.numerical[dat.sub$b1 == -1],  xlab = &quot;log(BF.numerical)&quot;, main = &quot;true b = -1; MAF = 0.1; n = 5e5; no censor&quot;)
+hist(dat.sub$lbf.numerical[dat.sub$b1 == 1],  xlab = &quot;log(BF.numerical)&quot;, main = &quot;true b = 1; MAF = 0.1; n = 5e5; no censor&quot;)
+hist(dat.sub$lbf.wakefeld[dat.sub$b1 == -1],  xlab = &quot;log(BF.wakefield)&quot;, main = &quot;true b = -1; MAF = 0.1; n = 5e5; no censor&quot;)
+hist(dat.sub$lbf.wakefeld[dat.sub$b1 == 1],  xlab = &quot;log(BF.wakefield)&quot;, main = &quot;true b = 1; MAF = 0.1; n = 5e5; no censor&quot;)</code></pre>
+<p><img src="figure/bf_comparison2.Rmd/unnamed-chunk-14-1.png" width="768" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-14-1">
+Past versions of unnamed-chunk-14-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-14-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/5b1f3bf6cd29c5c5cd1bc55f35bd1a228888cf63/docs/figure/bf_comparison2.Rmd/unnamed-chunk-14-1.png" target="_blank">5b1f3bf</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-09-15
+</td>
+</tr>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/546c2bfd1619e245a52503e86cb047c85381707a/docs/figure/bf_comparison2.Rmd/unnamed-chunk-14-1.png" target="_blank">546c2bf</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-08-26
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div id="check-bf-when-flip-binary-x." class="section level3">
 <h3>2. Check BF when flip binary x.</h3>
@@ -1498,57 +1532,7 @@ abline(a = 0, b = 1, col = &quot;red&quot;)
 
 plot(dat2$lbf.numerical[dat2$n == n &amp; dat2$flip == &quot;flip&quot;], dat2$lbf.numerical[dat2$n == n &amp; dat2$flip == &quot;nonflip&quot;], main = &quot;Numerical log(BF)&quot;, xlab = &quot;x flipped&quot;, ylab = &quot;x original&quot;)
 abline(a = 0, b = 1, col = &quot;red&quot;)</code></pre>
-<p><img src="figure/bf_comparison2.Rmd/unnamed-chunk-15-1.png" width="576" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-15-1">
-Past versions of unnamed-chunk-15-1.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-15-1" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/yunqiyang0215/survival-susie/blob/5b1f3bf6cd29c5c5cd1bc55f35bd1a228888cf63/docs/figure/bf_comparison2.Rmd/unnamed-chunk-15-1.png" target="_blank">5b1f3bf</a>
-</td>
-<td>
-yunqi yang
-</td>
-<td>
-2024-09-15
-</td>
-</tr>
-<tr>
-<td>
-<a href="https://github.com/yunqiyang0215/survival-susie/blob/546c2bfd1619e245a52503e86cb047c85381707a/docs/figure/bf_comparison2.Rmd/unnamed-chunk-15-1.png" target="_blank">546c2bf</a>
-</td>
-<td>
-yunqi yang
-</td>
-<td>
-2024-08-26
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>plot(dat2$bhat[dat2$n == n], dat2$lbf.wakefeld[dat2$n == n]-dat2$lbf.numerical[dat2$n == n], xlab = &quot;bhat&quot;, ylab = &quot;log(BF.wakefield) - log(BF.numerical)&quot;)</code></pre>
-<p><img src="figure/bf_comparison2.Rmd/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/bf_comparison2.Rmd/unnamed-chunk-16-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-16-1">
 Past versions of unnamed-chunk-16-1.png
@@ -1571,6 +1555,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/6445624beedf5f4010dfe33639b65d77c36e6f48/docs/figure/bf_comparison2.Rmd/unnamed-chunk-16-1.png" target="_blank">6445624</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-09-18
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/5b1f3bf6cd29c5c5cd1bc55f35bd1a228888cf63/docs/figure/bf_comparison2.Rmd/unnamed-chunk-16-1.png" target="_blank">5b1f3bf</a>
@@ -1597,13 +1592,7 @@ yunqi yang
 </table>
 </div>
 </div>
-</div>
-<div id="n-5e5" class="section level4">
-<h4>2. n = 5e5</h4>
-<pre class="r"><code>n = 5e5
-plot(dat2$zscore[dat2$n == n &amp; dat2$flip == &quot;flip&quot;], dat2$zscore[dat2$n == n &amp; dat2$flip == &quot;nonflip&quot;],
-     main = &quot;zscore&quot;, xlab = &quot;x flipped&quot;, ylab = &quot;x original&quot;)
-abline(a = 0, b = -1, col = &quot;red&quot;)</code></pre>
+<pre class="r"><code>plot(dat2$bhat[dat2$n == n], dat2$lbf.wakefeld[dat2$n == n]-dat2$lbf.numerical[dat2$n == n], xlab = &quot;bhat&quot;, ylab = &quot;log(BF.wakefield) - log(BF.numerical)&quot;)</code></pre>
 <p><img src="figure/bf_comparison2.Rmd/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-17-1">
@@ -1627,6 +1616,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/6445624beedf5f4010dfe33639b65d77c36e6f48/docs/figure/bf_comparison2.Rmd/unnamed-chunk-17-1.png" target="_blank">6445624</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-09-18
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/5b1f3bf6cd29c5c5cd1bc55f35bd1a228888cf63/docs/figure/bf_comparison2.Rmd/unnamed-chunk-17-1.png" target="_blank">5b1f3bf</a>
@@ -1653,127 +1653,13 @@ yunqi yang
 </table>
 </div>
 </div>
-<pre class="r"><code>plot(dat2$bhat[dat2$n == n &amp; dat2$flip == &quot;flip&quot;], dat2$bhat[dat2$n == n &amp; dat2$flip == &quot;nonflip&quot;], main = &quot;bhat&quot;)
-abline(a = 0, b = -1, col = &quot;red&quot;, xlab = &quot;x flipped&quot;, ylab = &quot;x original&quot;)</code></pre>
-<p><img src="figure/bf_comparison2.Rmd/unnamed-chunk-17-2.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-17-2">
-Past versions of unnamed-chunk-17-2.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-17-2" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/yunqiyang0215/survival-susie/blob/5b1f3bf6cd29c5c5cd1bc55f35bd1a228888cf63/docs/figure/bf_comparison2.Rmd/unnamed-chunk-17-2.png" target="_blank">5b1f3bf</a>
-</td>
-<td>
-yunqi yang
-</td>
-<td>
-2024-09-15
-</td>
-</tr>
-</tbody>
-</table>
 </div>
-</div>
-<pre class="r"><code>plot(dat2$lbf.wakefeld[dat2$n == n &amp; dat2$flip == &quot;flip&quot;], dat2$lbf.wakefeld[dat2$n == n &amp; dat2$flip == &quot;nonflip&quot;], main = &quot;Wakefield log(BF)&quot;, xlab = &quot;x flipped&quot;, ylab = &quot;x original&quot;)
-abline(a = 0, b = 1, col = &quot;red&quot;)</code></pre>
-<p><img src="figure/bf_comparison2.Rmd/unnamed-chunk-17-3.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-17-3">
-Past versions of unnamed-chunk-17-3.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-17-3" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/yunqiyang0215/survival-susie/blob/5b1f3bf6cd29c5c5cd1bc55f35bd1a228888cf63/docs/figure/bf_comparison2.Rmd/unnamed-chunk-17-3.png" target="_blank">5b1f3bf</a>
-</td>
-<td>
-yunqi yang
-</td>
-<td>
-2024-09-15
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>plot(dat2$lbf.numerical[dat2$n == n &amp; dat2$flip == &quot;flip&quot;], dat2$lbf.numerical[dat2$n == n &amp; dat2$flip == &quot;nonflip&quot;], main = &quot;Numerical log(BF)&quot;, xlab = &quot;x flipped&quot;, ylab = &quot;x original&quot;)
-abline(a = 0, b = 1, col = &quot;red&quot;)</code></pre>
-<p><img src="figure/bf_comparison2.Rmd/unnamed-chunk-17-4.png" width="672" style="display: block; margin: auto;" /></p>
-<p>
-<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-17-4">
-Past versions of unnamed-chunk-17-4.png
-</button>
-</p>
-<div id="fig-unnamed-chunk-17-4" class="collapse">
-<div class="table-responsive">
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th>
-Version
-</th>
-<th>
-Author
-</th>
-<th>
-Date
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>
-<a href="https://github.com/yunqiyang0215/survival-susie/blob/5b1f3bf6cd29c5c5cd1bc55f35bd1a228888cf63/docs/figure/bf_comparison2.Rmd/unnamed-chunk-17-4.png" target="_blank">5b1f3bf</a>
-</td>
-<td>
-yunqi yang
-</td>
-<td>
-2024-09-15
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<pre class="r"><code>plot(dat2$bhat[dat2$n == n], dat2$lbf.wakefeld[dat2$n == n]-dat2$lbf.numerical[dat2$n == n], xlab = &quot;bhat&quot;, ylab = &quot;log(BF.wakefield) - log(BF.numerical)&quot;)</code></pre>
+<div id="n-5e5" class="section level4">
+<h4>2. n = 5e5</h4>
+<pre class="r"><code>n = 5e5
+plot(dat2$zscore[dat2$n == n &amp; dat2$flip == &quot;flip&quot;], dat2$zscore[dat2$n == n &amp; dat2$flip == &quot;nonflip&quot;],
+     main = &quot;zscore&quot;, xlab = &quot;x flipped&quot;, ylab = &quot;x original&quot;)
+abline(a = 0, b = -1, col = &quot;red&quot;)</code></pre>
 <p><img src="figure/bf_comparison2.Rmd/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-18-1">
@@ -1799,6 +1685,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/6445624beedf5f4010dfe33639b65d77c36e6f48/docs/figure/bf_comparison2.Rmd/unnamed-chunk-18-1.png" target="_blank">6445624</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-09-18
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/5b1f3bf6cd29c5c5cd1bc55f35bd1a228888cf63/docs/figure/bf_comparison2.Rmd/unnamed-chunk-18-1.png" target="_blank">5b1f3bf</a>
 </td>
 <td>
@@ -1806,6 +1703,54 @@ yunqi yang
 </td>
 <td>
 2024-09-15
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<pre class="r"><code>plot(dat2$bhat[dat2$n == n &amp; dat2$flip == &quot;flip&quot;], dat2$bhat[dat2$n == n &amp; dat2$flip == &quot;nonflip&quot;], main = &quot;bhat&quot;)
+abline(a = 0, b = -1, col = &quot;red&quot;, xlab = &quot;x flipped&quot;, ylab = &quot;x original&quot;)</code></pre>
+<p><img src="figure/bf_comparison2.Rmd/unnamed-chunk-18-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot(dat2$lbf.wakefeld[dat2$n == n &amp; dat2$flip == &quot;flip&quot;], dat2$lbf.wakefeld[dat2$n == n &amp; dat2$flip == &quot;nonflip&quot;], main = &quot;Wakefield log(BF)&quot;, xlab = &quot;x flipped&quot;, ylab = &quot;x original&quot;)
+abline(a = 0, b = 1, col = &quot;red&quot;)</code></pre>
+<p><img src="figure/bf_comparison2.Rmd/unnamed-chunk-18-3.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot(dat2$lbf.numerical[dat2$n == n &amp; dat2$flip == &quot;flip&quot;], dat2$lbf.numerical[dat2$n == n &amp; dat2$flip == &quot;nonflip&quot;], main = &quot;Numerical log(BF)&quot;, xlab = &quot;x flipped&quot;, ylab = &quot;x original&quot;)
+abline(a = 0, b = 1, col = &quot;red&quot;)</code></pre>
+<p><img src="figure/bf_comparison2.Rmd/unnamed-chunk-18-4.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plot(dat2$bhat[dat2$n == n], dat2$lbf.wakefeld[dat2$n == n]-dat2$lbf.numerical[dat2$n == n], xlab = &quot;bhat&quot;, ylab = &quot;log(BF.wakefield) - log(BF.numerical)&quot;)</code></pre>
+<p><img src="figure/bf_comparison2.Rmd/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-19-1">
+Past versions of unnamed-chunk-19-1.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-19-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/6445624beedf5f4010dfe33639b65d77c36e6f48/docs/figure/bf_comparison2.Rmd/unnamed-chunk-19-1.png" target="_blank">6445624</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-09-18
 </td>
 </tr>
 </tbody>
@@ -1820,7 +1765,7 @@ class="section level3">
 <pre class="r"><code>par(mfrow = c(1,2))
 hist(dat2$time.lp)
 hist(dat2$time.gh)</code></pre>
-<p><img src="figure/bf_comparison2.Rmd/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="figure/bf_comparison2.Rmd/unnamed-chunk-20-1.png" width="672" style="display: block; margin: auto;" /></p>
 <pre class="r"><code>mean(dat2$time.lp)</code></pre>
 <pre><code>[1] 0.0111275</code></pre>
 <pre class="r"><code>mean(dat2$time.gh)</code></pre>
