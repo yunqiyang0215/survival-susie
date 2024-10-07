@@ -52,9 +52,9 @@ print(censor_lvl)
 print(af)
 ```
 
+
 ```{r fig.width = 14, fig.height=20}
-pdf("/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/bf_different_n_large_b.pdf", width = 8, height = 18)
-par(mfrow = c(6,3))
+par(mfrow = c(6,4))
 for (i in 1:length(censor_lvl)){
   for (j in 1:length(af)){
     indx = which(dat2$censor_lvl == censor_lvl[i] & dat2$allele_freq == af[j] & dat2$b1 == 1)
@@ -73,9 +73,30 @@ for (i in 1:length(censor_lvl)){
 }
 ```
 
+
 ```{r fig.width = 14, fig.height=20}
-pdf("/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/bf_different_bhat_small_n.pdf", width = 8, height = 18)
-par(mfrow = c(6,3))
+par(mfrow = c(6,4))
+for (i in 1:length(censor_lvl)){
+  for (j in 1:length(af)){
+    indx = which(dat2$censor_lvl == censor_lvl[i] & dat2$allele_freq == af[j] & dat2$b1 == 0.01)
+    diff1 = dat2$lbf.numerical - dat2$lbf.laplace
+    diff2 = dat2$lbf.numerical - dat2$lbf.wakefeld
+    ymin = min(diff1[indx], diff2[indx]) - 1
+    ymax = max(diff1[indx], diff2[indx]) + 1
+    plot(dat2$n[indx], diff1[indx], ylim = c(ymin, ymax),
+         main = paste0("censor=",censor_lvl[i], ", MAF=", af[j]),
+         xlab = "sample size", ylab = "difference in log(BF)", cex = 0.8, pch = 20)
+    points(dat2$n[indx], diff2[indx], col = "#00CCFF", cex = 0.8, pch = 20)
+    fit = lm(diff2[indx] ~ dat2$n[indx])
+    abline(fit, col = "grey", lty = 2) 
+    legend("bottomleft", legend = c("log(BF.lp)", 'log(BF.wf)'), col = c(1, "#00CCFF"), pch = 20, cex = 0.8)
+  }
+}
+```
+
+```{r fig.width = 14, fig.height=20}
+# Sample size small 
+par(mfrow = c(6,4))
 for (i in 1:length(censor_lvl)){
   for (j in 1:length(af)){
     indx = which(dat2$censor_lvl == censor_lvl[i] & dat2$allele_freq == af[j] & dat2$n == 5e3)
@@ -86,15 +107,15 @@ for (i in 1:length(censor_lvl)){
     plot(dat2$bhat[indx], diff1[indx], ylim = c(ymin, ymax), xlab = "bhat", ylab = "difference in log(BF)",
          main = paste0("censor=",censor_lvl[i], ", MAF=", af[j]), cex = 0.8, pch = 20)
     points(dat2$bhat[indx], diff2[indx], col = "#00CCFF", cex = 0.8, pch = 20)
-    legend("bottomleft", legend = c("log(BF.lp)", 'log(BF.wf)'), col = c(1, "#00CCFF"), pch = 20, cex = 0.8)
+    legend("topleft", legend = c("log(BF.lp)", 'log(BF.wf)'), col = c(1, "#00CCFF"), pch = 20, cex = 0.8)
   }
 }
 
 ```
 
 ```{r fig.width = 14, fig.height=20}
-pdf("/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/bf_different_bhat_large_n.pdf", width = 8, height = 18)
-par(mfrow = c(6,3))
+# Large n
+par(mfrow = c(6,4))
 for (i in 1:length(censor_lvl)){
   for (j in 1:length(af)){
     indx = which(dat2$censor_lvl == censor_lvl[i] & dat2$allele_freq == af[j] & dat2$n == 5e5)
@@ -105,7 +126,7 @@ for (i in 1:length(censor_lvl)){
     plot(dat2$bhat[indx], diff1[indx], ylim = c(ymin, ymax), xlab = "bhat", ylab = "difference in log(BF)",
          main = paste0("censor=",censor_lvl[i], ", MAF=", af[j]), cex = 0.8, pch = 20)
     points(dat2$bhat[indx], diff2[indx], col = "#00CCFF", cex = 0.8, pch = 20)
-    legend("bottomleft", legend = c("log(BF.lp)", 'log(BF.wf)'), col = c(1, "#00CCFF"), pch = 20, cex = 0.8)
+    #legend("topright", legend = c("log(BF.lp)", 'log(BF.wf)'), col = c(1, "#00CCFF"), pch = 20, cex = 0.8)
   }
 }
 
@@ -113,13 +134,13 @@ for (i in 1:length(censor_lvl)){
 
 
 ```{r fig.width = 12, fig.height=5}
-pdf("/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/bf_defense.pdf", width = 8, height = 18)
+pdf("/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/bf_comparison_b_1_n_500000.pdf", width = 8, height = 18)
 par(mfrow = c(6,3))
 
 for (i in 1:length(censor_lvl)){
   for (j in 1:length(af)){
     indx = which(res$simulate.censor_lvl == censor_lvl[i] & res$simulate.allele_freq == af[j]
-                 & res$simulate.n == 5e5 & res$simulate.b1 == 0.01)
+                 & res$simulate.n == 5e5 & res$simulate.b1 == 1)
     dat = t(sapply(indx, function(x) res$compute_bf.result[[x]]))
     plot(x = dat[, 'lbf.numerical'], y = dat[, 'lbf.laplace'], pch = 20, main = paste0("censor=",censor_lvl[i], ", MAF=", af[j]),
          ylim = c(min(dat[,c(4:6)])-1, max(dat[, c(4:6)])+1), cex = 0.8, col = "blue",
