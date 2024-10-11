@@ -198,7 +198,7 @@ for (i in 1:length(censor_lvl)){
          xlab = "bhat", ylab = "log_10(BF)s", cex = 0.8, pch = 20)
     points(dat2$bhat[indx], dat2$lbf.laplace[indx], col = "#00CCFF", cex = 0.8, pch = 20)
     points(dat2$bhat[indx], dat2$lbf.wakefeld[indx], col = 2, cex = 0.8, pch = 20)
-    legend("topleft", legend = c("log(BF.numerical)", "log(BF.lp)", 'log(BF.wf)'), col = c(1, "#00CCFF", 2), pch = 20, cex = 0.8)
+    legend("bottomright", legend = c("log(BF.numerical)", "log(BF.lp)", 'log(BF.wf)'), col = c(1, "#00CCFF", 2), pch = 20, cex = 0.8)
   }
 }
 
@@ -217,7 +217,7 @@ for (i in 1:length(censor_lvl)){
          xlab = "bhat", ylab = "log_10(BF)s", cex = 0.8, pch = 20)
     points(dat2$bhat[indx], dat2$lbf.laplace[indx], col = "#00CCFF", cex = 0.8, pch = 20)
     points(dat2$bhat[indx], dat2$lbf.wakefeld[indx], col = 2, cex = 0.8, pch = 20)
-    legend("topleft", legend = c("log(BF.numerical)", "log(BF.lp)", 'log(BF.wf)'), col = c(1, "#00CCFF", 2), pch = 20, cex = 0.8)
+    legend("bottomright", legend = c("log(BF.numerical)", "log(BF.lp)", 'log(BF.wf)'), col = c(1, "#00CCFF", 2), pch = 20, cex = 0.8)
   }
 }
 
