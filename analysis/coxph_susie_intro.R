@@ -19,8 +19,9 @@ compute_approx_post_var <- function (z, s, v0)
 # @param s: s.d. of the estimated coefficient
 # @param bhat: estimated beta effect
 compute_approx_post_mean <- function (v1, s, bhat)
-  v1/(s^2)*bhat
+  v1*bhat/s^2
 
+# TO DO: Improve the code for this function a bit.
 surv_uni_fun <- function (x, y, o, v0, estimate_intercept = 0, ...) {
   fit  <- coxph(y ~ x + offset(o))
   bhat <- summary(fit)$coefficients[1,1]
