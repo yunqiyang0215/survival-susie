@@ -1,7 +1,6 @@
 # Generate the data set for the CoxPH-SuSiE tutorial.
 library(tools)
-p1 <- 3
-censor_level <- 0.6
+censor_level <- 0.3
 
 # Set the seed so the results can be reproduced.
 set.seed(1)
@@ -21,9 +20,9 @@ geno <- geno[,3501:4500]
 n <- nrow(geno)
 p <- ncol(geno)
 b <- rep(0,p)
-i <- sample(p,p1)
-b0 <- rnorm(1)
-b[i] <- rnorm(p1)
+i <- c(384,555,994)
+b0 <- 0
+b[i] <- c(1,-2,2) 
   
 # Generate survival times and censor times.
 lsurv   <- exp(b0 + drop(geno %*% b))
@@ -34,6 +33,6 @@ status  <- as.numeric(survT < censorT)
 time    <- pmin(survT,censorT)
 
 # Save the data and ground-truth coefficients to an .RData file.
-save(list = c("b","geno","time","time"),
+save(list = c("b","geno","time","status"),
      file = "survival_demo.RData")
 resaveRdaFiles("survival_demo.RData")
