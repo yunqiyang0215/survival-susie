@@ -5,6 +5,10 @@ date: December 6, 2024
 output:
   workflowr::wflow_html:
     theme: readable
+    toc: no
+    highlight: textmate
+    lib_dir: site_libs
+    self_contained: no
 ---
 
 ADD TEXT HERE.
