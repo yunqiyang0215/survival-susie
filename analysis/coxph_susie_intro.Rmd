@@ -1,0 +1,15 @@
+---
+title: Introduction to CoxPH-SuSiE
+author: Yunqi Yang and Peter Carbonetto
+date: December 6, 2024
+output:
+  workflowr::wflow_html:
+    theme: readable
+---
+
+ADD TEXT HERE.
+
+```{r knitr-opts, include=FALSE}
+knitr::opts_chunk$set(comment = "#",collapse = TRUE,results = "hold",
+                      fig.align = "center",dpi = 120)
+```
