@@ -5,7 +5,7 @@ library(survival)
 library(susieR)
 library(logisticsusie)
 
-# Function to calculate approximate log-BF based on Wakefield approximation.
+# Function to calculate approximate log-Bayes factor.
 # z: zscore of the regression coefficient
 # s: s.d. of the estimated coefficient.
 # v0: prior variance
@@ -47,7 +47,7 @@ fit_coxph <- ser_from_univariate(surv_uni_fun)
 fit <- ibss_from_ser(geno,pheno,L = L,ser_function = fit_coxph,
                      tol = 0.0001,maxit = 100)
 
-class(fit) <- "susie"
+class(fit) <- c("susie","list")
 out <- susie_get_cs(fit,geno,min_abs_cor = 0.1)
 
 # CS 1.
@@ -61,6 +61,8 @@ print(b[i])
 print(fit$mu[2,i])
 
 # TO DO:
+#
+# (1) Create a plot showing the coxph-based association p-values.
 # (1) Create a nice PIP plot showing the CSs and the causal SNPs.
 # (2) Create a scatterplot of true vs. estimated coefs.
 # 
