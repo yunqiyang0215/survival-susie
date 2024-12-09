@@ -11,9 +11,9 @@ output:
     self_contained: no
 ---
 
-This short vignette is intended to introduce the CoxPH-SuSiE model for
-fine-mapping time-to-event (TTE) phenotypes, and illustrate how to use
-the methods on an example genetic data set.
+This short vignette is intended to (i) introduce CoxPH-SuSiE for
+fine-mapping time-to-event (TTE) phenotypes, and (ii) illustrate how
+to use CoxPH-SuSiE on an example genetic data set.
 
 ```{r knitr-opts, include=FALSE}
 knitr::opts_chunk$set(comment = "#",collapse = TRUE,results = "hold",
@@ -52,7 +52,7 @@ library(cowplot)
 
 ## The data set
 
-The example data set is found in the "data" directory of this
+The example data set is found in the "data" directory of this GitHub
 repository, or can be downloaded by running these commands in R:
 
 ```{r load-data}
@@ -64,10 +64,10 @@ load("survival_demo.RData")
 ```
 
 In this example, the TTE data are "censored" disease diagnosis times,
-meaning that the observations are either: the time of diagnosis for
-uncensored samples; or a lower limit on the time of diagnosis for
-censored samples, indicated by the "+". (This is called "right
-censoring".)
+meaning that the observations are either: the time of diagnosis (for
+uncensored samples); or a lower limit on the time of diagnosis for
+censored samples. The censored samples are indicated by the "+" (this
+is called "right censoring"):
 
 ```{r survival-data}
 pheno <- Surv(time,status)
@@ -82,7 +82,7 @@ table(status)
 ```
 
 The "geno" matrix contains the (imputed) genotype data for 1,000
-candidate genetic variants (SNPs) positioned near each other on a
+candidate genetic variants (SNPs) located near each other on the
 chromosome.
 
 ```{r geno-data}
@@ -92,9 +92,9 @@ ncol(geno)
 
 ## Association analysis using the CoxPH model
 
-Basic association tests using the Cox proportional hazards (CoxPH)
-model show that many of these genetic variants are associated with
-the TTE phenotype:
+Association tests performed using the Cox proportional hazards (CoxPH)
+model show that many of thee genetic variants are associated with
+diagnosis time:
 
 ```{r genome-wide-scan, fig.height=2, fig.width=6}
 pvals <-
@@ -109,16 +109,17 @@ ggplot(pdat,aes(x = pos,y = -log10(pval),color = causal,shape = causal)) +
   theme_cowplot(font_size = 10)
 ```
 
-Since we simulated these data, we know that three SNPs truly affect
-the TTE phenotype (drawn in orange in the plot). All three of the
-causal SNPs show evidence for association from the CoxPH-based
-association tests, but the strength of support for association varies
-quite a bit among the three SNPs. Further, many more SNPs that do not
-affect the phenotype are also associated, and this occurs *because
-many of the SNPs are strongly correlated with each other* (strong
-*linkage disequilibrium*, or "LD" for short).
+Since we simulated these data, we know that 3 of the 1,000 SNPs truly
+affect the TTE phenotype (drawn in orange in the plot above). All
+three of these "causal" SNPs show evidence for association from the
+CoxPH-based association tests, but the strength of support for
+association varies quite a bit among the three SNPs. Further, many
+more SNPs that do not affect the phenotype are also strongly
+associated with the phenotype. This happens *because many of the SNPs
+are strongly correlated with each other* (in strong *linkage
+disequilibrium*, or "LD").
 
-Next we will run the CoxPH-SuSiE fine-mapping method in an attempt to
+Next we will run the CoxPH-SuSiE fine-mapping method to try and
 narrow the association signal down to a smaller set of causal
 candidates.
 
