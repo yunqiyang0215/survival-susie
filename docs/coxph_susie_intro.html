@@ -439,15 +439,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree92e56711924d56f3ebd81f822e9872719c09a4d3targetblank92e5671a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree10c35d03d7af11f54d31279b53ea111cccf936cbtargetblank10c35d0a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/92e56711924d56f3ebd81f822e9872719c09a4d3" target="_blank">92e5671</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/10c35d03d7af11f54d31279b53ea111cccf936cb" target="_blank">10c35d0</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree92e56711924d56f3ebd81f822e9872719c09a4d3targetblank92e5671a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree10c35d03d7af11f54d31279b53ea111cccf936cbtargetblank10c35d0a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -457,7 +457,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/92e56711924d56f3ebd81f822e9872719c09a4d3" target="_blank">92e5671</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/10c35d03d7af11f54d31279b53ea111cccf936cb" target="_blank">10c35d0</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -473,6 +473,7 @@ were generated:
 <pre><code>
 Untracked files:
     Untracked:  analysis/survival_demo.RData
+    Untracked:  survival_demo.RData
 
 </code></pre>
 <p>
@@ -518,6 +519,91 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/10c35d03d7af11f54d31279b53ea111cccf936cb/analysis/coxph_susie_intro.Rmd" target="_blank">10c35d0</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2024-12-09
+</td>
+<td>
+workflowr::wflow_publish("coxph_susie_intro.Rmd", verbose = TRUE)
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/caed3b02ea52c28cf6d8c7b59fa3f29b1982b19f/analysis/coxph_susie_intro.Rmd" target="_blank">caed3b0</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2024-12-09
+</td>
+<td>
+Made a few improvements to the text of the intro vignette.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/b323562b3c9297c9ae4c599d7300b698c133307d/analysis/coxph_susie_intro.Rmd" target="_blank">b323562</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2024-12-09
+</td>
+<td>
+Added fine-mapping step and fine-mapping plots to coxph_susie_intro Rmd.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/03283885954d03256b2b056e2cae79a0ada54072/analysis/coxph_susie_intro.Rmd" target="_blank">0328388</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2024-12-09
+</td>
+<td>
+Added a bit of text to the coxph_susie_intro vignette.
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/b849946358141cb2bb0c576dff8a8f54d12ce7c3/docs/coxph_susie_intro.html" target="_blank">b849946</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2024-12-09
+</td>
+<td>
+Added some material to the coxph-susie demo.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -627,9 +713,11 @@ workflowr::wflow_publish("analysis/coxph_susie_intro.Rmd")
 </div>
 </div>
 </div>
-<p>This short vignette is intended to introduce the CoxPH-SuSiE model
-for fine-mapping time-to-event (TTE) phenotypes, and illustrate how to
-use the methods on an example genetic data set.</p>
+<p>This short vignette is intended to (i) introduce CoxPH-SuSiE for
+fine-mapping time-to-event (TTE) phenotypes, and (ii) illustrate how to
+use CoxPH-SuSiE on an example genetic data set.</p>
+<div id="initial-setup" class="section level2">
+<h2>Initial setup</h2>
 <p>To run the code below, you will need the survival, susieR and
 logisticsusie R packages, which can be installed with these commands in
 R:</p>
@@ -639,14 +727,19 @@ remotes::install_github(&quot;stephenslab/susieR&quot;)
 remotes::install_github(&quot;karltayeb/logisticsusie&quot;)</code></pre>
 <p>Also, we will use the ggplot2 and cowplot packages to create some
 helpful visualizations of the data and results:</p>
-<p><code>{r install-more-packages, eval=FALSE install.packages(c("ggplot2","cowplot"))</code></p>
+<pre class="r"><code>install.packages(c(&quot;ggplot2&quot;,&quot;cowplot&quot;))</code></pre>
 <p>Once the packages are installed, load them.</p>
 <pre class="r"><code>library(survival)
 library(susieR)
 library(logisticsusie)
 library(ggplot2)
 library(cowplot)</code></pre>
-<p>The example data set is found in the “data” directory of this
+<p>Set the seed for reproducibility.</p>
+<pre class="r"><code>set.seed(1)</code></pre>
+</div>
+<div id="the-data-set" class="section level2">
+<h2>The data set</h2>
+<p>The example data set is found in the “data” directory of this GitHub
 repository, or can be downloaded by running these commands in R:</p>
 <pre class="r"><code>data_url &lt;- paste0(&quot;https://raw.githubusercontent.com/&quot;,
                    &quot;yunqiyang0215/survival-susie/&quot;,
@@ -654,10 +747,10 @@ repository, or can be downloaded by running these commands in R:</p>
 download.file(data_url,&quot;survival_demo.RData&quot;)
 load(&quot;survival_demo.RData&quot;)</code></pre>
 <p>In this example, the TTE data are “censored” disease diagnosis times,
-meaning that the observations are either: the time of diagnosis for
-uncensored samples; or a lower limit on the time of diagnosis for
-censored samples, indicated by the “+”. (This is called “right
-censoring”.)</p>
+meaning that the observations are either: the time of diagnosis (for
+uncensored samples); or a lower limit on the time of diagnosis for
+censored samples. The censored samples are indicated by the “+” (this is
+called “right censoring”):</p>
 <pre class="r"><code>pheno &lt;- Surv(time,status)
 head(pheno,n = 10)
 #  [1] 0.3085771  0.4654124  2.7448602+ 1.3071323+ 0.2252482  3.3300303+
@@ -669,22 +762,27 @@ the remaining 244 are right-censored:</p>
 #   0   1 
 # 244 330</code></pre>
 <p>The “geno” matrix contains the (imputed) genotype data for 1,000
-candidate genetic variants (SNPs) positioned near each other on a
+candidate genetic variants (SNPs) located near each other on the
 chromosome.</p>
 <pre class="r"><code>nrow(geno)
 ncol(geno)
 # [1] 574
 # [1] 1000</code></pre>
-<p>Basic association tests using the Cox proportional hazards (CoxPH)
-model show that many of these genetic variants are associated with the
-TTE phenotype:</p>
+</div>
+<div id="association-analysis-using-the-coxph-model"
+class="section level2">
+<h2>Association analysis using the CoxPH model</h2>
+<p>Association tests performed using the Cox proportional hazards
+(CoxPH) model show that many of thee genetic variants are associated
+with diagnosis time:</p>
 <pre class="r"><code>pvals &lt;-
   apply(geno,2,
         function (x) summary(coxph(pheno ~ x))$coefficients[1,&quot;Pr(&gt;|z|)&quot;])
 pdat &lt;- data.frame(pos = 1:1000,pval = pvals,causal = (b != 0))
-ggplot(pdat,aes(x = pos,y = -log10(pval),color = causal)) +
-  geom_point(shape = 1,size = 1) +
+ggplot(pdat,aes(x = pos,y = -log10(pval),color = causal,shape = causal)) +
+  geom_point(size = 1.25) +
   scale_color_manual(values = c(&quot;dodgerblue&quot;,&quot;darkorange&quot;)) +
+  scale_shape_manual(values = c(1,17)) +
   labs(x = &quot;chromosomal position&quot;,y = &quot;-log10 p-value&quot;) +
   theme_cowplot(font_size = 10)</code></pre>
 <p><img src="figure/coxph_susie_intro.Rmd/genome-wide-scan-1.png" width="720" style="display: block; margin: auto;" /></p>
@@ -725,14 +823,92 @@ Peter Carbonetto
 </table>
 </div>
 </div>
-<p>Since we simulated these data, we know that three SNPs truly affect
-the TTE phenotype (drawn in orange in the plot). All three of the causal
-SNPs show evidence for association from the CoxPH-based association
-tests, but the strength of support for association varies quite a bit
-among the three SNPs. Further, many more SNPs that do not affect the
-phenotype are also associated, and this occurs <em>because many of the
-SNPs are strongly correlated with each other</em> (strong <em>linkage
-disequilibrium</em>, or “LD” for short).</p>
+<p>Since we simulated these data, we know that 3 of the 1,000 SNPs truly
+affect the TTE phenotype (drawn in orange in the plot above). All three
+of these “causal” SNPs show evidence for association from the
+CoxPH-based association tests, but the strength of support for
+association varies quite a bit among the three SNPs. Further, many more
+SNPs that do not affect the phenotype are also strongly associated with
+the phenotype. This happens <em>because many of the SNPs are strongly
+correlated with each other</em> (in strong <em>linkage
+disequilibrium</em>, or “LD”).</p>
+<p>Next we will run the CoxPH-SuSiE fine-mapping method to try and
+narrow the association signal down to a smaller set of causal
+candidates.</p>
+</div>
+<div id="fine-mapping-analysis-using-the-coxph-model"
+class="section level2">
+<h2>Fine-mapping analysis using the CoxPH model</h2>
+<p>To run the fine-mapping, we first need to define a function that
+performs a (Bayesian) univariate association analysis (here, using the
+CoxPH model). More precisely, this function takes as input the
+regression data (X, Y, as well as an additional “offset” term), and the
+prior variance of the regression coefficient (v0), and outputs three
+quantities: (1) the posterior mean of the regression coefficient; (2)
+its posterior variance; and (3) the log-Bayes factor comparing the model
+against the “null” model (when the coefficient is zero).</p>
+<pre class="r"><code>surv_uni_fun &lt;- function (x, y, e, v0, estimate_intercept = 0, ...) {
+  fit  &lt;- coxph(y ~ x + offset(e))
+  out  &lt;- summary(fit)$coefficients
+  bhat &lt;- out[1,&quot;coef&quot;]
+  s    &lt;- out[1,&quot;se(coef)&quot;]
+  z    &lt;- bhat/s
+  lbf  &lt;- log(s^2/(v0 + s^2))/2 + z^2/2*v0/(v0 + s^2)
+  lbf  &lt;- lbf - z^2/2 + summary(fit)$logtest[&quot;test&quot;]/2
+  v1   &lt;- 1/(1/v0 + 1/s^2)
+  mu1  &lt;- v1*bhat/s^2
+  return(list(mu = mu1,var = v1,lbf = lbf,intercept = 0))
+}</code></pre>
+<p>Now we can fit the CoxPH-based SuSiE model using the
+<code>ibss_from_ser()</code> function from the logisticsusie package.
+Note that this step may take a minutes or two to run depending on the
+computing platform:</p>
+<pre class="r"><code>fit &lt;- ibss_from_ser(geno,pheno,L = 3,tol = 0.0001,maxit = 100,
+                     ser_function = ser_from_univariate(surv_uni_fun))</code></pre>
+<p>Now we use the <code>susie_get_cs()</code> function from the susieR
+package to compute credible sets (CSs):</p>
+<pre class="r"><code>class(fit) &lt;- c(&quot;susie&quot;,&quot;list&quot;)
+out &lt;- susie_get_cs(fit,geno,coverage = 0.95,min_abs_cor = 0.1)
+out$cs
+# $L2
+# [1] 994
+# 
+# $L1
+# [1] 550 555 561 566 582 598</code></pre>
+<p>Interestingly, in one credible set, CoxPH-SuSiE is able to identify a
+single causal SNP with very high confidence (shown in blue in the plot).
+Additionally, a second set of causal candidates is identified with 6
+plausible candidates (shown in orange). <em>Both of these CSs contain
+the true causal SNPs.</em></p>
+<pre class="r"><code>pdat &lt;- cbind(pdat,CS = 0)
+pdat[out$cs$L1,&quot;CS&quot;] &lt;- 1
+pdat[out$cs$L2,&quot;CS&quot;] &lt;- 2
+pdat &lt;- transform(pdat,CS = factor(CS))
+cs_colors &lt;- c(&quot;black&quot;,&quot;darkorange&quot;,&quot;dodgerblue&quot;)
+ggplot(pdat,aes(x = pos,y = -log10(pval),color = CS,shape = causal)) +
+  geom_point(size = 1.25) +
+  scale_color_manual(values = cs_colors) +
+  scale_shape_manual(values = c(1,17)) +
+  labs(x = &quot;chromosomal position&quot;,y = &quot;-log10 p-value&quot;) +
+  theme_cowplot(font_size = 10)</code></pre>
+<p><img src="figure/coxph_susie_intro.Rmd/plot-credible-sets-1.png" width="720" style="display: block; margin: auto;" /></p>
+<p>The PIPs (“posterior inclusion probabilities”) measure the relative
+support for the SNPs within each CS. Plotting the PIPs for all SNPs is
+helpful for understanding precisely which SNPs are the top
+candidates:</p>
+<pre class="r"><code>pdat &lt;- cbind(pdat,pip = fit$pip)
+ggplot(pdat,aes(x = pos,y = pip,color = CS,shape = causal)) +
+  geom_point(size = 1.25) +
+  scale_color_manual(values = cs_colors) +
+  scale_shape_manual(values = c(1,17)) +
+  labs(x = &quot;chromosomal position&quot;,y = &quot;PIP&quot;) +
+  theme_cowplot(font_size = 10)</code></pre>
+<p><img src="figure/coxph_susie_intro.Rmd/pip-plot-1.png" width="720" style="display: block; margin: auto;" /></p>
+<p>For example, in CS 1 (orange), 3 out of the 6 SNPs are much stronger
+candidates than the others.</p>
+<p>It is also interesting that the third causal SNPs that was not
+identified does show some modest evidence for being a causal SNP in the
+PIP plot.</p>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -761,25 +937,27 @@ Session information
 # 
 # other attached packages:
 # [1] cowplot_1.1.3            ggplot2_3.5.0            logisticsusie_0.0.0.9002
-# [4] susieR_0.12.42           survival_3.5-8           workflowr_1.7.1         
+# [4] susieR_0.12.42           survival_3.5-8          
 # 
 # loaded via a namespace (and not attached):
-#  [1] generics_0.1.3    sass_0.4.8        utf8_1.2.4        stringi_1.8.3    
-#  [5] lattice_0.22-5    digest_0.6.34     magrittr_2.0.3    evaluate_0.23    
-#  [9] grid_4.3.3        fastmap_1.1.1     plyr_1.8.9        rprojroot_2.0.4  
-# [13] jsonlite_1.8.8    Matrix_1.6-5      processx_3.8.3    whisker_0.4.1    
-# [17] reshape_0.8.9     mixsqp_0.3-54     ps_1.7.6          promises_1.2.1   
-# [21] httr_1.4.7        fansi_1.0.6       scales_1.3.0      jquerylib_0.1.4  
-# [25] cli_3.6.2         rlang_1.1.3       crayon_1.5.2      munsell_0.5.0    
-# [29] splines_4.3.3     withr_3.0.0       cachem_1.0.8      yaml_2.3.8       
-# [33] tools_4.3.3       dplyr_1.1.4       colorspace_2.1-0  httpuv_1.6.14    
-# [37] vctrs_0.6.5       R6_2.5.1          matrixStats_1.2.0 lifecycle_1.0.4  
-# [41] git2r_0.33.0      stringr_1.5.1     fs_1.6.3          irlba_2.3.5.1    
-# [45] pkgconfig_2.0.3   callr_3.7.5       pillar_1.9.0      bslib_0.6.1      
-# [49] later_1.3.2       gtable_0.3.4      glue_1.7.0        Rcpp_1.0.12      
-# [53] highr_0.10        tidyselect_1.2.1  xfun_0.42         tibble_3.2.1     
-# [57] rstudioapi_0.15.0 knitr_1.45        farver_2.1.1      htmltools_0.5.7  
-# [61] labeling_0.4.3    rmarkdown_2.26    compiler_4.3.3    getPass_0.2-4</code></pre>
+#  [1] sass_0.4.8         utf8_1.2.4         generics_0.1.3     stringi_1.8.3     
+#  [5] lattice_0.22-5     digest_0.6.34      magrittr_2.0.3     evaluate_0.23     
+#  [9] grid_4.3.3         fastmap_1.1.1      plyr_1.8.9         rprojroot_2.0.4   
+# [13] workflowr_1.7.1    jsonlite_1.8.8     Matrix_1.6-5       whisker_0.4.1     
+# [17] reshape_0.8.9      mixsqp_0.3-54      promises_1.2.1     purrr_1.0.2       
+# [21] fansi_1.0.6        scales_1.3.0       jquerylib_0.1.4    cli_3.6.2         
+# [25] rlang_1.1.3        crayon_1.5.2       munsell_0.5.0      splines_4.3.3     
+# [29] withr_3.0.0        cachem_1.0.8       yaml_2.3.8         parallel_4.3.3    
+# [33] tools_4.3.3        dplyr_1.1.4        colorspace_2.1-0   httpuv_1.6.14     
+# [37] RcppZiggurat_0.1.6 Rfast_2.1.0        vctrs_0.6.5        R6_2.5.1          
+# [41] matrixStats_1.2.0  lifecycle_1.0.4    git2r_0.33.0       stringr_1.5.1     
+# [45] tictoc_1.2.1       fs_1.6.3           irlba_2.3.5.1      pkgconfig_2.0.3   
+# [49] RcppParallel_5.1.7 pillar_1.9.0       bslib_0.6.1        later_1.3.2       
+# [53] gtable_0.3.4       glue_1.7.0         Rcpp_1.0.12        highr_0.10        
+# [57] xfun_0.42          tibble_3.2.1       tidyselect_1.2.1   knitr_1.45        
+# [61] farver_2.1.1       htmltools_0.5.7    labeling_0.4.3     rmarkdown_2.26    
+# [65] compiler_4.3.3</code></pre>
+</div>
 </div>
 
 
