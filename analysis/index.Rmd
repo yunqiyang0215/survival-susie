@@ -10,6 +10,8 @@ editor_options:
 
 Background and analysis on coxph model
 
++ [Introduction to CoxPH-SuSiE](coxph_susie_intro.html)
+
 + [Example of survival analysis in R](survival_example.html)
 
 + [Check effect of standardization in coxph model](check_coxph_fit.html)

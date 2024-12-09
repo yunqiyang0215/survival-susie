@@ -1,50 +1,20 @@
-# This script is a first draft of the CoxPH-SuSiE demo.
-# remotes::install_github("karltayeb/logisticsusie")
-# remotes::install_github("stephenslab/susieR")
-library(survival)
-library(susieR)
-library(logisticsusie)
-
-# Function to calculate approximate log-Bayes factor.
-# z: zscore of the regression coefficient
-# s: s.d. of the estimated coefficient.
-# v0: prior variance
-compute_lbf <- function (z, s, v0)
-  log(s^2/(s^2 + v0))/2 + z^2/2*v0/(s^2 + v0)
-
-compute_approx_post_var <- function (z, s, v0)
-  1/(1/s^2 + 1/v0)
-
-# @param v1: posterior variance
-# @param s: s.d. of the estimated coefficient
-# @param bhat: estimated beta effect
-compute_approx_post_mean <- function (v1, s, bhat)
-  v1*bhat/s^2
-
-# TO DO: Improve the code for this function a bit.
-surv_uni_fun <- function (x, y, o, v0, estimate_intercept = 0, ...) {
-  fit  <- coxph(y ~ x + offset(o))
-  bhat <- summary(fit)$coefficients[1,1]
-  sd   <- summary(fit)$coefficients[1,3]
-  z    <- bhat/sd
-  lbf  <- compute_lbf(z,sd,v0)
-  lbf_corr <- lbf - z^2/2 + summary(fit)$logtest[1]/2
-  var  <- compute_approx_post_var(z,sd,v0)
-  mu   <- compute_approx_post_mean(var,sd,bhat)
-  return(list(mu = mu,var = var,lbf = lbf_corr,intercept = 0))
+surv_uni_fun <- function (x, y, e, v0, estimate_intercept = 0, ...) {
+  fit  <- coxph(y ~ x + offset(e))
+  out  <- summary(fit)$coefficients
+  bhat <- out[1,"coef"]
+  s    <- out[1,"se(coef)"]
+  z    <- bhat/s
+  lbf  <- log(s^2/(v0 + s^2))/2 + z^2/2*v0/(v0 + s^2)
+  lbf  <- lbf - z^2/2 + summary(fit)$logtest[1]/2
+  v1   <- 1/(1/v0 + 1/s^2)
+  mu1  <- v1*bhat/s^2
+  return(list(mu = mu1,var = var1,lbf = lbf,intercept = 0))
 }
-
-L <- 3
-
-load("data/survival_demo.RData")
-
-# Create the survival object.
-pheno <- Surv(time,status)
 
 fit_coxph <- ser_from_univariate(surv_uni_fun)
 
 # This step may take a minutes or two to run
-fit <- ibss_from_ser(geno,pheno,L = L,ser_function = fit_coxph,
+fit <- ibss_from_ser(geno,pheno,L = 3,ser_function = fit_coxph,
                      tol = 0.0001,maxit = 100)
 
 class(fit) <- c("susie","list")

@@ -11,9 +11,102 @@ output:
     self_contained: no
 ---
 
-ADD TEXT HERE.
+This short vignette is intended to introduce the CoxPH-SuSiE model for
+fine-mapping time-to-event (TTE) phenotypes, and illustrate how to use
+the methods on an example genetic data set.
 
 ```{r knitr-opts, include=FALSE}
 knitr::opts_chunk$set(comment = "#",collapse = TRUE,results = "hold",
                       fig.align = "center",dpi = 120)
 ```
+
+To run the code below, you will need the survival, susieR and
+logisticsusie R packages, which can be installed with these commands
+in R:
+
+```{r install-packages, eval=FALSE}
+install.packages("remotes")
+install.packages("survival")
+remotes::install_github("stephenslab/susieR")
+remotes::install_github("karltayeb/logisticsusie")
+```
+
+Also, we will use the ggplot2 and cowplot packages to create some
+helpful visualizations of the data and results:
+
+```{r install-more-packages, eval=FALSE
+install.packages(c("ggplot2","cowplot"))
+```
+
+Once the packages are installed, load them.
+
+```{r load-packages, message=FALSE}
+library(survival)
+library(susieR)
+library(logisticsusie)
+library(ggplot2)
+library(cowplot)
+```
+
+The example data set is found in the "data" directory of this
+repository, or can be downloaded by running these commands in R:
+
+```{r load-data}
+data_url <- paste0("https://raw.githubusercontent.com/",
+                   "yunqiyang0215/survival-susie/",
+			       "refs/heads/master/data/survival_demo.RData")
+download.file(data_url,"survival_demo.RData")
+load("survival_demo.RData")
+```
+
+In this example, the TTE data are "censored" disease diagnosis times,
+meaning that the observations are either: the time of diagnosis for
+uncensored samples; or a lower limit on the time of diagnosis for
+censored samples, indicated by the "+". (This is called "right
+censoring".)
+
+```{r survival-data}
+pheno <- Surv(time,status)
+head(pheno,n = 10)
+```
+
+Among the 574 diagnosis times in this data set, 330 are observed, and
+the remaining 244 are right-censored:
+
+```{r survival-data-2}
+table(status)
+```
+
+The "geno" matrix contains the (imputed) genotype data for 1,000
+candidate genetic variants (SNPs) positioned near each other on a
+chromosome.
+
+```{r geno-data}
+nrow(geno)
+ncol(geno)
+```
+
+Basic association tests using the Cox proportional hazards (CoxPH)
+model show that many of these genetic variants are associated with
+the TTE phenotype:
+
+```{r genome-wide-scan, fig.height=2, fig.width=6}
+pvals <-
+  apply(geno,2,
+        function (x) summary(coxph(pheno ~ x))$coefficients[1,"Pr(>|z|)"])
+pdat <- data.frame(pos = 1:1000,pval = pvals,causal = (b != 0))
+ggplot(pdat,aes(x = pos,y = -log10(pval),color = causal)) +
+  geom_point(shape = 1,size = 1) +
+  scale_color_manual(values = c("dodgerblue","darkorange")) +
+  labs(x = "chromosomal position",y = "-log10 p-value") +
+  theme_cowplot(font_size = 10)
+```
+
+Since we simulated these data, we know that three SNPs truly affect
+the TTE phenotype (drawn in orange in the plot). All three of the
+causal SNPs show evidence for association from the CoxPH-based
+association tests, but the strength of support for association varies
+quite a bit among the three SNPs. Further, many more SNPs that do not
+affect the phenotype are also associated, and this occurs *because
+many of the SNPs are strongly correlated with each other* (strong
+*linkage disequilibrium*, or "LD" for short).
