@@ -36,7 +36,7 @@ remotes::install_github("karltayeb/logisticsusie")
 Also, we will use the ggplot2 and cowplot packages to create some
 helpful visualizations of the data and results:
 
-```{r install-more-packages, eval=FALSE
+```{r install-more-packages, eval=FALSE}
 install.packages(c("ggplot2","cowplot"))
 ```
 
@@ -102,9 +102,9 @@ pvals <-
         function (x) summary(coxph(pheno ~ x))$coefficients[1,"Pr(>|z|)"])
 pdat <- data.frame(pos = 1:1000,pval = pvals,causal = (b != 0))
 ggplot(pdat,aes(x = pos,y = -log10(pval),color = causal,shape = causal)) +
-  geom_point(size = 1) +
+  geom_point(size = 1.25) +
   scale_color_manual(values = c("dodgerblue","darkorange")) +
-  scale_shape_manual(values = c(1,16)) +
+  scale_shape_manual(values = c(1,17)) +
   labs(x = "chromosomal position",y = "-log10 p-value") +
   theme_cowplot(font_size = 10)
 ```
@@ -123,3 +123,55 @@ narrow the association signal down to a smaller set of causal
 candidates.
 
 ## Fine-mapping analysis using the CoxPH model
+
+```{r surv-uni-fun}
+surv_uni_fun <- function (x, y, e, v0, estimate_intercept = 0, ...) {
+  fit  <- coxph(y ~ x + offset(e))
+  out  <- summary(fit)$coefficients
+  bhat <- out[1,"coef"]
+  s    <- out[1,"se(coef)"]
+  z    <- bhat/s
+  lbf  <- log(s^2/(v0 + s^2))/2 + z^2/2*v0/(v0 + s^2)
+  lbf  <- lbf - z^2/2 + summary(fit)$logtest["test"]/2
+  v1   <- 1/(1/v0 + 1/s^2)
+  mu1  <- v1*bhat/s^2
+  return(list(mu = mu1,var = v1,lbf = lbf,intercept = 0))
+}
+```
+
+This step may take a minutes or two to run.
+
+```{r ibss-from-ser, warning=FALSE, results="hide"}
+fit <- ibss_from_ser(geno,pheno,L = 3,tol = 0.0001,maxit = 100,
+                     ser_function = ser_from_univariate(surv_uni_fun))
+```
+
+```{r credible-sets}
+class(fit) <- c("susie","list")
+out <- susie_get_cs(fit,geno,min_abs_cor = 0.1)
+out$cs
+```
+
+```{r plot-credible-sets, fig.height=2, fig.width=6}
+pdat <- cbind(pdat,CS = 0)
+pdat[out$cs$L1,"CS"] <- 1
+pdat[out$cs$L2,"CS"] <- 2
+pdat <- transform(pdat,CS = factor(CS))
+cs_colors <- c("black","darkorange","dodgerblue")
+ggplot(pdat,aes(x = pos,y = -log10(pval),color = CS,shape = causal)) +
+  geom_point(size = 1.25) +
+  scale_color_manual(values = cs_colors) +
+  scale_shape_manual(values = c(1,17)) +
+  labs(x = "chromosomal position",y = "-log10 p-value") +
+  theme_cowplot(font_size = 10)
+```
+
+```{r pip-plot, fig.height=2, fig.width=6}
+pdat <- cbind(pdat,pip = fit$pip)
+ggplot(pdat,aes(x = pos,y = pip,color = CS,shape = causal)) +
+  geom_point(size = 1.25) +
+  scale_color_manual(values = cs_colors) +
+  scale_shape_manual(values = c(1,17)) +
+  labs(x = "chromosomal position",y = "PIP") +
+  theme_cowplot(font_size = 10)
+```
