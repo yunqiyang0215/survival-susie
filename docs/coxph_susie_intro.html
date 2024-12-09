@@ -439,15 +439,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree10c35d03d7af11f54d31279b53ea111cccf936cbtargetblank10c35d0a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree35b02892b74093b433d6de33f2027092302c483dtargetblank35b0289a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/10c35d03d7af11f54d31279b53ea111cccf936cb" target="_blank">10c35d0</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/35b02892b74093b433d6de33f2027092302c483d" target="_blank">35b0289</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree10c35d03d7af11f54d31279b53ea111cccf936cbtargetblank10c35d0a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree35b02892b74093b433d6de33f2027092302c483dtargetblank35b0289a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -457,7 +457,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/10c35d03d7af11f54d31279b53ea111cccf936cb" target="_blank">10c35d0</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/35b02892b74093b433d6de33f2027092302c483d" target="_blank">35b0289</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -519,6 +519,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/35b02892b74093b433d6de33f2027092302c483d/analysis/coxph_susie_intro.Rmd" target="_blank">35b0289</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2024-12-09
+</td>
+<td>
+workflowr::wflow_publish("coxph_susie_intro.Rmd", verbose = TRUE)
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/7442aeb71fa0f3cee525f9489ffb79d9a518912f/docs/coxph_susie_intro.html" target="_blank">7442aeb</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2024-12-09
+</td>
+<td>
+Added more explanatory text to the introductory vignette.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -781,7 +815,7 @@ with diagnosis time:</p>
 pdat &lt;- data.frame(pos = 1:1000,pval = pvals,causal = (b != 0))
 ggplot(pdat,aes(x = pos,y = -log10(pval),color = causal,shape = causal)) +
   geom_point(size = 1.25) +
-  scale_color_manual(values = c(&quot;dodgerblue&quot;,&quot;darkorange&quot;)) +
+  scale_color_manual(values = c(&quot;black&quot;,&quot;darkorange&quot;)) +
   scale_shape_manual(values = c(1,17)) +
   labs(x = &quot;chromosomal position&quot;,y = &quot;-log10 p-value&quot;) +
   theme_cowplot(font_size = 10)</code></pre>
@@ -808,6 +842,17 @@ Date
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/7442aeb71fa0f3cee525f9489ffb79d9a518912f/docs/figure/coxph_susie_intro.Rmd/genome-wide-scan-1.png" target="_blank">7442aeb</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2024-12-09
+</td>
+</tr>
 <tr>
 <td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/92e56711924d56f3ebd81f822e9872719c09a4d3/docs/figure/coxph_susie_intro.Rmd/genome-wide-scan-1.png" target="_blank">92e5671</a>
@@ -892,6 +937,43 @@ ggplot(pdat,aes(x = pos,y = -log10(pval),color = CS,shape = causal)) +
   labs(x = &quot;chromosomal position&quot;,y = &quot;-log10 p-value&quot;) +
   theme_cowplot(font_size = 10)</code></pre>
 <p><img src="figure/coxph_susie_intro.Rmd/plot-credible-sets-1.png" width="720" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-plot-credible-sets-1">
+Past versions of plot-credible-sets-1.png
+</button>
+</p>
+<div id="fig-plot-credible-sets-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/7442aeb71fa0f3cee525f9489ffb79d9a518912f/docs/figure/coxph_susie_intro.Rmd/plot-credible-sets-1.png" target="_blank">7442aeb</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2024-12-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>The PIPs (“posterior inclusion probabilities”) measure the relative
 support for the SNPs within each CS. Plotting the PIPs for all SNPs is
 helpful for understanding precisely which SNPs are the top
@@ -904,6 +986,43 @@ ggplot(pdat,aes(x = pos,y = pip,color = CS,shape = causal)) +
   labs(x = &quot;chromosomal position&quot;,y = &quot;PIP&quot;) +
   theme_cowplot(font_size = 10)</code></pre>
 <p><img src="figure/coxph_susie_intro.Rmd/pip-plot-1.png" width="720" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-pip-plot-1">
+Past versions of pip-plot-1.png
+</button>
+</p>
+<div id="fig-pip-plot-1" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/7442aeb71fa0f3cee525f9489ffb79d9a518912f/docs/figure/coxph_susie_intro.Rmd/pip-plot-1.png" target="_blank">7442aeb</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2024-12-09
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <p>For example, in CS 1 (orange), 3 out of the 6 SNPs are much stronger
 candidates than the others.</p>
 <p>It is also interesting that the third causal SNPs that was not
