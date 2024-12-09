@@ -50,6 +50,12 @@ library(ggplot2)
 library(cowplot)
 ```
 
+Set the seed for reproducibility.
+
+```{r set-seed}
+set.seed(1)
+```
+
 ## The data set
 
 The example data set is found in the "data" directory of this GitHub
@@ -125,6 +131,16 @@ candidates.
 
 ## Fine-mapping analysis using the CoxPH model
 
+To run the fine-mapping, we first need to define a function that
+performs a (Bayesian) univariate association analysis (here, using the
+CoxPH model). More precisely, this function takes as input the
+regression data (X, Y, as well as an additional "offset" term), and
+the prior variance of the regression coefficient (v0), and outputs
+three quantities: (1) the posterior mean of the regression
+coefficient; (2) its posterior variance; and (3) the log-Bayes factor
+comparing the model against the "null" model (when the coefficient is
+zero).
+
 ```{r surv-uni-fun}
 surv_uni_fun <- function (x, y, e, v0, estimate_intercept = 0, ...) {
   fit  <- coxph(y ~ x + offset(e))
@@ -140,18 +156,29 @@ surv_uni_fun <- function (x, y, e, v0, estimate_intercept = 0, ...) {
 }
 ```
 
-This step may take a minutes or two to run.
+Now we can fit the CoxPH-based SuSiE model using the `ibss_from_ser()`
+function from the logisticsusie package. Note that this step may
+take a minutes or two to run depending on the computing platform:
 
 ```{r ibss-from-ser, warning=FALSE, results="hide"}
 fit <- ibss_from_ser(geno,pheno,L = 3,tol = 0.0001,maxit = 100,
                      ser_function = ser_from_univariate(surv_uni_fun))
 ```
 
+Now we use the `susie_get_cs()` function from the susieR package to
+compute credible sets (CSs):
+
 ```{r credible-sets}
 class(fit) <- c("susie","list")
-out <- susie_get_cs(fit,geno,min_abs_cor = 0.1)
+out <- susie_get_cs(fit,geno,coverage = 0.95,min_abs_cor = 0.1)
 out$cs
 ```
+
+Interestingly, in one credible set, CoxPH-SuSiE is able to identify a
+single causal SNP with very high confidence (shown in blue in the
+plot). Additionally, a second set of causal candidates is identified
+with 6 plausible candidates (shown in orange). *Both of these CSs
+contain the true causal SNPs.*
 
 ```{r plot-credible-sets, fig.height=2, fig.width=6}
 pdat <- cbind(pdat,CS = 0)
@@ -167,6 +194,10 @@ ggplot(pdat,aes(x = pos,y = -log10(pval),color = CS,shape = causal)) +
   theme_cowplot(font_size = 10)
 ```
 
+The PIPs ("posterior inclusion probabilities") measure the relative
+support for the SNPs within each CS. Plotting the PIPs for all SNPs is
+helpful for understanding precisely which SNPs are the top candidates:
+
 ```{r pip-plot, fig.height=2, fig.width=6}
 pdat <- cbind(pdat,pip = fit$pip)
 ggplot(pdat,aes(x = pos,y = pip,color = CS,shape = causal)) +
@@ -176,3 +207,10 @@ ggplot(pdat,aes(x = pos,y = pip,color = CS,shape = causal)) +
   labs(x = "chromosomal position",y = "PIP") +
   theme_cowplot(font_size = 10)
 ```
+
+For example, in CS 1 (orange), 3 out of the 6 SNPs are much stronger
+candidates than the others.
+
+It is also interesting that the third causal SNPs that was not
+identified does show some modest evidence for being a causal SNP in
+the PIP plot.
