@@ -20,6 +20,8 @@ knitr::opts_chunk$set(comment = "#",collapse = TRUE,results = "hold",
                       fig.align = "center",dpi = 120)
 ```
 
+## Initial setup
+
 To run the code below, you will need the survival, susieR and
 logisticsusie R packages, which can be installed with these commands
 in R:
@@ -47,6 +49,8 @@ library(logisticsusie)
 library(ggplot2)
 library(cowplot)
 ```
+
+## The data set
 
 The example data set is found in the "data" directory of this
 repository, or can be downloaded by running these commands in R:
@@ -86,6 +90,8 @@ nrow(geno)
 ncol(geno)
 ```
 
+## Association analysis using the CoxPH model
+
 Basic association tests using the Cox proportional hazards (CoxPH)
 model show that many of these genetic variants are associated with
 the TTE phenotype:
@@ -95,9 +101,10 @@ pvals <-
   apply(geno,2,
         function (x) summary(coxph(pheno ~ x))$coefficients[1,"Pr(>|z|)"])
 pdat <- data.frame(pos = 1:1000,pval = pvals,causal = (b != 0))
-ggplot(pdat,aes(x = pos,y = -log10(pval),color = causal)) +
-  geom_point(shape = 1,size = 1) +
+ggplot(pdat,aes(x = pos,y = -log10(pval),color = causal,shape = causal)) +
+  geom_point(size = 1) +
   scale_color_manual(values = c("dodgerblue","darkorange")) +
+  scale_shape_manual(values = c(1,16)) +
   labs(x = "chromosomal position",y = "-log10 p-value") +
   theme_cowplot(font_size = 10)
 ```
@@ -110,3 +117,9 @@ quite a bit among the three SNPs. Further, many more SNPs that do not
 affect the phenotype are also associated, and this occurs *because
 many of the SNPs are strongly correlated with each other* (strong
 *linkage disequilibrium*, or "LD" for short).
+
+Next we will run the CoxPH-SuSiE fine-mapping method in an attempt to
+narrow the association signal down to a smaller set of causal
+candidates.
+
+## Fine-mapping analysis using the CoxPH model
