@@ -109,7 +109,7 @@ pvals <-
 pdat <- data.frame(pos = 1:1000,pval = pvals,causal = (b != 0))
 ggplot(pdat,aes(x = pos,y = -log10(pval),color = causal,shape = causal)) +
   geom_point(size = 1.25) +
-  scale_color_manual(values = c("dodgerblue","darkorange")) +
+  scale_color_manual(values = c("black","darkorange")) +
   scale_shape_manual(values = c(1,17)) +
   labs(x = "chromosomal position",y = "-log10 p-value") +
   theme_cowplot(font_size = 10)
