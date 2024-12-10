@@ -308,7 +308,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2024-12-09
+<strong>Last updated:</strong> 2024-12-10
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -439,15 +439,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree35b02892b74093b433d6de33f2027092302c483dtargetblank35b0289a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree991bd75a7678cee713ef16be46f71fd9f7d6bcd6targetblank991bd75a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/35b02892b74093b433d6de33f2027092302c483d" target="_blank">35b0289</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/991bd75a7678cee713ef16be46f71fd9f7d6bcd6" target="_blank">991bd75</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree35b02892b74093b433d6de33f2027092302c483dtargetblank35b0289a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree991bd75a7678cee713ef16be46f71fd9f7d6bcd6targetblank991bd75a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -457,7 +457,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/35b02892b74093b433d6de33f2027092302c483d" target="_blank">35b0289</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/991bd75a7678cee713ef16be46f71fd9f7d6bcd6" target="_blank">991bd75</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -472,7 +472,6 @@ were generated:
 </p>
 <pre><code>
 Untracked files:
-    Untracked:  analysis/survival_demo.RData
     Untracked:  survival_demo.RData
 
 </code></pre>
@@ -519,6 +518,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/991bd75a7678cee713ef16be46f71fd9f7d6bcd6/analysis/coxph_susie_intro.Rmd" target="_blank">991bd75</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2024-12-10
+</td>
+<td>
+workflowr::wflow_publish("coxph_susie_intro.Rmd", verbose = TRUE,
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/de9be109f136d445d354c9806736c37fa95f3105/docs/coxph_susie_intro.html" target="_blank">de9be10</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2024-12-09
+</td>
+<td>
+Small fix to one of the plots in the introductory vignette.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -844,6 +877,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/de9be109f136d445d354c9806736c37fa95f3105/docs/figure/coxph_susie_intro.Rmd/genome-wide-scan-1.png" target="_blank">de9be10</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2024-12-09
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/7442aeb71fa0f3cee525f9489ffb79d9a518912f/docs/figure/coxph_susie_intro.Rmd/genome-wide-scan-1.png" target="_blank">7442aeb</a>
 </td>
 <td>
@@ -1028,6 +1072,20 @@ candidates than the others.</p>
 <p>It is also interesting that the third causal SNPs that was not
 identified does show some modest evidence for being a causal SNP in the
 PIP plot.</p>
+<p>Finally, let’s compare the coefficient estimates against the
+ground-truth estimates. These are contained in the “mu” output. Here we
+see that the first CS (L1) accurately estimates the coefficient for the
+second causal SNP (the true value is -2), and the second CS (L2)
+accurately estimates the coefficient for the third causal SNP (the true
+value is 2).</p>
+<pre class="r"><code>rownames(fit$mu) &lt;- c(&quot;L1&quot;,&quot;L2&quot;,&quot;L3&quot;)
+causal_snps &lt;- which(b != 0)
+round(rbind(b,fit$mu)[,causal_snps],digits = 3)
+#     [,1]   [,2]   [,3]
+# b  1.000 -2.000  2.000
+# L1 1.301 -2.139  0.137
+# L2 0.875 -0.012  2.063
+# L3 1.085 -0.012 -0.002</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
