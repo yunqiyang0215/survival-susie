@@ -1,7 +1,7 @@
 ---
 title: Introduction to CoxPH-SuSiE
-author: Yunqi Yang and Peter Carbonetto
-date: December 6, 2024
+author: Yunqi Yang, Karl Tayeb, Peter Carbonetto and Matthew Stephens
+date: December 10, 2024
 output:
   workflowr::wflow_html:
     theme: readable
