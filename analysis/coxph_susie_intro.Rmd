@@ -214,3 +214,16 @@ candidates than the others.
 It is also interesting that the third causal SNPs that was not
 identified does show some modest evidence for being a causal SNP in
 the PIP plot.
+
+Finally, let's compare the coefficient estimates against the
+ground-truth estimates. These are contained in the "mu" output. Here
+we see that the first CS (L1) accurately estimates the coefficient for
+the second causal SNP (the true value is -2), and the second CS (L2)
+accurately estimates the coefficient for the third causal SNP (the
+true value is 2). 
+
+```{r compare-coefs}
+rownames(fit$mu) <- c("L1","L2","L3")
+causal_snps <- which(b != 0)
+round(rbind(b,fit$mu)[,causal_snps],digits = 3)
+```
