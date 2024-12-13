@@ -309,7 +309,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2024-12-10
+<strong>Last updated:</strong> 2024-12-13
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -440,15 +440,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree0dec6498f7bc7194c3cdfbf3f73083516fa7b039targetblank0dec649a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreee483e17ca9888009164247a1e4d47192e6a3312ctargetblanke483e17a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/0dec6498f7bc7194c3cdfbf3f73083516fa7b039" target="_blank">0dec649</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/e483e17ca9888009164247a1e4d47192e6a3312c" target="_blank">e483e17</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree0dec6498f7bc7194c3cdfbf3f73083516fa7b039targetblank0dec649a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreee483e17ca9888009164247a1e4d47192e6a3312ctargetblanke483e17a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -458,7 +458,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/0dec6498f7bc7194c3cdfbf3f73083516fa7b039" target="_blank">0dec649</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/e483e17ca9888009164247a1e4d47192e6a3312c" target="_blank">e483e17</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -473,7 +473,8 @@ were generated:
 </p>
 <pre><code>
 Ignored files:
-    Ignored:    analysis/figure/
+    Ignored:    .DS_Store
+    Ignored:    analysis/.DS_Store
 
 Untracked files:
     Untracked:  survival_demo.RData
@@ -522,6 +523,41 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/e483e17ca9888009164247a1e4d47192e6a3312c/analysis/coxph_susie_intro.Rmd" target="_blank">e483e17</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2024-12-13
+</td>
+<td>
+workflowr::wflow_publish("analysis/coxph_susie_intro.Rmd", verbose =
+TRUE)
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/dd1fd56805b8416289da4f80376db1d672da3263/docs/coxph_susie_intro.html" target="_blank">dd1fd56</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2024-12-10
+</td>
+<td>
+Updated the coxph_susie_intro page.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -974,7 +1010,9 @@ prior variance of the regression coefficient (v0), and outputs three
 quantities: (1) the posterior mean of the regression coefficient; (2)
 its posterior variance; and (3) the log-Bayes factor comparing the model
 against the “null” model (when the coefficient is zero).</p>
-<pre class="r"><code>surv_uni_fun &lt;- function (x, y, e, v0, estimate_intercept = 0, ...) {
+<pre class="r"><code>surv_uni_fun &lt;- function (x, y, e, prior_variance,
+                          estimate_intercept = 0, ...) {
+  v0   &lt;- prior_variance                         
   fit  &lt;- coxph(y ~ x + offset(e))
   out  &lt;- summary(fit)$coefficients
   bhat &lt;- out[1,&quot;coef&quot;]
@@ -988,10 +1026,30 @@ against the “null” model (when the coefficient is zero).</p>
 }</code></pre>
 <p>Now we can fit the CoxPH-based SuSiE model using the
 <code>ibss_from_ser()</code> function from the logisticsusie package.
-Note that this step may take a minutes or two to run depending on the
+Note that this step may take a minute or two to run depending on the
 computing platform:</p>
-<pre class="r"><code>fit &lt;- ibss_from_ser(geno,pheno,L = 3,tol = 0.0001,maxit = 100,
-                     ser_function = ser_from_univariate(surv_uni_fun))</code></pre>
+<pre class="r"><code>t0 &lt;- proc.time()
+fit &lt;- ibss_from_ser(geno,pheno,L = 3,tol = 0.0001,maxit = 100,
+                     ser_function = ser_from_univariate(surv_uni_fun))
+t1 &lt;- proc.time()
+print(t1 - t0)
+# 7.428 sec elapsed
+#    user  system elapsed 
+#   7.258   0.163   7.434</code></pre>
+<p>(As an aside, note that the SER computations are trivially
+parallelizable, so you have a multicore computing platform, you can make
+the method run faster, e.g.,</p>
+<pre class="r"><code>t0 &lt;- proc.time()
+fit &lt;- ibss_from_ser(geno,pheno,L = 3,tol = 0.0001,maxit = 100,
+                     ser_function = ser_from_univariate(surv_uni_fun),
+                     num_cores = 4)
+t1 &lt;- proc.time()
+print(t1 - t0)
+# 2.936 sec elapsed
+#    user  system elapsed 
+#   8.529   1.686   2.939</code></pre>
+<p>In this run we were able to achieve about a 3x speedup with 4
+threads.)</p>
 <p>Now we use the <code>susie_get_cs()</code> function from the susieR
 package to compute credible sets (CSs):</p>
 <pre class="r"><code>class(fit) &lt;- c(&quot;susie&quot;,&quot;list&quot;)
@@ -1119,11 +1177,11 @@ value is 2).</p>
 <pre class="r"><code>rownames(fit$mu) &lt;- c(&quot;L1&quot;,&quot;L2&quot;,&quot;L3&quot;)
 causal_snps &lt;- which(b != 0)
 round(rbind(b,fit$mu)[,causal_snps],digits = 3)
-#     [,1]   [,2]   [,3]
-# b  1.000 -2.000  2.000
-# L1 1.301 -2.139  0.137
-# L2 0.875 -0.012  2.063
-# L3 1.085 -0.012 -0.002</code></pre>
+#     [,1]   [,2]  [,3]
+# b  1.000 -2.000 2.000
+# L1 1.215 -2.088 0.252
+# L2 0.834 -0.076 1.927
+# L3 0.988 -0.063 0.127</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1151,7 +1209,7 @@ Session information
 # [1] stats     graphics  grDevices utils     datasets  methods   base     
 # 
 # other attached packages:
-# [1] cowplot_1.1.3            ggplot2_3.5.0            logisticsusie_0.0.0.9002
+# [1] cowplot_1.1.3            ggplot2_3.5.0            logisticsusie_0.0.0.9004
 # [4] susieR_0.12.42           survival_3.5-8           workflowr_1.7.1         
 # 
 # loaded via a namespace (and not attached):
@@ -1164,7 +1222,7 @@ Session information
 # [25] getPass_0.2-4      httpuv_1.6.14      htmltools_0.5.7    sass_0.4.8        
 # [29] yaml_2.3.8         later_1.3.2        pillar_1.9.0       crayon_1.5.2      
 # [33] jquerylib_0.1.4    whisker_0.4.1      cachem_1.0.8       tidyselect_1.2.1  
-# [37] digest_0.6.34      stringi_1.8.3      dplyr_1.1.4        purrr_1.0.2       
+# [37] digest_0.6.34      stringi_1.8.3      purrr_1.0.2        dplyr_1.1.4       
 # [41] labeling_0.4.3     splines_4.3.3      rprojroot_2.0.4    fastmap_1.1.1     
 # [45] grid_4.3.3         colorspace_2.1-0   cli_3.6.2          magrittr_2.0.3    
 # [49] Rfast_2.1.0        utf8_1.2.4         withr_3.0.0        scales_1.3.0      
