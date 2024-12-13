@@ -142,7 +142,9 @@ comparing the model against the "null" model (when the coefficient is
 zero).
 
 ```{r surv-uni-fun}
-surv_uni_fun <- function (x, y, e, v0, estimate_intercept = 0, ...) {
+surv_uni_fun <- function (x, y, e, prior_variance,
+                          estimate_intercept = 0, ...) {
+  v0   <- prior_variance						 
   fit  <- coxph(y ~ x + offset(e))
   out  <- summary(fit)$coefficients
   bhat <- out[1,"coef"]
@@ -158,12 +160,30 @@ surv_uni_fun <- function (x, y, e, v0, estimate_intercept = 0, ...) {
 
 Now we can fit the CoxPH-based SuSiE model using the `ibss_from_ser()`
 function from the logisticsusie package. Note that this step may
-take a minutes or two to run depending on the computing platform:
+take a minute or two to run depending on the computing platform:
 
-```{r ibss-from-ser, warning=FALSE, results="hide"}
+```{r ibss-from-ser, warning=FALSE}
+t0 <- proc.time()
 fit <- ibss_from_ser(geno,pheno,L = 3,tol = 0.0001,maxit = 100,
                      ser_function = ser_from_univariate(surv_uni_fun))
+t1 <- proc.time()
+print(t1 - t0)
 ```
+
+(As an aside, note that the SER computations are trivially
+parallelizable, so you have a multicore computing platform, you can
+make the method run faster, e.g.,
+
+```{r ibss-from-ser-parallel, warning=FALSE}
+t0 <- proc.time()
+fit <- ibss_from_ser(geno,pheno,L = 3,tol = 0.0001,maxit = 100,
+                     ser_function = ser_from_univariate(surv_uni_fun),
+					 num_cores = 4)
+t1 <- proc.time()
+print(t1 - t0)
+```
+
+In this run we were able to achieve about a 3x speedup with 4 threads.)
 
 Now we use the `susie_get_cs()` function from the susieR package to
 compute credible sets (CSs):
