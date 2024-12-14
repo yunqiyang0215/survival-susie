@@ -1,7 +1,7 @@
 ---
 title: Introduction to CoxPH-SuSiE
-author: Yunqi Yang and Peter Carbonetto
-date: December 6, 2024
+author: Yunqi Yang, Karl Tayeb, Peter Carbonetto and Matthew Stephens
+date: December 10, 2024
 output:
   workflowr::wflow_html:
     theme: readable
@@ -142,7 +142,9 @@ comparing the model against the "null" model (when the coefficient is
 zero).
 
 ```{r surv-uni-fun}
-surv_uni_fun <- function (x, y, e, v0, estimate_intercept = 0, ...) {
+surv_uni_fun <- function (x, y, e, prior_variance,
+                          estimate_intercept = 0, ...) {
+  v0   <- prior_variance						 
   fit  <- coxph(y ~ x + offset(e))
   out  <- summary(fit)$coefficients
   bhat <- out[1,"coef"]
@@ -158,12 +160,30 @@ surv_uni_fun <- function (x, y, e, v0, estimate_intercept = 0, ...) {
 
 Now we can fit the CoxPH-based SuSiE model using the `ibss_from_ser()`
 function from the logisticsusie package. Note that this step may
-take a minutes or two to run depending on the computing platform:
+take a minute or two to run depending on the computing platform:
 
-```{r ibss-from-ser, warning=FALSE, results="hide"}
+```{r ibss-from-ser, warning=FALSE}
+t0 <- proc.time()
 fit <- ibss_from_ser(geno,pheno,L = 3,tol = 0.0001,maxit = 100,
                      ser_function = ser_from_univariate(surv_uni_fun))
+t1 <- proc.time()
+print(t1 - t0)
 ```
+
+(As an aside, note that the SER computations are trivially
+parallelizable, so you have a multicore computing platform, you can
+make the method run faster, e.g.,
+
+```{r ibss-from-ser-parallel, warning=FALSE}
+t0 <- proc.time()
+fit <- ibss_from_ser(geno,pheno,L = 3,tol = 0.0001,maxit = 100,
+                     ser_function = ser_from_univariate(surv_uni_fun),
+					 num_cores = 4)
+t1 <- proc.time()
+print(t1 - t0)
+```
+
+In this run we were able to achieve about a 3x speedup with 4 threads.)
 
 Now we use the `susie_get_cs()` function from the susieR package to
 compute credible sets (CSs):
@@ -214,3 +234,16 @@ candidates than the others.
 It is also interesting that the third causal SNPs that was not
 identified does show some modest evidence for being a causal SNP in
 the PIP plot.
+
+Finally, let's compare the coefficient estimates against the
+ground-truth estimates. These are contained in the "mu" output. Here
+we see that the first CS (L1) accurately estimates the coefficient for
+the second causal SNP (the true value is -2), and the second CS (L2)
+accurately estimates the coefficient for the third causal SNP (the
+true value is 2). 
+
+```{r compare-coefs}
+rownames(fit$mu) <- c("L1","L2","L3")
+causal_snps <- which(b != 0)
+round(rbind(b,fit$mu)[,causal_snps],digits = 3)
+```
