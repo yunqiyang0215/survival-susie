@@ -10,7 +10,60 @@ source("/project2/mstephens/yunqiyang/surv-susie/survival-susie/code/pip.R")
 ```
 
 ```{r}
-# ggplot2
+# GTEx simulation
+susie = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/susie.rds")
+svb = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/svb.rds")
+bvsnlp = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/bvsnlp.rds")
+r2b = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/r2b.rds")
+rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/rss.rds")
+
+indx = which(susie$simulate.cor_type == "real")
+pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+pip.svb = unlist(lapply(indx, function(x) svb$svb.pip[[x]]))
+pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
+pip.rss = unlist(lapply(indx, function(x) rss$rss.pip[[x]]))
+is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
+
+dat.gtex <- list()
+dat.gtex[[1]] <- pip.susie
+dat.gtex[[2]] <- pip.svb
+dat.gtex[[3]] <- pip.bvsnlp
+dat.gtex[[4]] <- pip.r2b
+dat.gtex[[5]] <- pip.rss
+dat.gtex[[6]] <- is_effect
+names(dat.gtex) = c("CoxPH-SuSiE", "survival.svb", "BVSNLP", "R2BGLiMS", "SuSiE.RSS", "is_effect")
+
+
+# UKB simulation
+susie = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/susie.rds")
+survsvb = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/survsvb.rds")
+bvsnlp = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/bvsnlp.rds")
+rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/susie_rss.rds")
+r2b = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/r2b.rds")
+
+indx = which(susie$simulate.cor_type == "real")
+pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
+pip.svb = unlist(lapply(indx, function(x) survsvb$svb.pip[[x]]))
+pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
+pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
+pip.rss = unlist(lapply(indx, function(x) rss$susie_rss.pip[[x]]))
+is_effect = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
+
+
+dat.ukb <- list()
+dat.ukb[[1]] <- pip.susie
+dat.ukb[[2]] <- pip.svb
+dat.ukb[[3]] <- pip.bvsnlp
+dat.ukb[[4]] <- pip.r2b
+dat.ukb[[5]] <- pip.rss
+dat.ukb[[6]] <- is_effect
+names(dat.ukb) = c("CoxPH-SuSiE", "survival.svb", "BVSNLP", "R2BGLiMS", "SuSiE.RSS", "is_effect")
+```
+
+
+### 1. PIP distribution plot
+```{r}
 # Combined function for PIP comparison
 prepare_pip_data <- function(pip1, pip2, is_effect, method, simulation) {
   data.frame(
@@ -23,66 +76,26 @@ prepare_pip_data <- function(pip1, pip2, is_effect, method, simulation) {
 }
 ```
 
+
 ```{r}
-
-# GTEx simulation
-susie = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/susie.rds")
-svb = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/svb.rds")
-bvsnlp = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/bvsnlp.rds")
-r2b = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/r2b.rds")
-rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/rss.rds")
-
-indx = which(susie$simulate.cor_type == "real")
-pip.susie.gtex = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
-pip.svb.gtex = unlist(lapply(indx, function(x) svb$svb.pip[[x]]))
-pip.bvsnlp.gtex = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
-pip.r2b.gtex = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
-pip.rss.gtex = unlist(lapply(indx, function(x) rss$rss.pip[[x]]))
-is_effect.gtex = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
-
-
-
-# UKB simulation
-susie = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/susie.rds")
-survsvb = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/survsvb.rds")
-bvsnlp = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/bvsnlp.rds")
-rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/susie_rss.rds")
-r2b = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/r2b.rds")
-
-
-indx = which(susie$simulate.cor_type == "real")
-pip.susie.ukb = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
-pip.svb.ukb = unlist(lapply(indx, function(x) survsvb$svb.pip[[x]]))
-pip.bvsnlp.ukb = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
-pip.r2b.ukb = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
-pip.rss.ukb = unlist(lapply(indx, function(x) rss$susie_rss.pip[[x]]))
-is_effect.ukb = unlist(lapply(indx, function(x) susie$simulate.is_effect[[x]]))
-
+method = c("survival.svb", "BVSNLP", "R2BGLiMS", "SuSiE.RSS")
+pip_data <- NULL
+for (i in 1:length(method)){
+  m = method[i]
+  dat1 <- prepare_pip_data(dat.gtex[['CoxPH-SuSiE']], dat.gtex[[m]], dat.gtex[["is_effect"]], m, "GTEx simulation")
+  dat2 <- prepare_pip_data(dat.ukb[['CoxPH-SuSiE']], dat.ukb[[m]], dat.ukb[["is_effect"]], m, "UKB simulation")
+  pip_data <- rbind(pip_data, dat1, dat2)
+}
 ```
 
-
 ```{r}
-
-# Prepare all data into one combined data frame
-pip_data <- rbind(
-  prepare_pip_data(pip.susie.gtex, pip.svb.gtex, is_effect.gtex, "survival.svb", "GTEx simulation"),
-  prepare_pip_data(pip.susie.gtex, pip.bvsnlp.gtex, is_effect.gtex, "BVSNLP", "GTEx simulation"),
-  prepare_pip_data(pip.susie.gtex, pip.r2b.gtex, is_effect.gtex, "R2BGLiMS", "GTEx simulation"),
-  prepare_pip_data(pip.susie.gtex, pip.rss.gtex, is_effect.gtex, "SuSiE.RSS", "GTEx simulation"),
-  prepare_pip_data(pip.susie.ukb, pip.svb.ukb, is_effect.ukb, "survival.svb", "UKB simulation"),
-  prepare_pip_data(pip.susie.ukb, pip.bvsnlp.ukb, is_effect.ukb, "BVSNLP", "UKB simulation"),
-  prepare_pip_data(pip.susie.ukb, pip.r2b.ukb, is_effect.ukb, "R2BGLiMS", "UKB simulation"),
-  prepare_pip_data(pip.susie.ukb, pip.rss.ukb, is_effect.ukb, "SuSiE.RSS", "UKB simulation")
-)
-
-# Plot
 ggplot(pip_data) +
   # Grey dots first
   geom_point(data = subset(pip_data, is_effect == 0), 
-             aes(x = pip1, y = pip2), color = "darkgrey", size = 1) +
+             aes(x = pip1, y = pip2), color = "darkgrey", size = 1.25, shape = 1) +
   # Red dots on top
   geom_point(data = subset(pip_data, is_effect == 1), 
-             aes(x = pip1, y = pip2), color = "red", size = 0.75) +
+             aes(x = pip1, y = pip2), color = "red", size = 0.7) +
   # Blue dashed diagonal line
   geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "blue") +
   # Facet grid layout with free x scales
@@ -94,102 +107,17 @@ ggplot(pip_data) +
   theme(
     strip.text = element_text(face = "bold"),
     panel.grid = element_blank(),       # Remove background grid lines
-    legend.position = "none",           # Remove legend
-    axis.text.x = element_text(size = 10, angle = 45, hjust = 1) # Adjust x-axis labels
+    legend.position = "none"         # Remove legend
   )
 
 
-ggsave("/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/pip_combined_ggplot.pdf", width = 16, height = 6, dpi = 300)
+ggsave("/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/pip_combined_gg.pdf", width = 16, height = 8, dpi = 300)
 
 ```
 
-
-
-
-
-
-
+### 2. PIP calibration plot
 
 ```{r}
-pdf("/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/pip_calibration_combined.pdf", height = 8, width = 20)
-par(mfrow = c(2,5))
-
-# GTEx simulation
-susie = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/susie.rds")
-svb = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/svb.rds")
-bvsnlp = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/bvsnlp.rds")
-r2b = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/r2b.rds")
-rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/rss.rds")
-
-indx = which(bvsnlp$simulate.cor_type == "real")
-is_effect = unlist(lapply(indx, function(x) bvsnlp$simulate.is_effect[[x]]))
-pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
-pip.survsvb = unlist(lapply(indx, function(x) svb$svb.pip[[x]]))
-pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
-pip.rss = unlist(lapply(indx, function(x) rss$rss.pip[[x]]))
-pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
-  
-# Calibration plot for pip.susie
-calibration.susie = pip_calibration(pip.susie, is_effect)
-plot_calibration(calibration.susie, main = "CoxPH-SuSiE")
-  
-# Calibration plot for pip.svb
-calibration.survsvb = pip_calibration(pip.survsvb, is_effect)
-plot_calibration(calibration.survsvb, main = "survival.svb")
-  
-# Calibration plot for pip.bvsnlp
-calibration.bvsnlp = pip_calibration(pip.bvsnlp, is_effect)
-plot_calibration(calibration.bvsnlp, main = "BVSNLP")
-  
-# Calibration plot for pip.rss
-calibration.rss = pip_calibration(pip.rss, is_effect)
-plot_calibration(calibration.rss, main = "SuSiE.RSS")
-  
-# Calibration plot for pip.r2b
-calibration.r2b = pip_calibration(pip.r2b, is_effect)
-plot_calibration(calibration.r2b, main = "R2BGLiMS")
-
-
-# UKB simulation
-susie = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/susie.rds")
-survsvb = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/survsvb.rds")
-bvsnlp = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/bvsnlp.rds")
-rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/susie_rss.rds")
-r2b = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/r2b.rds")
-
-
-indx = which(bvsnlp$simulate.cor_type == "real")
-is_effect = unlist(lapply(indx, function(x) bvsnlp$simulate.is_effect[[x]]))
-pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
-pip.survsvb = unlist(lapply(indx, function(x) survsvb$svb.pip[[x]]))
-pip.bvsnlp = unlist(lapply(indx, function(x) bvsnlp$bvsnlp.pip[[x]]))
-pip.rss = unlist(lapply(indx, function(x) rss$susie_rss.pip[[x]]))
-pip.r2b = unlist(lapply(indx, function(x) r2b$r2b.pip[[x]]))
-  
-# Calibration plot for pip.susie
-calibration.susie = pip_calibration(pip.susie, is_effect)
-plot_calibration(calibration.susie, main = "CoxPH-SuSiE")
-  
-# Calibration plot for pip.svb
-calibration.survsvb = pip_calibration(pip.survsvb, is_effect)
-plot_calibration(calibration.survsvb, main = "survival.svb")
-  
-# Calibration plot for pip.bvsnlp
-calibration.bvsnlp = pip_calibration(pip.bvsnlp, is_effect)
-plot_calibration(calibration.bvsnlp, main = "BVSNLP")
-  
-# Calibration plot for pip.rss
-calibration.rss = pip_calibration(pip.rss, is_effect)
-plot_calibration(calibration.rss, main = "SuSiE.RSS")
-  
-# Calibration plot for pip.r2b
-calibration.r2b = pip_calibration(pip.r2b, is_effect)
-plot_calibration(calibration.r2b, main = "R2BGLiMS")
-```
-
-
-```{r}
-
 # Function to convert calibration results to a tidy data frame
 prepare_calibration_data <- function(calibration, method, simulation) {
   data.frame(
@@ -199,6 +127,71 @@ prepare_calibration_data <- function(calibration, method, simulation) {
     simulation = simulation
   )
 }
+```
+
+```{r}
+method = c("CoxPH-SuSiE", "survival.svb", "BVSNLP", "SuSiE.RSS", "R2BGLiMS")
+calibration_data <- NULL
+for (m in method){
+  cali1 <- pip_calibration(dat.gtex[[m]], dat.gtex[["is_effect"]])
+  cali2 <- pip_calibration(dat.ukb[[m]], dat.ukb[["is_effect"]])
+  
+  dat1 <- prepare_calibration_data(cali1, m, "GTEx simulation")
+  dat2 <- prepare_calibration_data(cali2, m, "UKB simulation")
+  calibration_data <- rbind(calibration_data, dat1, dat2)
+}
+```
+
+```{r}
+ggplot(calibration_data, aes(x = Expected, y = Observed)) +
+  geom_point(shape = 16) + 
+  geom_abline(slope = 1, intercept = 0, color = "red", linewidth = 0.5, linetype = "dashed") + 
+  facet_grid(simulation ~ method) +           # Facet by method (columns only)
+  xlab("Mean PIP") +
+  ylab("Observed frequency") +
+  theme_classic(base_size = 14) +    # Minimalist theme
+  theme(
+    strip.text = element_text(face = "bold"),   # Bold facet titles
+    axis.text = element_text(size = 10),        # Adjust axis text size
+    axis.title = element_text(size = 12),       # Adjust axis label size
+    panel.border = element_rect(color = "black", fill = NA, linewidth = 0.5), # Add border
+    plot.margin = margin(5, 5, 5, 5),           # Minimal margins
+    strip.background = element_blank(),         # Remove background from facet strips
+    strip.placement = "outside"                 # Place facet labels outside
+  )
+
+ggsave("/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/pip_calibration_combined_gg.pdf", width = 16, height = 8, dpi = 300)
+
+
+```
+
+```{r}
+ggplot(calibration_data, aes(x = Expected, y = Observed)) +
+  geom_point(color = "red", size = 1) +  
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "blue") + # Diagonal line x = y
+  facet_grid(simulation ~ method) +      # Rows: Simulation, Columns: Method
+  xlab("Predicted PIP") +
+  ylab("Observed Proportion") +
+  theme_minimal(base_size = 14) +
+  theme(
+    strip.text = element_text(face = "bold"),
+    panel.grid = element_blank(),       # Remove grid lines
+    axis.text.x = element_text(size = 10), # Adjust x-axis text size
+    axis.text.y = element_text(size = 10)
+  )
+
+
+# Save a wider version of the plot
+#ggsave("calibration_plots_wide.png", width = 14, height = 6, dpi = 300)
+
+```
+
+```{r}
+calibration.susie = pip_calibration(pip.susie, is_effect)
+calibration.susie = pip_calibration(pip.susie, is_effect)
+calibration.susie = pip_calibration(pip.susie, is_effect)
+calibration.susie = pip_calibration(pip.susie, is_effect)
+calibration.susie = pip_calibration(pip.susie, is_effect)
 
 # GTEx Simulation
 calibration_data <- rbind(
