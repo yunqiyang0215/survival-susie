@@ -258,7 +258,7 @@ Finally, note that CoxPH-SuSiE is robust to overestimating the number
 of causal SNPs. For example, suppose we set the number of causal SNPs
 to 10:
 
-```{r ibss-from-ser-L-10, warning=FALSE}
+```{r ibss-from-ser-L-10, warning=FALSE, results="hide"}
 fit <- ibss_from_ser(geno,pheno,L = 10,tol = 0.0001,maxit = 100,
                      ser_function = ser_from_univariate(surv_uni_fun))
 ```
