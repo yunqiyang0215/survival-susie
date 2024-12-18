@@ -440,15 +440,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree078933910a23328c3bf7d361adfda1ed08c154aatargetblank0789339a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreee6ba60e0e90baefcfcc819ead3ec3fbdffd31e6dtargetblanke6ba60ea">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/078933910a23328c3bf7d361adfda1ed08c154aa" target="_blank">0789339</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/e6ba60e0e90baefcfcc819ead3ec3fbdffd31e6d" target="_blank">e6ba60e</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree078933910a23328c3bf7d361adfda1ed08c154aatargetblank0789339a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietreee6ba60e0e90baefcfcc819ead3ec3fbdffd31e6dtargetblanke6ba60ea"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -458,7 +458,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/078933910a23328c3bf7d361adfda1ed08c154aa" target="_blank">0789339</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/e6ba60e0e90baefcfcc819ead3ec3fbdffd31e6d" target="_blank">e6ba60e</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -523,6 +523,41 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/e6ba60e0e90baefcfcc819ead3ec3fbdffd31e6d/analysis/coxph_susie_intro.Rmd" target="_blank">e6ba60e</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2024-12-18
+</td>
+<td>
+workflowr::wflow_publish("analysis/coxph_susie_intro.Rmd", verbose =
+TRUE,
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/ede61684f9cdb3b6db8a4feadad8891a76c9c1a9/docs/coxph_susie_intro.html" target="_blank">ede6168</a>
+</td>
+<td>
+Peter Carbonetto
+</td>
+<td>
+2024-12-18
+</td>
+<td>
+Added prior variance estimation and the SER BFs to the
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1075,9 +1110,9 @@ fit &lt;- ibss_from_ser(geno,pheno,L = 3,tol = 0.0001,maxit = 100,
                      ser_function = ser_from_univariate(surv_uni_fun))
 t1 &lt;- proc.time()
 print(t1 - t0)
-# 7.287 sec elapsed
+# 7.216 sec elapsed
 #    user  system elapsed 
-#   7.126   0.162   7.293</code></pre>
+#   7.052   0.169   7.222</code></pre>
 <p>(As an aside, note that the univariate regression computations are
 trivially parallelizable, so you have a multicore computing platform,
 you can make the method run faster, e.g.,</p>
@@ -1087,9 +1122,9 @@ fit &lt;- ibss_from_ser(geno,pheno,L = 3,tol = 0.0001,maxit = 100,
                      num_cores = 4)
 t1 &lt;- proc.time()
 print(t1 - t0)
-# 2.551 sec elapsed
+# 2.586 sec elapsed
 #    user  system elapsed 
-#   8.036   1.422   2.555</code></pre>
+#   8.151   1.504   2.590</code></pre>
 <p>In this run we were able to achieve about a 3x speedup with 4
 threads.)</p>
 <p>Now we use the <code>susie_get_cs()</code> function from the susieR
@@ -1238,8 +1273,7 @@ round(rbind(b,fit$mu)[,causal_snps],digits = 3)
 of causal SNPs. For example, suppose we set the number of causal SNPs to
 10:</p>
 <pre class="r"><code>fit &lt;- ibss_from_ser(geno,pheno,L = 10,tol = 0.0001,maxit = 100,
-                     ser_function = ser_from_univariate(surv_uni_fun))
-# 38.871 sec elapsed</code></pre>
+                     ser_function = ser_from_univariate(surv_uni_fun))</code></pre>
 <p>The log-Bayes factors quantifying support for each CS (i.e., each
 causal SNP) are in the “lbf_ser” output:</p>
 <pre class="r"><code>fit$lbf_ser
