@@ -337,12 +337,6 @@ div.tocify {
         <li>
   <a href="index.html">Home</a>
 </li>
-<li>
-  <a href="about.html">About</a>
-</li>
-<li>
-  <a href="license.html">License</a>
-</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -391,7 +385,7 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2024-04-01
+<strong>Last updated:</strong> 2025-01-04
 </p>
 <p>
 <strong>Checks:</strong> <span
@@ -522,15 +516,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree3af7f7724f27c6d0646bb8131333fc974fd17946targetblank3af7f77a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree843ebc71679a10e4e849d997f15544cb73603bf2targetblank843ebc7a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/3af7f7724f27c6d0646bb8131333fc974fd17946" target="_blank">3af7f77</a>
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/843ebc71679a10e4e849d997f15544cb73603bf2" target="_blank">843ebc7</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree3af7f7724f27c6d0646bb8131333fc974fd17946targetblank3af7f77a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomyunqiyang0215survivalsusietree843ebc71679a10e4e849d997f15544cb73603bf2targetblank843ebc7a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -540,7 +534,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/yunqiyang0215/survival-susie/tree/3af7f7724f27c6d0646bb8131333fc974fd17946" target="_blank">3af7f77</a>.
+<a href="https://github.com/yunqiyang0215/survival-susie/tree/843ebc71679a10e4e849d997f15544cb73603bf2" target="_blank">843ebc7</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -555,12 +549,32 @@ were generated:
 </p>
 <pre><code>
 Ignored files:
+    Ignored:    .RData
     Ignored:    .Rhistory
     Ignored:    .Rproj.user/
 
+Untracked files:
+    Untracked:  analysis/time_gh.Rmd
+    Untracked:  output/bf_comparison_b_1_n_500000.pdf
+
 Unstaged changes:
+    Modified:   analysis/bf_comparison.Rmd
     Deleted:    analysis/calibration_large_sample.Rmd
+    Modified:   analysis/check_bf.Rmd
     Modified:   analysis/coxph_na.Rmd
+    Modified:   analysis/pip_default_iter_gtex.Rmd
+    Modified:   code/pip.R
+    Modified:   output/bf_comparison.pdf
+    Modified:   output/bf_comparison_b_0.01_n_500000.pdf
+    Modified:   output/bf_defense.pdf
+    Modified:   output/bf_different_bhat_large_n.pdf
+    Modified:   output/bf_different_bhat_small_n.pdf
+    Modified:   output/bf_different_n_large_b.pdf
+    Deleted:    output/pip_combined.Rmd
+    Deleted:    output/pip_combined_ggplot.pdf
+    Modified:   output/pip_gtex.pdf
+    Modified:   output/pip_ukb.pdf
+    Modified:   output/plot_combined.Rmd
 
 </code></pre>
 <p>
@@ -611,6 +625,40 @@ Message
 Rmd
 </td>
 <td>
+<a href="https://github.com/yunqiyang0215/survival-susie/blob/843ebc71679a10e4e849d997f15544cb73603bf2/analysis/time_benchmark.Rmd" target="_blank">843ebc7</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2025-01-04
+</td>
+<td>
+wflow_publish("analysis/time_benchmark.Rmd")
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/yunqiyang0215/survival-susie/9f5230bca6174183ee18b44386705a3d7b36f7c9/docs/time_benchmark.html" target="_blank">9f5230b</a>
+</td>
+<td>
+yunqi yang
+</td>
+<td>
+2024-04-01
+</td>
+<td>
+Build site.
+</td>
+</tr>
+<tr>
+<td>
+Rmd
+</td>
+<td>
 <a href="https://github.com/yunqiyang0215/survival-susie/blob/3af7f7724f27c6d0646bb8131333fc974fd17946/analysis/time_benchmark.Rmd" target="_blank">3af7f77</a>
 </td>
 <td>
@@ -643,19 +691,17 @@ class="section level3">
 <li><p>susie.rss: maxiter = 100</p></li>
 <li><p>r2b: niter = 1e6.</p></li>
 </ol>
-<pre class="r"><code>time1 = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_niter10/time_comparison.rds&quot;)
-time2 = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/dsc202401/time.rds&quot;)</code></pre>
-<pre class="r"><code>t1 = unlist(lapply(1:length(time1), function(i) mean(time1[[i]][,5], na.rm = TRUE)))
-t2 = c(mean(time2$susie.DSC_TIME, na.rm = TRUE), mean(time2$bvsnlp.DSC_TIME, na.rm = TRUE),
-       mean(time2$susie_rss.DSC_TIME, na.rm = TRUE), mean(time2$svb.DSC_TIME, na.rm = TRUE),
-       mean(time2$r2b.DSC_TIME, na.rm = TRUE))</code></pre>
+<pre class="r"><code>time.gtex = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/time_comparison.rds&quot;)
+time.ukb = readRDS(&quot;/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/time_comparison.rds&quot;)</code></pre>
+<pre class="r"><code>t1 = unlist(lapply(1:length(time.gtex), function(i) mean(time.gtex[[i]][,5], na.rm = TRUE)))
+t2 = unlist(lapply(1:length(time.ukb), function(i) mean(time.ukb[[i]][,5], na.rm = TRUE)))</code></pre>
 <pre class="r"><code>res = rbind(t1, t2)
 colnames(res) = c(&quot;susie&quot;, &quot;bvsnlp&quot;, &quot;susie.rss&quot;, &quot;svb&quot;, &quot;r2b&quot;)
 rownames(res) = c(&quot;n=500&quot;, &quot;n=50000&quot;)
 res</code></pre>
-<pre><code>            susie     bvsnlp  susie.rss        svb      r2b
-n=500    282.6331   99.39167   6.486436   15.63348 181.8122
-n=50000 7678.7632 3727.99831 311.516340 2577.96074 575.7101</code></pre>
+<pre><code>            susie     bvsnlp  susie.rss       svb        r2b
+n=500    331.0061   57.69978   6.448924  138.6065   190.2182
+n=50000 7275.3637 4498.76360 218.386279 2496.1227 10463.2586</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -685,17 +731,17 @@ other attached packages:
 [1] workflowr_1.7.0
 
 loaded via a namespace (and not attached):
- [1] Rcpp_1.0.8.3     bslib_0.3.1      compiler_4.2.0   pillar_1.7.0    
+ [1] Rcpp_1.0.12      compiler_4.2.0   pillar_1.9.0     bslib_0.3.1     
  [5] later_1.3.0      git2r_0.30.1     jquerylib_0.1.4  tools_4.2.0     
  [9] getPass_0.2-2    digest_0.6.29    jsonlite_1.8.0   evaluate_0.15   
-[13] tibble_3.1.7     lifecycle_1.0.1  pkgconfig_2.0.3  rlang_1.0.2     
-[17] cli_3.3.0        rstudioapi_0.13  yaml_2.3.5       xfun_0.30       
-[21] fastmap_1.1.0    httr_1.4.3       stringr_1.4.0    knitr_1.39      
-[25] sass_0.4.1       fs_1.5.2         vctrs_0.4.1      rprojroot_2.0.3 
+[13] lifecycle_1.0.4  tibble_3.2.1     pkgconfig_2.0.3  rlang_1.1.3     
+[17] cli_3.6.2        rstudioapi_0.13  yaml_2.3.5       xfun_0.30       
+[21] fastmap_1.1.0    httr_1.4.3       stringr_1.5.1    knitr_1.39      
+[25] fs_1.5.2         vctrs_0.6.5      sass_0.4.1       rprojroot_2.0.3 
 [29] glue_1.6.2       R6_2.5.1         processx_3.8.0   fansi_1.0.3     
 [33] rmarkdown_2.14   callr_3.7.3      magrittr_2.0.3   whisker_0.4     
-[37] ps_1.7.0         promises_1.2.0.1 htmltools_0.5.2  ellipsis_0.3.2  
-[41] httpuv_1.6.5     utf8_1.2.2       stringi_1.7.6    crayon_1.5.1    </code></pre>
+[37] ps_1.7.0         promises_1.2.0.1 htmltools_0.5.2  httpuv_1.6.5    
+[41] utf8_1.2.2       stringi_1.7.6   </code></pre>
 </div>
 </div>
 
