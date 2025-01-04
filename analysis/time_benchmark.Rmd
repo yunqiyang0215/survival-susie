@@ -19,15 +19,13 @@ date: '2024-04-02'
 (5) r2b: niter = 1e6. 
 
 ```{r}
-time1 = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim2024/sim_niter10/time_comparison.rds")
-time2 = readRDS("/project2/mstephens/yunqiyang/surv-susie/dsc202401/time.rds")
+time.gtex = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/time_comparison.rds")
+time.ukb = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/time_comparison.rds")
 ```
 
 ```{r}
-t1 = unlist(lapply(1:length(time1), function(i) mean(time1[[i]][,5], na.rm = TRUE)))
-t2 = c(mean(time2$susie.DSC_TIME, na.rm = TRUE), mean(time2$bvsnlp.DSC_TIME, na.rm = TRUE),
-       mean(time2$susie_rss.DSC_TIME, na.rm = TRUE), mean(time2$svb.DSC_TIME, na.rm = TRUE),
-       mean(time2$r2b.DSC_TIME, na.rm = TRUE))
+t1 = unlist(lapply(1:length(time.gtex), function(i) mean(time.gtex[[i]][,5], na.rm = TRUE)))
+t2 = unlist(lapply(1:length(time.ukb), function(i) mean(time.ukb[[i]][,5], na.rm = TRUE)))
 ```
 
 ```{r}
