@@ -37,7 +37,8 @@ Also, we will use the ggplot2 and cowplot packages to create some
 helpful visualizations of the data and results:
 
 ```{r install-more-packages, eval=FALSE}
-install.packages(c("ggplot2","cowplot"))
+install.packages("ggplot2")
+install.packages("cowplot")
 ```
 
 Once the packages are installed, load them.
@@ -136,10 +137,13 @@ performs a (Bayesian) univariate association analysis (here, using the
 CoxPH model). More precisely, this function takes as input the
 regression data (X, Y, as well as an additional "offset" term), and
 the prior variance of the regression coefficient (v0), and outputs
-three quantities: (1) the posterior mean of the regression
-coefficient; (2) its posterior variance; and (3) the log-Bayes factor
-comparing the model against the "null" model (when the coefficient is
-zero).
+four quantities: (1) the posterior mean of the regression coefficient;
+(2) its posterior variance; (3) the log-Bayes factor comparing the
+model against the "null" model (when the coefficient is zero); and (4)
+an estimate of the prior variance parameter (here we use the
+maximum-likelihood estimate, which is simply the posterior second
+moment of the regression coefficient. (This last quantity can be a
+constant if you want to keep the prior variance at a fixed value.)
 
 ```{r surv-uni-fun}
 surv_uni_fun <- function (x, y, e, prior_variance,
@@ -154,7 +158,9 @@ surv_uni_fun <- function (x, y, e, prior_variance,
   lbf  <- lbf - z^2/2 + summary(fit)$logtest["test"]/2
   v1   <- 1/(1/v0 + 1/s^2)
   mu1  <- v1*bhat/s^2
-  return(list(mu = mu1,var = v1,lbf = lbf,intercept = 0))
+  return(list(mu = mu1,var = v1,lbf = lbf,
+              prior_variance = mu1^2 + v1,
+			  intercept = 0))
 }
 ```
 
@@ -170,9 +176,9 @@ t1 <- proc.time()
 print(t1 - t0)
 ```
 
-(As an aside, note that the SER computations are trivially
-parallelizable, so you have a multicore computing platform, you can
-make the method run faster, e.g.,
+(As an aside, note that the univariate regression computations are
+trivially parallelizable, so you have a multicore computing platform,
+you can make the method run faster, e.g.,
 
 ```{r ibss-from-ser-parallel, warning=FALSE}
 t0 <- proc.time()
@@ -235,15 +241,36 @@ It is also interesting that the third causal SNPs that was not
 identified does show some modest evidence for being a causal SNP in
 the PIP plot.
 
-Finally, let's compare the coefficient estimates against the
-ground-truth estimates. These are contained in the "mu" output. Here
-we see that the first CS (L1) accurately estimates the coefficient for
-the second causal SNP (the true value is -2), and the second CS (L2)
-accurately estimates the coefficient for the third causal SNP (the
-true value is 2). 
+Let's compare the coefficient estimates against the ground-truth
+estimates. These are contained in the "mu" output. Here we see that
+the first CS (L1) accurately estimates the coefficient for the second
+causal SNP (the true value is -2), and the second CS (L2) accurately
+estimates the coefficient for the third causal SNP (the true value is
+2).
 
 ```{r compare-coefs}
 rownames(fit$mu) <- c("L1","L2","L3")
 causal_snps <- which(b != 0)
 round(rbind(b,fit$mu)[,causal_snps],digits = 3)
 ```
+
+Finally, note that CoxPH-SuSiE is robust to overestimating the number
+of causal SNPs. For example, suppose we set the number of causal SNPs
+to 10:
+
+```{r ibss-from-ser-L-10, warning=FALSE, results="hide"}
+fit <- ibss_from_ser(geno,pheno,L = 10,tol = 0.0001,maxit = 100,
+                     ser_function = ser_from_univariate(surv_uni_fun))
+```
+
+The log-Bayes factors quantifying support for each CS (i.e., each
+causal SNP) are in the "lbf_ser" output:
+
+```{r ibss-bf}
+fit$lbf_ser
+```
+
+After the first two CSs, the remaining 8 CSs provide very little
+improvement in fit. This result tells us that we can focus on the
+results for the first two CSs and ignore the rest. (Note these
+log-Bayes factors are computed using the natural logarithm.)
