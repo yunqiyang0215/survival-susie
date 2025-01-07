@@ -23,15 +23,26 @@ time.gtex = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex
 time.ukb = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/time_comparison.rds")
 ```
 
-```{r}
-t1 = unlist(lapply(1:length(time.gtex), function(i) mean(time.gtex[[i]][,5], na.rm = TRUE)))
-t2 = unlist(lapply(1:length(time.ukb), function(i) mean(time.ukb[[i]][,5], na.rm = TRUE)))
+```{r }
+t_mean.gtex <- unlist(lapply(1:length(time.gtex),
+                    function (i) {
+                      res <- subset(time.gtex[[i]],cor_type = "real")
+                      return(mean(res[,5],na.rm = TRUE))
+                    }))
+
+
+t_mean.ukb <- unlist(lapply(1:length(time.ukb),
+                    function (i) {
+                      res <- subset(time.ukb[[i]],cor_type = "real")
+                      return(mean(res[,5],na.rm = TRUE))
+                    }))
 ```
 
+
 ```{r}
-res = rbind(t1, t2)
+res = rbind(t_mean.gtex, t_mean.ukb)
 colnames(res) = c("susie", "bvsnlp", "susie.rss", "svb", "r2b")
-rownames(res) = c("n=500", "n=50000")
+rownames(res) = c("gtex", "ukb")
 res
 ```
 
