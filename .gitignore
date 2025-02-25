@@ -3,13 +3,14 @@
 .RData
 .Ruserdata
 .Rapp.history
-.DS_Store
 analysis/figure
 analysis/*png
 analysis/*html
 analysis/*_cache
 analysis/site_libs
-dsc/bf_comparison/dsc_result/
 dsc/bf_comparison/.dsc/
 dsc/bf_comparison0712/.dsc/
+dsc/bf_comparison0825/.dsc/
+dsc/bf_comparison/dsc_result/
 dsc/bf_comparison0712/dsc_result/
+dsc/bf_comparison0825/dsc_result/
