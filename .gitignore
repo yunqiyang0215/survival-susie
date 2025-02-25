@@ -9,4 +9,5 @@ analysis/*png
 analysis/*html
 analysis/*_cache
 analysis/site_libs
-
+dsc/bf_comparison/dsc_result/
+dsc/bf_comparison/.dsc/
