@@ -5,19 +5,19 @@ date: '2024-10-04'
 ---
 
 ```{r}
-source("/project2/mstephens/yunqiyang/surv-susie/survival-susie/code/pip.R")
+source("../code/pip.R")
 ```
 
 ```{r}
-pdf("/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/pip_combined.pdf", height = 8, width = 16)
+pdf("pip_combined.pdf", height = 8, width = 16)
 par(mfrow = c(2,4))
 
 # GTEx simulation
-susie = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/susie.rds")
-svb = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/svb.rds")
-bvsnlp = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/bvsnlp.rds")
-r2b = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/r2b.rds")
-rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/rss.rds")
+susie = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/survival-susie/dsc/sim_gtex_default_iter/susie.rds")
+svb = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/survival-susie/dsc/sim_gtex_default_iter/svb.rds")
+bvsnlp = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/survival-susie/dsc/sim_gtex_default_iter/bvsnlp.rds")
+r2b = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/survival-susie/dsc/sim_gtex_default_iter/r2b.rds")
+rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/survival-susie/dsc/sim_gtex_default_iter/rss.rds")
 
 indx = which(susie$simulate.cor_type == "real")
 pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
@@ -46,11 +46,11 @@ abline(a = 0, b = 1, lty = 2, col = "blue")
 
 
 # UKB simulation
-susie = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/susie.rds")
-survsvb = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/survsvb.rds")
-bvsnlp = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/bvsnlp.rds")
-rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/susie_rss.rds")
-r2b = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/r2b.rds")
+susie = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/survival-susie/dsc/sim_ukb_niter10/susie.rds")
+survsvb = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/survival-susie/dsc/sim_ukb_niter10/survsvb.rds")
+bvsnlp = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/survival-susie/dsc/sim_ukb_niter10/bvsnlp.rds")
+rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/survival-susie/dsc/sim_ukb_niter10/susie_rss.rds")
+r2b = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/survival-susie/dsc/sim_ukb_niter10/r2b.rds")
 
 
 indx = which(susie$simulate.cor_type == "real")
@@ -82,15 +82,15 @@ abline(a = 0, b = 1, lty = 2, col = "blue")
 ```
 
 ```{r}
-pdf("/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/pip_calibration_combined.pdf", height = 8, width = 20)
+pdf("pip_calibration_combined.pdf", height = 8, width = 20)
 par(mfrow = c(2,5))
 
 # GTEx simulation
-susie = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/susie.rds")
-svb = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/svb.rds")
-bvsnlp = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/bvsnlp.rds")
-r2b = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/r2b.rds")
-rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/rss.rds")
+susie = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/survival-susie/dsc/sim_gtex_default_iter/susie.rds")
+svb = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/survival-susie/dsc/sim_gtex_default_iter/svb.rds")
+bvsnlp = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/survival-susie/dsc/sim_gtex_default_iter/bvsnlp.rds")
+r2b = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/survival-susie/dsc/sim_gtex_default_iter/r2b.rds")
+rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/survival-susie/dsc/sim_gtex_default_iter/rss.rds")
 
 indx = which(bvsnlp$simulate.cor_type == "real")
 is_effect = unlist(lapply(indx, function(x) bvsnlp$simulate.is_effect[[x]]))
@@ -122,12 +122,11 @@ plot_calibration(calibration.r2b, main = "R2BGLiMS")
 
 
 # UKB simulation
-susie = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/susie.rds")
-survsvb = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/survsvb.rds")
-bvsnlp = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/bvsnlp.rds")
-rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/susie_rss.rds")
-r2b = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/r2b.rds")
-
+susie = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/survival-susie/dsc/sim_ukb_niter10/susie.rds")
+survsvb = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/survival-susie/dsc/sim_ukb_niter10/survsvb.rds")
+bvsnlp = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/survival-susie/dsc/sim_ukb_niter10/bvsnlp.rds")
+rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/survival-susie/dsc/sim_ukb_niter10/susie_rss.rds")
+r2b = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/survival-susie/dsc/sim_ukb_niter10/r2b.rds")
 
 indx = which(bvsnlp$simulate.cor_type == "real")
 is_effect = unlist(lapply(indx, function(x) bvsnlp$simulate.is_effect[[x]]))
@@ -160,16 +159,15 @@ plot_calibration(calibration.r2b, main = "R2BGLiMS")
 
 
 ```{r}
-source("/project2/mstephens/yunqiyang/surv-susie/survival-susie/code/post_summary.R")
-
-pdf("/project2/mstephens/yunqiyang/surv-susie/survival-susie/output/fdr_combined.pdf", height = 6, width = 10)
+source("../code/post_summary.R")
+pdf("fdr_combined.pdf", height = 6, width = 10)
 par(mfrow = c(1,2))
 # GTEx 
-susie = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/susie.rds")
-svb = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/svb.rds")
-bvsnlp = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/bvsnlp.rds")
-r2b = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/r2b.rds")
-rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_gtex_default_iter/rss.rds")
+susie = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/survival-susie/dsc/sim_gtex_default_iter/susie.rds")
+svb = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/survival-susie/dsc/sim_gtex_default_iter/svb.rds")
+bvsnlp = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/survival-susie/dsc/sim_gtex_default_iter/bvsnlp.rds")
+r2b = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/survival-susie/dsc/sim_gtex_default_iter/r2b.rds")
+rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/survival-susie/dsc/sim_gtex_default_iter/rss.rds")
 
 indx = which(susie$simulate.cor_type == "real")
 pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
@@ -203,12 +201,11 @@ legend("topleft", legend = c("CoxPH-SuSiE", "survival.svb", "BVSNLP", "SuSiE.RSS
 
 
 # UKB
-susie = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/susie.rds")
-survsvb = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/survsvb.rds")
-bvsnlp = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/bvsnlp.rds")
-rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/susie_rss.rds")
-r2b = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/sim_ukb_niter10/r2b.rds")
-
+susie = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/survival-susie/dsc/sim_ukb_niter10/susie.rds")
+survsvb = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/survival-susie/dsc/sim_ukb_niter10/survsvb.rds")
+bvsnlp = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/survival-susie/dsc/sim_ukb_niter10/bvsnlp.rds")
+rss = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/survival-susie/dsc/sim_ukb_niter10/susie_rss.rds")
+r2b = readRDS("/project2/mstephens/yunqiyang/surv-susie/sim202406/survival-susie/dsc/sim_ukb_niter10/r2b.rds")
 
 indx = which(susie$simulate.cor_type == "real")
 pip.susie = unlist(lapply(indx, function(x) susie$susie.pip[[x]]))
